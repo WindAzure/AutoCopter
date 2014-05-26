@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -67,12 +68,6 @@ namespace DetectSystem
             get;
         }
 
-        public int Index
-        {
-            set;
-            get;
-        }
-
         public Shape TempShape
         {
             set;
@@ -103,18 +98,17 @@ namespace DetectSystem
             get;
         }
 
-        public void InitializeStateButton()
+        public void InitializeStateButton(bool state)
         {
-            Table1StateChangeButtonEnable = true;
-            Table2StateChangeButtonEnable = true;
-            Table3StateChangeButtonEnable = true;
-            Table4StateChangeButtonEnable = true;
+            Table1StateChangeButtonEnable = state;
+            Table2StateChangeButtonEnable = state;
+            Table3StateChangeButtonEnable = state;
+            Table4StateChangeButtonEnable = state;
             NotifyStateButtonChanged();
         }
 
         public PresentationModel()
         {
-            Index = -1;
             DataModel = new Model();
             IsTable1StateChanged = false;
             IsTable2StateChanged = false;
@@ -144,6 +138,16 @@ namespace DetectSystem
             Point point = ConvertRatioOfPictureBoxAndImage(movePoint);
             TempShape.SetStartPoint(point.X, point.Y);
             TempShape.SetEndPoint(point.X, point.Y);
+            DataModel.AddPolygons(point.X, point.Y);
+            if (DataModel.PointPer == 3)
+            {
+                _isPress = false;
+                InitializeStateButton(true);
+            }
+            else
+            {
+                InitializeStateButton(false);
+            }
         }
 
         public void MouseMoveInputBox(Point movePoint)
@@ -157,18 +161,23 @@ namespace DetectSystem
 
         public void MouseUpInputBox(Point movePoint)
         {
-            if (movePoint.X < 0 || movePoint.X > InputPictureBoxWidth || movePoint.Y < 0 || movePoint.Y > InputPictureBoxHeight)
-            {
-                _isPress = false;
-                TempShape = new MyDefLine();
-            }
+             /* if (movePoint.X < 0 || movePoint.X > InputPictureBoxWidth || movePoint.Y < 0 || movePoint.Y > InputPictureBoxHeight)
+              {
+                  _isPress = false;
+                  TempShape = new MyDefLine();
+              }
 
-            if (_isPress)
-            {
-                Point point = ConvertRatioOfPictureBoxAndImage(movePoint);
-                TempShape.SetEndPoint(point.X, point.Y);
-                _isPress = false;
-            }
+              if (_isPress)
+              {
+                  Point point = ConvertRatioOfPictureBoxAndImage(movePoint);
+                  TempShape.SetEndPoint(point.X, point.Y);
+                  _isPress = false;
+              }*/
+        }
+
+        public String CalSelectRangeArea()
+        {
+            return DataModel.CalcaluateArea().ToString();
         }
     }
 }

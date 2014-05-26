@@ -34,15 +34,23 @@ namespace DetectSystem
             if (_inputPictureBox.InvokeRequired)
             {
                 InvokeShowImageData showData = new InvokeShowImageData(ShowInputImage);
-                _inputPictureBox.Invoke(showData, new Object[] { });
+                this.Invoke(showData, new Object[] { });
             }
             else
             {
                 _inputPictureBox.Image = _input.ToBitmap();
-
                 Bitmap map = _inputPictureBox.Image as Bitmap;
                 Graphics graphic = Graphics.FromImage(map);
                 graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.TempShape.StartPoint.X), Convert.ToInt32(_presentationModel.TempShape.StartPoint.Y), Convert.ToInt32(_presentationModel.TempShape.EndPoint.X), Convert.ToInt32(_presentationModel.TempShape.EndPoint.Y));
+
+                for (int i = 1; i <= _presentationModel.DataModel.PointPer; i++)
+                {
+                    graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.DataModel.Polygons[i-1].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[i-1].Y), Convert.ToInt32(_presentationModel.DataModel.Polygons[i].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[i].Y));
+                }
+                if (_presentationModel.DataModel.PointPer == 3)
+                {
+                    graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.DataModel.Polygons[3].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[3].Y), Convert.ToInt32(_presentationModel.DataModel.Polygons[0].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[0].Y));
+                }
             }
         }
 
@@ -51,7 +59,7 @@ namespace DetectSystem
             if (_outputPictureBox.InvokeRequired)
             {
                 InvokeShowImageData showData = new InvokeShowImageData(ShowOutputImage);
-                _outputPictureBox.Invoke(showData, new Object[] { });
+                this.Invoke(showData, new Object[] { });
             }
             else
             {
@@ -165,7 +173,6 @@ namespace DetectSystem
                 _processImageThread = new Thread(start2);
                 _processImageThread.Start();
 
-                _presentationModel.InitializeStateButton();
                 _startButton.Enabled = false;
             }
             catch (Exception)
@@ -214,25 +221,25 @@ namespace DetectSystem
         private void ClickTable1StateChangeButton(object sender, EventArgs e)
         {
             _presentationModel.IsTable1StateChanged = true;
-            _presentationModel.Index = 1;
+            _table1AreaLabel.Text = _presentationModel.CalSelectRangeArea();
         }
 
         private void ClickTable2StateChangeButton(object sender, EventArgs e)
         {
             _presentationModel.IsTable2StateChanged = true;
-            _presentationModel.Index = 2;
+            _table2AreaLabel.Text = _presentationModel.CalSelectRangeArea();
         }
 
         private void ClickTable3StateChangeButton(object sender, EventArgs e)
         {
             _presentationModel.IsTable3StateChanged = true;
-            _presentationModel.Index = 3;
+            _table3AreaLabel.Text = _presentationModel.CalSelectRangeArea();
         }
 
         private void ClickTable4StateChangeButton(object sender, EventArgs e)
         {
             _presentationModel.IsTable4StateChanged = true;
-            _presentationModel.Index = 4;
+            _table4AreaLabel.Text = _presentationModel.CalSelectRangeArea();
         }
     }
 }
