@@ -28,7 +28,7 @@ namespace DetectSystem
         private int _imageHeight;
         private int _imageWidth;
         private bool _isPress = false;
-        private Shape _tempShape = new Shape();
+        private Shape _tempShape = new MyDefLine();
         private PresentationModel _presentationModel = new PresentationModel();
 
         private IBarcodeReader reader = new BarcodeReader();
@@ -46,7 +46,7 @@ namespace DetectSystem
 
                 Bitmap map = _inputPictureBox.Image as Bitmap;
                 Graphics graphic = Graphics.FromImage(map);
-                graphic.DrawRectangle(new Pen(Brushes.Red, 5), new Rectangle(Convert.ToInt32(_tempShape.StartPoint.X), Convert.ToInt32(_tempShape.StartPoint.Y), Convert.ToInt32(_tempShape.Width), Convert.ToInt32(_tempShape.Height)));
+                graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_tempShape.StartPoint.X), Convert.ToInt32(_tempShape.StartPoint.Y), Convert.ToInt32(_tempShape.EndPoint.X), Convert.ToInt32(_tempShape.EndPoint.Y));
             }
         }
 
@@ -154,7 +154,7 @@ namespace DetectSystem
         {
             try
             {
-                _tempShape = new Shape();
+                _tempShape = new MyDefLine();
                 _capture = new Capture("rtsp://192.168.0.250/h264");
                 _imageWidth = _capture.Width;
                 _imageHeight = _capture.Height;
@@ -238,7 +238,7 @@ namespace DetectSystem
             if (e.Location.X < 0 || e.Location.X > _inputPictureBox.Width || e.Location.Y < 0 || e.Location.Y > _inputPictureBox.Height)
             {
                 _isPress = false;
-                _tempShape = new Shape();
+                _tempShape = new MyDefLine();
             }
 
             if (_isPress)
