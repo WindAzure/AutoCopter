@@ -25,10 +25,6 @@ namespace DetectSystem
         public delegate void InvokeShowImageData();
         public delegate void InvokeShowTextData(String data);
 
-        private int _imageHeight;
-        private int _imageWidth;
-        private bool _isPress = false;
-        private Shape _tempShape = new MyDefLine();
         private PresentationModel _presentationModel = new PresentationModel();
 
         private IBarcodeReader reader = new BarcodeReader();
@@ -46,7 +42,7 @@ namespace DetectSystem
 
                 Bitmap map = _inputPictureBox.Image as Bitmap;
                 Graphics graphic = Graphics.FromImage(map);
-                graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_tempShape.StartPoint.X), Convert.ToInt32(_tempShape.StartPoint.Y), Convert.ToInt32(_tempShape.EndPoint.X), Convert.ToInt32(_tempShape.EndPoint.Y));
+                graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.TempShape.StartPoint.X), Convert.ToInt32(_presentationModel.TempShape.StartPoint.Y), Convert.ToInt32(_presentationModel.TempShape.EndPoint.X), Convert.ToInt32(_presentationModel.TempShape.EndPoint.Y));
             }
         }
 
@@ -140,6 +136,8 @@ namespace DetectSystem
         {
             InitializeComponent();
             _presentationModel._presentationModelChanged += PresentationModelStateChangeButtonEnableChanged;
+            _presentationModel.InputPictureBoxWidth = _inputPictureBox.Width;
+            _presentationModel.InputPictureBoxHeight = _inputPictureBox.Height;
         }
 
         void PresentationModelStateChangeButtonEnableChanged()
@@ -154,10 +152,10 @@ namespace DetectSystem
         {
             try
             {
-                _tempShape = new MyDefLine();
+                _presentationModel.TempShape = new MyDefLine();
                 _capture = new Capture("rtsp://192.168.0.250/h264");
-                _imageWidth = _capture.Width;
-                _imageHeight = _capture.Height;
+                _presentationModel.InputPictureBoxImageWidth = _capture.Width;
+                _presentationModel.InputPictureBoxImageHeight = _capture.Height;
 
                 ThreadStart start1 = new ThreadStart(ReadImage);
                 _fectchImageThread = new Thread(start1);
@@ -176,22 +174,6 @@ namespace DetectSystem
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            /*try
-            {
-                _capture = new Capture(0);
-                double fps = _capture.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
-                _movieTimer.Interval = Convert.ToInt16(1);
-                _movieTimer.Tick += TickMovieTimer;
-                _movieTimer.Start();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("連結錯誤，請確認攝影機是否已連結");
-            }*/
-        }
-
         private void ClosingAnalysisForm(object sender, FormClosingEventArgs e)
         {
             if (_fectchImageThread != null)
@@ -205,47 +187,27 @@ namespace DetectSystem
             }
         }
 
-        public Point ConvertRatioOfPictureBoxAndImage(Point point)
-        {
-            if (_inputPictureBox.Image == null)
-            {
-                return point;
-            }
-            double ratioX = Convert.ToDouble(_imageWidth) / Convert.ToDouble(_inputPictureBox.Width);
-            double ratioY = Convert.ToDouble(_imageHeight) / Convert.ToDouble(_inputPictureBox.Height);
-            return new Point(Convert.ToInt32(point.X * ratioX), Convert.ToInt32(point.Y * ratioY));
-        }
-
         private void MouseDownInputBox(object sender, MouseEventArgs e)
         {
-            _isPress = true;
-            Point point = ConvertRatioOfPictureBoxAndImage(e.Location);
-            _tempShape.SetStartPoint(point.X, point.Y);
-            _tempShape.SetEndPoint(point.X, point.Y);
+            if (_inputPictureBox.Image != null)
+            {
+                _presentationModel.MouseDownInputBox(e.Location);
+            }
         }
 
         private void MouseMoveInputBox(object sender, MouseEventArgs e)
         {
-            if (_isPress)
+            if (_inputPictureBox.Image != null)
             {
-                Point point = ConvertRatioOfPictureBoxAndImage(e.Location);
-                _tempShape.SetEndPoint(point.X, point.Y);
+                _presentationModel.MouseMoveInputBox(e.Location);
             }
         }
 
         private void MouseUpInputBox(object sender, MouseEventArgs e)
         {
-            if (e.Location.X < 0 || e.Location.X > _inputPictureBox.Width || e.Location.Y < 0 || e.Location.Y > _inputPictureBox.Height)
+            if (_inputPictureBox.Image != null)
             {
-                _isPress = false;
-                _tempShape = new MyDefLine();
-            }
-
-            if (_isPress)
-            {
-                Point point = ConvertRatioOfPictureBoxAndImage(e.Location);
-                _tempShape.SetEndPoint(point.X, point.Y);
-                _isPress = false;
+                _presentationModel.MouseUpInputBox(e.Location);
             }
         }
 
