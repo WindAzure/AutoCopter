@@ -13,6 +13,12 @@ namespace DetectSystem
         public delegate void PresentationModelChanged();
         public event PresentationModelChanged _presentationModelChanged = null;
 
+        public Model DataModel
+        {
+            set;
+            get;
+        }
+
         public bool Table1StateChangeButtonEnable
         {
             set;
@@ -108,11 +114,12 @@ namespace DetectSystem
 
         public PresentationModel()
         {
+            Index = -1;
+            DataModel = new Model();
             IsTable1StateChanged = false;
             IsTable2StateChanged = false;
             IsTable3StateChanged = false;
             IsTable4StateChanged = false;
-            Index = -1;
         }
 
         private void NotifyStateButtonChanged()
