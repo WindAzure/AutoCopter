@@ -19,7 +19,7 @@ namespace DetectSystem
     {
         private Capture _capture = null;
         private Image<Bgr, Byte> _input = null;
-        private Image<Gray, Byte> _output = null;
+        private Image<Hsv, Byte> _output = null;
         private Thread _fectchImageThread = null;
         private Thread _processImageThread = null;
         public delegate void InvokeShowImageData();
@@ -39,18 +39,18 @@ namespace DetectSystem
             else
             {
                 _inputPictureBox.Image = _input.ToBitmap();
-                Bitmap map = _inputPictureBox.Image as Bitmap;
+                /*Bitmap map = _inputPictureBox.Image as Bitmap;
                 Graphics graphic = Graphics.FromImage(map);
                 graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.TempShape.StartPoint.X), Convert.ToInt32(_presentationModel.TempShape.StartPoint.Y), Convert.ToInt32(_presentationModel.TempShape.EndPoint.X), Convert.ToInt32(_presentationModel.TempShape.EndPoint.Y));
 
                 for (int i = 1; i <= _presentationModel.DataModel.PointPer; i++)
                 {
-                    graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.DataModel.Polygons[i-1].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[i-1].Y), Convert.ToInt32(_presentationModel.DataModel.Polygons[i].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[i].Y));
+                    graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.DataModel.Polygons[i - 1].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[i - 1].Y), Convert.ToInt32(_presentationModel.DataModel.Polygons[i].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[i].Y));
                 }
                 if (_presentationModel.DataModel.PointPer == 3)
                 {
                     graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.DataModel.Polygons[3].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[3].Y), Convert.ToInt32(_presentationModel.DataModel.Polygons[0].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[0].Y));
-                }
+                }*/
             }
         }
 
@@ -80,6 +80,15 @@ namespace DetectSystem
             }
         }
 
+        public void showImage(Image<Bgr, Byte> input, Image<Gray, Byte> output)
+        {
+            Adapter.Invoke(new SendOrPostCallback(o =>
+            {
+                _inputPictureBox.Image = input.ToBitmap();
+                _outputPictureBox.Image = output.ToBitmap();
+            }), null);
+        }
+
         public void ReadImage()
         {
             while (true)
@@ -94,32 +103,36 @@ namespace DetectSystem
             {
                 if (_input != null)
                 {
-                    _output = _input.Convert<Gray, Byte>();
-                    /*  CircleF[][] circles = _input.Convert<Gray, Byte>().HoughCircles(
-                              new Gray(200),
-                              new Gray(100),
-                              1,
-                              200,
-                              0,
-                              0
-                          );
+                     _output = _input.Convert<Hsv, Byte>();
+                     int height = _output.Cols;
+                     int width = _output.Rows;
+                     for (int i = 0; i < height; i++)
+                     {
+                         for (int j = 0; j < width; j++)
+                         {
+                             double h = _output[j, i].Hue;
+                             double s = _output[j, i].Satuation;
+                             double v = _output[j, i].Value;
+                             if (Math.Abs(h - 100) <= 20 && s >= 128 && s <= 255 && v >= 128 && v <= 255)
+                             {
 
-                      foreach (var circle in circles[0])
-                      {
-                          _input.Draw(circle, new Bgr(0, 0, 255), 5);
-                       //   _output.Draw(circle,new Gray(0),3);
-                      }*/
+                             }
+                             else
+                             {
+                                   _output[j, i] = new Hsv(120, 0, 255);
+                             }
+                         }
+                     }
 
-                    // _output = _output.Canny(100, 200);
                     /*  var result = reader.Decode(_input.ToBitmap());
                       ShowData("");
                       if (result != null)
                       {
                           ShowData(result.Text);
                       }*/
+
                     ShowInputImage();
                     ShowOutputImage();
-
                 }
             }
         }
@@ -160,6 +173,7 @@ namespace DetectSystem
         {
             try
             {
+                Adapter.Initialize();
                 _presentationModel.TempShape = new MyDefLine();
                 _capture = new Capture("rtsp://192.168.0.250/h264");
                 _presentationModel.InputPictureBoxImageWidth = _capture.Width;

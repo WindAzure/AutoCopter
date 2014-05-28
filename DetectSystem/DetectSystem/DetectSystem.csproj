@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapter.cs" />
     <Compile Include="AnalysisForm.cs">
       <SubType>Form</SubType>
     </Compile>
