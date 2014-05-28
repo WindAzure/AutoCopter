@@ -103,26 +103,27 @@ namespace DetectSystem
             {
                 if (_input != null)
                 {
-                     _output = _input.Convert<Hsv, Byte>();
-                     int height = _output.Cols;
-                     int width = _output.Rows;
-                     for (int i = 0; i < height; i++)
-                     {
-                         for (int j = 0; j < width; j++)
-                         {
-                             double h = _output[j, i].Hue;
-                             double s = _output[j, i].Satuation;
-                             double v = _output[j, i].Value;
-                             if (Math.Abs(h - 100) <= 20 && s >= 128 && s <= 255 && v >= 128 && v <= 255)
-                             {
+                    _output = _input.Convert<Hsv, Byte>();
+                    int height = _output.Cols;
+                    int width = _output.Rows;
+                    for (int i = 0; i < height; i++)
+                    {
+                        for (int j = 0; j < width; j++)
+                        {
+                            double h = _output[j, i].Hue;
+                            double s = _output[j, i].Satuation;
+                            double v = _output[j, i].Value;
+                            if (Math.Abs(h - 100) <= 65)
+                            {
 
-                             }
-                             else
-                             {
-                                   _output[j, i] = new Hsv(120, 0, 255);
-                             }
-                         }
-                     }
+                            }
+                            else
+                            {
+                                _output[j, i] = new Hsv(40, 0, 255);
+                            }
+                           // _output[j, i] = new Hsv(165, 128, 128);
+                        }
+                    }
 
                     /*  var result = reader.Decode(_input.ToBitmap());
                       ShowData("");
@@ -175,7 +176,8 @@ namespace DetectSystem
             {
                 Adapter.Initialize();
                 _presentationModel.TempShape = new MyDefLine();
-                _capture = new Capture("rtsp://192.168.0.250/h264");
+                //   _capture = new Capture("rtsp://192.168.0.250/h264");
+                _capture = new Capture(0);
                 _presentationModel.InputPictureBoxImageWidth = _capture.Width;
                 _presentationModel.InputPictureBoxImageHeight = _capture.Height;
 
