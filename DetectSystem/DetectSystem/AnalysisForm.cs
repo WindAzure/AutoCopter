@@ -19,7 +19,7 @@ namespace DetectSystem
     {
         private Capture _capture = null;
         private Image<Bgr, Byte> _input = null;
-        private Image<Hsv, Byte> _output = null;
+        private Image<Gray, Byte> _output = null;
         private Thread _fectchImageThread = null;
         private Thread _processImageThread = null;
         public delegate void InvokeShowImageData();
@@ -39,7 +39,7 @@ namespace DetectSystem
             else
             {
                 _inputPictureBox.Image = _input.ToBitmap();
-                /*Bitmap map = _inputPictureBox.Image as Bitmap;
+                Bitmap map = _inputPictureBox.Image as Bitmap;
                 Graphics graphic = Graphics.FromImage(map);
                 graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.TempShape.StartPoint.X), Convert.ToInt32(_presentationModel.TempShape.StartPoint.Y), Convert.ToInt32(_presentationModel.TempShape.EndPoint.X), Convert.ToInt32(_presentationModel.TempShape.EndPoint.Y));
 
@@ -50,7 +50,7 @@ namespace DetectSystem
                 if (_presentationModel.DataModel.PointPer == 3)
                 {
                     graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.DataModel.Polygons[3].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[3].Y), Convert.ToInt32(_presentationModel.DataModel.Polygons[0].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[0].Y));
-                }*/
+                }
             }
         }
 
@@ -103,35 +103,13 @@ namespace DetectSystem
             {
                 if (_input != null)
                 {
-                    _output = _input.Convert<Hsv, Byte>();
-                    int height = _output.Cols;
-                    int width = _output.Rows;
-                    for (int i = 0; i < height; i++)
-                    {
-                        for (int j = 0; j < width; j++)
-                        {
-                            double h = _output[j, i].Hue;
-                            double s = _output[j, i].Satuation;
-                            double v = _output[j, i].Value;
-                            if (Math.Abs(h - 100) <= 65)
-                            {
-
-                            }
-                            else
-                            {
-                                _output[j, i] = new Hsv(40, 0, 255);
-                            }
-                           // _output[j, i] = new Hsv(165, 128, 128);
-                        }
-                    }
-
-                    /*  var result = reader.Decode(_input.ToBitmap());
+                    _output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130));
+                 /*      var result = reader.Decode(_input.ToBitmap());
                       ShowData("");
                       if (result != null)
                       {
                           ShowData(result.Text);
                       }*/
-
                     ShowInputImage();
                     ShowOutputImage();
                 }
@@ -176,8 +154,7 @@ namespace DetectSystem
             {
                 Adapter.Initialize();
                 _presentationModel.TempShape = new MyDefLine();
-                //   _capture = new Capture("rtsp://192.168.0.250/h264");
-                _capture = new Capture(0);
+                _capture = new Capture("rtsp://192.168.0.250/h264");
                 _presentationModel.InputPictureBoxImageWidth = _capture.Width;
                 _presentationModel.InputPictureBoxImageHeight = _capture.Height;
 
@@ -188,7 +165,6 @@ namespace DetectSystem
                 ThreadStart start2 = new ThreadStart(ProcessImage);
                 _processImageThread = new Thread(start2);
                 _processImageThread.Start();
-
                 _startButton.Enabled = false;
             }
             catch (Exception)
