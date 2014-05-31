@@ -97,32 +97,43 @@ namespace DetectSystem
             }
         }
 
+        public void FindContours(Contour<Point> contours,ref Rectangle rectangle)
+        {
+            for (; contours != null; contours = contours.HNext)
+            {
+                if (contours.Area >= ConstValue.OBJECT_MIN_AREA)
+                {
+                    rectangle = contours.BoundingRectangle;
+                }
+            }
+        }
+
         public void ProcessImage()
         {
             while (true)
             {
                 if (_input != null)
                 {
-                     Image<Gray, Byte> temp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130));
-                   // _output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130)); //green
-                    // _output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 170, 0), new Ycc(110, 255, 150)); //red
-                    // _output = new Image<Ycc, byte>(_presentationModel.InputPictureBoxImageWidth,_presentationModel.InputPictureBoxImageHeight,new Ycc(0, 192, 0));
+                    _output = new Image<Gray, byte>(_presentationModel.InputPictureBoxImageWidth, _presentationModel.InputPictureBoxImageHeight, new Gray(0));
+                    Image<Gray, Byte> greenTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130));
+                    Image<Gray, Byte> redTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 170, 0), new Ycc(110, 255, 150));
                     /*      var result = reader.Decode(_input.ToBitmap());
                          ShowData("");
                          if (result != null)
                          {
                              ShowData(result.Text);
                          }*/
-                      Contour<Point> contours = temp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
+                    Rectangle red=new Rectangle();
+                    Rectangle green=new Rectangle();
+                    Contour<Point> redContours = redTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
+                    Contour<Point> greenContours = greenTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
+                    FindContours(redContours,ref red);
+                    FindContours(greenContours, ref green);
 
-                      for (; contours != null; contours = contours.HNext)
-                      {
-                          if (contours.Area >= ConstValue.OBJECT_MIN_AREA)
-                          {
-                              _output.Draw(contours, new Gray(255), 1);
-                              ShowData(contours.Area.ToString());
-                          }
-                      }
+
+                    _output.Draw(red, new Gray(255), 1);
+                    _output.Draw(green, new Gray(255), 1);
+
                     ShowInputImage();
                     ShowOutputImage();
                 }
@@ -170,7 +181,6 @@ namespace DetectSystem
                 _capture = new Capture("rtsp://192.168.0.250/h264");
                 _presentationModel.InputPictureBoxImageWidth = _capture.Width;
                 _presentationModel.InputPictureBoxImageHeight = _capture.Height;
-                _output = new Image<Gray, byte>(_presentationModel.InputPictureBoxImageWidth, _presentationModel.InputPictureBoxImageHeight);
 
                 ThreadStart start1 = new ThreadStart(ReadImage);
                 _fectchImageThread = new Thread(start1);
