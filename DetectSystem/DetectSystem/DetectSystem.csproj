@@ -89,6 +89,7 @@
     <Compile Include="AnalysisForm.Designer.cs">
       <DependentUpon>AnalysisForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConstValue.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="MyDefLine.cs" />
     <Compile Include="MyDefPoint.cs" />

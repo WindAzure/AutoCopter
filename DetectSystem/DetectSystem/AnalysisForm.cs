@@ -103,15 +103,26 @@ namespace DetectSystem
             {
                 if (_input != null)
                 {
-                    //_output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130)); //green
-                    _output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 170, 0), new Ycc(110, 255, 150)); //red
-                        // _output = new Image<Ycc, byte>(_presentationModel.InputPictureBoxImageWidth,_presentationModel.InputPictureBoxImageHeight,new Ycc(0, 192, 0));
+                     Image<Gray, Byte> temp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130));
+                   // _output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130)); //green
+                    // _output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 170, 0), new Ycc(110, 255, 150)); //red
+                    // _output = new Image<Ycc, byte>(_presentationModel.InputPictureBoxImageWidth,_presentationModel.InputPictureBoxImageHeight,new Ycc(0, 192, 0));
                     /*      var result = reader.Decode(_input.ToBitmap());
                          ShowData("");
                          if (result != null)
                          {
                              ShowData(result.Text);
                          }*/
+                      Contour<Point> contours = temp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
+
+                      for (; contours != null; contours = contours.HNext)
+                      {
+                          if (contours.Area >= ConstValue.OBJECT_MIN_AREA)
+                          {
+                              _output.Draw(contours, new Gray(255), 1);
+                              ShowData(contours.Area.ToString());
+                          }
+                      }
                     ShowInputImage();
                     ShowOutputImage();
                 }
@@ -159,6 +170,7 @@ namespace DetectSystem
                 _capture = new Capture("rtsp://192.168.0.250/h264");
                 _presentationModel.InputPictureBoxImageWidth = _capture.Width;
                 _presentationModel.InputPictureBoxImageHeight = _capture.Height;
+                _output = new Image<Gray, byte>(_presentationModel.InputPictureBoxImageWidth, _presentationModel.InputPictureBoxImageHeight);
 
                 ThreadStart start1 = new ThreadStart(ReadImage);
                 _fectchImageThread = new Thread(start1);
@@ -167,7 +179,7 @@ namespace DetectSystem
                 ThreadStart start2 = new ThreadStart(ProcessImage);
                 _processImageThread = new Thread(start2);
                 _processImageThread.Start();
-                  _startButton.Enabled = false;
+                _startButton.Enabled = false;
             }
             catch (Exception)
             {
