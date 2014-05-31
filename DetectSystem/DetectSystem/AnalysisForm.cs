@@ -104,7 +104,7 @@ namespace DetectSystem
                 if (_input != null)
                 {
                     //_output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130)); //green
-                    _output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 160, 0), new Ycc(110, 255, 150)); //red
+                    _output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 170, 0), new Ycc(110, 255, 150)); //red
                         // _output = new Image<Ycc, byte>(_presentationModel.InputPictureBoxImageWidth,_presentationModel.InputPictureBoxImageHeight,new Ycc(0, 192, 0));
                     /*      var result = reader.Decode(_input.ToBitmap());
                          ShowData("");
