@@ -8,6 +8,6 @@ namespace DetectSystem
 {
     public class ConstValue
     {
-        public const double OBJECT_MIN_AREA = 1000.0;
+        public const double OBJECT_MIN_AREA = 300.0;
     }
 }

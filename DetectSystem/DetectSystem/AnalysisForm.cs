@@ -97,15 +97,16 @@ namespace DetectSystem
             }
         }
 
-        public void FindContours(Contour<Point> contours,ref Rectangle rectangle)
+        public Contour<Point> FindContours(Contour<Point> contours)
         {
             for (; contours != null; contours = contours.HNext)
             {
                 if (contours.Area >= ConstValue.OBJECT_MIN_AREA)
                 {
-                    rectangle = contours.BoundingRectangle;
+                    return contours;
                 }
             }
+            return null;
         }
 
         public void ProcessImage()
@@ -114,25 +115,27 @@ namespace DetectSystem
             {
                 if (_input != null)
                 {
-                    _output = new Image<Gray, byte>(_presentationModel.InputPictureBoxImageWidth, _presentationModel.InputPictureBoxImageHeight, new Gray(0));
-                    Image<Gray, Byte> greenTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130));
+                    _output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130));
+                     /*_output = new Image<Gray, byte>(_presentationModel.InputPictureBoxImageWidth, _presentationModel.InputPictureBoxImageHeight, new Gray(0));
+                   Image<Gray, Byte> greenTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130));
                     Image<Gray, Byte> redTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 170, 0), new Ycc(110, 255, 150));
-                    /*      var result = reader.Decode(_input.ToBitmap());
+
+                    Contour<Point> redContours = redTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
+                    Contour<Point> greenContours = greenTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
+                    Contour<Point> red = FindContours(redContours);
+                    Contour<Point> green = FindContours(greenContours);
+
+                    if (red != null)
+                        _output.Draw(red.BoundingRectangle, new Gray(255), 1);
+                    if (green != null)
+                        _output.Draw(green.BoundingRectangle, new Gray(255), 1);
+
+                          var result = reader.Decode(_input.ToBitmap());
                          ShowData("");
                          if (result != null)
                          {
                              ShowData(result.Text);
                          }*/
-                    Rectangle red=new Rectangle();
-                    Rectangle green=new Rectangle();
-                    Contour<Point> redContours = redTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
-                    Contour<Point> greenContours = greenTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
-                    FindContours(redContours,ref red);
-                    FindContours(greenContours, ref green);
-
-
-                    _output.Draw(red, new Gray(255), 1);
-                    _output.Draw(green, new Gray(255), 1);
 
                     ShowInputImage();
                     ShowOutputImage();
