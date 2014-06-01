@@ -115,10 +115,10 @@ namespace DetectSystem
             {
                 if (_input != null)
                 {
-                    _output = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130));
+                    _output = _input.Convert<Hsv, Byte>().InRange(new Hsv(35, 50, 50), new Hsv(80, 255, 255));// hsv green
                      /*_output = new Image<Gray, byte>(_presentationModel.InputPictureBoxImageWidth, _presentationModel.InputPictureBoxImageHeight, new Gray(0));
-                   Image<Gray, Byte> greenTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130));
-                    Image<Gray, Byte> redTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 170, 0), new Ycc(110, 255, 150));
+                   Image<Gray, Byte> greenTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130)); ycrcb green
+                    Image<Gray, Byte> redTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 170, 0), new Ycc(110, 255, 150)); ycrcb red
 
                     Contour<Point> redContours = redTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
                     Contour<Point> greenContours = greenTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
@@ -181,7 +181,8 @@ namespace DetectSystem
             {
                 Adapter.Initialize();
                 _presentationModel.TempShape = new MyDefLine();
-                _capture = new Capture("rtsp://192.168.0.250/h264");
+                _capture = new Capture(0);
+                //_capture = new Capture("rtsp://192.168.0.250/h264");
                 _presentationModel.InputPictureBoxImageWidth = _capture.Width;
                 _presentationModel.InputPictureBoxImageHeight = _capture.Height;
 
