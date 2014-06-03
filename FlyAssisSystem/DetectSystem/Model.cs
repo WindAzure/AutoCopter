@@ -10,8 +10,6 @@ namespace DetectSystem
 {
     public class Model
     {
-        private readonly DroneClient _droneClient;
-
         public int PointPer
         {
             set;

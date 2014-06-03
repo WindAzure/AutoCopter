@@ -1,5 +1,7 @@
 ﻿using AR.Drone.Client;
 using AR.Drone.Client.Command;
+using AR.Drone.Data;
+using AR.Drone.Data.Navigation;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System;
@@ -32,7 +34,7 @@ namespace DetectSystem
         private PresentationModel _presentationModel = new PresentationModel();
 
 
-        private readonly DroneClient _droneClient = new DroneClient("192.168.1.1");
+        private readonly DroneClient _droneClient;
 
         private IBarcodeReader reader = new BarcodeReader();
 
@@ -123,14 +125,13 @@ namespace DetectSystem
             {
                 if (_input != null)
                 {
-                    _output = _input.Convert<Hsv, Byte>().InRange(new Hsv(35, 50, 50), new Hsv(80, 255, 255));// hsv green
-                    //_output = new Image<Gray, byte>(_presentationModel.InputPictureBoxImageWidth, _presentationModel.InputPictureBoxImageHeight, new Gray(0));
+                    _output = new Image<Gray, byte>(_presentationModel.InputPictureBoxImageWidth, _presentationModel.InputPictureBoxImageHeight, new Gray(0));
                     Image<Gray, Byte> greenTemp = _input.Convert<Hsv, Byte>().InRange(new Hsv(35, 50, 50), new Hsv(80, 255, 255));
-                    //Image<Gray, Byte> greenTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130)); //ycrcb green
                     Image<Gray, Byte> redTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 170, 0), new Ycc(110, 255, 150)); //ycrcb red
+                    //Image<Gray, Byte> greenTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130)); //ycrcb green
 
-                
-                    /*    Contour<Point> redContours = redTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
+
+                    Contour<Point> redContours = redTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
                     Contour<Point> greenContours = greenTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
                     Contour<Point> red = FindContours(redContours);
                     Contour<Point> green = FindContours(greenContours);
@@ -145,19 +146,19 @@ namespace DetectSystem
                         _green = green;
                         _output.Draw(green.BoundingRectangle, new Gray(255), 1);
                     }
-                    double redCenterX = (2.0 * _red.BoundingRectangle.X + _red.BoundingRectangle.Width) / 2.0;
-                    double redCenterY = (2.0 * _red.BoundingRectangle.Y + _red.BoundingRectangle.Height) / 2.0;
-                    double greenCenterX = (2.0 * _green.BoundingRectangle.X + _green.BoundingRectangle.Width) / 2.0;
-                    double greenCenterY = (2.0 * _green.BoundingRectangle.Y + _green.BoundingRectangle.Height) / 2.0;
-                    _presentationModel.SetQuadcopterCenter(greenCenterX, greenCenterY);
-                    _presentationModel.SetQuadcopterTailCenter(redCenterX, redCenterY);
-                    */
-                    /*     var result = reader.Decode(_input.ToBitmap());
-                        ShowData("");
-                        if (result != null)
-                        {
-                            ShowData(result.Text);
-                        }*/
+                    /*   double redCenterX = (2.0 * _red.BoundingRectangle.X + _red.BoundingRectangle.Width) / 2.0;
+                       double redCenterY = (2.0 * _red.BoundingRectangle.Y + _red.BoundingRectangle.Height) / 2.0;
+                       double greenCenterX = (2.0 * _green.BoundingRectangle.X + _green.BoundingRectangle.Width) / 2.0;
+                       double greenCenterY = (2.0 * _green.BoundingRectangle.Y + _green.BoundingRectangle.Height) / 2.0;
+                       _presentationModel.SetQuadcopterCenter(greenCenterX, greenCenterY);
+                       _presentationModel.SetQuadcopterTailCenter(redCenterX, redCenterY);
+                    
+                       /*     var result = reader.Decode(_input.ToBitmap());
+                           ShowData("");
+                           if (result != null)
+                           {
+                               ShowData(result.Text);
+                           }*/
 
                     ShowInputImage();
                     ShowOutputImage();
@@ -187,6 +188,8 @@ namespace DetectSystem
             _presentationModel._presentationModelChanged += PresentationModelStateChangeButtonEnableChanged;
             _presentationModel.InputPictureBoxWidth = _inputPictureBox.Width;
             _presentationModel.InputPictureBoxHeight = _inputPictureBox.Height;
+            _droneClient = new DroneClient("192.168.1.1");
+            _droneClient.Start();
         }
 
         void PresentationModelStateChangeButtonEnableChanged()
@@ -203,8 +206,8 @@ namespace DetectSystem
             {
                 Adapter.Initialize();
                 _presentationModel.TempShape = new MyDefLine();
-                _capture = new Capture(0);
-                //_capture = new Capture("rtsp://192.168.0.250/h264");
+                //_capture = new Capture(0);
+                _capture = new Capture("rtsp://192.168.0.250/h264");
                 _presentationModel.InputPictureBoxImageWidth = _capture.Width;
                 _presentationModel.InputPictureBoxImageHeight = _capture.Height;
 
@@ -239,6 +242,9 @@ namespace DetectSystem
             {
                 _processImageThread.Abort();
             }
+
+            _droneClient.Stop();
+            _droneClient.Dispose();
         }
 
         private void MouseDownInputBox(object sender, MouseEventArgs e)
