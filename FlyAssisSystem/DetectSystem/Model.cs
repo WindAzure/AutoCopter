@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,28 +15,31 @@ namespace DetectSystem
             get;
         }
 
+        public Rectangle MinRectangle
+        {
+            set;
+            get;
+        }
+
         public MyDefPoint[] Polygons
         {
             set;
             get;
         }
 
-        public Model()
-        {
-            PointPer = -1;
-            Polygons = new MyDefPoint[4];
-        }
+
 
         public void AddPolygons(double x,double y)
         {
             if (PointPer == 3)
             {
                 PointPer = -1;
+                MinRectangle = new Rectangle(GetMinX(Polygons), GetMinY(Polygons), GetMaxX(Polygons), GetMaxY(Polygons));
             }
             Polygons[++PointPer] = new MyDefPoint(x, y);
         }
 
-        private double GetSeaDradronValue(MyDefPoint p1, MyDefPoint p2, MyDefPoint p3)
+        private double GetTriangleValue(MyDefPoint p1, MyDefPoint p2, MyDefPoint p3)
         {
             MyDefPoint s1 = new MyDefPoint(p1.X - p2.X, p1.Y - p2.Y);
             MyDefPoint s2 = new MyDefPoint(p1.X - p3.X, p1.Y - p3.Y);
@@ -44,7 +48,13 @@ namespace DetectSystem
 
         public double CalcaluateArea()
         {
-            return GetSeaDradronValue(Polygons[0], Polygons[1], Polygons[2]) + GetSeaDradronValue(Polygons[2], Polygons[3], Polygons[0]);
+            return GetTriangleValue(Polygons[0], Polygons[1], Polygons[2]) + GetTriangleValue(Polygons[2], Polygons[3], Polygons[0]);
+        }
+
+        public Model()
+        {
+            PointPer = -1;
+            Polygons = new MyDefPoint[4];
         }
     }
 }
