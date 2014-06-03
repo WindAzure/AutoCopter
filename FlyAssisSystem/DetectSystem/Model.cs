@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AR.Drone.Client;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace DetectSystem
 {
     public class Model
     {
+        private readonly DroneClient _droneClient;
+
         public int PointPer
         {
             set;
@@ -116,6 +119,11 @@ namespace DetectSystem
             return GetTriangleValue(Polygons[0], Polygons[1], Polygons[2]) + GetTriangleValue(Polygons[2], Polygons[3], Polygons[0]);
         }
 
+        public void FlyToTarget()
+        {
+ 
+        }
+
         public Model()
         {
             PointPer = -1;
@@ -123,6 +131,7 @@ namespace DetectSystem
             PolygonCenter = new MyDefPoint();
             QuadcopterCenter = new MyDefPoint();
             QuadcopterTailCenter = new MyDefPoint();
+            //_droneClient = new DroneClient("192.168.1.1");
         }
     }
 }

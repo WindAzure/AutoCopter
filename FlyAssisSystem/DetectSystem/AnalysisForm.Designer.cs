@@ -70,6 +70,7 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
+            this._flyButton = new System.Windows.Forms.Button();
             this._inputGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._inputPictureBox)).BeginInit();
             this._outputGroupBox.SuspendLayout();
@@ -79,7 +80,7 @@
             // 
             // _startButton
             // 
-            this._startButton.Location = new System.Drawing.Point(1253, 108);
+            this._startButton.Location = new System.Drawing.Point(1253, 67);
             this._startButton.Name = "_startButton";
             this._startButton.Size = new System.Drawing.Size(86, 34);
             this._startButton.TabIndex = 1;
@@ -503,11 +504,22 @@
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
+            // _flyButton
+            // 
+            this._flyButton.Location = new System.Drawing.Point(1253, 129);
+            this._flyButton.Name = "_flyButton";
+            this._flyButton.Size = new System.Drawing.Size(86, 34);
+            this._flyButton.TabIndex = 23;
+            this._flyButton.Text = "fly";
+            this._flyButton.UseVisualStyleBackColor = true;
+            this._flyButton.Click += new System.EventHandler(this.ClickFlyButton);
+            // 
             // AnalysisForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 459);
+            this.Controls.Add(this._flyButton);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
@@ -587,6 +599,7 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button _flyButton;
     }
 }
 
