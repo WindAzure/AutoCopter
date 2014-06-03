@@ -56,6 +56,7 @@ namespace DetectSystem
                 }
                 if (_presentationModel.DataModel.PointPer == 3)
                 {
+                    graphic.DrawEllipse(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.DataModel.PolygonCenter.X), Convert.ToInt32(_presentationModel.DataModel.PolygonCenter.Y), 30, 30);
                     graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.DataModel.Polygons[3].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[3].Y), Convert.ToInt32(_presentationModel.DataModel.Polygons[0].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[0].Y));
                 }
             }
@@ -148,6 +149,8 @@ namespace DetectSystem
                     double redCenterY = (2.0 * _red.BoundingRectangle.Y + _red.BoundingRectangle.Height) / 2.0;
                     double greenCenterX = (2.0 * _green.BoundingRectangle.X + _green.BoundingRectangle.Width) / 2.0;
                     double greenCenterY = (2.0 * _green.BoundingRectangle.Y + _green.BoundingRectangle.Height) / 2.0;
+                    _presentationModel.SetQuadcopterCenter(greenCenterX, greenCenterY);
+                    _presentationModel.SetQuadcopterTailCenter(redCenterX, redCenterY);
 
                     /*     var result = reader.Decode(_input.ToBitmap());
                         ShowData("");

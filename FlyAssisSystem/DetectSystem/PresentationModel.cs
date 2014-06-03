@@ -124,7 +124,6 @@ namespace DetectSystem
             }
         }
 
-
         public Point ConvertRatioOfPictureBoxAndImage(Point point)
         {
             double ratioX = Convert.ToDouble(InputPictureBoxImageWidth) / Convert.ToDouble(InputPictureBoxWidth);
@@ -178,6 +177,18 @@ namespace DetectSystem
         public String CalSelectRangeArea()
         {
             return DataModel.CalcaluateArea().ToString();
+        }
+
+        public void SetQuadcopterCenter(double x,double y)
+        {
+            DataModel.QuadcopterCenter.X = x;
+            DataModel.QuadcopterCenter.Y = y;
+        }
+
+        public void SetQuadcopterTailCenter(double x,double y)
+        {
+            DataModel.QuadcopterTailCenter.X = x;
+            DataModel.QuadcopterTailCenter.Y = y;
         }
     }
 }

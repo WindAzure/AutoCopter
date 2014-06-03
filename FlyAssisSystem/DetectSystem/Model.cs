@@ -15,7 +15,19 @@ namespace DetectSystem
             get;
         }
 
-        public Rectangle MinRectangle
+        public MyDefPoint PolygonCenter
+        {
+            set;
+            get;
+        }
+
+        public MyDefPoint QuadcopterCenter
+        {
+            set;
+            get;
+        }
+
+        public MyDefPoint QuadcopterTailCenter
         {
             set;
             get;
@@ -27,16 +39,69 @@ namespace DetectSystem
             get;
         }
 
-
-
-        public void AddPolygons(double x,double y)
+        private double GetPolygonsMinX()
         {
+            double minX = ConstValue.MIN_LIMMIT;
+            for (int i = 0; i < 4; i++)
+            {
+                if (minX > Polygons[i].X)
+                {
+                    minX = Polygons[i].X;
+                }
+            }
+            return minX;
+        }
+
+        private double GetPolygonsMinY()
+        {
+            double minY = ConstValue.MIN_LIMMIT;
+            for (int i = 0; i < 4; i++)
+            {
+                if (minY > Polygons[i].Y)
+                {
+                    minY = Polygons[i].Y;
+                }
+            }
+            return minY;
+        }
+
+        private double GetPolygonsMaxX()
+        {
+            double maxX = ConstValue.MAX_LIMMIT;
+            for (int i = 0; i < 4; i++)
+            {
+                if (maxX < Polygons[i].X)
+                {
+                    maxX = Polygons[i].X;
+                }
+            }
+            return maxX;
+        }
+
+        private double GetPolygonsMaxY()
+        {
+            double maxY = ConstValue.MAX_LIMMIT;
+            for (int i = 0; i < 4; i++)
+            {
+                if (maxY < Polygons[i].Y)
+                {
+                    maxY = Polygons[i].Y;
+                }
+            }
+            return maxY;
+        }
+
+        public void AddPolygons(double x, double y)
+        {
+            ++PointPer;
+            PointPer %= 4;
+            Polygons[PointPer] = new MyDefPoint(x, y);
+
             if (PointPer == 3)
             {
-                PointPer = -1;
-                MinRectangle = new Rectangle(GetMinX(Polygons), GetMinY(Polygons), GetMaxX(Polygons), GetMaxY(Polygons));
+                PolygonCenter.X = (GetPolygonsMinX() + GetPolygonsMaxX()) / 2.0;
+                PolygonCenter.Y = (GetPolygonsMinY() + GetPolygonsMaxY()) / 2.0;
             }
-            Polygons[++PointPer] = new MyDefPoint(x, y);
         }
 
         private double GetTriangleValue(MyDefPoint p1, MyDefPoint p2, MyDefPoint p3)
@@ -55,6 +120,9 @@ namespace DetectSystem
         {
             PointPer = -1;
             Polygons = new MyDefPoint[4];
+            PolygonCenter = new MyDefPoint();
+            QuadcopterCenter = new MyDefPoint();
+            QuadcopterTailCenter = new MyDefPoint();
         }
     }
 }
