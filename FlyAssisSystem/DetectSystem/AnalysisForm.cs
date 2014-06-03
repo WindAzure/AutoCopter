@@ -34,7 +34,6 @@ namespace DetectSystem
         private PresentationModel _presentationModel = new PresentationModel();
 
 
-        private readonly DroneClient _droneClient;
 
         private IBarcodeReader reader = new BarcodeReader();
 
@@ -130,7 +129,6 @@ namespace DetectSystem
                     Image<Gray, Byte> redTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 170, 0), new Ycc(110, 255, 150)); //ycrcb red
                     //Image<Gray, Byte> greenTemp = _input.Convert<Ycc, Byte>().InRange(new Ycc(0, 0, 0), new Ycc(255, 110, 130)); //ycrcb green
 
-
                     Contour<Point> redContours = redTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
                     Contour<Point> greenContours = greenTemp.FindContours(Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_NONE, Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL);
                     Contour<Point> red = FindContours(redContours);
@@ -146,19 +144,20 @@ namespace DetectSystem
                         _green = green;
                         _output.Draw(green.BoundingRectangle, new Gray(255), 1);
                     }
-                    /*   double redCenterX = (2.0 * _red.BoundingRectangle.X + _red.BoundingRectangle.Width) / 2.0;
-                       double redCenterY = (2.0 * _red.BoundingRectangle.Y + _red.BoundingRectangle.Height) / 2.0;
-                       double greenCenterX = (2.0 * _green.BoundingRectangle.X + _green.BoundingRectangle.Width) / 2.0;
-                       double greenCenterY = (2.0 * _green.BoundingRectangle.Y + _green.BoundingRectangle.Height) / 2.0;
-                       _presentationModel.SetQuadcopterCenter(greenCenterX, greenCenterY);
-                       _presentationModel.SetQuadcopterTailCenter(redCenterX, redCenterY);
-                    
-                       /*     var result = reader.Decode(_input.ToBitmap());
-                           ShowData("");
-                           if (result != null)
-                           {
-                               ShowData(result.Text);
-                           }*/
+
+                    double redCenterX = (2.0 * _red.BoundingRectangle.X + _red.BoundingRectangle.Width) / 2.0;
+                    double redCenterY = (2.0 * _red.BoundingRectangle.Y + _red.BoundingRectangle.Height) / 2.0;
+                    double greenCenterX = (2.0 * _green.BoundingRectangle.X + _green.BoundingRectangle.Width) / 2.0;
+                    double greenCenterY = (2.0 * _green.BoundingRectangle.Y + _green.BoundingRectangle.Height) / 2.0;
+                    _presentationModel.SetQuadcopterCenter(greenCenterX, greenCenterY);
+                    _presentationModel.SetQuadcopterTailCenter(redCenterX, redCenterY);
+                    _presentationModel.DataModel.FlyToTarget();
+                    /*     var result = reader.Decode(_input.ToBitmap());
+                        ShowData("");
+                        if (result != null)
+                        {
+                            ShowData(result.Text);
+                        }*/
 
                     ShowInputImage();
                     ShowOutputImage();
@@ -188,8 +187,6 @@ namespace DetectSystem
             _presentationModel._presentationModelChanged += PresentationModelStateChangeButtonEnableChanged;
             _presentationModel.InputPictureBoxWidth = _inputPictureBox.Width;
             _presentationModel.InputPictureBoxHeight = _inputPictureBox.Height;
-            _droneClient = new DroneClient("192.168.1.1");
-            _droneClient.Start();
         }
 
         void PresentationModelStateChangeButtonEnableChanged()
@@ -243,8 +240,7 @@ namespace DetectSystem
                 _processImageThread.Abort();
             }
 
-            _droneClient.Stop();
-            _droneClient.Dispose();
+            _presentationModel.DataModel.DisposeDroneClient();
         }
 
         private void MouseDownInputBox(object sender, MouseEventArgs e)
@@ -297,77 +293,77 @@ namespace DetectSystem
 
         private void button5_Click(object sender, EventArgs e)
         {
-            _droneClient.Takeoff();
+            //_droneClient.Takeoff();
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            _droneClient.Start();
+          //  _droneClient.Start();
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            _droneClient.Stop();
+         //   _droneClient.Stop();
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            _droneClient.Land();
+         //   _droneClient.Land();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            _droneClient.Progress(FlightMode.Progressive, pitch: -0.05f);
+          //  _droneClient.Progress(FlightMode.Progressive, pitch: -0.05f);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            _droneClient.Progress(FlightMode.Progressive, pitch: 0.05f);
+          //  _droneClient.Progress(FlightMode.Progressive, pitch: 0.05f);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _droneClient.Progress(FlightMode.Progressive, roll: -0.05f);
+          //  _droneClient.Progress(FlightMode.Progressive, roll: -0.05f);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            _droneClient.Progress(FlightMode.Progressive, roll: 0.05f);
+         //   _droneClient.Progress(FlightMode.Progressive, roll: 0.05f);
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            _droneClient.Progress(FlightMode.Progressive, yaw: 0.25f);
+        //    _droneClient.Progress(FlightMode.Progressive, yaw: 0.25f);
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            _droneClient.Progress(FlightMode.Progressive, yaw: -0.25f);
+        //    _droneClient.Progress(FlightMode.Progressive, yaw: -0.25f);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            _droneClient.Emergency();
+       //     _droneClient.Emergency();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            _droneClient.Progress(FlightMode.Progressive, gaz: 0.25f);
+        //    _droneClient.Progress(FlightMode.Progressive, gaz: 0.25f);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            _droneClient.Progress(FlightMode.Progressive, gaz: -0.25f);
+         //   _droneClient.Progress(FlightMode.Progressive, gaz: -0.25f);
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            _droneClient.Hover();
+        //    _droneClient.Hover();
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            _droneClient.ResetEmergency();
+       //     _droneClient.ResetEmergency();
         }
     }
 }

@@ -64,12 +64,9 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
             this._flyButton = new System.Windows.Forms.Button();
             this._inputGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._inputPictureBox)).BeginInit();
@@ -444,26 +441,6 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(1263, 276);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(86, 34);
-            this.button10.TabIndex = 17;
-            this.button10.Text = "開始";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(1263, 327);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(86, 34);
-            this.button11.TabIndex = 18;
-            this.button11.Text = "停止";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
             // button12
             // 
             this.button12.Location = new System.Drawing.Point(1058, 276);
@@ -494,16 +471,6 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
-            // button15
-            // 
-            this.button15.Location = new System.Drawing.Point(1155, 225);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(123, 34);
-            this.button15.TabIndex = 22;
-            this.button15.Text = "reset 緊急降落";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
-            // 
             // _flyButton
             // 
             this._flyButton.Location = new System.Drawing.Point(1253, 129);
@@ -520,12 +487,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 459);
             this.Controls.Add(this._flyButton);
-            this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
-            this.Controls.Add(this.button11);
-            this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -593,12 +557,9 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button _flyButton;
     }
 }
