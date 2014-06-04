@@ -1,6 +1,7 @@
 ﻿using AR.Drone.Client;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -127,7 +128,10 @@ namespace DetectSystem
 
         public void FlyToTarget()
         {
- 
+            MyDefPoint v1 = new MyDefPoint(QuadcopterCenter.X - QuadcopterTailCenter.X, QuadcopterCenter.Y - QuadcopterTailCenter.Y);
+            MyDefPoint v2 = new MyDefPoint(PolygonCenter.X - QuadcopterTailCenter.X, PolygonCenter.Y - QuadcopterTailCenter.Y);
+            double theta = Math.Acos((v1.X * v2.X + v1.Y * v2.Y) / (Math.Sqrt(v1.X * v1.X + v1.Y * v1.Y) * Math.Sqrt(v2.X * v2.X + v2.Y * v2.Y))) * 180.0 / Math.PI;
+            Debug.WriteLine(theta);
         }
 
         public Model()
