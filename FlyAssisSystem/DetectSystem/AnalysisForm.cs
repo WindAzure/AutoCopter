@@ -33,7 +33,7 @@ namespace DetectSystem
 
         private PresentationModel _presentationModel = new PresentationModel();
 
-
+        private bool _controlFlag = false;
 
         private IBarcodeReader reader = new BarcodeReader();
 
@@ -145,19 +145,22 @@ namespace DetectSystem
                         _output.Draw(green.BoundingRectangle, new Gray(255), 1);
                     }
 
-               /*     double redCenterX = (2.0 * _red.BoundingRectangle.X + _red.BoundingRectangle.Width) / 2.0;
-                    double redCenterY = (2.0 * _red.BoundingRectangle.Y + _red.BoundingRectangle.Height) / 2.0;
-                    double greenCenterX = (2.0 * _green.BoundingRectangle.X + _green.BoundingRectangle.Width) / 2.0;
-                    double greenCenterY = (2.0 * _green.BoundingRectangle.Y + _green.BoundingRectangle.Height) / 2.0;
-                    _presentationModel.SetQuadcopterCenter(greenCenterX, greenCenterY);
-                    _presentationModel.SetQuadcopterTailCenter(redCenterX, redCenterY);
-                    _presentationModel.DataModel.FlyToTarget();
-                         var result = reader.Decode(_input.ToBitmap());
-                        ShowData("");
-                        if (result != null)
-                        {
-                            ShowData(result.Text);
-                        }*/
+                         double redCenterX = (2.0 * _red.BoundingRectangle.X + _red.BoundingRectangle.Width) / 2.0;
+                         double redCenterY = (2.0 * _red.BoundingRectangle.Y + _red.BoundingRectangle.Height) / 2.0;
+                         double greenCenterX = (2.0 * _green.BoundingRectangle.X + _green.BoundingRectangle.Width) / 2.0;
+                         double greenCenterY = (2.0 * _green.BoundingRectangle.Y + _green.BoundingRectangle.Height) / 2.0;
+                         _presentationModel.SetQuadcopterCenter(greenCenterX, greenCenterY);
+                         _presentationModel.SetQuadcopterTailCenter(redCenterX, redCenterY);
+                         if (_controlFlag)
+                         {
+                             _presentationModel.DataModel.FlyToTarget(_green);
+                         }
+                        /*      var result = reader.Decode(_input.ToBitmap());
+                             ShowData("");
+                             if (result != null)
+                             {
+                                 ShowData(result.Text);
+                             }*/
 
                     ShowInputImage();
                     ShowOutputImage();
@@ -225,10 +228,10 @@ namespace DetectSystem
 
         private void ClickFlyButton(object sender, EventArgs e)
         {
-            _presentationModel.SetQuadcopterCenter(-2, 0);
+            /*_presentationModel.SetQuadcopterCenter(-2, 0);
             _presentationModel.SetQuadcopterTailCenter(0, 0);
-            _presentationModel.DataModel.PolygonCenter=new MyDefPoint(2, 0);
-            _presentationModel.DataModel.FlyToTarget();
+            _presentationModel.DataModel.PolygonCenter = new MyDefPoint(2, 0);*/
+            _controlFlag = !_controlFlag;
         }
 
         private void ClosingAnalysisForm(object sender, FormClosingEventArgs e)

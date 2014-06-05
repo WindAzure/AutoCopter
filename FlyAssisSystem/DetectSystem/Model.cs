@@ -1,4 +1,6 @@
 ﻿using AR.Drone.Client;
+using AR.Drone.Client.Command;
+using Emgu.CV;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -126,12 +128,101 @@ namespace DetectSystem
             _droneClient.Dispose();
         }
 
-        public void FlyToTarget()
+        private bool IsOverlapping(Rectangle A, Rectangle B)
         {
-            MyDefPoint v1 = new MyDefPoint(QuadcopterCenter.X - QuadcopterTailCenter.X, QuadcopterCenter.Y - QuadcopterTailCenter.Y);
-            MyDefPoint v2 = new MyDefPoint(PolygonCenter.X - QuadcopterTailCenter.X, PolygonCenter.Y - QuadcopterTailCenter.Y);
-            double theta = Math.Acos((v1.X * v2.X + v1.Y * v2.Y) / (Math.Sqrt(v1.X * v1.X + v1.Y * v1.Y) * Math.Sqrt(v2.X * v2.X + v2.Y * v2.Y))) * 180.0 / Math.PI;
-            Debug.WriteLine(theta);
+            if (A.Left <= B.Left && B.Left <= A.Right && A.Top <= B.Top && B.Top <= A.Bottom)
+            {
+                return true;
+            }
+            else if (A.Left <= B.Left && B.Left <= A.Right && B.Top <= A.Top && A.Top <= B.Bottom)
+            {
+                return true;
+            }
+            else if (B.Left <= A.Left && A.Left <= B.Right && A.Top <= B.Top && B.Top <= A.Bottom)
+            {
+                return true;
+            }
+            else if (B.Left <= A.Left && A.Left <= B.Right && B.Top <= A.Top && A.Top <= B.Bottom)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool IsAreaSameAndCover(Contour<Point> quadcopter)
+        {
+            if (Math.Abs(quadcopter.Area - CalcaluateArea()) <= ConstValue.OBJECT_TOLERANCE_AREA)
+            {
+                Rectangle rect = new Rectangle(Convert.ToInt32(GetPolygonsMinX()), Convert.ToInt32(GetPolygonsMinY()), Convert.ToInt32(GetPolygonsMaxX() - GetPolygonsMinX()), Convert.ToInt32(GetPolygonsMaxY() - GetPolygonsMinY()));
+                return IsOverlapping(rect, quadcopter.BoundingRectangle) || IsOverlapping(quadcopter.BoundingRectangle, rect);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private int GetDirection()
+        {
+            int direct;
+            if (QuadcopterCenter.X == QuadcopterTailCenter.X)
+            {
+                if (PolygonCenter.X > QuadcopterCenter.X)
+                {
+                    direct = 1;
+                }
+                else if (PolygonCenter.X < QuadcopterCenter.X)
+                {
+                    direct = -1;
+                }
+                else
+                {
+                    direct = 0;
+                }
+            }
+            else
+            {
+                double value = -PolygonCenter.Y + ((QuadcopterTailCenter.Y - QuadcopterCenter.Y) / (QuadcopterTailCenter.X - QuadcopterCenter.X) * PolygonCenter.X) + ((QuadcopterCenter.X * QuadcopterTailCenter.Y - QuadcopterCenter.Y * QuadcopterTailCenter.X) / (QuadcopterCenter.X - QuadcopterTailCenter.X));
+                if (value > 0.0)
+                {
+                    direct = 1;
+                }
+                else if (value < 0.0)
+                {
+                    direct = -1;
+                }
+                else
+                {
+                    direct = 0;
+                }
+            }
+            return direct;
+        }
+
+        public void FlyToTarget(Contour<Point> quadcopter)
+        {
+            if (IsAreaSameAndCover(quadcopter))
+            {
+                _droneClient.Land();
+            }
+            else
+            {
+                MyDefPoint v1 = new MyDefPoint(QuadcopterCenter.X - QuadcopterTailCenter.X, QuadcopterCenter.Y - QuadcopterTailCenter.Y);
+                MyDefPoint v2 = new MyDefPoint(PolygonCenter.X - QuadcopterTailCenter.X, PolygonCenter.Y - QuadcopterTailCenter.Y);
+                double theta = Math.Acos((v1.X * v2.X + v1.Y * v2.Y) / (Math.Sqrt(v1.X * v1.X + v1.Y * v1.Y) * Math.Sqrt(v2.X * v2.X + v2.Y * v2.Y))) * 180.0 / Math.PI;
+                int direct = GetDirection() * -1;
+                if (theta <= ConstValue.OBJECT_TOLERANCE_ANGLE)
+                {
+                    _droneClient.Progress(FlightMode.Progressive, pitch: -0.05f);
+                }
+                else
+                {
+                    _droneClient.Progress(FlightMode.Progressive, yaw: (float)(theta*direct));
+                }
+            }
         }
 
         public Model()

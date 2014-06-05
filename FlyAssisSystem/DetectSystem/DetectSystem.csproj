@@ -93,6 +93,7 @@
     <Compile Include="Model.cs" />
     <Compile Include="MyDefLine.cs" />
     <Compile Include="MyDefPoint.cs" />
+    <Compile Include="MyDefPolygon.cs" />
     <Compile Include="PresentationModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
