@@ -185,7 +185,7 @@ namespace AR.Drone.WinApp
                 DumpValue(propertyInfo.PropertyType, node, value);
             }
         }
-
+        
         private void DumpValue(Type type, TreeNode node, object value)
         {
             if (value == null)
@@ -468,6 +468,14 @@ namespace AR.Drone.WinApp
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            const float turn = (float)(Math.PI / 5);
+            float heading = _droneClient.NavigationData.Yaw;
+
+            _autopilot.EnqueueObjective(Objective.Create(2000, new Heading(heading + turn, aCanBeObtained: true)));
         }
     }
 }

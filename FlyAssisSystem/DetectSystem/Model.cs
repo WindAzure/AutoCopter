@@ -1,5 +1,7 @@
 ﻿using AR.Drone.Client;
 using AR.Drone.Client.Command;
+using AR.Drone.Data;
+using AR.Drone.Data.Navigation;
 using Emgu.CV;
 using System;
 using System.Collections.Generic;
@@ -7,14 +9,28 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DetectSystem
 {
     public class Model
     {
+        private Thread _planeMotionThread = null;
         private readonly DroneClient _droneClient;
 
+        public bool ControlFlag
+        {
+            set;
+            get;
+        }
+
+        public Contour<Point> Quadcopter
+        {
+            set;
+            get;
+        }
+        
         public int PointPer
         {
             set;
@@ -119,6 +135,10 @@ namespace DetectSystem
 
         public double CalcaluateArea()
         {
+            if (PointPer < 3)
+            {
+                return 0;
+            }
             return GetTriangleValue(Polygons[0], Polygons[1], Polygons[2]) + GetTriangleValue(Polygons[2], Polygons[3], Polygons[0]);
         }
 
@@ -152,20 +172,18 @@ namespace DetectSystem
             }
         }
 
-        private bool IsAreaSameAndCover(Contour<Point> quadcopter)
+        private bool IsAreaSame(Contour<Point> quadcopter)
         {
-            if (Math.Abs(quadcopter.Area - CalcaluateArea()) <= ConstValue.OBJECT_TOLERANCE_AREA)
-            {
-                Rectangle rect = new Rectangle(Convert.ToInt32(GetPolygonsMinX()), Convert.ToInt32(GetPolygonsMinY()), Convert.ToInt32(GetPolygonsMaxX() - GetPolygonsMinX()), Convert.ToInt32(GetPolygonsMaxY() - GetPolygonsMinY()));
-                return IsOverlapping(rect, quadcopter.BoundingRectangle) || IsOverlapping(quadcopter.BoundingRectangle, rect);
-            }
-            else
-            {
-                return false;
-            }
+            return Math.Abs(quadcopter.Area - CalcaluateArea()) <= ConstValue.OBJECT_TOLERANCE_AREA;
         }
 
-        private int GetDirection()
+        private bool IsAreaCover(Contour<Point> quadcopter)
+        {
+            Rectangle rect = new Rectangle(Convert.ToInt32(GetPolygonsMinX()), Convert.ToInt32(GetPolygonsMinY()), Convert.ToInt32(GetPolygonsMaxX() - GetPolygonsMinX()), Convert.ToInt32(GetPolygonsMaxY() - GetPolygonsMinY()));
+            return IsOverlapping(rect, quadcopter.BoundingRectangle) || IsOverlapping(quadcopter.BoundingRectangle, rect);
+        }
+
+        public int GetDirection()
         {
             int direct;
             if (QuadcopterCenter.X == QuadcopterTailCenter.X)
@@ -202,38 +220,102 @@ namespace DetectSystem
             return direct;
         }
 
-        public void FlyToTarget(Contour<Point> quadcopter)
+        public void PlaneMotion()
         {
-            if (IsAreaSameAndCover(quadcopter))
+            while (true)
             {
-                _droneClient.Land();
-            }
-            else
-            {
-                MyDefPoint v1 = new MyDefPoint(QuadcopterCenter.X - QuadcopterTailCenter.X, QuadcopterCenter.Y - QuadcopterTailCenter.Y);
-                MyDefPoint v2 = new MyDefPoint(PolygonCenter.X - QuadcopterTailCenter.X, PolygonCenter.Y - QuadcopterTailCenter.Y);
-                double theta = Math.Acos((v1.X * v2.X + v1.Y * v2.Y) / (Math.Sqrt(v1.X * v1.X + v1.Y * v1.Y) * Math.Sqrt(v2.X * v2.X + v2.Y * v2.Y))) * 180.0 / Math.PI;
-                int direct = GetDirection() * -1;
-                if (theta <= ConstValue.OBJECT_TOLERANCE_ANGLE)
+                if (Quadcopter != null && ControlFlag)
                 {
-                    _droneClient.Progress(FlightMode.Progressive, pitch: -0.05f);
+                    double minX = Math.Min(QuadcopterCenter.X, QuadcopterTailCenter.X);
+                    double maxX = Math.Max(QuadcopterCenter.X, QuadcopterTailCenter.X);
+
+                    if (((minX - ConstValue.OBJECT_TOLERANCE_ANGLE) <= PolygonCenter.X) && (PolygonCenter.X <= (maxX + ConstValue.OBJECT_TOLERANCE_ANGLE)))
+                    {
+                        if (IsAreaCover(Quadcopter) || ((QuadcopterCenter.Y+100)<PolygonCenter.Y))
+                        {
+                            if (_droneClient.NavigationData.Altitude > 0.30)
+                            {
+                                _droneClient.Progress(FlightMode.Progressive, gaz: -0.25f);
+                            }
+                            else
+                            {
+                                _droneClient.Land();
+                                break;
+                            }
+                            Debug.WriteLine("0");
+                            Thread.Sleep(100);
+                        }
+                        else
+                        {
+                            _droneClient.Progress(FlightMode.Progressive, pitch: -0.1f);
+                            Debug.WriteLine("+0");
+                            Thread.Sleep(100);
+                        }
+                    }
+                    else
+                    {
+                        if (PolygonCenter.X < QuadcopterCenter.X)
+                        {
+                            _droneClient.Progress(FlightMode.Progressive, roll: -0.05f);
+                            Debug.WriteLine("-1");
+                        }
+                        else
+                        {
+                            _droneClient.Progress(FlightMode.Progressive, roll: 0.05f);
+                            Debug.WriteLine("1");
+                        }
+                        Thread.Sleep(100);
+                    }
                 }
                 else
-                {
-                    _droneClient.Progress(FlightMode.Progressive, yaw: (float)(theta*direct));
-                }
+                    Thread.Sleep(10);
             }
+        }
+
+        public void TakeOffDrone()
+        {
+            _droneClient.Takeoff();
+            _droneClient.Hover();
+        }
+
+        public void LandDrone()
+        {
+            _droneClient.Land();
+        }
+
+        public void EmergencyLand()
+        {
+            _droneClient.Emergency();
+        }
+
+        public void RotateRight()
+        {
+            _droneClient.Progress(FlightMode.Progressive, yaw: -0.25f);
         }
 
         public Model()
         {
             PointPer = -1;
+            ControlFlag = false;
             Polygons = new MyDefPoint[4];
             PolygonCenter = new MyDefPoint();
+            Quadcopter = null;
             QuadcopterCenter = new MyDefPoint();
             QuadcopterTailCenter = new MyDefPoint();
             _droneClient = new DroneClient("192.168.1.1");
             _droneClient.Start();
+
+            ThreadStart start3 = new ThreadStart(PlaneMotion);
+            _planeMotionThread = new Thread(start3);
+            _planeMotionThread.Start();
+        }
+
+        public void DisposeThread()
+        {
+            if (_planeMotionThread != null)
+            {
+                _planeMotionThread.Abort();
+            }
         }
     }
 }

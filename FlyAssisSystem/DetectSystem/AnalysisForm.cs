@@ -33,8 +33,6 @@ namespace DetectSystem
 
         private PresentationModel _presentationModel = new PresentationModel();
 
-        private bool _controlFlag = false;
-
         private IBarcodeReader reader = new BarcodeReader();
 
         void ShowInputImage()
@@ -57,7 +55,7 @@ namespace DetectSystem
                 }
                 if (_presentationModel.DataModel.PointPer == 3)
                 {
-                    graphic.DrawEllipse(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.DataModel.PolygonCenter.X), Convert.ToInt32(_presentationModel.DataModel.PolygonCenter.Y), 30, 30);
+                   // graphic.DrawEllipse(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.DataModel.PolygonCenter.X), Convert.ToInt32(_presentationModel.DataModel.PolygonCenter.Y), 30, 30);
                     graphic.DrawLine(new Pen(Brushes.Red, 5), Convert.ToInt32(_presentationModel.DataModel.Polygons[3].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[3].Y), Convert.ToInt32(_presentationModel.DataModel.Polygons[0].X), Convert.ToInt32(_presentationModel.DataModel.Polygons[0].Y));
                 }
             }
@@ -145,22 +143,26 @@ namespace DetectSystem
                         _output.Draw(green.BoundingRectangle, new Gray(255), 1);
                     }
 
-                         double redCenterX = (2.0 * _red.BoundingRectangle.X + _red.BoundingRectangle.Width) / 2.0;
-                         double redCenterY = (2.0 * _red.BoundingRectangle.Y + _red.BoundingRectangle.Height) / 2.0;
-                         double greenCenterX = (2.0 * _green.BoundingRectangle.X + _green.BoundingRectangle.Width) / 2.0;
-                         double greenCenterY = (2.0 * _green.BoundingRectangle.Y + _green.BoundingRectangle.Height) / 2.0;
-                         _presentationModel.SetQuadcopterCenter(greenCenterX, greenCenterY);
-                         _presentationModel.SetQuadcopterTailCenter(redCenterX, redCenterY);
-                         if (_controlFlag)
-                         {
-                             _presentationModel.DataModel.FlyToTarget(_green);
-                         }
-                        /*      var result = reader.Decode(_input.ToBitmap());
-                             ShowData("");
-                             if (result != null)
-                             {
-                                 ShowData(result.Text);
-                             }*/
+                    if (_red != null && _green != null)
+                    {
+                        double redCenterX = (2.0 * _red.BoundingRectangle.X + _red.BoundingRectangle.Width) / 2.0;
+                        double redCenterY = (2.0 * _red.BoundingRectangle.Y + _red.BoundingRectangle.Height) / 2.0;
+                        double greenCenterX = (2.0 * _green.BoundingRectangle.X + _green.BoundingRectangle.Width) / 2.0;
+                        double greenCenterY = (2.0 * _green.BoundingRectangle.Y + _green.BoundingRectangle.Height) / 2.0;
+                        _presentationModel.SetQuadcopterCenter(greenCenterX, greenCenterY);
+                        _presentationModel.SetQuadcopterTailCenter(redCenterX, redCenterY);
+                        _presentationModel.DataModel.Quadcopter = _green;
+
+                        Debug.WriteLine("QuadcopterCenter=" + greenCenterX.ToString() + "," + greenCenterY.ToString());
+                        Debug.WriteLine("QuadcopterTailCenter=" + redCenterX.ToString() + "," + redCenterY.ToString());
+                        Debug.WriteLine("PolygonCenter=" + _presentationModel.DataModel.PolygonCenter.X.ToString() + "," + _presentationModel.DataModel.PolygonCenter.Y.ToString());
+                    }
+                    /*   var result = reader.Decode(_input.ToBitmap());
+                       ShowData("");
+                       if (result != null)
+                       {
+                           ShowData(result.Text);
+                       }*/
 
                     ShowInputImage();
                     ShowOutputImage();
@@ -187,17 +189,8 @@ namespace DetectSystem
         public AnalysisForm()
         {
             InitializeComponent();
-            _presentationModel._presentationModelChanged += PresentationModelStateChangeButtonEnableChanged;
             _presentationModel.InputPictureBoxWidth = _inputPictureBox.Width;
             _presentationModel.InputPictureBoxHeight = _inputPictureBox.Height;
-        }
-
-        void PresentationModelStateChangeButtonEnableChanged()
-        {
-            _table1StateChangeButton.Enabled = _presentationModel.Table1StateChangeButtonEnable;
-            _table2StateChangeButton.Enabled = _presentationModel.Table2StateChangeButtonEnable;
-            _table3StateChangeButton.Enabled = _presentationModel.Table3StateChangeButtonEnable;
-            _table4StateChangeButton.Enabled = _presentationModel.Table4StateChangeButtonEnable;
         }
 
         private void ClickStartButton(object sender, EventArgs e)
@@ -206,8 +199,8 @@ namespace DetectSystem
             {
                 Adapter.Initialize();
                 _presentationModel.TempShape = new MyDefLine();
-                _capture = new Capture(0);
-               // _capture = new Capture("rtsp://192.168.0.250/h264");
+                // _capture = new Capture(0);
+                _capture = new Capture("rtsp://192.168.0.250/h264");
                 _presentationModel.InputPictureBoxImageWidth = _capture.Width;
                 _presentationModel.InputPictureBoxImageHeight = _capture.Height;
 
@@ -226,12 +219,28 @@ namespace DetectSystem
             }
         }
 
-        private void ClickFlyButton(object sender, EventArgs e)
+        private void ClickEmergencyLandButton(object sender, EventArgs e)
         {
-            /*_presentationModel.SetQuadcopterCenter(-2, 0);
-            _presentationModel.SetQuadcopterTailCenter(0, 0);
-            _presentationModel.DataModel.PolygonCenter = new MyDefPoint(2, 0);*/
-            _controlFlag = !_controlFlag;
+            _presentationModel.DataModel.EmergencyLand();
+        }
+
+        private void ClickTakeOffButton(object sender, EventArgs e)
+        {
+            _presentationModel.DataModel.TakeOffDrone();
+        }
+
+        private void ClickAutoPilotButton(object sender, EventArgs e)
+        {
+            _presentationModel.DataModel.ControlFlag = !_presentationModel.DataModel.ControlFlag;
+            if (_presentationModel.DataModel.ControlFlag == false)
+            {
+                _presentationModel.DataModel.LandDrone();
+                _autoPilotButton.Text = "Auto Pilot";
+            }
+            else
+            {
+                _autoPilotButton.Text = "Disable Auto Pilot";
+            }
         }
 
         private void ClosingAnalysisForm(object sender, FormClosingEventArgs e)
@@ -245,7 +254,7 @@ namespace DetectSystem
             {
                 _processImageThread.Abort();
             }
-
+            _presentationModel.DataModel.DisposeThread();
             _presentationModel.DataModel.DisposeDroneClient();
         }
 
@@ -254,6 +263,7 @@ namespace DetectSystem
             if (_inputPictureBox.Image != null)
             {
                 _presentationModel.MouseDownInputBox(e.Location);
+                _table1AreaLabel.Text = _presentationModel.CalSelectRangeArea();
             }
         }
 
@@ -273,30 +283,6 @@ namespace DetectSystem
             }
         }
 
-        private void ClickTable1StateChangeButton(object sender, EventArgs e)
-        {
-            _presentationModel.IsTable1StateChanged = true;
-            _table1AreaLabel.Text = _presentationModel.CalSelectRangeArea();
-        }
-
-        private void ClickTable2StateChangeButton(object sender, EventArgs e)
-        {
-            _presentationModel.IsTable2StateChanged = true;
-            _table2AreaLabel.Text = _presentationModel.CalSelectRangeArea();
-        }
-
-        private void ClickTable3StateChangeButton(object sender, EventArgs e)
-        {
-            _presentationModel.IsTable3StateChanged = true;
-            _table3AreaLabel.Text = _presentationModel.CalSelectRangeArea();
-        }
-
-        private void ClickTable4StateChangeButton(object sender, EventArgs e)
-        {
-            _presentationModel.IsTable4StateChanged = true;
-            _table4AreaLabel.Text = _presentationModel.CalSelectRangeArea();
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             //_droneClient.Takeoff();
@@ -304,72 +290,77 @@ namespace DetectSystem
 
         private void button10_Click(object sender, EventArgs e)
         {
-          //  _droneClient.Start();
+            //  _droneClient.Start();
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-         //   _droneClient.Stop();
+            //   _droneClient.Stop();
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-         //   _droneClient.Land();
+            //   _droneClient.Land();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-          //  _droneClient.Progress(FlightMode.Progressive, pitch: -0.05f);
+            //  _droneClient.Progress(FlightMode.Progressive, pitch: -0.05f);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-          //  _droneClient.Progress(FlightMode.Progressive, pitch: 0.05f);
+            //  _droneClient.Progress(FlightMode.Progressive, pitch: 0.05f);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-          //  _droneClient.Progress(FlightMode.Progressive, roll: -0.05f);
+            //  _droneClient.Progress(FlightMode.Progressive, roll: -0.05f);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-         //   _droneClient.Progress(FlightMode.Progressive, roll: 0.05f);
+            //   _droneClient.Progress(FlightMode.Progressive, roll: 0.05f);
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-        //    _droneClient.Progress(FlightMode.Progressive, yaw: 0.25f);
+            //    _droneClient.Progress(FlightMode.Progressive, yaw: 0.25f);
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-        //    _droneClient.Progress(FlightMode.Progressive, yaw: -0.25f);
+            //    _droneClient.Progress(FlightMode.Progressive, yaw: -0.25f);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-       //     _droneClient.Emergency();
+            //     _droneClient.Emergency();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-        //    _droneClient.Progress(FlightMode.Progressive, gaz: 0.25f);
+            //    _droneClient.Progress(FlightMode.Progressive, gaz: 0.25f);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-         //   _droneClient.Progress(FlightMode.Progressive, gaz: -0.25f);
+            //   _droneClient.Progress(FlightMode.Progressive, gaz: -0.25f);
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-        //    _droneClient.Hover();
+            //    _droneClient.Hover();
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-       //     _droneClient.ResetEmergency();
+            //     _droneClient.ResetEmergency();
+        }
+
+        private void button10_Click_1(object sender, EventArgs e)
+        {
+            _presentationModel.DataModel.RotateRight();
         }
     }
 }

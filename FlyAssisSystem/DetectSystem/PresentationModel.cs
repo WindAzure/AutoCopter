@@ -11,58 +11,8 @@ namespace DetectSystem
     public class PresentationModel
     {
         private bool _isPress = false;
-        public delegate void PresentationModelChanged();
-        public event PresentationModelChanged _presentationModelChanged = null;
 
         public Model DataModel
-        {
-            set;
-            get;
-        }
-
-        public bool Table1StateChangeButtonEnable
-        {
-            set;
-            get;
-        }
-
-        public bool Table2StateChangeButtonEnable
-        {
-            set;
-            get;
-        }
-
-        public bool Table3StateChangeButtonEnable
-        {
-            set;
-            get;
-        }
-
-        public bool Table4StateChangeButtonEnable
-        {
-            set;
-            get;
-        }
-
-        public bool IsTable1StateChanged
-        {
-            set;
-            get;
-        }
-
-        public bool IsTable2StateChanged
-        {
-            set;
-            get;
-        }
-
-        public bool IsTable3StateChanged
-        {
-            set;
-            get;
-        }
-
-        public bool IsTable4StateChanged
         {
             set;
             get;
@@ -98,30 +48,9 @@ namespace DetectSystem
             get;
         }
 
-        public void InitializeStateButton(bool state)
-        {
-            Table1StateChangeButtonEnable = state;
-            Table2StateChangeButtonEnable = state;
-            Table3StateChangeButtonEnable = state;
-            Table4StateChangeButtonEnable = state;
-            NotifyStateButtonChanged();
-        }
-
         public PresentationModel()
         {
             DataModel = new Model();
-            IsTable1StateChanged = false;
-            IsTable2StateChanged = false;
-            IsTable3StateChanged = false;
-            IsTable4StateChanged = false;
-        }
-
-        private void NotifyStateButtonChanged()
-        {
-            if (_presentationModelChanged != null)
-            {
-                _presentationModelChanged();
-            }
         }
 
         public Point ConvertRatioOfPictureBoxAndImage(Point point)
@@ -141,11 +70,6 @@ namespace DetectSystem
             if (DataModel.PointPer == 3)
             {
                 _isPress = false;
-                InitializeStateButton(true);
-            }
-            else
-            {
-                InitializeStateButton(false);
             }
         }
 
