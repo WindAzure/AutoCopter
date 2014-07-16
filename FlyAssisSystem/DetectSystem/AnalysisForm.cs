@@ -199,7 +199,7 @@ namespace DetectSystem
             {
                 Adapter.Initialize();
                 _presentationModel.TempShape = new MyDefLine();
-                // _capture = new Capture(0);
+           //      _capture = new Capture(0);
                 _capture = new Capture("rtsp://192.168.0.250/h264");
                 _presentationModel.InputPictureBoxImageWidth = _capture.Width;
                 _presentationModel.InputPictureBoxImageHeight = _capture.Height;
@@ -221,17 +221,17 @@ namespace DetectSystem
 
         private void ClickEmergencyLandButton(object sender, EventArgs e)
         {
-            _presentationModel.DataModel.EmergencyLand();
+            //_presentationModel.DataModel.EmergencyLand();
         }
 
         private void ClickTakeOffButton(object sender, EventArgs e)
         {
-            _presentationModel.DataModel.TakeOffDrone();
+            //_presentationModel.DataModel.TakeOffDrone();
         }
 
         private void ClickAutoPilotButton(object sender, EventArgs e)
         {
-            _presentationModel.DataModel.ControlFlag = !_presentationModel.DataModel.ControlFlag;
+            /*_presentationModel.DataModel.ControlFlag = !_presentationModel.DataModel.ControlFlag;
             if (_presentationModel.DataModel.ControlFlag == false)
             {
                 _presentationModel.DataModel.LandDrone();
@@ -240,7 +240,7 @@ namespace DetectSystem
             else
             {
                 _autoPilotButton.Text = "Disable Auto Pilot";
-            }
+            }*/
         }
 
         private void ClosingAnalysisForm(object sender, FormClosingEventArgs e)
