@@ -116,6 +116,8 @@ namespace AR.Drone.WinApp
                 return;
             _frameNumber = _frame.Number;
 
+            label1.Text = _frame.Data.Length.ToString();
+
             if (_frameBitmap == null)
                 _frameBitmap = VideoHelper.CreateBitmap(ref _frame);
             else
@@ -405,16 +407,6 @@ namespace AR.Drone.WinApp
         private void MainForm_Load(object sender, EventArgs e)
         {
 
-        }
-
-        int aaa = 0;
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            TreeNode ultraSoundNode = _tvInfo.Nodes.GetOrCreate("UltraSound");
-            TreeNode node = ultraSoundNode.Nodes.GetOrCreate("front:");
-            node.Text = node.Name + aaa.ToString();
-            aaa++;
         }
     }
 }
