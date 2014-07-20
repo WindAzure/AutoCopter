@@ -38,6 +38,8 @@ namespace AR.Drone.WinApp
         private PacketRecorder _packetRecorderWorker;
         private FileStream _recorderStream;
 
+        private UdpSender _udpSender = new UdpSender("192.168.1.16", 11111);
+
         public MainForm()
         {
             InitializeComponent();
@@ -123,6 +125,7 @@ namespace AR.Drone.WinApp
             else
                 VideoHelper.UpdateBitmap(ref _frameBitmap, ref _frame);
 
+            _udpSender.SendData(_frame.Data);
             _pbVideo.Image = _frameBitmap;
         }
 
