@@ -24,7 +24,7 @@ namespace AR.Drone.WinApp
             _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         }
 
-        private void Send(object data)
+        private void SendData(object data)
         {
             if (data != null)
             {
@@ -42,9 +42,9 @@ namespace AR.Drone.WinApp
             }
         }
 
-        public void SendData(object data)
+        public void SendVideoData(object data)
         {
-            Thread sendThread = new Thread(new ParameterizedThreadStart(Send));
+            Thread sendThread = new Thread(new ParameterizedThreadStart(SendData));
             sendThread.Start(data);
         }
     }

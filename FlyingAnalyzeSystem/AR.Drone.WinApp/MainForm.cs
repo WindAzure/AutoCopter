@@ -123,7 +123,7 @@ namespace AR.Drone.WinApp
             else
                 VideoHelper.UpdateBitmap(ref _frameBitmap, ref _frame);
 
-            _udpSender.SendData(_frame);
+            _udpSender.SendVideoData(_frame);
             _pbVideo.Image = _frameBitmap;
         }
 
