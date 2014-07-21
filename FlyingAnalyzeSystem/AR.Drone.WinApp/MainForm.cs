@@ -118,14 +118,12 @@ namespace AR.Drone.WinApp
                 return;
             _frameNumber = _frame.Number;
 
-            label1.Text = _frame.Data.Length.ToString();
-
             if (_frameBitmap == null)
                 _frameBitmap = VideoHelper.CreateBitmap(ref _frame);
             else
                 VideoHelper.UpdateBitmap(ref _frameBitmap, ref _frame);
 
-            _udpSender.SendData(_frame.Data);
+            _udpSender.SendData(_frame);
             _pbVideo.Image = _frameBitmap;
         }
 

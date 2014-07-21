@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AR.Drone.Video;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -20,15 +21,24 @@ namespace AR.Drone.WinApp
         public UdpSender(String ip, int portNumber)
         {
             _endPoint = new IPEndPoint(IPAddress.Parse(ip), portNumber);
-            _socket = new Socket(AddressFamily.InterNetwork,SocketType.Dgram,ProtocolType.Udp);
+            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         }
 
         private void Send(object data)
         {
             if (data != null)
             {
-                byte[] package = (byte[])data;
-                _socket.SendTo(package, package.Length, SocketFlags.None, _endPoint);
+                VideoFrame frame = data as VideoFrame;
+                int width = frame.Width;
+                int height = frame.Height;
+                byte[] package = new byte[width * 3];
+                byte[] frameBytes = (byte[])frame.Data.Clone();
+
+                for (int i = 0; i < height; i++)
+                {
+                    Buffer.BlockCopy(frameBytes, i * width * 3, package, 0, width * 3);
+                    _socket.SendTo(package, package.Length, SocketFlags.None, _endPoint);
+                }
             }
         }
 
