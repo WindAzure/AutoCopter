@@ -21,7 +21,8 @@ namespace AR.Drone.WinApp
         public UdpSender(String ip, int portNumber)
         {
             _endPoint = new IPEndPoint(IPAddress.Parse(ip), portNumber);
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _socket.Connect(_endPoint);
         }
 
         private void SendData(object data)
