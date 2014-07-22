@@ -28,7 +28,7 @@ namespace AR.Drone.WinApp
         {
             if (data != null)
             {
-                VideoFrame frame = data as VideoFrame;
+                /*VideoFrame frame = data as VideoFrame;
                 int width = frame.Width;
                 int height = frame.Height;
                 byte[] package = new byte[width * 3];
@@ -38,7 +38,11 @@ namespace AR.Drone.WinApp
                 {
                     Buffer.BlockCopy(frameBytes, i * width * 3, package, 0, width * 3);
                     _socket.SendTo(package, package.Length, SocketFlags.None, _endPoint);
-                }
+                }*/
+                byte[] package = new byte[10];
+                package[0] = 1;
+                package[1] = 2;
+                _socket.SendTo(package, package.Length, SocketFlags.None, _endPoint);
             }
         }
 
