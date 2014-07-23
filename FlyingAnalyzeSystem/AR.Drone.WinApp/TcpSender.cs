@@ -29,6 +29,7 @@ namespace AR.Drone.WinApp
                 try
                 {
                     TcpClient client = _tcpLister.AcceptTcpClient();
+                    client.NoDelay = true;
                     if (client.Connected)
                     {
                         VideoFrame frame = data as VideoFrame;
@@ -37,20 +38,26 @@ namespace AR.Drone.WinApp
                         byte[] frameBytes = (byte[])frame.Data.Clone();
                         NetworkStream stream = client.GetStream();
 
-                        if (stream.CanWrite)
+                        int T = 0;
+                        while (T < height)
                         {
-                            for (int i = 0; i < height; i++)
-                                stream.Write(frameBytes, i * width * 3, width*3);
+                            if (stream.CanWrite)
+                            {
+                                    stream.Write(frameBytes, T * width * 3, width * 3);
+                                    T++;
+                            }
+                            //Debug.WriteLine("Done");
+                            stream.Flush();
                         }
-
-                      /*  if (stream.CanWrite)
-                        {
-                            byte[] package = new byte[10];
-                            package[0] = 1;
-                            package[1] = 2;
-                            stream.Write(package, 0, package.Length);
-                        }
-                        Debug.WriteLine("Done");*/
+                        /* NetworkStream stream = client.GetStream();
+                         if (stream.CanWrite)
+                         {
+                             byte[] package = new byte[10];
+                             package[0] = 1;
+                             package[1] = 2;
+                             stream.Write(package, 0, package.Length);
+                         }
+                         Debug.WriteLine("Done");*/
                     }
                 }
                 catch (Exception e)
