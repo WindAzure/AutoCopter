@@ -128,7 +128,7 @@ namespace AR.Drone.WinApp
 
             if (T ==1)
             {
-                _udpSender.SendVideoData(_frame);
+                _tcpSender.SendVideoData(_frame);
                 T = 0;
             }
             _pbVideo.Image = _frameBitmap;
@@ -420,11 +420,6 @@ namespace AR.Drone.WinApp
         private void button1_Click(object sender, EventArgs e)
         {
             T = 1;
-        }
-
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            _tcpSender.SendVideoData("asdf");
         }
     }
 }

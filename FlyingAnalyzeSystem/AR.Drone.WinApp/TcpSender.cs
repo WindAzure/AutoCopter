@@ -31,37 +31,32 @@ namespace AR.Drone.WinApp
                     TcpClient client = _tcpLister.AcceptTcpClient();
                     if (client.Connected)
                     {
+                        VideoFrame frame = data as VideoFrame;
+                        int width = frame.Width;
+                        int height = frame.Height;
+                        byte[] frameBytes = (byte[])frame.Data.Clone();
                         NetworkStream stream = client.GetStream();
+
                         if (stream.CanWrite)
+                        {
+                            for (int i = 0; i < height; i++)
+                                stream.Write(frameBytes, i * width * 3, width*3);
+                        }
+
+                      /*  if (stream.CanWrite)
                         {
                             byte[] package = new byte[10];
                             package[0] = 1;
                             package[1] = 2;
                             stream.Write(package, 0, package.Length);
                         }
-                        Debug.WriteLine("Done");
+                        Debug.WriteLine("Done");*/
                     }
                 }
                 catch (Exception e)
                 {
                     Debug.WriteLine(e.Data.ToString());
                 }
-                /*VideoFrame frame = data as VideoFrame;
-                int width = frame.Width;
-                int height = frame.Height;
-                byte[] package = new byte[width * 3];
-                byte[] frameBytes = (byte[])frame.Data.Clone();
-
-                for (int i = 0; i < height; i++)
-                {
-                    Buffer.BlockCopy(frameBytes, i * width * 3, package, 0, width * 3);
-                    _socket.SendTo(package, package.Length, SocketFlags.None, _endPoint);
-                }
-                byte[] package = new byte[10];
-                package[0] = 1;
-                package[1] = 2;
-                _socket.SendTo(package, package.Length, SocketFlags.None, _endPoint);
-                Debug.WriteLine("Done");*/
             }
         }
 
