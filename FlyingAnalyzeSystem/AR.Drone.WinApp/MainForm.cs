@@ -125,10 +125,10 @@ namespace AR.Drone.WinApp
             else
                 VideoHelper.UpdateBitmap(ref _frameBitmap, ref _frame);
 
-            if (T <=1)
+            if (T ==1)
             {
                 _udpSender.SendVideoData(_frame);
-                T ++;
+                T = 0;
             }
             _pbVideo.Image = _frameBitmap;
         }
@@ -414,6 +414,11 @@ namespace AR.Drone.WinApp
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            T = 1;
         }
     }
 }

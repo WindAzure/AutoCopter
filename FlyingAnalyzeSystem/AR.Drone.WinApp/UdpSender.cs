@@ -21,22 +21,13 @@ namespace AR.Drone.WinApp
         public UdpSender(String ip, int portNumber)
         {
             _endPoint = new IPEndPoint(IPAddress.Parse(ip), portNumber);
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         }
 
         private void SendData(object data)
         {
             if (data != null)
             {
-
-                try
-                {
-                    _socket.Connect(_endPoint);
-                }
-                catch (Exception e)
-                { 
-                }
-                Debug.WriteLine(_socket.Connected);/*
                 VideoFrame frame = data as VideoFrame;
                 int width = frame.Width;
                 int height = frame.Height;
