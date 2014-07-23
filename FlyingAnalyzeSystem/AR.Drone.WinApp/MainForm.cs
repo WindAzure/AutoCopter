@@ -39,6 +39,7 @@ namespace AR.Drone.WinApp
         private FileStream _recorderStream;
 
         private UdpSender _udpSender = new UdpSender("192.168.1.3", 11111);
+        private TcpSender _tcpSender = new TcpSender("192.168.1.101", 11111);
 
         public MainForm()
         {
@@ -419,6 +420,11 @@ namespace AR.Drone.WinApp
         private void button1_Click(object sender, EventArgs e)
         {
             T = 1;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            _tcpSender.SendVideoData("asdf");
         }
     }
 }
