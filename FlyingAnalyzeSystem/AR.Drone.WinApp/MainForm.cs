@@ -39,7 +39,8 @@ namespace AR.Drone.WinApp
         private FileStream _recorderStream;
 
         private UdpSender _udpSender = new UdpSender("192.168.1.3", 11111);
-        private TcpSender _tcpSender = new TcpSender("192.168.1.101", 11111);
+        //private TcpSender _tcpSender = new TcpSender("192.168.1.101", 11111);
+        private TcpSender _tcpSender = new TcpSender("192.168.1.2", 11111);
 
         public MainForm()
         {
