@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -28,6 +29,39 @@ namespace AR.Drone.WinApp
             {
                 try
                 {
+                    Image bitmap=Image.FromFile(@"C:\Users\Public\Pictures\Sample Pictures\Penguins.bmp");
+                    ImageConverter converter = new ImageConverter();
+                    byte[] frameBytes=(byte[])converter.ConvertTo(bitmap, typeof(byte[]));
+                    TcpClient client = _tcpLister.AcceptTcpClient();
+                    client.NoDelay = true;
+                    if (client.Connected)
+                    {
+                        int width = 640;
+                        int height = 480;
+                        NetworkStream stream = client.GetStream();
+
+                        int T = 0;
+                        while (T < height)
+                        {
+                            if (stream.CanWrite)
+                            {
+                                stream.Write(frameBytes, T * width * 3, width * 3);
+                                T++;
+                            }
+                            stream.Flush();
+                        }
+                    }
+                        /* NetworkStream stream = client.GetStream();
+                         if (stream.CanWrite)
+                         {
+                             byte[] package = new byte[10];
+                             package[0] = 1;
+                             package[1] = 2;
+                             stream.Write(package, 0, package.Length);
+                         }
+                         
+                    }
+                    /*
                     TcpClient client = _tcpLister.AcceptTcpClient();
                     client.NoDelay = true;
                     if (client.Connected)
@@ -57,8 +91,8 @@ namespace AR.Drone.WinApp
                              package[1] = 2;
                              stream.Write(package, 0, package.Length);
                          }
-                         Debug.WriteLine("Done");*/
-                    }
+                         
+                    }*/
                 }
                 catch (Exception e)
                 {
