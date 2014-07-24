@@ -421,7 +421,7 @@ namespace AR.Drone.WinApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            T = 1;
+            _tcpSender.SendVideoData("aaaa");
         }
     }
 }
