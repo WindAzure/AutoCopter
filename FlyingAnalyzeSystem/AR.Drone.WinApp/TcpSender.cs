@@ -29,7 +29,7 @@ namespace AR.Drone.WinApp
             {
                 try
                 {
-                    TcpClient client = _tcpLister.AcceptTcpClient();
+                    /*TcpClient client = _tcpLister.AcceptTcpClient();
                     client.NoDelay = true;
                     if (client.Connected)
                     {
@@ -42,7 +42,7 @@ namespace AR.Drone.WinApp
                         if(stream.CanWrite)
                             stream.Write(frameBytes, 0, width*height* 3);
                         stream.Flush();
-                       /* for (int i = 0; i < 30; i+=3)
+                        for (int i = 0; i < 30; i+=3)
                             Debug.WriteLine(frameBytes[i + 1].ToString() + " " + frameBytes[i + 2].ToString() + " " + frameBytes[i + 3].ToString());
                         int T = 0;
                         while (T < height)
@@ -53,8 +53,8 @@ namespace AR.Drone.WinApp
                                 T++;
                             }
                             stream.Flush();
-                        }*/
-                    }
+                        }
+                    }*/
                     /* NetworkStream stream = client.GetStream();
                      if (stream.CanWrite)
                      {
@@ -63,18 +63,20 @@ namespace AR.Drone.WinApp
                          package[1] = 2;
                          stream.Write(package, 0, package.Length);
                      }*/
-
-                    /*  TcpClient client = _tcpLister.AcceptTcpClient();
+                      TcpClient client = _tcpLister.AcceptTcpClient();
                       client.NoDelay = true;
                       if (client.Connected)
                       {
                           VideoFrame frame = data as VideoFrame;
+                          Debug.WriteLine(frame.Width.ToString() + " " + frame.Height.ToString());
                           int width = frame.Width;
                           int height = frame.Height;
                           byte[] frameBytes = (byte[])frame.Data.Clone();
                           NetworkStream stream = client.GetStream();
 
-                          int T = 0;
+                          stream.Write(frameBytes, 0, width * height * 3);
+                          stream.Flush();
+                          /*int T = 0;
                           while (T < height)
                           {
                               if (stream.CanWrite)
@@ -84,8 +86,8 @@ namespace AR.Drone.WinApp
                               }
                               //Debug.WriteLine("Done");
                               stream.Flush();
-                          }
-                      }*/
+                          }*/
+                      }
                 }
                 catch (Exception e)
                 {
@@ -96,9 +98,9 @@ namespace AR.Drone.WinApp
 
         public void SendVideoData(object data)
         {
-         /*   Thread sendThread = new Thread(new ParameterizedThreadStart(SendData));
-            sendThread.Start(data);*/
-            SendData(data);
+            Thread sendThread = new Thread(new ParameterizedThreadStart(SendData));
+            sendThread.Start(data);
+            //SendData(data);
         }
     }
 }
