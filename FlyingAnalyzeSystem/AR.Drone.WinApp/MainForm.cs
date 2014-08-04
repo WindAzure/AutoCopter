@@ -38,9 +38,9 @@ namespace AR.Drone.WinApp
         private PacketRecorder _packetRecorderWorker;
         private FileStream _recorderStream;
 
-        private UdpSender _udpSender = new UdpSender("192.168.1.3", 11112);
+        //private UdpSender _udpSender = new UdpSender("192.168.1.3", 11112);
         //private TcpSender _tcpSender = new TcpSender("192.168.1.101", 11111);
-        private TcpSender _tcpSender = new TcpSender("192.168.1.2", 11111);
+        //private TcpSender _tcpSender = new TcpSender("192.168.1.2", 11111);
 
         public MainForm()
         {
@@ -114,8 +114,6 @@ namespace AR.Drone.WinApp
             _droneClient.Stop();
         }
 
-        int T = 0;
-
         private void tmrVideoUpdate_Tick(object sender, EventArgs e)
         {
             if (_frame == null || _frameNumber == _frame.Number)
@@ -127,12 +125,7 @@ namespace AR.Drone.WinApp
             else
                 VideoHelper.UpdateBitmap(ref _frameBitmap, ref _frame);
 
-            _tcpSender.SendVideoData(_frame);
-           /* if (T ==1)
-            {
-                _tcpSender.SendVideoData(_frame);
-                T = 0;
-            }*/
+            //_tcpSender.SendVideoData(_frame);
             _pbVideo.Image = _frameBitmap;
         }
 
@@ -417,11 +410,6 @@ namespace AR.Drone.WinApp
         private void MainForm_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            _tcpSender.SendVideoData("aaaa");
         }
     }
 }
