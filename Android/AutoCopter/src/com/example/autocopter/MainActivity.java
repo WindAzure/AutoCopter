@@ -39,11 +39,6 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity 
 {
-    private String SENDER_ID = "210598965994";
-    public static final String PROPERTY_REG_ID = "registration_id";
-    private static final String PROPERTY_APP_VERSION = "appVersion";
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-
     private GoogleCloudMessaging _gcm;
     private Context _context;
     private String _regId;
@@ -107,7 +102,7 @@ public class MainActivity extends ActionBarActivity
         {
             if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) 
             {
-                GooglePlayServicesUtil.getErrorDialog(resultCode, this, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this, ConstValue.PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } 
             else 
             {
@@ -132,7 +127,7 @@ public class MainActivity extends ActionBarActivity
                     {
                     	_gcm = GoogleCloudMessaging.getInstance(_context);
                     }
-                    _regId = _gcm.register(SENDER_ID);
+                    _regId = _gcm.register(ConstValue.PROJECT_NUMBER);
                     SendRegIdToServer(_regId);
                     StoreRegistrationId(_context, _regId);
                 } 
@@ -144,21 +139,24 @@ public class MainActivity extends ActionBarActivity
             }
         }.execute(null, null, null);
     }
+
+    private SharedPreferences GetGcmPreferences(Context context) 
+    {
+        return getSharedPreferences(MainActivity.class.getSimpleName(),Context.MODE_PRIVATE);
+    }
     
     private String GetRegistrationId(Context context) 
     {
         final SharedPreferences prefs = GetGcmPreferences(context);
-        String registrationId = prefs.getString(PROPERTY_REG_ID, "");
+        String registrationId = prefs.getString(ConstValue.SHARE_PREFERENCES_REGISTER_ID, "");
         if (registrationId.isEmpty()) 
         {
             Log.i(ConstValue.LOG_VERBOSE_GCM_TAG, "Registration not found.");
             return "";
         }
-        // Check if app was updated; if so, it must clear the registration ID
-        // since the existing regID is not guaranteed to work with the new
-        // app version.
-        int registeredVersion = prefs.getInt(PROPERTY_APP_VERSION, Integer.MIN_VALUE);
-        int currentVersion = getAppVersion(context);
+        
+        int registeredVersion = prefs.getInt(ConstValue.SHARE_PREFERENCES_APP_VERSION, Integer.MIN_VALUE);
+        int currentVersion = GetAppVersion(context);
         if (registeredVersion != currentVersion) 
         {
             Log.i(ConstValue.LOG_VERBOSE_GCM_TAG, "App version changed.");
@@ -167,14 +165,17 @@ public class MainActivity extends ActionBarActivity
         return registrationId;
     }
     
-    private SharedPreferences GetGcmPreferences(Context context) 
+    private void StoreRegistrationId(Context context, String regId) 
     {
-        // This sample app persists the registration ID in shared preferences, but
-        // how you store the regID in your app is up to you.
-        return getSharedPreferences(MainActivity.class.getSimpleName(),Context.MODE_PRIVATE);
+        final SharedPreferences prefs = GetGcmPreferences(context);
+        int appVersion = GetAppVersion(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(ConstValue.SHARE_PREFERENCES_REGISTER_ID, regId);
+        editor.putInt(ConstValue.SHARE_PREFERENCES_APP_VERSION, appVersion);
+        editor.commit();
     }
     
-    private static int getAppVersion(Context context) 
+    private static int GetAppVersion(Context context) 
     {
         try 
         {
@@ -186,17 +187,6 @@ public class MainActivity extends ActionBarActivity
             // should never happen
             throw new RuntimeException("Could not get package name: " + e);
         }
-    }
-    
-    private void StoreRegistrationId(Context context, String regId) 
-    {
-        final SharedPreferences prefs = GetGcmPreferences(context);
-        int appVersion = getAppVersion(context);
-        Log.i(ConstValue.LOG_VERBOSE_GCM_TAG, "Saving regId on app version " + appVersion);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(PROPERTY_REG_ID, regId);
-        editor.putInt(PROPERTY_APP_VERSION, appVersion);
-        editor.commit();
     }
 
     private void SendRegIdToServer(String registerationId) 
