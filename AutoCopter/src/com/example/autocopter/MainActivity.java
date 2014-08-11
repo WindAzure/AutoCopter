@@ -1,66 +1,90 @@
 package com.example.autocopter;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import com.example.stable.value.ConstValue;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+
 import android.support.v7.app.ActionBarActivity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.net.Uri;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore.Audio;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.RemoteViews;
+import android.widget.Toast;
 
 
-public class MainActivity extends ActionBarActivity {
-	//BaseNotification  
-    private Button bt01;  
-      
-    //UpdateBaseNotification  
-    private Button bt02;  
-      
-    //ClearBaseNotification  
-    private Button bt03;  
-      
-    //MediaNotification  
-    private Button bt04;  
-      
-    //ClearMediaNotification  
-    private Button bt05;  
-      
-    //ClearALL  
-    private Button bt06;  
-      
-    //CustomNotification  
-    private Button bt07;  
-      
-    //通知管理器  
-    private NotificationManager nm;  
-      
-    //通知?示?容  
-    private PendingIntent pd;  
+public class MainActivity extends ActionBarActivity 
+{
+    private String _regId;
+    private Context _context;
+    private GoogleCloudMessaging _gcm;
     
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();  
+        
+        _context = getApplicationContext();
+    	if (CheckPlayServices()) 
+    	{
+    		_gcm = GoogleCloudMessaging.getInstance(this);
+            _regId = GetRegistrationId(_context);
+
+            if (_regId.isEmpty())
+            {
+                RegisterInBackground();
+            }
+        } 
+    	else 
+    	{
+            Log.i(ConstValue.LOG_VERBOSE_GCM_TAG, "No valid Google Play Services APK found.");
+        }
+    }
+    
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        // Check device for Play Services APK.
+        CheckPlayServices();
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) 
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) 
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -70,146 +94,135 @@ public class MainActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private boolean CheckPlayServices() 
+    {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) 
+        {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) 
+            {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this, ConstValue.PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } 
+            else 
+            {
+                Log.i(ConstValue.LOG_VERBOSE_GCM_TAG, "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
     
-OnClickListener onclick = new OnClickListener() {  
+    private void RegisterInBackground() 
+    {
+        new AsyncTask<Void, Void, String>() 
+        {
+            @Override
+            protected String doInBackground(Void... params) 
+            {
+                try
+                {
+                    if (_gcm == null) 
+                    {
+                    	_gcm = GoogleCloudMessaging.getInstance(_context);
+                    }
+                    _regId = _gcm.register(ConstValue.PROJECT_NUMBER);
+                    SendRegIdToServer(_regId);
+                    StoreRegistrationId(_context, _regId);
+                } 
+                catch (IOException ex) 
+                {
+                	Log.v(ConstValue.LOG_VERBOSE_GCM_TAG,ex.getMessage());
+                }
+                return null;
+            }
+        }.execute(null, null, null);
+    }
+
+    private SharedPreferences GetGcmPreferences(Context context) 
+    {
+        return getSharedPreferences(MainActivity.class.getSimpleName(),Context.MODE_PRIVATE);
+    }
+    
+    private String GetRegistrationId(Context context) 
+    {
+        final SharedPreferences prefs = GetGcmPreferences(context);
+        String registrationId = prefs.getString(ConstValue.SHARE_PREFERENCES_REGISTER_ID, "");
+        if (registrationId.isEmpty()) 
+        {
+            Log.i(ConstValue.LOG_VERBOSE_GCM_TAG, "Registration not found.");
+            return "";
+        }
         
-        //BASE Notification ID  
-        private int Notification_ID_BASE = 110;  
-          
-        private Notification baseNF;  
-          
-        //Notification ID  
-        private int Notification_ID_MEDIA = 119;  
-          
-        private Notification mediaNF;  
-          
-        public void onClick(View v) {  
-            switch(v.getId()) {  
-                case R.id.le10bt01:  
-                    //新建???通知  
-                    baseNF = new Notification();  
-                       
-                    //?置通知在????示的??  
-                    baseNF.icon = R.drawable.ic_launcher;  
-                      
-                    //通知?在????示的?容  
-                    baseNF.tickerText = "You clicked BaseNF!";  
-                      
-                    //通知的默??? DEFAULT_SOUND, DEFAULT_VIBRATE, DEFAULT_LIGHTS.   
-                    //如果要全部采用默?值, 用 DEFAULT_ALL.  
-                    //此?采用默??音  
-                    baseNF.defaults |= Notification.DEFAULT_SOUND;  
-                    baseNF.defaults |= Notification.DEFAULT_VIBRATE;  
-                    baseNF.defaults |= Notification.DEFAULT_LIGHTS;  
-                      
-                    //??音、振??限循?，直到用???  
-                    baseNF.flags |= Notification.FLAG_INSISTENT;  
-                      
-                    //通知被??后，自?消失  
-                    baseNF.flags |= Notification.FLAG_AUTO_CANCEL;  
-                      
-                    //??'Clear'?，不清楚?通知(QQ的通知?法清除，就是用的??)  
-                    baseNF.flags |= Notification.FLAG_NO_CLEAR;  
-                      
-                      
-                    //第二??? ：下拉?????示的消息?? expanded message title  
-                    //第三???：下拉?????示的消息?容 expanded message text  
-                    //第四???：???通知??行?面跳?  
-                    baseNF.setLatestEventInfo(MainActivity.this, "Title01", "Content01", pd);  
-                      
-                    //?出???通知  
-                    //The first parameter is the unique ID for the Notification   
-                    // and the second is the Notification object.  
-                    nm.notify(Notification_ID_BASE, baseNF);  
-                      
-                    break;  
-                      
-                case R.id.le10bt02:  
-                    //更新通知  
-                    //比如???提示有一?新短信，???得及查看，又?一?新短信的提示。  
-                    //此?采用更新原?通知的方式比?。  
-                    //(再重新?一?通知也可以，但是???造成通知的混?，而且?示多?通知?用?，?用?也不友好)  
-                    baseNF.setLatestEventInfo(MainActivity.this, "Title02", "Content02", pd);  
-                    nm.notify(Notification_ID_BASE, baseNF);  
-                    break;  
-                      
-                case R.id.le10bt03:  
-                      
-                    //清除 baseNF  
-                    nm.cancel(Notification_ID_BASE);  
-                    break;  
-                      
-                case R.id.le10bt04:  
-                    mediaNF = new Notification();  
-                    mediaNF.icon = R.drawable.ic_launcher;  
-                    mediaNF.tickerText = "You clicked MediaNF!";  
-                      
-                    //自定??音  
-                    mediaNF.sound = Uri.withAppendedPath(Audio.Media.INTERNAL_CONTENT_URI, "6");  
-                      
-                    //通知??出的振?  
-                    //第一???: 振?前等待的??  
-                    //第二???： 第一次振?的??、以此?推  
-                    long[] vir = {0,100,200,300};  
-                    mediaNF.vibrate = vir;  
-                      
-                    mediaNF.setLatestEventInfo(MainActivity.this, "Title03", "Content03", pd);  
-                      
-                    nm.notify(Notification_ID_MEDIA, mediaNF);  
-                    break;  
-                      
-                case R.id.le10bt05:  
-                    //清除 mediaNF  
-                    nm.cancel(Notification_ID_MEDIA);  
-                    break;  
-                      
-                case R.id.le10bt06:  
-                    nm.cancelAll();  
-                    break;  
-                      
-                case R.id.le10bt07:  
-                    //自定?下拉??，比如下??件?，?示的?度?。  
-                    Notification notification = new Notification();  
-                      
-                    notification.icon = R.drawable.ic_launcher;  
-                    notification.tickerText = "Custom!";  
-                      
-                    RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.aaa);  
-                    contentView.setImageViewResource(R.id.image, R.drawable.ic_launcher);  
-                    contentView.setTextViewText(R.id.text, "Hello, this message is in a custom expanded view");  
-                    notification.contentView = contentView;  
-                      
-                    //使用自定?下拉???，不需要再?用setLatestEventInfo()方法  
-                    //但是必?定? contentIntent  
-                    notification.contentIntent = pd;  
-                      
-                    nm.notify(3, notification);  
-                    break;  
-            }  
-        }  
-    };  
+        int registeredVersion = prefs.getInt(ConstValue.SHARE_PREFERENCES_APP_VERSION, Integer.MIN_VALUE);
+        int currentVersion = GetAppVersion(context);
+        if (registeredVersion != currentVersion) 
+        {
+            Log.i(ConstValue.LOG_VERBOSE_GCM_TAG, "App version changed.");
+            return "";
+        }
+        return registrationId;
+    }
     
-    private void init() {  
-        bt01 = (Button)findViewById(R.id.le10bt01);  
-        bt02 = (Button)findViewById(R.id.le10bt02);  
-        bt03 = (Button)findViewById(R.id.le10bt03);  
-        bt04 = (Button)findViewById(R.id.le10bt04);  
-        bt05 = (Button)findViewById(R.id.le10bt05);  
-        bt06 = (Button)findViewById(R.id.le10bt06);  
-        bt07 = (Button)findViewById(R.id.le10bt07);  
-          
-        bt01.setOnClickListener(onclick);  
-        bt02.setOnClickListener(onclick);  
-        bt03.setOnClickListener(onclick);  
-        bt04.setOnClickListener(onclick);  
-        bt05.setOnClickListener(onclick);  
-        bt06.setOnClickListener(onclick);     
-        bt07.setOnClickListener(onclick);  
-          
-        nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);  
-          
-        Intent intent = new Intent(this,MainActivity.class);  
-          
-        pd = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);  
-    }  
+    private void StoreRegistrationId(Context context, String regId) 
+    {
+        final SharedPreferences prefs = GetGcmPreferences(context);
+        int appVersion = GetAppVersion(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(ConstValue.SHARE_PREFERENCES_REGISTER_ID, regId);
+        editor.putInt(ConstValue.SHARE_PREFERENCES_APP_VERSION, appVersion);
+        editor.commit();
+    }
+    
+    private static int GetAppVersion(Context context) 
+    {
+        try 
+        {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionCode;
+        } 
+        catch (NameNotFoundException e) 
+        {
+            // should never happen
+            throw new RuntimeException("Could not get package name: " + e);
+        }
+    }
+
+    private void SendRegIdToServer(String registerationId) 
+    {
+    	new AsyncTask<String,Void,String>() 
+    	{
+    	    @Override
+    	    protected String doInBackground(String... id) 
+    	    {
+    	    	HttpClient client=new DefaultHttpClient();
+    	    	HttpPost post=new HttpPost("http://1.34.139.73/DeviceIdHttpHandler.ashx");
+    	    	try
+    	    	{
+	    	    	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+	    	    	nameValuePairs.add(new BasicNameValuePair("RegistrationID",id[0]));
+	    	    	nameValuePairs.add(new BasicNameValuePair("Del","false"));
+	    	    	post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	    	    	HttpResponse response=client.execute(post);
+    	    	}
+    	    	catch(Exception e)
+    	    	{
+    	    		Log.v("Exception",e.toString());
+    	    	}
+    	    	return id[0];
+    	    }
+    	 
+    	    @Override
+    	    protected void onPostExecute(String msg) 
+    	    {
+    	    	Log.v("asdf",msg+" is done");
+    	    }
+    	 }.execute(registerationId);
+    }
+    
+    public void ClickTest(View view)
+    {
+    	SendRegIdToServer(_regId);
+    }
 }
