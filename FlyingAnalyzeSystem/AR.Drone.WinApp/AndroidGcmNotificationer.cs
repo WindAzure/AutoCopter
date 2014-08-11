@@ -10,10 +10,9 @@ namespace AR.Drone.WinApp
 {
     public class AndroidGcmNotificationer
     {
-        private String GoogleApiKey = "AIzaSyA5Fwe7JGaBdtOgUPTinUe662InlXpVHxA";
-
         private HttpWebRequest request = null;
         private HttpWebResponse response = null;
+        private String GoogleApiKey = "AIzaSyA5Fwe7JGaBdtOgUPTinUe662InlXpVHxA";
 
         private static String AssembleDataIntoJson(String deviceId, String data)
         {
