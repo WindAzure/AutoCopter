@@ -9,4 +9,5 @@ public class ConstValue
 	public static String SHARE_PREFERENCES_REGISTER_ID="RegistrationId";
 	public static String SHARE_PREFERENCES_APP_VERSION="AppVersion";
 	public static int PLAY_SERVICES_RESOLUTION_REQUEST=9000;
+	public static int NOTIFICATIONMANAGER_NOTIFY_ID=1;
 }
