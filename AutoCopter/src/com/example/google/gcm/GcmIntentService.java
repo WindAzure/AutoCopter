@@ -16,7 +16,6 @@
 
 package com.example.google.gcm;
 
-import com.example.autocopter.MainActivity;
 import com.example.autocopter.R;
 import com.example.stable.value.ConstValue;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -78,7 +77,7 @@ public class GcmIntentService extends IntentService
     {
     	_notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, GcmActivity.class), 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
         .setSmallIcon(R.drawable.ic_launcher)

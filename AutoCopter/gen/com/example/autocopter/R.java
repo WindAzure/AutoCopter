@@ -1451,13 +1451,14 @@ containing a value of this type.
         public static final int common_signin_btn_text_normal_light=0x7f02006c;
         public static final int common_signin_btn_text_pressed_dark=0x7f02006d;
         public static final int common_signin_btn_text_pressed_light=0x7f02006e;
-        public static final int ic_launcher=0x7f02006f;
-        public static final int ic_plusone_medium_off_client=0x7f020070;
-        public static final int ic_plusone_small_off_client=0x7f020071;
-        public static final int ic_plusone_standard_off_client=0x7f020072;
-        public static final int ic_plusone_tall_off_client=0x7f020073;
-        public static final int powered_by_google_dark=0x7f020074;
-        public static final int powered_by_google_light=0x7f020075;
+        public static final int home=0x7f02006f;
+        public static final int ic_launcher=0x7f020070;
+        public static final int ic_plusone_medium_off_client=0x7f020071;
+        public static final int ic_plusone_small_off_client=0x7f020072;
+        public static final int ic_plusone_standard_off_client=0x7f020073;
+        public static final int ic_plusone_tall_off_client=0x7f020074;
+        public static final int powered_by_google_dark=0x7f020075;
+        public static final int powered_by_google_light=0x7f020076;
     }
     public static final class id {
         public static final int action_bar=0x7f08002e;
@@ -1593,11 +1594,14 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030015;
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
-        public static final int activity_main=0x7f030018;
-        public static final int support_simple_spinner_dropdown_item=0x7f030019;
+        public static final int activity_gcm=0x7f030018;
+        public static final int activity_main=0x7f030019;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001a;
     }
     public static final class menu {
-        public static final int main=0x7f0c0000;
+        public static final int aaaaa=0x7f0c0000;
+        public static final int gcm=0x7f0c0001;
+        public static final int main=0x7f0c0002;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1641,7 +1645,6 @@ containing a value of this type.
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f070025;
         public static final int action_settings=0x7f070029;
-        public static final int already_registered=0x7f07002b;
         public static final int app_name=0x7f070027;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
@@ -1732,23 +1735,9 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f070018;
-        public static final int error_config=0x7f07002a;
-        public static final int gcm_deleted=0x7f070031;
-        public static final int gcm_error=0x7f07002f;
-        public static final int gcm_message=0x7f07002e;
-        public static final int gcm_recoverable_error=0x7f070030;
-        public static final int gcm_registered=0x7f07002c;
-        public static final int gcm_unregistered=0x7f07002d;
         public static final int hello_world=0x7f070028;
-        public static final int options_clear=0x7f070039;
-        public static final int options_exit=0x7f07003a;
-        public static final int options_register=0x7f070037;
-        public static final int options_unregister=0x7f070038;
-        public static final int server_register_error=0x7f070035;
-        public static final int server_registered=0x7f070033;
-        public static final int server_registering=0x7f070032;
-        public static final int server_unregister_error=0x7f070036;
-        public static final int server_unregistered=0x7f070034;
+        public static final int title_activity_aaaaa=0x7f07002b;
+        public static final int title_activity_gcm=0x7f07002a;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */
