@@ -116,8 +116,8 @@ public class MainPanelScaleAnimation
 			}
 			else
 			{
-				_alphaRate=_alphaRate+2*Math.abs(_alphaRate-ConstValue.ALPHA_ANIMATION_UPPER_BOUND)/3;
-				_zoomRate=_zoomRate+2*Math.abs(_zoomRate-ConstValue.ZOOM_ANIMATION_UPPER_BOUND)/3;
+				_alphaRate=_alphaRate+Math.abs(_alphaRate-ConstValue.ALPHA_ANIMATION_UPPER_BOUND)/3;
+				_zoomRate=_zoomRate+Math.abs(_zoomRate-ConstValue.ZOOM_ANIMATION_UPPER_BOUND)/3;
 				_zoomRate=Math.min(_zoomRate, ConstValue.ZOOM_ANIMATION_UPPER_BOUND);
 				_alphaRate=Math.min(_alphaRate, ConstValue.ALPHA_ANIMATION_UPPER_BOUND);
 				_notifyHandler.post(new PlayAnimationRunnable(_zoomRate,_alphaRate));

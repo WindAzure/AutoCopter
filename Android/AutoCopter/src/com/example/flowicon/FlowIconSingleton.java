@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 public class FlowIconSingleton 
@@ -15,6 +16,6 @@ public class FlowIconSingleton
 	public static WindowManager.LayoutParams _fullPageParams;
 	public static WindowManager.LayoutParams _singlePageParams;
 	public static ImageView _closeIcon;
-	public static ImageView _mainPanel;
+	public static LinearLayout _mainPanel;
 	
 }

@@ -28,6 +28,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 
 public class TestService extends Service
 {	
@@ -223,7 +224,7 @@ public class TestService extends Service
 		FlowIconSingleton._fullLayout=(RelativeLayout)LayoutInflater.from(this).inflate(R.layout.normal_layout2, null);
 
 		FlowIconSingleton._closeIcon=(ImageView)FlowIconSingleton._fullLayout.findViewById(R.id.closeIcon);
-		FlowIconSingleton._mainPanel=(ImageView)FlowIconSingleton._fullLayout.findViewById(R.id.mainPanel);
+		FlowIconSingleton._mainPanel=(LinearLayout)FlowIconSingleton._fullLayout.findViewById(R.id.mainPanel);
 		FlowIconSingleton._mainPanel.setVisibility(View.INVISIBLE);
 		
 		FlowIconSingleton._singleLayout.setOnTouchListener(homeIconTouchListener);

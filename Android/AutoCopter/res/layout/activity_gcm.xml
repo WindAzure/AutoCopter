@@ -9,17 +9,17 @@
     tools:context="com.example.google.gcm.GcmActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/titleTextView"
+        android:layout_below="@+id/titleTextView"
         android:layout_marginLeft="41dp"
         android:layout_marginTop="36dp"
         android:onClick="ClickTest"
