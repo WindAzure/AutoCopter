@@ -411,5 +411,11 @@ namespace AR.Drone.WinApp
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AndroidGcmNotificationer gcmSender = new AndroidGcmNotificationer();
+            gcmSender.SendNotification("APA91bFdkkts2kPbzEas85tiRw4aCeNSbmHPd5WOOMD9bloTJH9DmuqIGWI2ndmUBJRKlsNCovkGjoHXk5n6Uq_LWji0ExZ8pzS5uOiXu7cBLUvfcajS2n99E8kqdbezQaKD0g_2J03zCu6U98W_NzVH-WdXxpHTyw", "ASDF");
+        }
     }
 }
