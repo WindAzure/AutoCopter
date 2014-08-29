@@ -32,6 +32,8 @@ import android.widget.LinearLayout;
 
 public class TestService extends Service
 {	
+	public static TestService _currentService=null; 
+	
 	private int _currentX=0;
 	private int _currentY=0;
 	private Handler _notifyHandler=new Handler();
@@ -213,8 +215,8 @@ public class TestService extends Service
 	public void onCreate()
 	{
 		super.onCreate();
-
-		FlowIconSingleton._context=getApplicationContext();
+		_currentService=this;
+		
 		FlowIconSingleton._windowManager=(WindowManager)getSystemService(WINDOW_SERVICE);
 		
 		CreateSingleLayoutParams();

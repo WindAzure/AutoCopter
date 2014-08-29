@@ -1,12 +1,17 @@
 package com.example.stable;
 
-import com.example.flowicon.FlowIconSingleton;
-
+import android.content.Context;
+import android.content.SharedPreferences;
 
 public class UsualMethod 
 {
 	public static int ChangeDpiIntoPixel(int dpi)
 	{
-		return (int)(FlowIconSingleton._context.getResources().getDisplayMetrics().density*dpi+0.5f);
+		return (int)(ConstValue.APPLICATION_CONTEXT.getResources().getDisplayMetrics().density*dpi+0.5f);
+	}
+	
+	public static SharedPreferences GetSharedPreferences()
+	{
+		return ConstValue.APPLICATION_CONTEXT.getSharedPreferences(ConstValue.SHARE_PREFERENCES_NAME,Context.MODE_PRIVATE);
 	}
 }

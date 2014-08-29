@@ -9,13 +9,12 @@ import android.widget.RelativeLayout;
 
 public class FlowIconSingleton 
 {
-	public static Context _context;
-	public static FrameLayout _singleLayout;
-	public static RelativeLayout _fullLayout;
-	public static WindowManager _windowManager;
-	public static WindowManager.LayoutParams _fullPageParams;
-	public static WindowManager.LayoutParams _singlePageParams;
-	public static ImageView _closeIcon;
-	public static LinearLayout _mainPanel;
+	public static FrameLayout _singleLayout=null;
+	public static RelativeLayout _fullLayout=null;
+	public static WindowManager _windowManager=null;
+	public static WindowManager.LayoutParams _fullPageParams=null;
+	public static WindowManager.LayoutParams _singlePageParams=null;
+	public static ImageView _closeIcon=null;
+	public static LinearLayout _mainPanel=null;
 	
 }

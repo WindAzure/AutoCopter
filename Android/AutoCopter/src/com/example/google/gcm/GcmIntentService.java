@@ -16,8 +16,13 @@
 
 package com.example.google.gcm;
 
+import com.example.autocopter.LoginActivity;
+import com.example.autocopter.MainActivity;
+import com.example.flowicon.TestService;
 import com.example.autocopter.R;
+import com.example.flowicon.FlowIconSingleton;
 import com.example.stable.ConstValue;
+import com.example.stable.UsualMethod;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import android.app.IntentService;
@@ -26,10 +31,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.WindowManager;
 
 /**
  * This {@code IntentService} does the actual handling of the GCM message.
@@ -58,35 +65,70 @@ public class GcmIntentService extends IntentService
         {  
             if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) 
             {
-                sendNotification("Send error: " + extras.toString());
+              //  sendNotification("Send error: " + extras.toString());
             } 
             else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) 
             {
-                sendNotification("Deleted messages on server: " + extras.toString());
+              //  sendNotification("Deleted messages on server: " + extras.toString());
             } 
             else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) 
             {
-                sendNotification("Received: " + extras.toString());
+                sendNotification(extras.getString("Msg"));
             }
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }
 
+    private void ClearAllPage()
+    {
+		if(!MainActivity._currentMain.isFinishing())
+		{
+			MainActivity._currentMain.finish();
+		}
+		if(TestService._currentService!=null)
+		{
+			TestService._currentService.stopSelf();
+		}
+    }
+    
     private void sendNotification(String msg) 
     {
-    	_notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+    	if(UsualMethod.GetSharedPreferences().getBoolean(ConstValue.SHARE_PREFERENCES_LOGIN_STATE, false))
+    	{
+    		String title;
+        	String content;
+        	ClearAllPage();
+        	final SharedPreferences pref=UsualMethod.GetSharedPreferences();
+        	SharedPreferences.Editor editor=pref.edit();
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, GcmActivity.class), 0);
+        	if(msg.equals("false"))
+        	{
+            	editor.putBoolean(ConstValue.SHARE_PREFERENCES_SYSTEM_STATE, false);
+        		title=ConstValue.NOTIFY_MANAGER_TITLE_WARNING;
+        		content=ConstValue.NOTIFY_MANAGER_CONTENT_WARNING;
+        	}
+        	else
+        	{
+            	editor.putBoolean(ConstValue.SHARE_PREFERENCES_SYSTEM_STATE, true);
+            	title=ConstValue.NOTIFY_MANAGER_TITLE_NORMAL;
+            	content=ConstValue.NOTIFY_MANAGER_CONTENT_NORMAL;
+        	}
+        	editor.commit();
+        	
+        	_notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-        .setSmallIcon(R.drawable.ic_launcher)
-        .setContentTitle("GCM Notification")
-        .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-        .setContentText(msg)
-        .setDefaults(Notification.DEFAULT_ALL);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+            .setSmallIcon(R.drawable.ic_launcher)
+            .setContentTitle(title)
+            .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
+            .setContentText(content)
+            .setDefaults(Notification.DEFAULT_ALL);
 
-        builder.setContentIntent(contentIntent);
-        _notificationManager.notify(ConstValue.NOTIFICATIONMANAGER_NOTIFY_ID, builder.build());
+            builder.setContentIntent(contentIntent);
+            _notificationManager.notify(ConstValue.NOTIFICATIONMANAGER_NOTIFY_ID, builder.build());
+    	}
+    	Log.v("asdf","gcm is arrive");
     }
 }
