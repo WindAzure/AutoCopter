@@ -21,7 +21,7 @@
             android:textSize="24sp" />
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/mapImageView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -105,7 +105,7 @@
                 android:src="@drawable/login2" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/locationTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"

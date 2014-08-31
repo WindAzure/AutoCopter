@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/q"
+        android:src="@drawable/home4"
         android:visibility="invisible" />
 
     <com.example.stable.TwoStateScaleImageView
@@ -23,7 +23,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/homeIcon"
-        android:src="@drawable/close3" />
+        android:src="@drawable/close4" />
 
     <LinearLayout
         android:id="@+id/mainPanel"
@@ -84,29 +84,53 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="4.8" >
+            android:layout_weight="4.8"
+            android:background="@drawable/block4" >
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/mapImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="8.8"
                 android:scaleType="fitXY"
-                android:src="@drawable/e" />
+                android:src="@drawable/map1" />
 
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="8.2"
-            android:scaleType="fitXY"
-            android:src="@drawable/b" />
+            android:background="@drawable/location_block4" >
+
+            <ImageView
+                android:id="@+id/locationIconImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_weight="7"
+                android:src="@drawable/location4" />
+
+            <TextView
+                android:id="@+id/locationTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center_vertical"
+                android:layout_weight="3"
+                android:gravity="left|center_vertical"
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
