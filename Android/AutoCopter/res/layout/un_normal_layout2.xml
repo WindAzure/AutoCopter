@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/home3"
+        android:src="@drawable/q"
         android:visibility="invisible" />
 
     <com.example.stable.TwoStateScaleImageView
@@ -24,7 +24,6 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/homeIcon"
         android:src="@drawable/close3" />
-    
 
     <LinearLayout
         android:id="@+id/mainPanel"
@@ -34,17 +33,15 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/base3"
-        android:orientation="vertical"
-        android:paddingLeft="1dp" >
+        android:background="@drawable/base4"
+        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="1dp"
             android:layout_marginTop="10dp"
             android:layout_weight="8.8"
-            android:background="@drawable/title3" >
+            android:background="@drawable/title4" >
 
             <ImageView
                 android:id="@+id/titleCheckImageView"
@@ -53,7 +50,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/title_check3" />
+                android:src="@drawable/title_check4" />
 
             <TextView
                 android:id="@+id/titleTextView"
@@ -63,7 +60,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
-                android:text="System All Green"
+                android:text="Warning!!!"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
@@ -81,46 +78,36 @@
             android:scaleType="fitXY"
             android:src="@drawable/call3" />
 
-        <LinearLayout
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="4.8" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="8.8"
+                android:scaleType="fitXY"
+                android:src="@drawable/e" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="3"
-            android:background="@drawable/block3"
-            android:orientation="vertical" >
-
-            <ImageView
-                android:id="@+id/headImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_weight="4"
-                android:src="@drawable/head3" />
-
-            <TextView
-                android:id="@+id/accountTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_weight="8"
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <com.example.stable.TwoStateScaleAlphaImageView
-                android:id="@+id/logoutImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="8"
-                android:src="@drawable/logout3" />
-
-        </LinearLayout>
+            android:layout_weight="8.2"
+            android:scaleType="fitXY"
+            android:src="@drawable/b" />
 
     </LinearLayout>
-    
+
 </RelativeLayout>

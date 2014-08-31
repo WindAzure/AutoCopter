@@ -9,7 +9,6 @@ import com.example.stable.UsualMethod;
 
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;

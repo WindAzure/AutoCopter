@@ -16,11 +16,9 @@
 
 package com.example.google.gcm;
 
-import com.example.autocopter.LoginActivity;
 import com.example.autocopter.MainActivity;
-import com.example.flowicon.TestService;
+import com.example.flowicon.NormalService;
 import com.example.autocopter.R;
-import com.example.flowicon.FlowIconSingleton;
 import com.example.stable.ConstValue;
 import com.example.stable.UsualMethod;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -33,10 +31,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.view.WindowManager;
 
 /**
  * This {@code IntentService} does the actual handling of the GCM message.
@@ -86,9 +82,9 @@ public class GcmIntentService extends IntentService
 		{
 			MainActivity._currentMain.finish();
 		}
-		if(TestService._currentService!=null)
+		if(NormalService._currentService!=null)
 		{
-			TestService._currentService.stopSelf();
+			NormalService._currentService.stopSelf();
 		}
     }
     

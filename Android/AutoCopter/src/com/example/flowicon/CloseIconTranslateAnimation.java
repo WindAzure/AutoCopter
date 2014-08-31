@@ -4,11 +4,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.example.autocopter.R;
-import com.example.flowicon.SingleIconTranslateAnimation.AnimationTask;
 import com.example.stable.UsualMethod;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;

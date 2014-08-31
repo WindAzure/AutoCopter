@@ -1,15 +1,10 @@
 package com.example.flowicon;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.example.autocopter.R;
-import com.example.stable.ConstValue;
 import com.example.stable.UsualMethod;
 
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
@@ -18,21 +13,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-public class TestService extends Service
-{	
-	public static TestService _currentService=null; 
+public class UnNormalService extends Service
+{
+	public static UnNormalService _currentService=null; 
 	
 	private int _currentX=0;
 	private int _currentY=0;
@@ -44,6 +33,8 @@ public class TestService extends Service
 	private SingleIconTranslateAnimation _singleIconTranslateAnimation;
 	private MainPanelScaleAnimation _mainPanelScaleAnimation;
 	private CloseIconTranslateAnimation _closeIconTranslateAnimation;
+	
+	private ImageView _callImageView;
 	
 	private SingleIconEventRegister _translateRegister=new SingleIconEventRegister()
 	{
@@ -61,6 +52,7 @@ public class TestService extends Service
 			_canMove=true;
 		}
 	};
+	
 	
 	private CloseIconEventRegister _translate2Register=new CloseIconEventRegister()
 	{
@@ -80,6 +72,7 @@ public class TestService extends Service
 		}
 	};
 	
+	
 	private MainPanelEventRegister _scaleRegister=new MainPanelEventRegister()
 	{
 		@Override
@@ -95,6 +88,7 @@ public class TestService extends Service
 			//_canMove=false;
 		}
 	};
+	
 	
 	@Override
 	public IBinder onBind(Intent intent) 
@@ -202,6 +196,15 @@ public class TestService extends Service
 		}
 	};
 
+	public View.OnClickListener TwoStateImageViewClickListener=new View.OnClickListener() 
+	{
+		@Override
+		public void onClick(View v) 
+		{
+			
+		}
+	};
+	
 	public View.OnClickListener closeIconClickListener=new View.OnClickListener() 
 	{	
 		@Override
@@ -210,6 +213,7 @@ public class TestService extends Service
 			stopSelf();
 		}
 	};
+	
 	
 	@Override
 	public void onCreate()
@@ -222,12 +226,15 @@ public class TestService extends Service
 		CreateSingleLayoutParams();
 		CreateFullLayoutParams();
 
-		FlowIconSingleton._singleLayout=(FrameLayout)LayoutInflater.from(this).inflate(R.layout.normal_layout1, null);
-		FlowIconSingleton._fullLayout=(RelativeLayout)LayoutInflater.from(this).inflate(R.layout.normal_layout2, null);
+		FlowIconSingleton._singleLayout=(FrameLayout)LayoutInflater.from(this).inflate(R.layout.un_normal_layout1, null);
+		FlowIconSingleton._fullLayout=(RelativeLayout)LayoutInflater.from(this).inflate(R.layout.un_normal_layout2, null);
 
 		FlowIconSingleton._closeIcon=(ImageView)FlowIconSingleton._fullLayout.findViewById(R.id.closeIcon);
 		FlowIconSingleton._mainPanel=(LinearLayout)FlowIconSingleton._fullLayout.findViewById(R.id.mainPanel);
 		FlowIconSingleton._mainPanel.setVisibility(View.INVISIBLE);
+		
+		_callImageView=(ImageView)FlowIconSingleton._fullLayout.findViewById(R.id.callImageView);
+		_callImageView.setOnClickListener(TwoStateImageViewClickListener);
 		
 		FlowIconSingleton._singleLayout.setOnTouchListener(homeIconTouchListener);
 		FlowIconSingleton._singleLayout.setOnClickListener(homeIconClickListener);
@@ -250,6 +257,12 @@ public class TestService extends Service
 			}
 		});
 	}
+	
+    @Override
+	public int onStartCommand(Intent intent, int flags, int startId) 
+    {
+		return START_NOT_STICKY;
+    }
 	
 	@Override
 	public void onDestroy()
