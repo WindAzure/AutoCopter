@@ -11,56 +11,47 @@ public class DeviceIdHttpHandler : IHttpHandler
     public void ProcessRequest(HttpContext context)
     {
         context.Response.ContentType = "text/plain";
-        
-        //App傳送的RegistrationID
-        string RegistrationID = context.Request["RegistrationID"];
-        string Del = context.Request["Del"];//是否刪除RegistrationID
-        SqlParameter[] param = new SqlParameter[] { new SqlParameter() { ParameterName = "@RegistrationID", SqlDbType = SqlDbType.VarChar, Value = RegistrationID } };
-        string json = string.Empty;//輸出結果的json字串
-        bool validate = false;
+        string json = string.Empty;
 
-        if (!string.IsNullOrEmpty(RegistrationID))//防呆
+        Boolean validate = false;
+        string Account = context.Request["Account"];
+        string Password = context.Request["Password"];
+        string RegistrationID = context.Request["RegistrationID"];
+        
+        SqlParameter idParam = new SqlParameter() { ParameterName = "@Account", SqlDbType = SqlDbType.VarChar, Value = Account };
+        SqlParameter passwordParam = new SqlParameter() { ParameterName="@Password",SqlDbType=SqlDbType.VarChar,Value=Password};
+        SqlParameter phoneIdParam = new SqlParameter() { ParameterName = "@RegistrationID", SqlDbType = SqlDbType.VarChar, Value = RegistrationID };
+
+        if (!string.IsNullOrEmpty(Account) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(RegistrationID))
         {
             try
             {
-                if (!string.IsNullOrEmpty(Del) && "true".Equals(Del))
+                if (Convert.ToBoolean(SqlHelper.ExecuteScalar(CommandType.Text, "SELECT count(*) FROM Member WHERE Account=@Account and Password=@Password", new SqlParameter[] { idParam, passwordParam })))
                 {
-                    //從DB把RegistrationID刪除
-                    SqlHelper.ExecteNonQuery(CommandType.Text, "Delete From AndroidDeviceTable Where RegistrationID =@RegistrationID", param);
-                }
-                else
-                {
-                    int count = Convert.ToInt32(SqlHelper.ExecuteScalar(CommandType.Text, "Select count(*) From AndroidDeviceTable Where RegistrationID =@RegistrationID", param));
-                    if (count == 0)
+                    validate = true;
+                    if (!Convert.ToBoolean(SqlHelper.ExecuteScalar(CommandType.Text, "SELECT count(*) FROM MemberMultiValue WHERE FKAccount=@Account and PhoneRegistId=@RegistrationID", new SqlParameter[] { idParam, phoneIdParam })))
                     {
-                        //DB無此RegistrationID，//新增RegistrationID到DB
-                        SqlHelper.ExecteNonQuery(CommandType.Text, "Insert into AndroidDeviceTable (RegistrationID) values (@RegistrationID)", param);
+                        SqlHelper.ExecteNonQuery(CommandType.Text, "INSERT INTO MemberMultiValue(FKAccount,PhoneRegistId) VALUES (@Account,@RegistrationID)", new SqlParameter[] { idParam, phoneIdParam });
                     }
                 }
-                validate = true;//執行成功
             }
             catch (Exception ex)
             {
-                validate = false;//執行失敗
+                validate = false; 
             }
-
-        }
-        else
-        {
-            validate = false;
-        }
-
-
-        if (validate)
-        {
-            json = @"{""Success"":true}";
-        }
-        else
-        {
-            json = @"{""Success"":false}";
         }
         
-        context.Response.Write(json);//輸出訊息
+        
+        if (validate)
+        {
+            json = "Welcome";
+        }
+        else
+        {
+            json = "Invalid ID or password";
+        }
+
+        context.Response.Write(json);
     }
 
     public bool IsReusable
