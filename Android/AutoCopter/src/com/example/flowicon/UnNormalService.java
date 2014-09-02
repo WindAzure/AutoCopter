@@ -1,10 +1,13 @@
 package com.example.flowicon;
 
 import com.example.autocopter.R;
+import com.example.stable.MapImageView;
 import com.example.stable.UsualMethod;
 
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
@@ -35,6 +38,7 @@ public class UnNormalService extends Service
 	private CloseIconTranslateAnimation _closeIconTranslateAnimation;
 	
 	private ImageView _callImageView;
+	private MapImageView _mapImageView;
 	
 	private SingleIconEventRegister _translateRegister=new SingleIconEventRegister()
 	{
@@ -214,7 +218,6 @@ public class UnNormalService extends Service
 		}
 	};
 	
-	
 	@Override
 	public void onCreate()
 	{
@@ -236,6 +239,8 @@ public class UnNormalService extends Service
 		_callImageView=(ImageView)FlowIconSingleton._fullLayout.findViewById(R.id.callImageView);
 		_callImageView.setOnClickListener(TwoStateImageViewClickListener);
 		
+		_mapImageView=(MapImageView)FlowIconSingleton._fullLayout.findViewById(R.id.mapImageView);
+		
 		FlowIconSingleton._singleLayout.setOnTouchListener(homeIconTouchListener);
 		FlowIconSingleton._singleLayout.setOnClickListener(homeIconClickListener);
 		FlowIconSingleton._closeIcon.setOnClickListener(closeIconClickListener);
@@ -254,6 +259,7 @@ public class UnNormalService extends Service
 			{
 				_closeIconTranslateAnimation.InitializePosition();
 				_closeIconTranslateAnimation.TranslateToOrderPosition();
+				_mapImageView.Iniatilize(BitmapFactory.decodeResource(getResources(), R.drawable.map1));
 			}
 		});
 	}
