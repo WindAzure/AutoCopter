@@ -22,6 +22,7 @@ public class MapImageView extends ImageView
 	private float _startZoomRate;
 	private float _width;
 	private float _height;
+	private boolean _isClickActive=false;
 	
 	public View.OnTouchListener mapImageViewTouchListener=new View.OnTouchListener()
 	{
@@ -34,12 +35,14 @@ public class MapImageView extends ImageView
 			int action=event.getAction() & MotionEvent.ACTION_MASK;
 			if(action==MotionEvent.ACTION_DOWN)
 			{
+				_isClickActive=true;
 				_mode=MapMode.DRAG;
 				_lastStateMatrix.set(_matrix);
 				movePoint.set(event.getX(), event.getY());
 			}
 			else if(action==MotionEvent.ACTION_POINTER_DOWN && event.getPointerCount()==2)
 			{
+				_isClickActive=false;
 				_startZoomRate=UsualMethod.GetTwoActionPointerDistanse(event);
 				if(_startZoomRate>10f)
 				{
@@ -52,8 +55,12 @@ public class MapImageView extends ImageView
 			{
 				if(_mode==MapMode.DRAG)
 				{
-					_matrix.set(_lastStateMatrix);
-					_matrix.postTranslate(event.getX()-movePoint.x, event.getY()-movePoint.y);
+					if(Math.abs(event.getX()-movePoint.x)>5 && Math.abs(event.getY()-movePoint.y)>5)
+					{
+						_isClickActive=false;
+						_matrix.set(_lastStateMatrix);
+						_matrix.postTranslate(event.getX()-movePoint.x, event.getY()-movePoint.y);
+					}
 				}
 				else if(_mode==MapMode.ZOOM)
 				{
@@ -72,7 +79,7 @@ public class MapImageView extends ImageView
 				_mode=MapMode.NONE;
 			}
 			MapImageView.this.setImageMatrix(_matrix);
-			return true;
+			return false;
 		}
 	};
 	
@@ -82,12 +89,15 @@ public class MapImageView extends ImageView
 		@Override
 		public void onClick(View v) 
 		{
-			_matrix=new Matrix();
-			_lastStateMatrix=new Matrix();
-			float scaleWidth=_width/_map.getWidth();
-			float scaleHeight=_height/_map.getHeight();
-			_matrix.postScale(scaleWidth, scaleHeight);
-			MapImageView.this.setImageMatrix(_matrix);
+			if(_isClickActive)
+			{
+				_matrix=new Matrix();
+				_lastStateMatrix=new Matrix();
+				float scaleWidth=_width/_map.getWidth();
+				float scaleHeight=_height/_map.getHeight();
+				_matrix.postScale(scaleWidth, scaleHeight);
+				MapImageView.this.setImageMatrix(_matrix);
+			}
 		}
 	};
 	
