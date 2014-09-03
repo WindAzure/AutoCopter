@@ -41,6 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -56,6 +57,7 @@
     <Compile Include="PlayerForm.Designer.cs">
       <DependentUpon>PlayerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SqlHelper.cs" />
     <Compile Include="TcpSender.cs" />
     <Compile Include="UdpSender.cs" />
     <Compile Include="VideoHelper.cs" />
@@ -105,6 +107,9 @@
       <Project>{A536B02A-B0B1-4753-8328-17369EF09976}</Project>
       <Name>FFmpeg.AutoGen</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

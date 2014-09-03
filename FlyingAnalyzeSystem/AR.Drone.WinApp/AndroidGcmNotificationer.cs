@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -46,6 +48,34 @@ namespace AR.Drone.WinApp
             request.UserAgent = "Android GCM Message Sender Client 1.0";
         }
 
+        public void UnRegister(String account,String deviceId)
+        {
+            SqlParameter accountParam=new SqlParameter(){ParameterName="@Account",SqlDbType=SqlDbType.VarChar,Value=account};
+            SqlParameter registionIdParam = new SqlParameter() { ParameterName = "@RegistionId", SqlDbType = SqlDbType.VarChar, Value = deviceId };
+            SqlHelper.ExecuteScalar(CommandType.Text, "DELETE FROM [dbo].[MemberMultiValue] WHERE [FKAccount]=@Account and [PhoneRegistId]=@RegistionId",new SqlParameter[]{ accountParam, registionIdParam});
+        }
+
+        public void SendNotification(String account,String deviceId, String data)
+        {
+            data = AssembleDataIntoJson(deviceId, data);
+            Send(data);
+
+            try
+            {
+                response = request.GetResponse() as HttpWebResponse;
+            }
+            catch (WebException e)
+            {
+                Debug.WriteLine("[ERROR] There is a problem within processing GCM message \n" + e.Message);
+            }
+
+            data = ReadResponse(response);
+            if (data.Contains("NotRegistered"))
+            {
+                UnRegister(account,deviceId);
+            }
+        }
+
         public void SendNotification(String deviceId, String data)
         {
             data = AssembleDataIntoJson(deviceId, data);
@@ -59,8 +89,8 @@ namespace AR.Drone.WinApp
             {
                 Debug.WriteLine("[ERROR] There is a problem within processing GCM message \n" + e.Message);
             }
+
             data = ReadResponse(response);
-            //Debug.WriteLine(data);
         }
     }
 }
