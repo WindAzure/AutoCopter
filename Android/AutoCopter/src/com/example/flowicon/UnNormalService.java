@@ -6,7 +6,6 @@ import com.example.stable.UsualMethod;
 
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;

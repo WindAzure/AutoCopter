@@ -84,7 +84,7 @@ public class LoginActivity extends Activity
 	
 	private void RegisterInBackground() 
     {
-        new AsyncTask<Void, Void, String>() 
+        new AsyncTask<Void, Void, Object>() 
         {
             @Override
             protected String doInBackground(Void... params) 
@@ -104,13 +104,7 @@ public class LoginActivity extends Activity
                 }
                 return null;
             }
-            
-            @Override
-            protected void onPostExecute(String s)
-            {
-            	//SwitchPage();
-            }
-        }.execute(null, null, null);
+        }.execute();
     }
 
     private String GetRegistrationId(Context context) 

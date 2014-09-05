@@ -13,9 +13,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.example.autocopter.MainActivityaaaaa;
 import com.example.flowicon.FlowIconSingleton;
-import com.example.flowicon.NormalService;
 import com.example.flowicon.UnNormalService;
 
 import android.app.Activity;

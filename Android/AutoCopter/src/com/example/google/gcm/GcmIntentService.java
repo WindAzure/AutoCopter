@@ -18,6 +18,7 @@ package com.example.google.gcm;
 
 import com.example.autocopter.MainActivity;
 import com.example.flowicon.NormalService;
+import com.example.flowicon.UnNormalService;
 import com.example.autocopter.R;
 import com.example.stable.ConstValue;
 import com.example.stable.UsualMethod;
@@ -84,6 +85,10 @@ public class GcmIntentService extends IntentService
 		if(NormalService._currentService!=null)
 		{
 			NormalService._currentService.stopSelf();
+		}
+		if(UnNormalService._currentService!=null)
+		{
+			UnNormalService._currentService.stopSelf();
 		}
     }
     

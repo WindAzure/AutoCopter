@@ -2,8 +2,6 @@ package com.example.flowicon;
 
 import com.example.autocopter.R;
 import com.example.stable.ConstValue;
-import com.example.stable.TwoStateScaleAlphaImageView;
-import com.example.stable.TwoStateScaleImageView;
 import com.example.stable.UsualMethod;
 
 import android.app.Service;
