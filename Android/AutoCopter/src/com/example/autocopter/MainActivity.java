@@ -2,6 +2,7 @@
 
 import com.example.flowicon.NormalService;
 import com.example.flowicon.UnNormalService;
+import com.example.http.to.server.CheckServerStateTask;
 import com.example.stable.ConstValue;
 import com.example.stable.UsualMethod;
 import com.google.android.gms.common.ConnectionResult;
@@ -29,9 +30,6 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         _currentMain=this;
-        /*
-        startService(new Intent(this, TestService.class));
-        finish();*/
 
 		ConstValue.APPLICATION_CONTEXT = getApplicationContext();
         
@@ -78,13 +76,7 @@ public class MainActivity extends Activity
     	final SharedPreferences prefs=UsualMethod.GetSharedPreferences();
     	return prefs.getBoolean(ConstValue.SHARE_PREFERENCES_LOGIN_STATE, false);
     }
-    
-    private boolean CheckNormal()
-    {
-    	final SharedPreferences prefs=UsualMethod.GetSharedPreferences();
-    	return prefs.getBoolean(ConstValue.SHARE_PREFERENCES_SYSTEM_STATE, true);
-    }
-    
+        
     private void SwitchPage()
     {
     	/*if(!CheckLoginState())
@@ -93,17 +85,11 @@ public class MainActivity extends Activity
     	}
     	else
     	{
-    		if(!CheckNormal())
-    		{
-        		startService(new Intent(this, UnNormalService.class));
-    		}
-    		else
-    		{
-    	        startService(new Intent(this, NormalService.class));
-    		}
+    		new CheckServerStateTask(MainActivity.this).execute("Azure");
     	}*/
 
-        startService(new Intent(this, UnNormalService.class));
+		startActivity(new Intent(this,MainActivityaaaaa.class));
+        //startService(new Intent(this, NormalService.class));
     	finish();
     }
     

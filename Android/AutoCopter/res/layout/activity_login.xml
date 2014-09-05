@@ -21,7 +21,7 @@
             android:textSize="24sp" />
 
         <ImageView
-            android:id="@+id/mapImageView"
+            android:id="@+id/loginHeadImageView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -34,7 +34,7 @@
             android:layout_weight="9" >
 
             <ImageView
-                android:id="@+id/ImageView01"
+                android:id="@+id/accountImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="40dp"
@@ -43,16 +43,17 @@
                 android:src="@drawable/account2" />
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/accountEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/ImageView01"
-                android:layout_alignRight="@+id/ImageView01"
+                android:layout_alignLeft="@+id/accountImageView"
+                android:layout_alignRight="@+id/accountImageView"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="46dp"
+                android:background="@null"
                 android:ems="10"
                 android:hint="Account"
-                android:background="@null"
+                android:singleLine="true"
                 android:textColor="@color/gray" >
 
                 <requestFocus />
@@ -66,7 +67,7 @@
             android:layout_weight="9" >
 
             <ImageView
-                android:id="@+id/ImageView02"
+                android:id="@+id/passwordImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="40dp"
@@ -75,16 +76,18 @@
                 android:src="@drawable/password2" />
 
             <EditText
-                android:id="@+id/EditText01"
+                android:id="@+id/passwordEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/ImageView02"
-                android:layout_alignRight="@+id/ImageView02"
+                android:layout_alignLeft="@+id/passwordImageView"
+                android:layout_alignRight="@+id/passwordImageView"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="46dp"
+                android:background="@null"
                 android:ems="10"
                 android:hint="Password"
-                android:background="@null"
+                android:password="true"
+                android:singleLine="true"
                 android:textColor="@color/gray" />
 
         </RelativeLayout>
@@ -97,15 +100,17 @@
             android:layout_marginTop="10dp"
             android:layout_weight="8" >
 
-            <ImageView
-                android:id="@+id/ImageView03"
+            <com.example.stable.TwoStateScaleAlphaImageView
+                android:id="@+id/loginImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:layout_weight="9"
                 android:src="@drawable/login2" />
 
             <TextView
-                android:id="@+id/locationTextView"
+                android:id="@+id/loginTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -114,6 +119,17 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
+
+            <ProgressBar
+                android:id="@+id/loginProgressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:visibility="invisible" />
 
         </RelativeLayout>
 

@@ -115,7 +115,7 @@ public class MapImageView extends ImageView
 		}
 	}
 	
-	public void Iniatilize(Bitmap map)
+	public void Initialize(Bitmap map)
 	{
 		_map=map;
 		_width=MapImageView.this.getWidth();

@@ -13,6 +13,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.example.http.to.server.CheckServerStateTask;
+import com.example.http.to.server.SendRegistIdTask;
+import com.example.http.to.server.SendRegistIdTaskEventRegister;
 import com.example.stable.ConstValue;
 import com.example.stable.UsualMethod;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -26,12 +29,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity 
 {
     private String _regId;
     private GoogleCloudMessaging _gcm;
+    private ImageView _loginImageView;
+    private EditText _accountEditText;
+    private EditText _passwordEditText;
+    private ProgressBar _progressBar;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -39,6 +49,12 @@ public class LoginActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 
+		_progressBar=(ProgressBar)findViewById(R.id.loginProgressBar);
+		_accountEditText=(EditText)findViewById(R.id.accountEditText);
+		_passwordEditText=(EditText)findViewById(R.id.passwordEditText);
+		_loginImageView=(ImageView)findViewById(R.id.loginImageView);
+		_loginImageView.setOnClickListener(TwoStateImageViewClickListener);
+		
 		_gcm = GoogleCloudMessaging.getInstance(this);
         _regId = GetRegistrationId(ConstValue.APPLICATION_CONTEXT);
         if (_regId.isEmpty())
@@ -46,11 +62,25 @@ public class LoginActivity extends Activity
             RegisterInBackground();
         }
 	}
-	
-	public void ClickTest(View view)
+
+	public View.OnClickListener TwoStateImageViewClickListener=new View.OnClickListener() 
 	{
-        SendRegIdToServer(_regId,"Azure","IamAzure!");
-	}
+		@Override
+		public void onClick(View v) 
+		{
+			String account=_accountEditText.getText().toString();
+			String password=_passwordEditText.getText().toString();
+			if(account.length()<50 && password.length()<50 && (!account.equals("")) && (!password.equals("")))
+			{
+				_loginImageView.setEnabled(false);
+				_accountEditText.setEnabled(false);
+				_passwordEditText.setEnabled(false);
+				_progressBar.setVisibility(View.VISIBLE);
+				new SendRegistIdTask(_sendRegistIdTaskEventRegister).execute(_regId,account,password);
+				//SendRegIdToServer(_regId,account,password);
+			}
+		}
+	};
 	
 	private void RegisterInBackground() 
     {
@@ -127,7 +157,7 @@ public class LoginActivity extends Activity
         }
     }
 
-    private void SendRegIdToServer(String registerationId,String account,String password) 
+    /*private void SendRegIdToServer(String registerationId,String account,String password) 
     {
     	Log.v("asdf",registerationId);
     	new AsyncTask<String,Void,String>() 
@@ -168,8 +198,40 @@ public class LoginActivity extends Activity
     	    	else
     	    	{
     	    		Toast.makeText(LoginActivity.this, response, Toast.LENGTH_SHORT).show();
+    	    		_accountEditText.setText("");
+    	    		_passwordEditText.setText("");
     	    	}
     	    }
     	 }.execute(registerationId,account,password);
-    }
+    }*/
+    
+    private SendRegistIdTaskEventRegister _sendRegistIdTaskEventRegister=new SendRegistIdTaskEventRegister()
+    {
+    	/* 照理來說應該要先等 CheckServerStateTask 結束後再開啟元件的 enable
+    	 * 這邊不用的原因是反正 CheckServerStateTask 成立就會跳轉頁面
+    	 * 一旦跳轉，關不關就沒差了*/
+		@Override
+		public void AsyncTaskFinished(String response) 
+		{				
+			if(response.equals("Welcome"))
+	    	{
+	    		SharedPreferences pref=UsualMethod.GetSharedPreferences();
+	    		SharedPreferences.Editor editor=pref.edit();
+	    		editor.putBoolean(ConstValue.SHARE_PREFERENCES_LOGIN_STATE, true);
+	    		editor.putString(ConstValue.SHARE_PREFERENCES_LOGIN_ACCOUNT, _accountEditText.getText().toString());
+	    		editor.commit();
+	    		new CheckServerStateTask(LoginActivity.this,_accountEditText.getText().toString()).execute();
+	    	}
+	    	else
+	    	{
+				_loginImageView.setEnabled(true);
+				_accountEditText.setEnabled(true);
+				_passwordEditText.setEnabled(true);
+				_progressBar.setVisibility(View.INVISIBLE);
+	    		Toast.makeText(LoginActivity.this, response, Toast.LENGTH_SHORT).show();
+	    		_accountEditText.setText("");
+	    		_passwordEditText.setText("");
+	    	}
+		}
+	};
 }

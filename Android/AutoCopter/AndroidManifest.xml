@@ -53,17 +53,20 @@
 
         <service android:name="com.example.google.gcm.GcmIntentService" />
         <service android:name="com.example.flowicon.NormalService" />
-        <service android:name="com.example.flowicon.UnNormalService"/>
+        <service android:name="com.example.flowicon.UnNormalService" />
 
         <activity
             android:name="com.example.google.gcm.GcmActivity"
             android:label="@string/title_activity_gcm" >
         </activity>
-        
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" 
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:label="@string/title_activity_login"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".MainActivityaaaaa"
+            android:label="@string/title_activity_main_activityaaaaa" >
         </activity>
     </application>
 

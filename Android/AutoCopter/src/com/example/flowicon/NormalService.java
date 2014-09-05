@@ -1,12 +1,14 @@
 package com.example.flowicon;
 
 import com.example.autocopter.R;
+import com.example.stable.ConstValue;
 import com.example.stable.TwoStateScaleAlphaImageView;
 import com.example.stable.TwoStateScaleImageView;
 import com.example.stable.UsualMethod;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
@@ -203,7 +205,18 @@ public class NormalService extends Service
 		@Override
 		public void onClick(View v) 
 		{
-			
+			if(v==_callImageView)
+			{
+				
+			}
+			else if(v==_logoutImageView)
+			{
+				SharedPreferences pref=UsualMethod.GetSharedPreferences();
+				SharedPreferences.Editor editor=pref.edit();
+				editor.putBoolean(ConstValue.SHARE_PREFERENCES_LOGIN_STATE, false);
+				editor.putString(ConstValue.SHARE_PREFERENCES_LOGIN_ACCOUNT, "");
+				editor.commit();
+			}
 		}
 	};
 	

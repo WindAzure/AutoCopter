@@ -97,8 +97,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="8.8"
                 android:background="#FFFFFF"
-                android:scaleType="matrix"
-                android:src="@drawable/map1" />
+                android:scaleType="matrix" />
 
         </RelativeLayout>
 

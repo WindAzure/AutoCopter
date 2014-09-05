@@ -10,8 +10,8 @@ public class ConstValue
 	public static String SHARE_PREFERENCES_NAME="AutoCopterSharePreferneces";
 	public static String SHARE_PREFERENCES_REGISTER_ID="RegistrationId";
 	public static String SHARE_PREFERENCES_LOGIN_STATE="LoginState";
+	public static String SHARE_PREFERENCES_LOGIN_ACCOUNT="LoginAccount";
 	public static String SHARE_PREFERENCES_APP_VERSION="AppVersion";
-	public static String SHARE_PREFERENCES_SYSTEM_STATE="SystemState";
 	public static String NOTIFY_MANAGER_TITLE_NORMAL="Threat was solved";
 	public static String NOTIFY_MANAGER_TITLE_WARNING="Warning!!!";
 	public static String NOTIFY_MANAGER_CONTENT_NORMAL="Everything is OK";

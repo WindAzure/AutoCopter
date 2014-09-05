@@ -6,7 +6,6 @@ import com.example.stable.UsualMethod;
 
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.os.Handler;
@@ -240,6 +239,7 @@ public class UnNormalService extends Service
 		_callImageView.setOnClickListener(TwoStateImageViewClickListener);
 		
 		_mapImageView=(MapImageView)FlowIconSingleton._fullLayout.findViewById(R.id.mapImageView);
+		_mapImageView.setImageBitmap(FlowIconSingleton._locationBitmap);
 		
 		FlowIconSingleton._singleLayout.setOnTouchListener(homeIconTouchListener);
 		FlowIconSingleton._singleLayout.setOnClickListener(homeIconClickListener);
@@ -259,7 +259,7 @@ public class UnNormalService extends Service
 			{
 				_closeIconTranslateAnimation.InitializePosition();
 				_closeIconTranslateAnimation.TranslateToOrderPosition();
-				_mapImageView.Iniatilize(BitmapFactory.decodeResource(getResources(), R.drawable.map1));
+				_mapImageView.Initialize(FlowIconSingleton._locationBitmap);
 			}
 		});
 	}

@@ -1,5 +1,6 @@
 package com.example.flowicon;
 
+import android.graphics.Bitmap;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -15,5 +16,5 @@ public class FlowIconSingleton
 	public static WindowManager.LayoutParams _singlePageParams=null;
 	public static ImageView _closeIcon=null;
 	public static LinearLayout _mainPanel=null;
-	
+	public static Bitmap _locationBitmap=null;
 }
