@@ -79,18 +79,16 @@ public class MainActivity extends Activity
         
     private void SwitchPage()
     {
-    	/*if(!CheckLoginState())
+    	if(!CheckLoginState())
     	{
     		startActivity(new Intent(this,LoginActivity.class));
+        	finish();
     	}
     	else
     	{
-    		new CheckServerStateTask(MainActivity.this).execute("Azure");
-    	}*/
-
-		startActivity(new Intent(this,MainActivityaaaaa.class));
-        //startService(new Intent(this, NormalService.class));
-    	finish();
+    		SharedPreferences pref=UsualMethod.GetSharedPreferences();
+    		new CheckServerStateTask(MainActivity.this,pref.getString(ConstValue.SHARE_PREFERENCES_LOGIN_ACCOUNT, "")).execute();
+    	}
     }
     
     private boolean CheckPlayServices() 

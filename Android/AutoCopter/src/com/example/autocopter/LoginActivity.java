@@ -42,12 +42,14 @@ public class LoginActivity extends Activity
     private EditText _accountEditText;
     private EditText _passwordEditText;
     private ProgressBar _progressBar;
+    public static LoginActivity _currentLogin=null;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		_currentLogin=this;
 
 		_progressBar=(ProgressBar)findViewById(R.id.loginProgressBar);
 		_accountEditText=(EditText)findViewById(R.id.accountEditText);

@@ -7,6 +7,7 @@ import com.example.stable.UsualMethod;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
@@ -203,7 +204,13 @@ public class UnNormalService extends Service
 		@Override
 		public void onClick(View v) 
 		{
-			
+			Intent dial=new Intent();
+			dial.setAction("android.intent.action.CALL");
+			dial.setData(Uri.parse("tel:0977354265"));
+			dial.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			dial.addFlags(Intent.FLAG_FROM_BACKGROUND);
+			UnNormalService.this.startActivities(new Intent[]{dial});
+			stopSelf();
 		}
 	};
 	

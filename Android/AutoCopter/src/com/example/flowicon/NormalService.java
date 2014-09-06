@@ -8,6 +8,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.view.Gravity;
@@ -205,7 +206,13 @@ public class NormalService extends Service
 		{
 			if(v==_callImageView)
 			{
-				
+				Intent dial=new Intent();
+				dial.setAction("android.intent.action.CALL");
+				dial.setData(Uri.parse("tel:0977354265"));
+				dial.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				dial.addFlags(Intent.FLAG_FROM_BACKGROUND);
+				NormalService.this.startActivities(new Intent[]{dial});
+				stopSelf();
 			}
 			else if(v==_logoutImageView)
 			{
