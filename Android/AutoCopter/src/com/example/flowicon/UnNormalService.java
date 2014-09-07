@@ -21,6 +21,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class UnNormalService extends Service
 {
@@ -39,6 +40,7 @@ public class UnNormalService extends Service
 	
 	private ImageView _callImageView;
 	private MapImageView _mapImageView;
+	private TextView _locationTextView;
 	
 	private SingleIconEventRegister _translateRegister=new SingleIconEventRegister()
 	{
@@ -248,6 +250,9 @@ public class UnNormalService extends Service
 		
 		_mapImageView=(MapImageView)FlowIconSingleton._fullLayout.findViewById(R.id.mapImageView);
 		_mapImageView.setImageBitmap(FlowIconSingleton._locationBitmap);
+		
+		_locationTextView=(TextView)FlowIconSingleton._fullLayout.findViewById(R.id.locationTextView);
+		_locationTextView.setText(FlowIconSingleton._locationText);
 		
 		FlowIconSingleton._singleLayout.setOnTouchListener(homeIconTouchListener);
 		FlowIconSingleton._singleLayout.setOnClickListener(homeIconClickListener);

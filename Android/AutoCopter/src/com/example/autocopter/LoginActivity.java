@@ -1,19 +1,8 @@
 package com.example.autocopter;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-
-import com.example.http.to.server.CheckServerStateTask;
+import com.example.http.to.server.GetSystemPhoneNumberTask;
 import com.example.http.to.server.SendRegistIdTask;
 import com.example.http.to.server.SendRegistIdTaskEventRegister;
 import com.example.stable.ConstValue;
@@ -79,7 +68,6 @@ public class LoginActivity extends Activity
 				_passwordEditText.setEnabled(false);
 				_progressBar.setVisibility(View.VISIBLE);
 				new SendRegistIdTask(_sendRegistIdTaskEventRegister).execute(_regId,account,password);
-				//SendRegIdToServer(_regId,account,password);
 			}
 		}
 	};
@@ -152,54 +140,6 @@ public class LoginActivity extends Activity
             throw new RuntimeException("Could not get package name: " + e);
         }
     }
-
-    /*private void SendRegIdToServer(String registerationId,String account,String password) 
-    {
-    	Log.v("asdf",registerationId);
-    	new AsyncTask<String,Void,String>() 
-    	{
-    	    @Override
-    	    protected String doInBackground(String... data) 
-    	    {
-    	    	String httpResponse="false";
-    	    	HttpClient client=new DefaultHttpClient();
-    	    	HttpPost post=new HttpPost("http://1.34.139.73/DeviceIdHttpHandler.ashx");
-    	    	try
-    	    	{
-	    	    	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-	    	    	nameValuePairs.add(new BasicNameValuePair("RegistrationID",data[0]));
-	    	    	nameValuePairs.add(new BasicNameValuePair("Account",data[1]));
-	    	    	nameValuePairs.add(new BasicNameValuePair("Password",data[2]));
-	    	    	post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-	    	    	HttpResponse response=client.execute(post);
-	    	    	httpResponse=EntityUtils.toString(response.getEntity());
-    	    	}
-    	    	catch(Exception e)
-    	    	{
-    	    		Log.v("Exception",e.toString());
-    	    	}
-    	    	return httpResponse;
-    	    }
-    	 
-    	    @Override
-    	    protected void onPostExecute(String response) 
-    	    {
-    	    	if(response.equals("Welcome"))
-    	    	{
-    	    		SharedPreferences pref=UsualMethod.GetSharedPreferences();
-    	    		SharedPreferences.Editor editor=pref.edit();
-    	    		editor.putBoolean(ConstValue.SHARE_PREFERENCES_LOGIN_STATE, true);
-    	    		editor.commit();
-    	    	}
-    	    	else
-    	    	{
-    	    		Toast.makeText(LoginActivity.this, response, Toast.LENGTH_SHORT).show();
-    	    		_accountEditText.setText("");
-    	    		_passwordEditText.setText("");
-    	    	}
-    	    }
-    	 }.execute(registerationId,account,password);
-    }*/
     
     private SendRegistIdTaskEventRegister _sendRegistIdTaskEventRegister=new SendRegistIdTaskEventRegister()
     {
@@ -216,7 +156,8 @@ public class LoginActivity extends Activity
 	    		editor.putBoolean(ConstValue.SHARE_PREFERENCES_LOGIN_STATE, true);
 	    		editor.putString(ConstValue.SHARE_PREFERENCES_LOGIN_ACCOUNT, _accountEditText.getText().toString());
 	    		editor.commit();
-	    		new CheckServerStateTask(LoginActivity.this,_accountEditText.getText().toString()).execute();
+
+	    		new GetSystemPhoneNumberTask(LoginActivity.this,_accountEditText.getText().toString()).execute();
 	    	}
 	    	else
 	    	{

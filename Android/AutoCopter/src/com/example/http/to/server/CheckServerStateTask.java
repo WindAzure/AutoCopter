@@ -64,7 +64,7 @@ public class CheckServerStateTask extends AsyncTask<Void,Void,String>
 		}
 		else
 		{
-			new GetLocationImageTask(_context).execute(_account);
+			new GetLocationImageTask(_context,_account).execute();
 		}
 	}
 }

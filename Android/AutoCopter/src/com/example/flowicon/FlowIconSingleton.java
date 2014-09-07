@@ -17,4 +17,5 @@ public class FlowIconSingleton
 	public static ImageView _closeIcon=null;
 	public static LinearLayout _mainPanel=null;
 	public static Bitmap _locationBitmap=null;
+	public static String _locationText="";
 }

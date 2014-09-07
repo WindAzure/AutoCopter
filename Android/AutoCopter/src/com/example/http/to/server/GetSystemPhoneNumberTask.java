@@ -12,20 +12,24 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.example.autocopter.MainActivity;
 import com.example.stable.ConstValue;
 import com.example.stable.UsualMethod;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
 public class GetSystemPhoneNumberTask extends AsyncTask<Void,Void,String>
 {
-	private GetSystemTelTaskEventRegister _event;
+	private String _account;
+	private Context _context=null;
 	
-	public GetSystemPhoneNumberTask(GetSystemTelTaskEventRegister event)
+	public GetSystemPhoneNumberTask(Context context,String account)
 	{
-		_event=event;
+		_context=context;
+		_account=account;
 	}
 	
 	@Override
@@ -53,6 +57,7 @@ public class GetSystemPhoneNumberTask extends AsyncTask<Void,Void,String>
 	@Override
 	protected void onPostExecute(String phoneNumber)
 	{
-		_event.AsyncTaskFinished(phoneNumber);
+		ConstValue.SYSTEM_PHONE_NUMBER=phoneNumber;
+		new CheckServerStateTask(_context,_account).execute();
 	}
 }
