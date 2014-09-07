@@ -21,6 +21,7 @@ import com.example.flowicon.NormalService;
 import com.example.flowicon.UnNormalService;
 import com.example.autocopter.R;
 import com.example.stable.ConstValue;
+import com.example.stable.ToastRunnable;
 import com.example.stable.UsualMethod;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -31,8 +32,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * This {@code IntentService} does the actual handling of the GCM message.
@@ -43,6 +46,7 @@ import android.util.Log;
  */
 public class GcmIntentService extends IntentService 
 {
+	private Handler _handler=new Handler();
     private NotificationManager _notificationManager;
 
     public GcmIntentService() 
@@ -96,20 +100,22 @@ public class GcmIntentService extends IntentService
     {
     	if(UsualMethod.GetSharedPreferences().getBoolean(ConstValue.SHARE_PREFERENCES_LOGIN_STATE, false))
     	{
-    		String title;
-        	String content;
+    		String title="";
+        	String content="";
         	ClearAllPage();
 
-        	if(msg.equals("false"))
+        	if(msg.equals("False"))
         	{
         		title=ConstValue.NOTIFY_MANAGER_TITLE_WARNING;
         		content=ConstValue.NOTIFY_MANAGER_CONTENT_WARNING;
         	}
-        	else
+        	else if(msg.equals("True"))
         	{
             	title=ConstValue.NOTIFY_MANAGER_TITLE_NORMAL;
             	content=ConstValue.NOTIFY_MANAGER_CONTENT_NORMAL;
         	}
+        	
+        	_handler.post(new ToastRunnable(this,title+"\n"+content));
         	
         	_notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
@@ -120,6 +126,7 @@ public class GcmIntentService extends IntentService
             .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
             .setContentText(content)
             .setDefaults(Notification.DEFAULT_ALL);
+            builder.setAutoCancel(true);
 
             builder.setContentIntent(contentIntent);
             _notificationManager.notify(ConstValue.NOTIFICATIONMANAGER_NOTIFY_ID, builder.build());

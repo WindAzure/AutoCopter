@@ -45,6 +45,7 @@ public class CheckServerStateTask extends AsyncTask<Void,Void,String>
 			
 			HttpResponse response=client.execute(post);
 			count=EntityUtils.toString(response.getEntity());
+			Log.v("asdf",count.toString());
 		}
 		catch(Exception e)
 		{
@@ -56,7 +57,7 @@ public class CheckServerStateTask extends AsyncTask<Void,Void,String>
 	@Override
 	protected void onPostExecute(String count)
 	{
-		if(count=="0")
+		if(count.equals("0"))
 		{
 	        _context.startService(new Intent(_context, NormalService.class));
 	        ((Activity)(_context)).finish();

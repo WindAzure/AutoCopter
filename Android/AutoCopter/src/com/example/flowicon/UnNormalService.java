@@ -1,6 +1,7 @@
 package com.example.flowicon;
 
 import com.example.autocopter.R;
+import com.example.stable.ConstValue;
 import com.example.stable.MapImageView;
 import com.example.stable.UsualMethod;
 
@@ -206,11 +207,12 @@ public class UnNormalService extends Service
 		{
 			Intent dial=new Intent();
 			dial.setAction("android.intent.action.CALL");
-			dial.setData(Uri.parse("tel:0977354265"));
+			dial.setData(Uri.parse("tel:"+ConstValue.SYSTEM_PHONE_NUMBER));
 			dial.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			dial.addFlags(Intent.FLAG_FROM_BACKGROUND);
 			UnNormalService.this.startActivities(new Intent[]{dial});
-			stopSelf();
+			FlowIconSingleton._fullLayout.setVisibility(View.INVISIBLE);
+			FlowIconSingleton._singleLayout.setVisibility(View.INVISIBLE);
 		}
 	};
 	

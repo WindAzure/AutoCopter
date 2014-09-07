@@ -2,6 +2,7 @@ package com.example.stable;
 
 import com.example.flowicon.FlowIconSingleton;
 import com.example.flowicon.NormalService;
+import com.example.flowicon.UnNormalService;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,7 +27,15 @@ public class CallReceiver extends BroadcastReceiver
 			{
 				
 			}
-			context.startService(new Intent(context, NormalService.class));
+			
+			if(FlowIconSingleton._fullLayout!=null)
+			{
+				FlowIconSingleton._fullLayout.setVisibility(View.VISIBLE);
+			}
+			if(FlowIconSingleton._singleLayout!=null)
+			{
+				FlowIconSingleton._singleLayout.setVisibility(View.VISIBLE);	
+			}
 		}
 	}
 }

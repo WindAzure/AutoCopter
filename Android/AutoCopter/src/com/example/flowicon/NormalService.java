@@ -1,5 +1,6 @@
 package com.example.flowicon;
 
+import com.example.autocopter.LoginActivity;
 import com.example.autocopter.R;
 import com.example.stable.ConstValue;
 import com.example.stable.UsualMethod;
@@ -208,11 +209,13 @@ public class NormalService extends Service
 			{
 				Intent dial=new Intent();
 				dial.setAction("android.intent.action.CALL");
-				dial.setData(Uri.parse("tel:0977354265"));
+				dial.setData(Uri.parse("tel:"+ConstValue.SYSTEM_PHONE_NUMBER));
 				dial.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				dial.addFlags(Intent.FLAG_FROM_BACKGROUND);
+				dial.putExtra("From", "NormalService");
 				NormalService.this.startActivities(new Intent[]{dial});
-				stopSelf();
+				FlowIconSingleton._fullLayout.setVisibility(View.INVISIBLE);
+				FlowIconSingleton._singleLayout.setVisibility(View.INVISIBLE);
 			}
 			else if(v==_logoutImageView)
 			{
@@ -221,6 +224,10 @@ public class NormalService extends Service
 				editor.putBoolean(ConstValue.SHARE_PREFERENCES_LOGIN_STATE, false);
 				editor.putString(ConstValue.SHARE_PREFERENCES_LOGIN_ACCOUNT, "");
 				editor.commit();
+				Intent intent= new Intent(NormalService.this,LoginActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	    		NormalService.this.startActivity(intent);
+	        	stopSelf();
 			}
 		}
 	};

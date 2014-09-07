@@ -16,6 +16,7 @@ public class ConstValue
 	public static String NOTIFY_MANAGER_TITLE_WARNING="Warning!!!";
 	public static String NOTIFY_MANAGER_CONTENT_NORMAL="Everything is OK";
 	public static String NOTIFY_MANAGER_CONTENT_WARNING="System detected suspicious persion(people)";
+	public static String SYSTEM_PHONE_NUMBER="";
 	public static int PLAY_SERVICES_RESOLUTION_REQUEST=9000;
 	public static int NOTIFICATIONMANAGER_NOTIFY_ID=1;
 	public static float ZOOM_ANIMATION_UPPER_BOUND=1;

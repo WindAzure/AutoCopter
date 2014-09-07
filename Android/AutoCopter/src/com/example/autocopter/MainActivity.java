@@ -3,6 +3,8 @@
 import com.example.flowicon.NormalService;
 import com.example.flowicon.UnNormalService;
 import com.example.http.to.server.CheckServerStateTask;
+import com.example.http.to.server.GetSystemPhoneNumberTask;
+import com.example.http.to.server.GetSystemTelTaskEventRegister;
 import com.example.stable.ConstValue;
 import com.example.stable.UsualMethod;
 import com.google.android.gms.common.ConnectionResult;
@@ -23,6 +25,17 @@ public class MainActivity extends Activity
 	private Animation _animation;
 	private ImageView _backGroundImageView;
 	public static MainActivity _currentMain=null;
+	
+	private GetSystemTelTaskEventRegister _getSystemTelTaskEventRegister=new GetSystemTelTaskEventRegister()
+	{
+		@Override
+		public void AsyncTaskFinished(String response) 
+		{
+			ConstValue.SYSTEM_PHONE_NUMBER=response;
+    		SharedPreferences pref=UsualMethod.GetSharedPreferences();
+    		new CheckServerStateTask(MainActivity.this,pref.getString(ConstValue.SHARE_PREFERENCES_LOGIN_ACCOUNT, "")).execute();
+		}
+	};
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) 
@@ -86,8 +99,7 @@ public class MainActivity extends Activity
     	}
     	else
     	{
-    		SharedPreferences pref=UsualMethod.GetSharedPreferences();
-    		new CheckServerStateTask(MainActivity.this,pref.getString(ConstValue.SHARE_PREFERENCES_LOGIN_ACCOUNT, "")).execute();
+    		new GetSystemPhoneNumberTask(_getSystemTelTaskEventRegister).execute();
     	}
     }
     
