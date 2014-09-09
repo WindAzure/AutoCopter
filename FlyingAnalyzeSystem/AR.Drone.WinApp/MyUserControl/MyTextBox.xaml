@@ -4,38 +4,51 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBox VerticalContentAlignment="Center" BorderThickness="0" Foreground="Yellow">
-            <TextBox.Style>
-                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                    <Style.Resources>
-                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                            <VisualBrush.Visual>
-                                <Label Content="Account" Foreground="Yellow" VerticalContentAlignment="Center" />
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Style.Resources>
+             d:DesignHeight="50" d:DesignWidth="300">
+    
+    <Border BorderThickness="1" BorderBrush="White">
+        <Grid>
+            <Image Stretch="Fill" Source="../Image/LoginPage/AccountBase.png"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
 
-                    <Style.Triggers>
-                        <Trigger Property="IsFocused" Value="False">
-                            <Setter Property="Background" Value="Transparent" />
-                        </Trigger>
-                        
-                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                        </Trigger>
-                        
-                        <Trigger Property="Text" Value="{x:Null}">
-                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                        </Trigger>
+                <Image Margin="10,5,10,5" x:Name="_icon" Stretch="Fill" Source="../Image/LoginPage/AccountIcon.png"/>
+                <TextBox Grid.Column="1" VerticalContentAlignment="Center" BorderThickness="0" Foreground="Yellow" FontSize="20">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                            <Style.Resources>
+                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                    <VisualBrush.Visual>
+                                        <Label Content="Account" Foreground="Yellow" VerticalContentAlignment="Center" FontSize="20" />
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Style.Resources>
 
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Background" Value="Transparent" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Style>
-        </TextBox>
-    </Grid>
+                            <Style.Triggers>
+                                <Trigger Property="IsFocused" Value="False">
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Trigger>
+
+                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                </Trigger>
+
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                </Trigger>
+
+                                <Trigger Property="IsFocused" Value="True">
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </Grid>
+        </Grid>
+    </Border>
+    
 </UserControl>

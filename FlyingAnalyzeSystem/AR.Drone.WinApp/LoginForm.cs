@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AR.Drone.WinApp.MyUserControl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 
 namespace AR.Drone.WinApp
 {
@@ -14,6 +16,10 @@ namespace AR.Drone.WinApp
         public LoginForm()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
         }
     }
 }

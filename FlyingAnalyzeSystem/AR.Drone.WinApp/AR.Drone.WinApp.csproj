@@ -176,6 +176,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Image\LoginPage\PasswordIcon.png" />
+    <Resource Include="Image\LoginPage\AccountIcon.png" />
     <Resource Include="Image\LoginPage\AccountBase.png" />
     <Content Include="Image\LoginPage\PasswordBase.png" />
     <Content Include="Image\LoginPage\BigCircle1.png" />
@@ -187,8 +189,6 @@
     <Content Include="Image\LoginPage\BigCircle2.png" />
     <Content Include="Image\LoginPage\PC-09-14.png" />
     <Content Include="Image\LoginPage\PC-10.png" />
-    <Content Include="Image\LoginPage\AccountIcon.png" />
-    <Content Include="Image\LoginPage\PasswordIcon.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
