@@ -16,8 +16,12 @@
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Style.Resources>
-                    
+
                     <Style.Triggers>
+                        <Trigger Property="IsFocused" Value="False">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Trigger>
+                        
                         <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
                             <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
                         </Trigger>
@@ -25,8 +29,8 @@
                         <Trigger Property="Text" Value="{x:Null}">
                             <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
                         </Trigger>
-                        
-                        <Trigger Property="IsKeyboardFocused" Value="True">
+
+                        <Trigger Property="IsFocused" Value="True">
                             <Setter Property="Background" Value="Transparent" />
                         </Trigger>
                     </Style.Triggers>
