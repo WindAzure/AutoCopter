@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -16,11 +15,11 @@ using System.Windows.Shapes;
 namespace AR.Drone.WinApp.MyUserControl
 {
     /// <summary>
-    /// Interaction logic for MyTextBox.xaml
+    /// Interaction logic for AccountTextBox.xaml
     /// </summary>
-    public partial class MyTextBox : UserControl
+    public partial class AccountTextBox : UserControl
     {
-        public MyTextBox()
+        public AccountTextBox()
         {
             InitializeComponent();
         }

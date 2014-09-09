@@ -77,8 +77,11 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyUserControl\MyTextBox.xaml.cs">
-      <DependentUpon>MyTextBox.xaml</DependentUpon>
+    <Compile Include="MyUserControl\AccountTextBox.xaml.cs">
+      <DependentUpon>AccountTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyUserControl\PasswordTexBox.xaml.cs">
+      <DependentUpon>PasswordTexBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlayerForm.cs">
       <SubType>Form</SubType>
@@ -176,10 +179,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Image\LoginPage\PasswordIcon.png" />
+    <Resource Include="Image\LoginPage\PasswordIcon.png" />
     <Resource Include="Image\LoginPage\AccountIcon.png" />
     <Resource Include="Image\LoginPage\AccountBase.png" />
-    <Content Include="Image\LoginPage\PasswordBase.png" />
+    <Resource Include="Image\LoginPage\PasswordBase.png" />
     <Content Include="Image\LoginPage\BigCircle1.png" />
     <Content Include="Image\LoginPage\PC-03.png" />
     <Content Include="Image\LoginPage\background.png" />
@@ -192,7 +195,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Page Include="MyUserControl\MyTextBox.xaml">
+    <Page Include="MyUserControl\AccountTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyUserControl\PasswordTexBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

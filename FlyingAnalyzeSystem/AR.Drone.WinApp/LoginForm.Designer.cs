@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.button1 = new System.Windows.Forms.Button();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.myTextBox1 = new AR.Drone.WinApp.MyUserControl.MyTextBox();
+            this.passwordTexBox1 = new AR.Drone.WinApp.MyUserControl.PasswordTexBox();
+            this._accountElementHost = new System.Windows.Forms.Integration.ElementHost();
+            this._accountTextBox = new AR.Drone.WinApp.MyUserControl.AccountTextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -47,13 +49,22 @@
             // elementHost1
             // 
             this.elementHost1.BackColor = System.Drawing.Color.Transparent;
-            this.elementHost1.Location = new System.Drawing.Point(292, 177);
-            this.elementHost1.Margin = new System.Windows.Forms.Padding(0);
+            this.elementHost1.Location = new System.Drawing.Point(258, 214);
             this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(216, 35);
+            this.elementHost1.Size = new System.Drawing.Size(200, 30);
             this.elementHost1.TabIndex = 4;
             this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this.myTextBox1;
+            this.elementHost1.Child = this.passwordTexBox1;
+            // 
+            // _accountElementHost
+            // 
+            this._accountElementHost.BackColor = System.Drawing.Color.Transparent;
+            this._accountElementHost.Location = new System.Drawing.Point(258, 163);
+            this._accountElementHost.Name = "_accountElementHost";
+            this._accountElementHost.Size = new System.Drawing.Size(200, 30);
+            this._accountElementHost.TabIndex = 3;
+            this._accountElementHost.Text = "elementHost1";
+            this._accountElementHost.Child = this._accountTextBox;
             // 
             // LoginForm
             // 
@@ -63,6 +74,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(731, 470);
             this.Controls.Add(this.elementHost1);
+            this.Controls.Add(this._accountElementHost);
             this.Controls.Add(this.button1);
             this.DoubleBuffered = true;
             this.Name = "LoginForm";
@@ -74,8 +86,10 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Integration.ElementHost _accountElementHost;
+        private MyUserControl.AccountTextBox _accountTextBox;
         private System.Windows.Forms.Integration.ElementHost elementHost1;
-        private MyUserControl.MyTextBox myTextBox1;
+        private MyUserControl.PasswordTexBox passwordTexBox1;
 
 
 
