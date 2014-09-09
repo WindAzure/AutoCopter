@@ -80,6 +80,9 @@
     <Compile Include="MyUserControl\AccountTextBox.xaml.cs">
       <DependentUpon>AccountTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyUserControl\LoginPanel.xaml.cs">
+      <DependentUpon>LoginPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyUserControl\PasswordTexBox.xaml.cs">
       <DependentUpon>PasswordTexBox.xaml</DependentUpon>
     </Compile>
@@ -179,23 +182,26 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\LoginPage\background.png" />
+    <Content Include="Image\LoginPage\PCA-CIR-02.png" />
+    <Content Include="Image\LoginPage\PCA-CIR-03.png" />
+    <Content Include="Image\LoginPage\PCA-CIR-04.png" />
+    <Content Include="Image\LoginPage\PCA-CIR-05.png" />
+    <Content Include="Image\LoginPage\PCA-CIR-06.png" />
+    <Content Include="Image\LoginPage\PCA-CIR-07.png" />
+    <Resource Include="Image\LoginPage\PCA-CIR-08.png" />
     <Resource Include="Image\LoginPage\PasswordIcon.png" />
     <Resource Include="Image\LoginPage\AccountIcon.png" />
     <Resource Include="Image\LoginPage\AccountBase.png" />
     <Resource Include="Image\LoginPage\PasswordBase.png" />
-    <Content Include="Image\LoginPage\BigCircle1.png" />
-    <Content Include="Image\LoginPage\PC-03.png" />
-    <Content Include="Image\LoginPage\background.png" />
-    <Content Include="Image\LoginPage\PC-05.png" />
-    <Content Include="Image\LoginPage\PC-06.png" />
-    <Content Include="Image\LoginPage\PC-07.png" />
-    <Content Include="Image\LoginPage\BigCircle2.png" />
-    <Content Include="Image\LoginPage\PC-09-14.png" />
-    <Content Include="Image\LoginPage\PC-10.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Page Include="MyUserControl\AccountTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyUserControl\LoginPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

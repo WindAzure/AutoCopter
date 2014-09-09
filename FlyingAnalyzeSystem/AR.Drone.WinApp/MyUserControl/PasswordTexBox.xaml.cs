@@ -23,5 +23,19 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             InitializeComponent();
         }
+
+        private void _label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _label.Visibility = Visibility.Hidden;
+            _passwordBox.Focus();
+        }
+
+        private void _passwordBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (_passwordBox.Password.Length == 0)
+            {
+                _label.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

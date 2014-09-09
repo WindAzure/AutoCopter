@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="AR.Drone.WinApp.MyUserControl.LoginPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    
+    <Viewbox Stretch="Fill">
+        <Grid Width="500" Height="300">
+            <Image Stretch="Fill" Source="../Image/LoginPage/background.png"/>
+            <Image Stretch="Fill" Source="../Image/LoginPage/PCA-CIR-08.png" Opacity="0.8" Margin="243,-97,-65,97"/>
+        </Grid>
+    </Viewbox>
+    
+</UserControl>

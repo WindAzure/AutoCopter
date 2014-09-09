@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.button1 = new System.Windows.Forms.Button();
+            this.elementHost2 = new System.Windows.Forms.Integration.ElementHost();
+            this.loginPanel1 = new AR.Drone.WinApp.MyUserControl.LoginPanel();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.passwordTexBox1 = new AR.Drone.WinApp.MyUserControl.PasswordTexBox();
             this._accountElementHost = new System.Windows.Forms.Integration.ElementHost();
@@ -45,6 +47,17 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // elementHost2
+            // 
+            this.elementHost2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elementHost2.Location = new System.Drawing.Point(0, 0);
+            this.elementHost2.Margin = new System.Windows.Forms.Padding(0);
+            this.elementHost2.Name = "elementHost2";
+            this.elementHost2.Size = new System.Drawing.Size(728, 388);
+            this.elementHost2.TabIndex = 5;
+            this.elementHost2.Text = "elementHost2";
+            this.elementHost2.Child = this.loginPanel1;
             // 
             // elementHost1
             // 
@@ -72,7 +85,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(731, 470);
+            this.ClientSize = new System.Drawing.Size(728, 388);
+            this.Controls.Add(this.elementHost2);
             this.Controls.Add(this.elementHost1);
             this.Controls.Add(this._accountElementHost);
             this.Controls.Add(this.button1);
@@ -90,6 +104,8 @@
         private MyUserControl.AccountTextBox _accountTextBox;
         private System.Windows.Forms.Integration.ElementHost elementHost1;
         private MyUserControl.PasswordTexBox passwordTexBox1;
+        private System.Windows.Forms.Integration.ElementHost elementHost2;
+        private MyUserControl.LoginPanel loginPanel1;
 
 
 
