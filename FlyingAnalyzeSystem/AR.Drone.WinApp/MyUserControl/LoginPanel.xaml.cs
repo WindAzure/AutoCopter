@@ -60,8 +60,6 @@ namespace AR.Drone.WinApp.MyUserControl
 
             _bigCircleDownCircle.Completed += CompletedBigCircleDownAnimation;
             Rotate(_bigCircleDownCircle, _bigCircleDownImage, 360, 0, 4000);
-
-            _backFocusButton.Focus();
         }
 
         void CompletedMiddleCircleAnimation(object sender, EventArgs e)
@@ -96,7 +94,7 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void MouseDownSignInImage(object sender, MouseButtonEventArgs e)
         {
-
+            _signInImage.Focus();
             _signInImage.Opacity = 0.5;
         }
 
