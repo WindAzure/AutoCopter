@@ -11,18 +11,18 @@
             <Image Stretch="Fill" Source="../Image/LoginPage/AccountBase.png"/>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="9*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Margin="10,5,10,5" x:Name="_icon" Stretch="Fill" Source="../Image/LoginPage/AccountIcon.png"/>
-                <TextBox Grid.Column="1" VerticalContentAlignment="Center" BorderThickness="0" Foreground="Yellow" FontSize="20">
+                <Image Grid.Column="0"  Margin="5,0,0,0" x:Name="_icon" Source="../Image/LoginPage/AccountIcon.png"/>
+                <TextBox Grid.Column="1" VerticalContentAlignment="Center" BorderThickness="0" Foreground="Yellow">
                     <TextBox.Style>
                         <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                             <Style.Resources>
                                 <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
                                     <VisualBrush.Visual>
-                                        <Label Content="Account" Foreground="Yellow" VerticalContentAlignment="Center" FontSize="20" />
+                                        <Label Content="Account" Foreground="Yellow" VerticalContentAlignment="Center"/>
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </Style.Resources>

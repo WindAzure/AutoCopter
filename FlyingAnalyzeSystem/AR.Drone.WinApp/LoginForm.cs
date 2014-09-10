@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
+using System.Windows.Input;
 
 namespace AR.Drone.WinApp
 {
@@ -15,10 +16,6 @@ namespace AR.Drone.WinApp
         public LoginForm()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
         }
     }
 }

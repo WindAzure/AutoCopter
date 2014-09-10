@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:myControl="clr-namespace:AR.Drone.WinApp.MyUserControl"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     
@@ -30,21 +31,21 @@
                 </Image.RenderTransform>
             </Image>
             <Image Source="../Image/LoginPage/Light.png" Opacity="0.1" />
-            <Image Source="../Image/LoginPage/SignIn.png" Margin="124,177,285,51"/>
-            
+            <Image x:Name="_signInImage" MouseDown="MouseDownSignInImage" MouseEnter="MouseEnterSignInImage" MouseLeave="MouseLeaveSignInImage" MouseUp="MouseUpSignInImage" Source="../Image/LoginPage/SignIn.png" Margin="124,177,285,51"/>
             <Image x:Name="_bigCircleInImage" Source="../Image/LoginPage/BigCircleIn.png" Opacity="0.9" Margin="153,-94,-153,94" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <RotateTransform Angle="0"/>
                 </Image.RenderTransform>
             </Image>
-            
             <Image x:Name="_bigCircleOutImage" Source="../Image/LoginPage/BigCircleOut.png" Opacity="0.9" Margin="153,-94,-153,94" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <RotateTransform Angle="0"/>
                 </Image.RenderTransform>
             </Image>
-            
             <Image Source="../Image/LoginPage/Title.png" Margin="0,-136,0,136"/>
+            <myControl:AccountTextBox x:Name="_accountTextBox" Margin="68,110,257,165"/>
+            <myControl:PasswordTexBox x:Name="_passwordTextBox" Margin="68,147,257,128"/>
+            <Button x:Name="_backFocusButton" Visibility="Hidden" Content="Button" HorizontalAlignment="Left" Margin="382,236,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
     </Viewbox>
     
