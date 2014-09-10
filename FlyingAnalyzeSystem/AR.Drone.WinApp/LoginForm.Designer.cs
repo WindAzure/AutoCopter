@@ -53,7 +53,7 @@
             this.elementHost2.Location = new System.Drawing.Point(0, 0);
             this.elementHost2.Margin = new System.Windows.Forms.Padding(0);
             this.elementHost2.Name = "elementHost2";
-            this.elementHost2.Size = new System.Drawing.Size(728, 388);
+            this.elementHost2.Size = new System.Drawing.Size(984, 562);
             this.elementHost2.TabIndex = 5;
             this.elementHost2.Text = "elementHost2";
             this.elementHost2.Child = this.loginPanel1;
@@ -83,7 +83,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(728, 388);
+            this.ClientSize = new System.Drawing.Size(984, 562);
             this.Controls.Add(this.elementHost2);
             this.Controls.Add(this.elementHost1);
             this.Controls.Add(this._accountElementHost);
