@@ -20,7 +20,8 @@ namespace AR.Drone.WinApp.MyUserControl
     /// </summary>
     public partial class LoginPanel : UserControl
     {
-        Storyboard _bigCircle = new Storyboard();
+        Storyboard _bigCircleIn = new Storyboard();
+        Storyboard _bigCircleOut = new Storyboard();
         Storyboard _middleCircle = new Storyboard();
         Storyboard _signInUpCircle = new Storyboard();
         Storyboard _signInDownCircle = new Storyboard();
@@ -42,8 +43,11 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             InitializeComponent();
 
-            _bigCircle.Completed += CompletedBigCircleAnimation;
-            Rotate(_bigCircle, _bigCircleImage, 0, 360, 20000);
+            _bigCircleIn.Completed += CompletedBigCircleInAnimation;
+            Rotate(_bigCircleIn, _bigCircleInImage, 0, 360, 30000);
+
+            _bigCircleOut.Completed += CompletedBigCircleOutAnimation;
+            Rotate(_bigCircleOut, _bigCircleOutImage, 360, 0, 30000);
 
             _middleCircle.Completed += CompletedMiddleCircleAnimation;
             Rotate(_middleCircle, _middleCircleImage, 0, 360, 16000);
@@ -63,9 +67,14 @@ namespace AR.Drone.WinApp.MyUserControl
             Rotate(_middleCircle, _middleCircleImage, 0, 360, 16000);
         }
 
-        void CompletedBigCircleAnimation(object sender, EventArgs e)
+        void CompletedBigCircleInAnimation(object sender, EventArgs e)
         {
-            Rotate(_bigCircle, _bigCircleImage, 0, 360, 20000);
+            Rotate(_bigCircleIn, _bigCircleInImage, 0, 360, 30000);
+        }
+
+        void CompletedBigCircleOutAnimation(object sender, EventArgs e)
+        {
+            Rotate(_bigCircleOut, _bigCircleOutImage, 360, 0, 30000);
         }
 
         void CompletedSignInUpCircleAnimation(object sender, EventArgs e)
