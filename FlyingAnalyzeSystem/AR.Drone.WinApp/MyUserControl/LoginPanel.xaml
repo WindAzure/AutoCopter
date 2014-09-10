@@ -9,12 +9,14 @@
     <Viewbox Stretch="Fill">
         <Grid Width="500" Height="300" Background="Transparent">
             <Image Source="../Image/LoginPage/BackGround.png" />
-            <Image Source="../Image/LoginPage/BigCircle.png" Opacity="0.8" Margin="153,-97,-153,97"/>
             <Image Source="../Image/LoginPage/SignInUp.png" Opacity="0.3" Margin="68,164,274,80"/>
             <Image Source="../Image/LoginPage/SignInDown.png" Opacity="0.3" Margin="105,218,232,-10"/>
             <Image Source="../Image/LoginPage/MiddleCircle.png" Opacity="0.3" Margin="-150,135,225,-59"/>
-            <Image Source="../Image/LoginPage/SignIn.png" Opacity="0.4" Margin="54,169,225,42"/>
             <Image Source="../Image/LoginPage/BigCircleDown.png" Opacity="0.3" Margin="303,185,-36,25"/>
+            <Image Source="../Image/LoginPage/Light.png" Opacity="0.1" />
+            <Image Source="../Image/LoginPage/SignIn.png" Margin="124,177,285,51"/>
+            <Image Source="../Image/LoginPage/BigCircle.png" Opacity="0.9" Margin="153,-94,-153,94"/>
+            <Image Source="../Image/LoginPage/Title.png" Margin="0,-136,0,136"/>
         </Grid>
     </Viewbox>
     

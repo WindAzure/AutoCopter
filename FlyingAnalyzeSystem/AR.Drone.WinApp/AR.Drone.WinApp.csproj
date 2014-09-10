@@ -193,9 +193,11 @@
     <Resource Include="Image\LoginPage\SignInUp.png" />
     <Resource Include="Image\LoginPage\BackGround.png" />
     <Resource Include="Image\LoginPage\SignInDown.png" />
-    <Resource Include="Image\LoginPage\SignIn.png" />
     <Resource Include="Image\LoginPage\BigCircle.png" />
-    <Content Include="Image\LoginPage\Title.png" />
+    <Resource Include="Image\LoginPage\Light.png" />
+    <Resource Include="Image\LoginPage\SignInText.png" />
+    <Resource Include="Image\LoginPage\SignIn.png" />
+    <Resource Include="Image\LoginPage\Title.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MyUserControl\AccountTextBox.xaml">
