@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using AR.Drone.Infrastructure;
+using AR.Drone.WinApp.Forms;
 
 namespace AR.Drone.WinApp
 {
@@ -29,7 +30,7 @@ namespace AR.Drone.WinApp
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            Application.Run(new PlaneStateForm());
         }
     }
 }

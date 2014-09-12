@@ -71,11 +71,17 @@
   <ItemGroup>
     <Compile Include="AndroidGcmNotificationer.cs" />
     <Compile Include="FilePlayer.cs" />
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PlaneStateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PlaneStateForm.Designer.cs">
+      <DependentUpon>PlaneStateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\AccountTextBox.xaml.cs">
       <DependentUpon>AccountTextBox.xaml</DependentUpon>
@@ -85,6 +91,9 @@
     </Compile>
     <Compile Include="MyUserControl\PasswordTexBox.xaml.cs">
       <DependentUpon>PasswordTexBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyUserControl\PlaneStatePanel.xaml.cs">
+      <DependentUpon>PlaneStatePanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlayerForm.cs">
       <SubType>Form</SubType>
@@ -110,8 +119,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlaneStateForm.resx">
+      <DependentUpon>PlaneStateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -212,10 +224,38 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyUserControl\PlaneStatePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\LoginPage\BigCircleOut.png" />
     <Resource Include="Image\LoginPage\BigCircleIn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\PlaneStatePage\PlaneStateTitle.png" />
+    <Resource Include="Image\PlaneStatePage\PlaneItem.png" />
+    <Resource Include="Image\PlaneStatePage\InformationTitle.png" />
+    <Resource Include="Image\PlaneStatePage\BackGround.png" />
+    <Content Include="Image\PlaneStatePage\PC02-03.png" />
+    <Resource Include="Image\PlaneStatePage\PlaneItemSelected.png" />
+    <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
+    <Content Include="Image\PlaneStatePage\PC02-15.png" />
+    <Content Include="Image\PlaneStatePage\PC02-16.png" />
+    <Content Include="Image\PlaneStatePage\PC02-17.png" />
+    <Resource Include="Image\PlaneStatePage\AccessoryCircle.png" />
+    <Resource Include="Image\PlaneStatePage\MainCircle.png" />
+    <Resource Include="Image\PlaneStatePage\RightControl.png" />
+    <Resource Include="Image\PlaneStatePage\LeftControl.png" />
+    <Resource Include="Image\PlaneStatePage\ForwardControl.png" />
+    <Resource Include="Image\PlaneStatePage\StopControl.png" />
+    <Content Include="Image\PlaneStatePage\PC02-24.png" />
+    <Content Include="Image\PlaneStatePage\PC02-25.png" />
+    <Resource Include="Image\PlaneStatePage\Map.png" />
+    <Resource Include="Image\PlaneStatePage\MapBackGround.png" />
+    <Content Include="Image\PlaneStatePage\PC02-28.png" />
+    <Content Include="Image\PlaneStatePage\PC02-29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
