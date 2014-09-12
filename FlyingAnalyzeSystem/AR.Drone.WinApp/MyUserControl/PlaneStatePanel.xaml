@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
+             d:DesignHeight="300" d:DesignWidth="500"
+             xmlns:myControl="clr-namespace:AR.Drone.WinApp.MyUserControl">
     
     <Viewbox Stretch="Fill">
         <Grid>
@@ -64,10 +65,30 @@
                                     <Grid Grid.Row="1">
                                         <Image Source="../Image/PlaneStatePage/MainCircle.png" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"/>
                                         <Image Source="../Image/PlaneStatePage/AccessoryCircle.png" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="55,40,55,0"/>
-                                        <Image Source="../Image/PlaneStatePage/LeftControl.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="6,0,116,20"/>
-                                        <Image Source="../Image/PlaneStatePage/RightControl.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="115,0,7,20"/>
-                                        <Image Source="../Image/PlaneStatePage/StopControl.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="73,0,73,8"/>
-                                        <Image Source="../Image/PlaneStatePage/ForwardControl.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="64,0,64,37"/>
+                                        
+                                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="6,0,116,20"
+                                                                         NormalImagePath="../Image/PlaneStatePage/LeftControl.png" 
+                                                                         DownImagePath="../Image/PlaneStatePage/LeftControl.png" 
+                                                                         HoverImagePath="../Image/PlaneStatePage/LeftControl.png"
+                                                                         OnClick="OnClickLeftButton"/>
+
+                                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="115,0,7,20"
+                                                                         NormalImagePath="../Image/PlaneStatePage/RightControl.png" 
+                                                                         DownImagePath="../Image/PlaneStatePage/RightControl.png" 
+                                                                         HoverImagePath="../Image/PlaneStatePage/RightControl.png"
+                                                                         OnClick="OnClickRightButton"/>
+                                        
+                                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="73,0,73,8" 
+                                                                         NormalImagePath="../Image/PlaneStatePage/StopControl.png" 
+                                                                         DownImagePath="../Image/PlaneStatePage/StopControl.png" 
+                                                                         HoverImagePath="../Image/PlaneStatePage/StopControl.png"
+                                                                         OnClick="OnClickStopButton"/>
+                                        
+                                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="64,0,64,37" 
+                                                                         NormalImagePath="../Image/PlaneStatePage/ForwardControl.png" 
+                                                                         DownImagePath="../Image/PlaneStatePage/ForwardControl.png" 
+                                                                         HoverImagePath="../Image/PlaneStatePage/ForwardControl.png"
+                                                                         OnClick="OnClickForwardButton"/>
                                     </Grid>
                                 </Grid>
                             </Grid>

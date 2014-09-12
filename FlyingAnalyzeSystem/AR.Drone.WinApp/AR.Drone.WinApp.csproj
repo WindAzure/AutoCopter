@@ -86,6 +86,9 @@
     <Compile Include="MyUserControl\AccountTextBox.xaml.cs">
       <DependentUpon>AccountTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyUserControl\ImageThreeStateButton.xaml.cs">
+      <DependentUpon>ImageThreeStateButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyUserControl\LoginPanel.xaml.cs">
       <DependentUpon>LoginPanel.xaml</DependentUpon>
     </Compile>
@@ -213,6 +216,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MyUserControl\AccountTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyUserControl\ImageThreeStateButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

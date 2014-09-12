@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -22,6 +23,26 @@ namespace AR.Drone.WinApp.MyUserControl
         public PlaneStatePanel()
         {
             InitializeComponent();
+        }
+
+        public void OnClickForwardButton()
+        {
+            Debug.WriteLine("OnClickForwardButton");
+        }
+
+        public void OnClickStopButton()
+        {
+            Debug.WriteLine("OnClickStopButton");
+        }
+
+        public void OnClickRightButton()
+        {
+            Debug.WriteLine("OnClickRightButton");
+        }
+
+        public void OnClickLeftButton()
+        {
+            Debug.WriteLine("OnClickLeftButton");
         }
     }
 }
