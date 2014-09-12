@@ -44,5 +44,10 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             Debug.WriteLine("OnClickLeftButton");
         }
+
+        public void OnClickFirstItem()
+        {
+            Debug.WriteLine("OnClickFirstItem");
+        }
     }
 }
