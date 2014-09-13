@@ -98,6 +98,9 @@
     <Compile Include="MyUserControl\PlaneStatePanel.xaml.cs">
       <DependentUpon>PlaneStatePanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyUserControl\UploadButton.xaml.cs">
+      <DependentUpon>UploadButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PlayerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,24 +238,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyUserControl\UploadButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\LoginPage\BigCircleOut.png" />
     <Resource Include="Image\LoginPage\BigCircleIn.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\PlaneStatePage\MainCircle.png" />
+    <Resource Include="Image\PlaneStatePage\ForwardControlDown.png" />
+    <Resource Include="Image\PlaneStatePage\LeftControlDown.png" />
+    <Resource Include="Image\PlaneStatePage\RightControlDown.png" />
+    <Resource Include="Image\PlaneStatePage\StopControlDown.png" />
+    <Resource Include="Image\PlaneStatePage\Upload.png" />
+    <Resource Include="Image\PlaneStatePage\UploadDown.png" />
+    <Resource Include="Image\PlaneStatePage\PlaneItemSelected.png" />
     <Resource Include="Image\PlaneStatePage\PlaneStateTitle.png" />
     <Resource Include="Image\PlaneStatePage\PlaneItem.png" />
     <Resource Include="Image\PlaneStatePage\InformationTitle.png" />
     <Resource Include="Image\PlaneStatePage\BackGround.png" />
+    <Resource Include="Image\PlaneStatePage\Battery.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
-    <Resource Include="Image\PlaneStatePage\PlaneItemSelected.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Content Include="Image\PlaneStatePage\PC02-15.png" />
-    <Content Include="Image\PlaneStatePage\PC02-16.png" />
     <Content Include="Image\PlaneStatePage\PC02-17.png" />
     <Resource Include="Image\PlaneStatePage\AccessoryCircle.png" />
-    <Resource Include="Image\PlaneStatePage\MainCircle.png" />
     <Resource Include="Image\PlaneStatePage\RightControl.png" />
     <Resource Include="Image\PlaneStatePage\LeftControl.png" />
     <Resource Include="Image\PlaneStatePage\ForwardControl.png" />
