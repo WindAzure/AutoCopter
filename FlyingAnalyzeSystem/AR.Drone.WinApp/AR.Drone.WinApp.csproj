@@ -95,6 +95,9 @@
     <Compile Include="MyUserControl\PasswordTexBox.xaml.cs">
       <DependentUpon>PasswordTexBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyUserControl\PlaneItemButton.xaml.cs">
+      <DependentUpon>PlaneItemButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyUserControl\PlaneStatePanel.xaml.cs">
       <DependentUpon>PlaneStatePanel.xaml</DependentUpon>
     </Compile>
@@ -234,6 +237,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyUserControl\PlaneItemButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyUserControl\PlaneStatePanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -248,6 +255,7 @@
     <Resource Include="Image\LoginPage\BigCircleIn.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\PlaneStatePage\PlaneItemSelected.png" />
     <Resource Include="Image\PlaneStatePage\MainCircle.png" />
     <Resource Include="Image\PlaneStatePage\ForwardControlDown.png" />
     <Resource Include="Image\PlaneStatePage\LeftControlDown.png" />
@@ -255,7 +263,7 @@
     <Resource Include="Image\PlaneStatePage\StopControlDown.png" />
     <Resource Include="Image\PlaneStatePage\Upload.png" />
     <Resource Include="Image\PlaneStatePage\UploadDown.png" />
-    <Resource Include="Image\PlaneStatePage\PlaneItemSelected.png" />
+    <Resource Include="Image\PlaneStatePage\PlaneItemDown.png" />
     <Resource Include="Image\PlaneStatePage\PlaneStateTitle.png" />
     <Resource Include="Image\PlaneStatePage\PlaneItem.png" />
     <Resource Include="Image\PlaneStatePage\InformationTitle.png" />
@@ -263,8 +271,6 @@
     <Resource Include="Image\PlaneStatePage\Battery.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
-    <Content Include="Image\PlaneStatePage\PC02-15.png" />
-    <Content Include="Image\PlaneStatePage\PC02-17.png" />
     <Resource Include="Image\PlaneStatePage\AccessoryCircle.png" />
     <Resource Include="Image\PlaneStatePage\RightControl.png" />
     <Resource Include="Image\PlaneStatePage\LeftControl.png" />
@@ -274,8 +280,6 @@
     <Content Include="Image\PlaneStatePage\PC02-25.png" />
     <Resource Include="Image\PlaneStatePage\Map.png" />
     <Resource Include="Image\PlaneStatePage\MapBackGround.png" />
-    <Content Include="Image\PlaneStatePage\PC02-28.png" />
-    <Content Include="Image\PlaneStatePage\PC02-29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

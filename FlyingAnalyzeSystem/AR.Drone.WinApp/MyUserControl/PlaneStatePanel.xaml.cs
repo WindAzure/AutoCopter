@@ -45,9 +45,27 @@ namespace AR.Drone.WinApp.MyUserControl
             Debug.WriteLine("OnClickLeftButton");
         }
 
-        public void OnClickFirstItem()
+        public void OnClickPlaneItemButton(object sender)
         {
-            Debug.WriteLine("OnClickFirstItem");
+            int T = 0;
+            bool isFirst = false;
+            UIElementCollection group = _planeItemsStackPanel.Children;
+            foreach (PlaneItemButton item in group)
+            {
+                T++;
+                if (item != sender)
+                {
+                    item.InitializeToNormalImage();
+                }
+                else
+                {
+                    if (T == 1)
+                    {
+                        isFirst = true;
+                    }
+                }
+            }
+            Debug.WriteLine(isFirst.ToString());
         }
     }
 }

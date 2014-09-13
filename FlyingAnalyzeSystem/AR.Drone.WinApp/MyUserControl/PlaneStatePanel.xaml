@@ -22,42 +22,50 @@
                         <Image Stretch="Fill" Source="../Image/PlaneStatePage/PlaneStateTitle.png"/>
                         <TextBlock Text="PLANE NAME" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0"/>
                     </Grid>
+                    
+                    <StackPanel x:Name="_planeItemsStackPanel">
+                        <myControl:PlaneItemButton Margin="0,5,0,0"
+                                                   NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
+                                                   DownImagePath="../Image/PlaneStatePage/PlaneItemDown.png"
+                                                   SelectedImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
+                                                   OnClick="OnClickPlaneItemButton"/>
 
-                    <myControl:ImageThreeStateButton Margin="0,5,0,0"
-                                                     NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
-                                                     DownImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
-                                                     HoverImagePath="../Image/PlaneStatePage/PlaneItem.png"
-                                                     OnClick="OnClickFirstItem"/>
+                        <myControl:PlaneItemButton Margin="0,5,0,0"
+                                                   NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
+                                                   DownImagePath="../Image/PlaneStatePage/PlaneItemDown.png"
+                                                   SelectedImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
+                                                   OnClick="OnClickPlaneItemButton"/>
 
-                    <myControl:ImageThreeStateButton Margin="0,5,0,0"
-                                                     NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
-                                                     DownImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
-                                                     HoverImagePath="../Image/PlaneStatePage/PlaneItem.png"/>
+                        <myControl:PlaneItemButton Margin="0,5,0,0"
+                                                   NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
+                                                   DownImagePath="../Image/PlaneStatePage/PlaneItemDown.png"
+                                                   SelectedImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
+                                                   OnClick="OnClickPlaneItemButton"/>
 
-                    <myControl:ImageThreeStateButton Margin="0,5,0,0"
-                                                     NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
-                                                     DownImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
-                                                     HoverImagePath="../Image/PlaneStatePage/PlaneItem.png"/>
+                        <myControl:PlaneItemButton Margin="0,5,0,0"
+                                                   NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
+                                                   DownImagePath="../Image/PlaneStatePage/PlaneItemDown.png"
+                                                   SelectedImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
+                                                   OnClick="OnClickPlaneItemButton"/>
 
-                    <myControl:ImageThreeStateButton Margin="0,5,0,0"
-                                                     NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
-                                                     DownImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
-                                                     HoverImagePath="../Image/PlaneStatePage/PlaneItem.png"/>
+                        <myControl:PlaneItemButton Margin="0,5,0,0"
+                                                   NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
+                                                   DownImagePath="../Image/PlaneStatePage/PlaneItemDown.png"
+                                                   SelectedImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
+                                                   OnClick="OnClickPlaneItemButton"/>
 
-                    <myControl:ImageThreeStateButton Margin="0,5,0,0"
-                                                     NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
-                                                     DownImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
-                                                     HoverImagePath="../Image/PlaneStatePage/PlaneItem.png"/>
+                        <myControl:PlaneItemButton Margin="0,5,0,0"
+                                                   NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
+                                                   DownImagePath="../Image/PlaneStatePage/PlaneItemDown.png"
+                                                   SelectedImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
+                                                   OnClick="OnClickPlaneItemButton"/>
 
-                    <myControl:ImageThreeStateButton Margin="0,5,0,0"
-                                                     NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
-                                                     DownImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
-                                                     HoverImagePath="../Image/PlaneStatePage/PlaneItem.png"/>
-
-                    <myControl:ImageThreeStateButton Margin="0,5,0,0"
-                                                     NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
-                                                     DownImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
-                                                     HoverImagePath="../Image/PlaneStatePage/PlaneItem.png"/>
+                        <myControl:PlaneItemButton Margin="0,5,0,0"
+                                                   NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
+                                                   DownImagePath="../Image/PlaneStatePage/PlaneItemDown.png"
+                                                   SelectedImagePath="../Image/PlaneStatePage/PlaneItemSelected.png"
+                                                   OnClick="OnClickPlaneItemButton"/>
+                    </StackPanel>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Margin="5,0,20,0">
