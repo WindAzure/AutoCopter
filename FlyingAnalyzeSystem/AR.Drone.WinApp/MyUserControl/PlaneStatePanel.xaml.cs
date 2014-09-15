@@ -124,5 +124,30 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             SetBattery(bbb.Value/100.0);
         }
+
+        public class City
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
+        }
+
+        private void ComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<City> list = new List<City>();
+            list.Add(new City { ID = 1, Name = "上海" });
+            list.Add(new City { ID = 2, Name = "北京" });
+            list.Add(new City { ID = 3, Name = "天津" });
+
+            var combobox = sender as ComboBox;
+            combobox.ItemsSource = list;
+            combobox.SelectedIndex = 0;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+          /*  combobox.Text = "name"+combobox.SelectedItem as string;
+            if(combobox.SelectedItem!=null)
+            Debug.WriteLine(combobox.SelectedItem.ToString());*/
+        }
     }
 }

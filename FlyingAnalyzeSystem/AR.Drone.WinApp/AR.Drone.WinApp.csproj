@@ -86,6 +86,9 @@
     <Compile Include="MyUserControl\AccountTextBox.xaml.cs">
       <DependentUpon>AccountTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyUserControl\ImageComboBox.xaml.cs">
+      <DependentUpon>ImageComboBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyUserControl\ImageThreeStateButton.xaml.cs">
       <DependentUpon>ImageThreeStateButton.xaml</DependentUpon>
     </Compile>
@@ -225,6 +228,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyUserControl\ImageComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyUserControl\ImageThreeStateButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -255,6 +262,8 @@
     <Resource Include="Image\LoginPage\BigCircleIn.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\PlaneStatePage\ComboBoxItemDelete.png" />
+    <Resource Include="Image\PlaneStatePage\ComboBoxTextImage.png" />
     <Resource Include="Image\PlaneStatePage\PlaneItemSelected.png" />
     <Resource Include="Image\PlaneStatePage\MainCircle.png" />
     <Resource Include="Image\PlaneStatePage\ForwardControlDown.png" />
@@ -269,6 +278,9 @@
     <Resource Include="Image\PlaneStatePage\InformationTitle.png" />
     <Resource Include="Image\PlaneStatePage\BackGround.png" />
     <Resource Include="Image\PlaneStatePage\Battery.png" />
+    <Resource Include="Image\PlaneStatePage\ComboBoxItemHover.png" />
+    <Content Include="Image\PlaneStatePage\914-54.png" />
+    <Content Include="Image\PlaneStatePage\914-55.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Resource Include="Image\PlaneStatePage\AccessoryCircle.png" />
