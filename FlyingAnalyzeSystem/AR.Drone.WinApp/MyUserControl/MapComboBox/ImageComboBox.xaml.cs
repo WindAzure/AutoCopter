@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -34,10 +35,17 @@ namespace AR.Drone.WinApp.MyUserControl.MapComboBox
         {
             InitializeComponent();
 
-            _source.Add(new ImageComboBoxItemProperty() { ItemText = "asdf" });
-            _source.Add(new ImageComboBoxItemProperty() { ItemText = "qwer" });
+            _source.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓12F" });
+            _source.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓3F" });
+            _source.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓B2-地下演講廳" });
+            _source.Add(new ImageComboBoxItemProperty() { ItemText = "共同科館3F" });
 
             DataContext = this;
+        }
+
+        private void ClickRemoveImageButton()
+        {
+            Debug.WriteLine("AAA");
         }
     }
 }

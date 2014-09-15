@@ -4,17 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
+             xmlns:myControl="clr-namespace:AR.Drone.WinApp.MyUserControl"
              xmlns:control="clr-namespace:AR.Drone.WinApp.MyUserControl.MapComboBox"
              d:DesignHeight="23" d:DesignWidth="160">
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="DataTemplates.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-    
     <ComboBox ItemsSource="{Binding ImageComboBoxItemSource}">
         <ComboBox.Resources>
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#98CAA1" Opacity="0.6"/>
@@ -46,9 +39,9 @@
                                               Content="{TemplateBinding SelectionBoxItem}"
                                               ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                              Margin="5,4,22,3"
+                                              Margin="5,4,0,3"
                                               VerticalAlignment="Center"
-                                              HorizontalAlignment="Left" Width="93" />
+                                              HorizontalAlignment="Left" Width="122" />
 
                     <Popup IsOpen="{TemplateBinding IsDropDownOpen}" PopupAnimation="Slide" AllowsTransparency="True" Placement="Bottom">
                         <Grid MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}" SnapsToDevicePixels="True">
@@ -80,7 +73,29 @@
         </ComboBox.Template>
 
         <ComboBox.ItemTemplateSelector>
-            <control:ComboBoxTemplateSelector/>
+            <control:ComboBoxTemplateSelector>
+
+                <control:ComboBoxTemplateSelector.SelectedTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Foreground="#FEE9AF" Text="{Binding Path=ItemText}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        </Grid>
+                    </DataTemplate>
+                </control:ComboBoxTemplateSelector.SelectedTemplate>
+
+                <control:ComboBoxTemplateSelector.DropDownTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <myControl:ImageThreeStateButton VerticalAlignment="Center" HorizontalAlignment="Left"
+                                             DownImagePath="../Image/PlaneStatePage/ComboBoxItemDeleteDown.png"
+                                             HoverImagePath="../Image/PlaneStatePage/ComboBoxItemDeleteHover.png"
+                                             NormalImagePath="../Image/PlaneStatePage/ComboBoxItemDelete.png" Margin="139,0,-50,4" OnClick="ClickRemoveImageButton"/>
+                            <TextBlock Foreground="#FEE9AF" Text="{Binding Path=ItemText}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        </Grid>
+                    </DataTemplate>
+                </control:ComboBoxTemplateSelector.DropDownTemplate>
+
+            </control:ComboBoxTemplateSelector>
         </ComboBox.ItemTemplateSelector>
     </ComboBox>
 </UserControl>

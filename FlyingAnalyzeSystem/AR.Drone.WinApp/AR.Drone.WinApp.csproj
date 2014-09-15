@@ -87,6 +87,7 @@
       <DependentUpon>AccountTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\MapComboBox\ComboBoxTemplateSelector.cs" />
+    <Compile Include="MyUserControl\MapComboBox\DependencyObjectExtensions.cs" />
     <Compile Include="MyUserControl\MapComboBox\ImageComboBox.xaml.cs">
       <DependentUpon>ImageComboBox.xaml</DependentUpon>
     </Compile>
@@ -238,10 +239,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MyUserControl\MapComboBox\DataTemplates.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MyUserControl\MapComboBox\ImageComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -284,9 +281,8 @@
     <Resource Include="Image\PlaneStatePage\InformationTitle.png" />
     <Resource Include="Image\PlaneStatePage\BackGround.png" />
     <Resource Include="Image\PlaneStatePage\Battery.png" />
-    <Resource Include="Image\PlaneStatePage\ComboBoxItemHover.png" />
-    <Content Include="Image\PlaneStatePage\914-54.png" />
-    <Content Include="Image\PlaneStatePage\914-55.png" />
+    <Resource Include="Image\PlaneStatePage\ComboBoxItemDeleteHover.png" />
+    <Resource Include="Image\PlaneStatePage\ComboBoxItemDeleteDown.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Resource Include="Image\PlaneStatePage\AccessoryCircle.png" />
