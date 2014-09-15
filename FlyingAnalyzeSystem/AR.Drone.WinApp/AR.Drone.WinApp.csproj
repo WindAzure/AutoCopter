@@ -86,9 +86,11 @@
     <Compile Include="MyUserControl\AccountTextBox.xaml.cs">
       <DependentUpon>AccountTextBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyUserControl\ImageComboBox.xaml.cs">
+    <Compile Include="MyUserControl\MapComboBox\ComboBoxTemplateSelector.cs" />
+    <Compile Include="MyUserControl\MapComboBox\ImageComboBox.xaml.cs">
       <DependentUpon>ImageComboBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyUserControl\MapComboBox\ImageComboBoxItemProperty.cs" />
     <Compile Include="MyUserControl\ImageThreeStateButton.xaml.cs">
       <DependentUpon>ImageThreeStateButton.xaml</DependentUpon>
     </Compile>
@@ -228,15 +230,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MyUserControl\ImageComboBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MyUserControl\ImageThreeStateButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyUserControl\LoginPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyUserControl\MapComboBox\DataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MyUserControl\MapComboBox\ImageComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
