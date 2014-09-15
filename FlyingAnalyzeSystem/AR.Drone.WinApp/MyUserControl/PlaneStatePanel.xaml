@@ -83,8 +83,10 @@
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0">
-                                <TextBlock Text="Location :" Foreground="White" Margin="20,16,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                <myControl:ImageComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,6,0,-1"/>
+                                <TextBlock Text="Location :" Foreground="White" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                                <myControl:ImageComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,11,0,0" Width="160" Height="23"/>
+
                                 <myControl:UploadButton VerticalAlignment="Center" HorizontalAlignment="Left" Margin="250,12,0,3" Width="60"
                                                         NormalImagePath="../Image/PlaneStatePage/Upload.png" 
                                                         DownImagePath="../Image/PlaneStatePage/UploadDown.png" 
@@ -154,9 +156,9 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-            <Slider x:Name="bbb" HorizontalAlignment="Left" Margin="275,349,0,0" VerticalAlignment="Top" Width="123" Minimum="0" Maximum="100" ValueChanged="Slider_ValueChanged"/>
+            <Slider x:Name="bbb" HorizontalAlignment="Left" Margin="269,352,0,0" VerticalAlignment="Top" Width="123" Minimum="0" Maximum="100" ValueChanged="Slider_ValueChanged"/>
 
-            <ComboBox HorizontalAlignment="Left" Margin="212,202,0,0" VerticalAlignment="Top" Width="120" BorderThickness="0">
+            <ComboBox HorizontalAlignment="Left" Margin="415,350,0,0" VerticalAlignment="Top" Width="120" BorderThickness="0">
                 <ComboBox.Template>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>

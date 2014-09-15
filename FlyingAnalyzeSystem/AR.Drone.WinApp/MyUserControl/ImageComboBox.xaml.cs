@@ -24,14 +24,5 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             InitializeComponent();
         }
-
-        private void ImageThreeStateButton_OnClick()
-        {
-            Debug.WriteLine("aaa");
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
     }
 }
