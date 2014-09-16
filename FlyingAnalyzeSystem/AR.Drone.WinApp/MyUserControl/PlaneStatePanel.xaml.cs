@@ -22,15 +22,12 @@ namespace AR.Drone.WinApp.MyUserControl
     /// </summary>
     public partial class PlaneStatePanel : UserControl
     {
+        private ObservableCollection<ImageComboBoxItemProperty> _comboBoxSource = new ObservableCollection<ImageComboBoxItemProperty>();
+
         public PlaneStatePanel()
         {
             InitializeComponent();
             _comboBoxSource = _comboBox.ImageComboBoxItemSource;
-            _comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓12F" });
-            _comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓3F" });
-            _comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓B2-地下演講廳" });
-            _comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText = "共同科館3F" });
-            DataContext = this;
         }
 
         public void OnClickForwardButton()
@@ -56,7 +53,6 @@ namespace AR.Drone.WinApp.MyUserControl
         public void OnClickPlaneItemButton(object sender)
         {
             int T = 0;
-            bool isFirst = false;
             UIElementCollection group = _planeItemsStackPanel.Children;
             foreach (PlaneItemButton item in group)
             {
@@ -69,11 +65,10 @@ namespace AR.Drone.WinApp.MyUserControl
                 {
                     if (T == 1)
                     {
-                        isFirst = true;
+                        //_comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText = "共同科館3F" });
                     }
                 }
             }
-            Debug.WriteLine(isFirst.ToString());
         }
 
         public void SetBattery(double rate)
@@ -133,16 +128,7 @@ namespace AR.Drone.WinApp.MyUserControl
             SetBattery(bbb.Value/100.0);
         }
 
-
-
-        private ObservableCollection<ImageComboBoxItemProperty> _comboBoxSource = new ObservableCollection<ImageComboBoxItemProperty>();
-
         private void OnComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void OnComboBoxRemoveImageClick()
         {
 
         }
