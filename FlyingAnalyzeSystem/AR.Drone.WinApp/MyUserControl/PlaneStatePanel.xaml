@@ -86,7 +86,8 @@
                             <Grid Grid.Row="0">
                                 <TextBlock Text="Location :" Foreground="White" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-                                <myComboxBox:ImageComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,11,0,0" Width="160" Height="23"/>
+                                <myComboxBox:ImageComboBox x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,11,0,0" Width="160" Height="23"
+                                                           SelectionChanged="OnComboBoxSelectionChanged" OnRemoveImageClick="OnComboBoxRemoveImageClick"/>
 
                                 <myControl:UploadButton VerticalAlignment="Center" HorizontalAlignment="Left" Margin="250,12,0,3" Width="60"
                                                         NormalImagePath="../Image/PlaneStatePage/Upload.png" 
@@ -158,79 +159,6 @@
                 </StackPanel>
             </Grid>
             <Slider x:Name="bbb" HorizontalAlignment="Left" Margin="269,352,0,0" VerticalAlignment="Top" Width="123" Minimum="0" Maximum="100" ValueChanged="Slider_ValueChanged"/>
-
-            <ComboBox HorizontalAlignment="Left" Margin="415,350,0,0" VerticalAlignment="Top" Width="120" BorderThickness="0">
-                <ComboBox.Template>
-                    <ControlTemplate TargetType="ComboBox">
-                        <Grid>
-                            <ToggleButton IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}">
-                                <ToggleButton.Template>
-                                    <ControlTemplate TargetType="ToggleButton">
-                                        <Image Name="img" Source="../Image/PlaneStatePage/ComboBoxTextImage.png"/>
-
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="img" Property="Opacity" Value="0.8" />
-                                            </Trigger>
-                                            <!--<Trigger Property="IsChecked" Value="True">
-                                                <Setter TargetName="img" Property="Opacity" Value="0.1" />
-                                            </Trigger>-->
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </ToggleButton.Template>
-
-                            </ToggleButton>
-
-                            <ContentPresenter Name="ContentSite"
-                                              IsHitTestVisible="False"
-                                              Content="{TemplateBinding SelectionBoxItem}"
-                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                              Margin="5,4,22,3"
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Center" Width="93" />
-
-                            <Popup IsOpen="{TemplateBinding IsDropDownOpen}" PopupAnimation="Slide" AllowsTransparency="True" Placement="Bottom">
-                                <Grid MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}" SnapsToDevicePixels="True">
-                                    <Border Name="DropDownBorder">
-                                        <Border.Background>
-                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                                <GradientStop Color="#00A5B1" Offset="0"/>
-                                                <GradientStop Color="#002E2D" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </Border.Background>
-
-                                        <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                                            <StackPanel Orientation="Vertical" IsItemsHost="True">
-
-                                            </StackPanel>
-                                        </ScrollViewer>
-                                    </Border>
-                                </Grid>
-                            </Popup>
-
-                        </Grid>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="HasItems" Value="false">
-                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-
-                    </ControlTemplate>
-                </ComboBox.Template>
-                
-                <ComboBoxItem>
-                    <Grid>
-                        <myControl:ImageThreeStateButton VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                 DownImagePath="../Image/PlaneStatePage/ComboBoxItemDelete.png"
-                                                 HoverImagePath="../Image/PlaneStatePage/ComboBoxItemDelete.png"
-                                                 NormalImagePath="../Image/PlaneStatePage/ComboBoxItemDelete.png" Margin="102,4,-91,4"/>
-                        <TextBlock Foreground="#FEE9AF" Text="111111111119943" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    </Grid>
-                </ComboBoxItem>
-
-            </ComboBox>
         </Grid>
     </Viewbox>
 

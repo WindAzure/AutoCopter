@@ -8,7 +8,7 @@
              xmlns:control="clr-namespace:AR.Drone.WinApp.MyUserControl.MapComboBox"
              d:DesignHeight="23" d:DesignWidth="160">
 
-    <ComboBox ItemsSource="{Binding ImageComboBoxItemSource}">
+    <ComboBox x:Name="_imageComboBox" ItemsSource="{Binding ImageComboBoxItemSource}" SelectionChanged="SelectionChangedComboBox">
         <ComboBox.Resources>
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#98CAA1" Opacity="0.6"/>
         </ComboBox.Resources>

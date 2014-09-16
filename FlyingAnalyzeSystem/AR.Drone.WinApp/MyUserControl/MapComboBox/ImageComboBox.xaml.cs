@@ -22,6 +22,12 @@ namespace AR.Drone.WinApp.MyUserControl.MapComboBox
     /// </summary>
     public partial class ImageComboBox : UserControl
     {
+        public delegate void ImageComboBoxRemoveImageOnClickEvent();
+        public delegate void ImageComboBoxSelectionChangedEvent(object sender, SelectionChangedEventArgs e);
+        public event ImageComboBoxRemoveImageOnClickEvent OnRemoveImageClick=null;
+        public event ImageComboBoxSelectionChangedEvent SelectionChanged = null;
+
+        private Boolean _isRemovable = false;
         private ObservableCollection<ImageComboBoxItemProperty> _source = new ObservableCollection<ImageComboBoxItemProperty>();
         public ObservableCollection<ImageComboBoxItemProperty> ImageComboBoxItemSource
         {
@@ -29,23 +35,44 @@ namespace AR.Drone.WinApp.MyUserControl.MapComboBox
             {
                 return _source;
             }
+            set
+            {
+                _source = value;
+            }
         }
 
         public ImageComboBox()
         {
             InitializeComponent();
-
-            _source.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓12F" });
-            _source.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓3F" });
-            _source.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓B2-地下演講廳" });
-            _source.Add(new ImageComboBoxItemProperty() { ItemText = "共同科館3F" });
-
             DataContext = this;
         }
 
         private void ClickRemoveImageButton()
         {
-            Debug.WriteLine("AAA");
+            if (OnRemoveImageClick != null)
+            {
+                OnRemoveImageClick();
+            }
+            _isRemovable = true;
+        }
+
+        private void SelectionChangedComboBox(object sender, SelectionChangedEventArgs e)
+        {
+            if (SelectionChanged != null)
+            {
+                SelectionChanged(sender,e);
+            }
+            if (_isRemovable)
+            {
+                int pos = _imageComboBox.SelectedIndex;
+                _imageComboBox.ClearValue(ItemsControl.ItemsSourceProperty);
+                if (0 <= pos && pos < _source.Count)
+                {
+                    _source.RemoveAt(pos);
+                }
+                _imageComboBox.ItemsSource = _source;
+            }
+            _isRemovable = false;
         }
     }
 }

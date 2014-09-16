@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AR.Drone.WinApp.MyUserControl.DataModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,12 @@ namespace AR.Drone.WinApp.MyUserControl
         public PlaneStatePanel()
         {
             InitializeComponent();
+            _comboBoxSource = _comboBox.ImageComboBoxItemSource;
+            _comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓12F" });
+            _comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓3F" });
+            _comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText = "科研大樓B2-地下演講廳" });
+            _comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText = "共同科館3F" });
+            DataContext = this;
         }
 
         public void OnClickForwardButton()
@@ -125,29 +133,18 @@ namespace AR.Drone.WinApp.MyUserControl
             SetBattery(bbb.Value/100.0);
         }
 
-        public class City
+
+
+        private ObservableCollection<ImageComboBoxItemProperty> _comboBoxSource = new ObservableCollection<ImageComboBoxItemProperty>();
+
+        private void OnComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            public int ID { get; set; }
-            public string Name { get; set; }
+
         }
 
-        private void ComboBox_Loaded(object sender, RoutedEventArgs e)
+        private void OnComboBoxRemoveImageClick()
         {
-            List<City> list = new List<City>();
-            list.Add(new City { ID = 1, Name = "上海" });
-            list.Add(new City { ID = 2, Name = "北京" });
-            list.Add(new City { ID = 3, Name = "天津" });
 
-            var combobox = sender as ComboBox;
-            combobox.ItemsSource = list;
-            combobox.SelectedIndex = 0;
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-          /*  combobox.Text = "name"+combobox.SelectedItem as string;
-            if(combobox.SelectedItem!=null)
-            Debug.WriteLine(combobox.SelectedItem.ToString());*/
         }
     }
 }
