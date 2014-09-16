@@ -91,13 +91,13 @@
     <Compile Include="MyUserControl\MapComboBox\ImageComboBox.xaml.cs">
       <DependentUpon>ImageComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyUserControl\MapComboBox\ImageComboBoxItemProperty.cs" />
     <Compile Include="MyUserControl\ImageThreeStateButton.xaml.cs">
       <DependentUpon>ImageThreeStateButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\LoginPanel.xaml.cs">
       <DependentUpon>LoginPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyUserControl\MapComboBox\ImageComboBoxItemProperty.cs" />
     <Compile Include="MyUserControl\PasswordTexBox.xaml.cs">
       <DependentUpon>PasswordTexBox.xaml</DependentUpon>
     </Compile>
@@ -283,6 +283,13 @@
     <Resource Include="Image\PlaneStatePage\Battery.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxItemDeleteHover.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxItemDeleteDown.png" />
+    <Resource Include="Image\PlaneStatePage\a3.png" />
+    <Resource Include="Image\PlaneStatePage\a2.png" />
+    <Resource Include="Image\PlaneStatePage\a1.png" />
+    <Resource Include="Image\PlaneStatePage\LeftControlA2.png" />
+    <Resource Include="Image\PlaneStatePage\LeftControlA1.png" />
+    <Resource Include="Image\PlaneStatePage\RightControlA1.png" />
+    <Resource Include="Image\PlaneStatePage\RightControlA2.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Resource Include="Image\PlaneStatePage\AccessoryCircle.png" />

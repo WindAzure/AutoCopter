@@ -132,13 +132,50 @@
                                                                          NormalImagePath="../Image/PlaneStatePage/LeftControl.png" 
                                                                          DownImagePath="../Image/PlaneStatePage/LeftControlDown.png" 
                                                                          HoverImagePath="../Image/PlaneStatePage/LeftControl.png"
-                                                                         OnClick="OnClickLeftButton"/>
+                                                                         OnClick="OnClickLeftButton" IsActiveHoverAnimation="True">
+                                            <myControl:ImageThreeStateButton.MouseHoverAnimation>
+                                                <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
+
+                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <BitmapImage UriSource="../Image/PlaneStatePage/LeftControlA1.png"/>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+
+                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.12">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <BitmapImage UriSource="../Image/PlaneStatePage/LeftControlA2.png"/>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                    
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </myControl:ImageThreeStateButton.MouseHoverAnimation>
+                                        </myControl:ImageThreeStateButton>
 
                                         <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="115,0,7,20"
                                                                          NormalImagePath="../Image/PlaneStatePage/RightControl.png" 
                                                                          DownImagePath="../Image/PlaneStatePage/RightControlDown.png" 
                                                                          HoverImagePath="../Image/PlaneStatePage/RightControl.png"
-                                                                         OnClick="OnClickRightButton"/>
+                                                                         OnClick="OnClickRightButton" IsActiveHoverAnimation="True">
+                                            <myControl:ImageThreeStateButton.MouseHoverAnimation>
+                                                <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
+
+                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <BitmapImage UriSource="../Image/PlaneStatePage/RightControlA1.png"/>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+
+                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.12">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <BitmapImage UriSource="../Image/PlaneStatePage/RightControlA2.png"/>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </myControl:ImageThreeStateButton.MouseHoverAnimation>
+                                            
+                                        </myControl:ImageThreeStateButton>
 
                                         <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="73,0,73,8" 
                                                                          NormalImagePath="../Image/PlaneStatePage/StopControl.png" 
@@ -159,6 +196,8 @@
                 </StackPanel>
             </Grid>
             <Slider x:Name="bbb" HorizontalAlignment="Left" Margin="269,352,0,0" VerticalAlignment="Top" Width="123" Minimum="0" Maximum="100" ValueChanged="Slider_ValueChanged"/>
+            <Image Margin="499,315,92,19" x:Name="sh" RenderTransformOrigin="0.407,0.471">
+            </Image>
         </Grid>
     </Viewbox>
 
