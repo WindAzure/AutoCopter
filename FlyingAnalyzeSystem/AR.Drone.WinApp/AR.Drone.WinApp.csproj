@@ -98,6 +98,9 @@
       <DependentUpon>LoginPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\MapComboBox\ImageComboBoxItemProperty.cs" />
+    <Compile Include="MyUserControl\MapImageView.xaml.cs">
+      <DependentUpon>MapImageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyUserControl\PasswordTexBox.xaml.cs">
       <DependentUpon>PasswordTexBox.xaml</DependentUpon>
     </Compile>
@@ -240,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyUserControl\MapComboBox\ImageComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyUserControl\MapImageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

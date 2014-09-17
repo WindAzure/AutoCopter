@@ -75,9 +75,9 @@ namespace AR.Drone.WinApp.MyUserControl
         public void SetBattery(double rate)
         {
             _battery.Width = 100 * rate;
-            Color endColor=GetRelativeColor(_batterySampleBrush.GradientStops, rate);
+            Color endColor = GetRelativeColor(_batterySampleBrush.GradientStops, rate);
             Color middleColor = GetRelativeColor(_batterySampleBrush.GradientStops, rate / 2.0);
-            
+
             LinearGradientBrush gradientBrushGroup = new LinearGradientBrush();
             GradientStop start = new GradientStop();
             start.Color = Colors.Red;
@@ -126,7 +126,7 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            SetBattery(bbb.Value/100.0);
+            SetBattery(bbb.Value / 100.0);
         }
 
         private void OnComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
