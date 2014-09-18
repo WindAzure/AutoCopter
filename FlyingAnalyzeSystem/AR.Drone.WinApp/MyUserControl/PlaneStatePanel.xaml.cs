@@ -1,4 +1,5 @@
 ﻿using AR.Drone.WinApp.MyUserControl.MapComboBox;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -132,6 +133,20 @@ namespace AR.Drone.WinApp.MyUserControl
         private void OnComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void OnClickUploadButton()
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.DefaultExt = ".png";
+            dialog.Filter = "PNG File(.png)|*.png|JPEG File(.jpeg)|*jpeg|JPG File(.jpg)|*jpg";
+            Nullable<bool> isFileReaded = dialog.ShowDialog();
+
+            if (isFileReaded==true)
+            {
+                _mapImage.Initialize();
+                _mapImage.ImagePath=new BitmapImage(new Uri(dialog.FileName,UriKind.Absolute));
+            }
         }
     }
 }

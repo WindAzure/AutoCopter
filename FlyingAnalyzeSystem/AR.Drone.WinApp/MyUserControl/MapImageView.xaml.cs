@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -17,14 +19,47 @@ namespace AR.Drone.WinApp.MyUserControl
     /// <summary>
     /// Interaction logic for MapImageView.xaml
     /// </summary>
-    public partial class MapImageView : UserControl
+    public partial class MapImageView : UserControl,INotifyPropertyChanged
     {
+        private Boolean _isClickDown = false;
         private Boolean _isDown = false;
         private Point _DownPoint = new Point();
+        private BitmapImage _imagePath = new BitmapImage();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(String name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public BitmapImage ImagePath
+        {
+            set
+            {
+                _imagePath = value;
+                OnPropertyChanged("ImagePath");
+            }
+            get
+            {
+                return _imagePath;
+            }
+        }
 
         public MapImageView()
         {
             InitializeComponent();
+            DataContext = this;
+        }
+        
+        public void Initialize()
+        {
+            _scale.ScaleX = 1;
+            _scale.ScaleY = 1;
+            _trans.X = 0;
+            _trans.Y = 0;
         }
 
         private void OnMouseWheelMapImageBack(object sender, MouseWheelEventArgs e)
@@ -42,6 +77,7 @@ namespace AR.Drone.WinApp.MyUserControl
         private void OnMouseDownMapImageBack(object sender, MouseButtonEventArgs e)
         {
             _isDown = true;
+            _isClickDown = true;
             _DownPoint = e.GetPosition(_mapImageBack);
         }
 
@@ -53,10 +89,16 @@ namespace AR.Drone.WinApp.MyUserControl
                 _trans.Y += (e.GetPosition(_mapImageBack).Y - _DownPoint.Y);
                 _DownPoint = e.GetPosition(_mapImageBack);
             }
+            _isClickDown = false;
         }
 
         private void OnMouseUpMapImageBack(object sender, MouseButtonEventArgs e)
         {
+            if (_isClickDown)
+            {
+                Initialize();
+                _isClickDown = false; 
+            }
             _isDown = false;
         }
     }

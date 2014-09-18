@@ -92,13 +92,14 @@
                                 <myControl:UploadButton VerticalAlignment="Center" HorizontalAlignment="Left" Margin="250,12,0,3" Width="60"
                                                         NormalImagePath="../Image/PlaneStatePage/Upload.png" 
                                                         DownImagePath="../Image/PlaneStatePage/UploadDown.png" 
-                                                        HoverImagePath="../Image/PlaneStatePage/Upload.png"/>
+                                                        HoverImagePath="../Image/PlaneStatePage/Upload.png"
+                                                        OnClick="OnClickUploadButton"/>
                             </Grid>
 
                             <Grid Grid.Row="1" Margin="10,0">
                                 <Grid  Margin="10,0,0,10" HorizontalAlignment="Left" x:Name="_mapGrid">
                                     <Image Stretch="Fill" Source="../Image/PlaneStatePage/MapBackGround.png"/>
-                                    <myControl:MapImageView Margin="7,7,7,7"/>
+                                    <myControl:MapImageView Width="275" Height="200" Margin="7,7,7,7" x:Name="_mapImage"/>                                    
                                 </Grid>
 
                                 <Grid Margin="305,0,10,10">
