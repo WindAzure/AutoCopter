@@ -290,13 +290,12 @@
     <Resource Include="Image\PlaneStatePage\Battery.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxItemDeleteHover.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxItemDeleteDown.png" />
-    <Resource Include="Image\PlaneStatePage\a3.png" />
-    <Resource Include="Image\PlaneStatePage\a2.png" />
-    <Resource Include="Image\PlaneStatePage\a1.png" />
     <Resource Include="Image\PlaneStatePage\LeftControlA2.png" />
     <Resource Include="Image\PlaneStatePage\LeftControlA1.png" />
     <Resource Include="Image\PlaneStatePage\RightControlA1.png" />
     <Resource Include="Image\PlaneStatePage\RightControlA2.png" />
+    <Resource Include="Image\PlaneStatePage\ForwardControlA1.png" />
+    <Resource Include="Image\PlaneStatePage\ForwardControlA2.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Resource Include="Image\PlaneStatePage\AccessoryCircle.png" />
