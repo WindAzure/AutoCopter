@@ -133,50 +133,13 @@
                                                                          NormalImagePath="../Image/PlaneStatePage/LeftControl.png" 
                                                                          DownImagePath="../Image/PlaneStatePage/LeftControlDown.png" 
                                                                          HoverImagePath="../Image/PlaneStatePage/LeftControl.png"
-                                                                         OnClick="OnClickLeftButton" IsActiveHoverAnimation="True">
-                                            <myControl:ImageThreeStateButton.MouseHoverAnimation>
-                                                <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
-
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <BitmapImage UriSource="../Image/PlaneStatePage/LeftControlA1.png"/>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.12">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <BitmapImage UriSource="../Image/PlaneStatePage/LeftControlA2.png"/>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-                                                    
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </myControl:ImageThreeStateButton.MouseHoverAnimation>
-                                        </myControl:ImageThreeStateButton>
+                                                                         OnClick="OnClickLeftButton"/>
 
                                         <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="115,0,7,20"
                                                                          NormalImagePath="../Image/PlaneStatePage/RightControl.png" 
                                                                          DownImagePath="../Image/PlaneStatePage/RightControlDown.png" 
                                                                          HoverImagePath="../Image/PlaneStatePage/RightControl.png"
-                                                                         OnClick="OnClickRightButton" IsActiveHoverAnimation="True">
-                                            <myControl:ImageThreeStateButton.MouseHoverAnimation>
-                                                <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
-
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <BitmapImage UriSource="../Image/PlaneStatePage/RightControlA1.png"/>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.12">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <BitmapImage UriSource="../Image/PlaneStatePage/RightControlA2.png"/>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </myControl:ImageThreeStateButton.MouseHoverAnimation>
-                                            
-                                        </myControl:ImageThreeStateButton>
+                                                                         OnClick="OnClickRightButton"/>
 
                                         <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="73,0,73,8" 
                                                                          NormalImagePath="../Image/PlaneStatePage/StopControl.png" 
@@ -188,25 +151,7 @@
                                                                          NormalImagePath="../Image/PlaneStatePage/ForwardControl.png" 
                                                                          DownImagePath="../Image/PlaneStatePage/ForwardControlDown.png" 
                                                                          HoverImagePath="../Image/PlaneStatePage/ForwardControl.png"
-                                                                         OnClick="OnClickForwardButton" IsActiveHoverAnimation="True">
-                                            <myControl:ImageThreeStateButton.MouseHoverAnimation>
-                                                <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
-
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <BitmapImage UriSource="../Image/PlaneStatePage/ForwardControlA1.png"/>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.12">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <BitmapImage UriSource="../Image/PlaneStatePage/ForwardControlA2.png"/>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </myControl:ImageThreeStateButton.MouseHoverAnimation>
-                                        </myControl:ImageThreeStateButton>
+                                                                         OnClick="OnClickForwardButton"/>
                                     </Grid>
                                 </Grid>
                             </Grid>

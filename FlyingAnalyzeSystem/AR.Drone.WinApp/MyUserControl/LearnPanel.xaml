@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="AR.Drone.WinApp.MyUserControl.LearnPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500"
+             xmlns:myControl="clr-namespace:AR.Drone.WinApp.MyUserControl"
+             xmlns:myComboxBox="clr-namespace:AR.Drone.WinApp.MyUserControl.MapComboBox">
+
+
+    <Viewbox Stretch="Fill">
+        <Grid>
+            <Image Stretch="Fill" Source="../Image/LearnPage/BackGround.png"/>
+
+            <myControl:ImageThreeStateButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"
+                                             NormalImagePath="../Image/LearnPage/Back.png" 
+                                             DownImagePath="../Image/LearnPage/Back.png" 
+                                             HoverImagePath="../Image/LearnPage/Back.png"/>
+            <Grid Margin="0,45,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55*"/>
+                    <ColumnDefinition Width="45*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Image Grid.Column="0" Source="../Image/LearnPage/12.png" Stretch="Fill" x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="240" Height="30"/>
+                <Image Grid.Column="0" Source="../Image/LearnPage/11.png" Stretch="Fill"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Height="20" Margin="240,15,0,0"/>
+                <!--<myComboxBox:ImageComboBox Grid.Column="0" x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="240" Height="30"/>-->
+
+                <myControl:UploadButton Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="60" Margin="0,15,0,0"
+                                        NormalImagePath="../Image/PlaneStatePage/Upload.png" 
+                                        DownImagePath="../Image/PlaneStatePage/UploadDown.png" 
+                                        HoverImagePath="../Image/PlaneStatePage/Upload.png"/>
+
+                <Grid Grid.Column="0" Margin="30,50,0,40">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="../Image/LearnPage/MapBackGround.png"/>
+                    </Grid.Background>
+                    <myControl:MapImageView Margin="0,10,0,0" Width="320" Height="220" VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="_mapImage"/>
+                    <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10"
+                                             NormalImagePath="../Image/LearnPage/Save.png" 
+                                             DownImagePath="../Image/LearnPage/SaveDown.png" 
+                                             HoverImagePath="../Image/LearnPage/Save.png"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="7*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="10,50,20,0">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="../Image/LearnPage/Information.png"/>
+                        </Grid.Background>
+                        <TextBlock Text="Information" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="10" Margin="2,0,0,0"/>
+                        <TextBlock Text="Ar.Drone-001" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FAED00" Margin="25,19,0,0"/>
+                        <TextBlock Text="323" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#FAED00" Margin="0,0,41,5"/>
+                        <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="11" Width="80.5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,41,0,0">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush x:Name="_batterySampleBrush">
+                                    <GradientStop Color="#FF0000" Offset="0"/>
+                                    <GradientStop Color="#FFFF00" Offset="0.5"/>
+                                    <GradientStop Color="#00FF00" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle x:Name="_battery" Visibility="Visible" Height="11" Width="80.5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,41,0,0"/>
+                        <TextBlock Text="0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,40,248,0"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="10,5,20,40">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="../Image/LearnPage/ControlBlock.png" Stretch="Fill"/>
+                        </Grid.Background>
+
+                        <Image Source="../Image/LearnPage/MainCircle.png" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,10,0,0"/>
+                        <TextBlock Text="Secs" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="105,0,0,0" Foreground="#FFFCDA" FontSize="8"/>
+
+                        <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,35"
+                                                      NormalImagePath="../Image/LearnPage/LeftControl.png">
+                            <myControl:PlaneControlButton.MouseDownAnimation>
+                                <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
+
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <BitmapImage UriSource="../Image/LearnPage/LeftControlA1.png"/>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.12">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <BitmapImage UriSource="../Image/LearnPage/LeftControlA2.png"/>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+
+                                </ObjectAnimationUsingKeyFrames>
+                            </myControl:PlaneControlButton.MouseDownAnimation>
+                        </myControl:PlaneControlButton>
+
+                        <myControl:PlaneControlButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,55,35"
+                                                      NormalImagePath="../Image/LearnPage/RightControl.png">
+                            <myControl:PlaneControlButton.MouseDownAnimation>
+                                <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
+
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <BitmapImage UriSource="../Image/LearnPage/RightControlA1.png"/>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.12">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <BitmapImage UriSource="../Image/LearnPage/RightControlA2.png"/>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+
+                                </ObjectAnimationUsingKeyFrames>
+                            </myControl:PlaneControlButton.MouseDownAnimation>
+                        </myControl:PlaneControlButton>
+
+                        <myControl:PlaneControlButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,45"
+                                                      NormalImagePath="../Image/LearnPage/ForwardControl.png">
+                            <myControl:PlaneControlButton.MouseDownAnimation>
+                                <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
+
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <BitmapImage UriSource="../Image/LearnPage/ForwardControlA1.png"/>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.12">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <BitmapImage UriSource="../Image/LearnPage/ForwardControlA2.png"/>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+
+                                </ObjectAnimationUsingKeyFrames>
+                            </myControl:PlaneControlButton.MouseDownAnimation>
+                        </myControl:PlaneControlButton>
+
+                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,10" 
+                                                         NormalImagePath="../Image/LearnPage/StopControl.png" 
+                                                         DownImagePath="../Image/LearnPage/StopControlDown.png" 
+                                                         HoverImagePath="../Image/LearnPage/StopControl.png"
+                                                         OnClick="OnClickStopButton"/>
+
+                        <myControl:ImageThreeStateButton HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,15,0" 
+                                                         NormalImagePath="../Image/LearnPage/UpControl.png" 
+                                                         DownImagePath="../Image/LearnPage/UpControlDown.png" 
+                                                         HoverImagePath="../Image/LearnPage/UpControl.png"/>
+
+                        <myControl:ImageThreeStateButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,30" 
+                                                         NormalImagePath="../Image/LearnPage/DownControl.png" 
+                                                         DownImagePath="../Image/LearnPage/DownControlDown.png" 
+                                                         HoverImagePath="../Image/LearnPage/DownControl.png"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Viewbox>
+
+</UserControl>

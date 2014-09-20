@@ -72,6 +72,12 @@
     <Compile Include="AndroidGcmNotificationer.cs" />
     <Compile Include="CommandToServer\Commands.cs" />
     <Compile Include="FilePlayer.cs" />
+    <Compile Include="Forms\LearnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LearnForm.Designer.cs">
+      <DependentUpon>LearnForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
     </Compile>
     <Compile Include="MyUserControl\AccountTextBox.xaml.cs">
       <DependentUpon>AccountTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyUserControl\LearnPanel.xaml.cs">
+      <DependentUpon>LearnPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\MapComboBox\ComboBoxTemplateSelector.cs" />
     <Compile Include="MyUserControl\MapComboBox\DependencyObjectExtensions.cs" />
@@ -104,6 +113,9 @@
     </Compile>
     <Compile Include="MyUserControl\PasswordTexBox.xaml.cs">
       <DependentUpon>PasswordTexBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyUserControl\PlaneControlButton.xaml.cs">
+      <DependentUpon>PlaneControlButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\PlaneItemButton.xaml.cs">
       <DependentUpon>PlaneItemButton.xaml</DependentUpon>
@@ -138,6 +150,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\LearnForm.resx">
+      <DependentUpon>LearnForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -239,6 +254,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyUserControl\LearnPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyUserControl\LoginPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -252,6 +271,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyUserControl\PasswordTexBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyUserControl\PlaneControlButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -297,6 +320,48 @@
     <Resource Include="Image\PlaneStatePage\RightControlA2.png" />
     <Resource Include="Image\PlaneStatePage\ForwardControlA1.png" />
     <Resource Include="Image\PlaneStatePage\ForwardControlA2.png" />
+    <Content Include="Image\LearnPage\0920-04.png" />
+    <Resource Include="Image\LearnPage\MapBackGround.png" />
+    <Resource Include="Image\LearnPage\ControlBlock.png" />
+    <Resource Include="Image\LearnPage\MainCircle.png" />
+    <Content Include="Image\LearnPage\0920-09.png" />
+    <Resource Include="Image\LearnPage\UpControl.png" />
+    <Resource Include="Image\LearnPage\DownControl.png" />
+    <Resource Include="Image\LearnPage\DownControlDown.png" />
+    <Resource Include="Image\LearnPage\UpControlDown.png" />
+    <Resource Include="Image\LearnPage\LeftControl.png" />
+    <Resource Include="Image\LearnPage\RightControl.png" />
+    <Resource Include="Image\LearnPage\RightControlA2.png" />
+    <Resource Include="Image\LearnPage\LeftControlA2.png" />
+    <Resource Include="Image\LearnPage\LeftControlA1.png" />
+    <Resource Include="Image\LearnPage\RightControlA1.png" />
+    <Resource Include="Image\LearnPage\ForwardControl.png" />
+    <Resource Include="Image\LearnPage\ForwardControlA2.png" />
+    <Resource Include="Image\LearnPage\ForwardControlA1.png" />
+    <Resource Include="Image\LearnPage\StopControl.png" />
+    <Resource Include="Image\LearnPage\StopControlDown.png" />
+    <Content Include="Image\LearnPage\0920-25.png" />
+    <Resource Include="Image\LearnPage\Information.png" />
+    <Content Include="Image\LearnPage\charge-36.png" />
+    <Content Include="Image\LearnPage\charge-37.png" />
+    <Content Include="Image\LearnPage\INFOR-26.png" />
+    <Content Include="Image\LearnPage\INFOR-27.png" />
+    <Content Include="Image\LearnPage\L-13.png" />
+    <Content Include="Image\LearnPage\L-14.png" />
+    <Resource Include="Image\LearnPage\BackGround.png" />
+    <Content Include="Image\LearnPage\NEW-05.png" />
+    <Content Include="Image\LearnPage\NEW-06.png" />
+    <Content Include="Image\LearnPage\NEW-07.png" />
+    <Content Include="Image\LearnPage\NEW-08.png" />
+    <Content Include="Image\LearnPage\NEW-12.png" />
+    <Content Include="Image\LearnPage\NEW-13.png" />
+    <Content Include="Image\LearnPage\NEW-14.png" />
+    <Resource Include="Image\LearnPage\Back.png" />
+    <Resource Include="Image\LearnPage\Save.png" />
+    <Resource Include="Image\LearnPage\SaveDown.png" />
+    <Resource Include="Image\LearnPage\ComboBoxTextImage.png" />
+    <Resource Include="Image\LearnPage\11.png" />
+    <Resource Include="Image\LearnPage\12.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Resource Include="Image\PlaneStatePage\AccessoryCircle.png" />
