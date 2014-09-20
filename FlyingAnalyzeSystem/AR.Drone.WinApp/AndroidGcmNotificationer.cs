@@ -50,8 +50,8 @@ namespace AR.Drone.WinApp
 
         public void UnRegister(String account,String deviceId)
         {
-            SqlParameter accountParam=new SqlParameter(){ParameterName="@Account",SqlDbType=SqlDbType.VarChar,Value=account};
-            SqlParameter registionIdParam = new SqlParameter() { ParameterName = "@RegistionId", SqlDbType = SqlDbType.VarChar, Value = deviceId };
+            SqlParameter accountParam = new SqlParameter() { ParameterName = "@Account", SqlDbType = SqlDbType.NVarChar, Value = account };
+            SqlParameter registionIdParam = new SqlParameter() { ParameterName = "@RegistionId", SqlDbType = SqlDbType.NVarChar, Value = deviceId };
             SqlHelper.ExecuteScalar(CommandType.Text, "DELETE FROM [dbo].[MemberMultiValue] WHERE [FKAccount]=@Account and [PhoneRegistId]=@RegistionId",new SqlParameter[]{ accountParam, registionIdParam});
         }
 

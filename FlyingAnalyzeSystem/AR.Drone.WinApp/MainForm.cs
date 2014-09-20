@@ -20,6 +20,7 @@ using AR.Drone.Avionics.Objectives;
 using AR.Drone.Avionics.Objectives.IntentObtainers;
 using System.Data.SqlClient;
 using System.Data;
+using AR.Drone.WinApp.CommandToServer;
 
 namespace AR.Drone.WinApp
 {
@@ -422,34 +423,7 @@ namespace AR.Drone.WinApp
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            String planeId = "Ar.Drone-001";
-            Boolean state = true;
-            String currentDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            SqlParameter planeIdParam = new SqlParameter() { ParameterName = "@PlaneId", SqlDbType = SqlDbType.VarChar, Value = planeId };
-            String floorId = Convert.ToString(SqlHelper.ExecuteScalar(CommandType.Text, "SELECT [FKFloor] FROM [dbo].[Charge] WHERE [FKPlaneId]=@PlaneId", new SqlParameter[] { planeIdParam }));
-            if (!String.IsNullOrEmpty(floorId))
-            {
-                SqlParameter floorIdParam = new SqlParameter() { ParameterName = "@FloorId", SqlDbType = SqlDbType.VarChar, Value = floorId };
-                SqlParameter stateParam = new SqlParameter() { ParameterName = "@FloorState", SqlDbType = SqlDbType.Bit, Value = state };
-                SqlParameter dateTimeParam = new SqlParameter() { ParameterName = "@StateChangedDate", SqlDbType = SqlDbType.VarChar, Value = currentDateTime };
-                SqlHelper.ExecuteScalar(CommandType.Text, "UPDATE [dbo].[Floor] SET [FloorState]=@FloorState, [StateChangedDate] = @StateChangedDate WHERE [FloorId] = @FloorId", new SqlParameter[] { stateParam, dateTimeParam, floorIdParam });
-
-                DataSet accountResult = SqlHelper.ExecuteDataSet(CommandType.Text, "SELECT [FKAccount] FROM [dbo].[Register] WHERE [FKFloor]=@FloorId", new SqlParameter[] { floorIdParam });
-                int accountRows = accountResult.Tables[0].Rows.Count;
-                for (int i = 0; i < accountRows; i++)
-                {
-                    String account = accountResult.Tables[0].Rows[i].ItemArray[0].ToString();
-                    SqlParameter accountParam = new SqlParameter() { ParameterName = "@Account", SqlDbType = SqlDbType.VarChar, Value = account };
-                    DataSet phoneIdResult = SqlHelper.ExecuteDataSet(CommandType.Text, "SELECT [PhoneRegistId] FROM [dbo].[MemberMultiValue] WHERE [FKAccount]=@Account", new SqlParameter[] { accountParam });
-                    int idRows = phoneIdResult.Tables[0].Rows.Count;
-                    for (int j = 0; j < idRows; j++)
-                    {
-                        Debug.WriteLine(phoneIdResult.Tables[0].Rows[j].ItemArray[0].ToString());
-                        AndroidGcmNotificationer gcmSender = new AndroidGcmNotificationer();
-                        gcmSender.SendNotification(account, phoneIdResult.Tables[0].Rows[j].ItemArray[0].ToString(), state.ToString());
-                    }
-                }
-            }
+            Commands.SendGCM("Ar.Drone-001",true);
         }
     }
 }

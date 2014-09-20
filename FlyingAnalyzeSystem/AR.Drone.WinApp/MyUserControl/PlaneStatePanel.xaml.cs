@@ -1,9 +1,12 @@
-﻿using AR.Drone.WinApp.MyUserControl.MapComboBox;
+﻿using AR.Drone.WinApp.CommandToServer;
+using AR.Drone.WinApp.MyUserControl.MapComboBox;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -137,15 +140,30 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void OnClickUploadButton()
         {
+            DataSet data=Commands.GetFloorInformation();
+            int rows = data.Tables[0].Rows.Count;
+            for (int i = 0; i < rows; i++) 
+            {
+                byte[] imageBytes = (byte[])data.Tables[0].Rows[i][1];
+                MemoryStream stream = new MemoryStream();
+                stream.Write(imageBytes, 0, imageBytes.Length);
+                stream.Position = 0;
+                BitmapImage img = new BitmapImage();
+                img.BeginInit();
+                img.StreamSource = stream;
+                img.EndInit();
+                _mapImage.ImagePath = img;
+            }
+
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.DefaultExt = ".png";
             dialog.Filter = "PNG File(.png)|*.png|JPEG File(.jpeg)|*jpeg|JPG File(.jpg)|*jpg";
             Nullable<bool> isFileReaded = dialog.ShowDialog();
-
             if (isFileReaded==true)
             {
                 _mapImage.Initialize();
                 _mapImage.ImagePath=new BitmapImage(new Uri(dialog.FileName,UriKind.Absolute));
+                Commands.RegistFloor(dialog.FileName, "");
             }
         }
     }

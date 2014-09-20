@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidGcmNotificationer.cs" />
+    <Compile Include="CommandToServer\Commands.cs" />
     <Compile Include="FilePlayer.cs" />
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
@@ -124,7 +125,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SqlHelper.cs" />
+    <Compile Include="CommandToServer\SqlHelper.cs" />
     <Compile Include="TcpSender.cs" />
     <Compile Include="UdpSender.cs" />
     <Compile Include="VideoHelper.cs" />
