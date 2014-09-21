@@ -92,11 +92,11 @@
                 <control:ComboBoxTemplateSelector.DropDownTemplate>
                     <DataTemplate>
                         <Grid>
+                            <TextBlock Foreground="#FEE9AF" Text="{Binding Path=ItemText}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                             <myControl:ImageThreeStateButton VerticalAlignment="Center" HorizontalAlignment="Left"
                                              DownImagePath="../Image/PlaneStatePage/ComboBoxItemDeleteDown.png"
                                              HoverImagePath="../Image/PlaneStatePage/ComboBoxItemDeleteHover.png"
-                                             NormalImagePath="../Image/PlaneStatePage/ComboBoxItemDelete.png" Margin="139,0,-50,4" OnClick="ClickRemoveImageButton"/>
-                            <TextBlock Foreground="#FEE9AF" Text="{Binding Path=ItemText}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                             NormalImagePath="../Image/PlaneStatePage/ComboBoxItemDelete.png" Margin="215,0,-50,4" OnClick="ClickRemoveImageButton"/>
                         </Grid>
                     </DataTemplate>
                 </control:ComboBoxTemplateSelector.DropDownTemplate>

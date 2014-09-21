@@ -23,7 +23,8 @@
                     <ColumnDefinition Width="55*"/>
                     <ColumnDefinition Width="45*"/>
                 </Grid.ColumnDefinitions>
-                <myComboxBox:ImageComboBox Grid.Column="0" x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="240" Height="30"/>
+                <myComboxBox:ImageComboBox Grid.Column="0" x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="240" Height="30"
+                                           SelectionChanged="OnComboBoxSelectionChanged"/>
 
                 <myControl:UploadButton Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="60" Margin="0,15,0,0"
                                         NormalImagePath="../Image/PlaneStatePage/Upload.png" 

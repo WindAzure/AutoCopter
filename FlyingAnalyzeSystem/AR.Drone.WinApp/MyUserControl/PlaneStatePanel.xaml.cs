@@ -33,6 +33,7 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             InitializeComponent();
             _comboBoxSource = _comboBox.ImageComboBoxItemSource;
+            _comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText="123"});
         }
 
         public void OnClickForwardButton()

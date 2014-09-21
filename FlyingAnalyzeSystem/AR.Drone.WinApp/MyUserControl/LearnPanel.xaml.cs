@@ -1,7 +1,13 @@
-﻿using System;
+﻿using AR.Drone.WinApp.CommandToServer;
+using AR.Drone.WinApp.MyUserControl.MapComboBox;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Timers;
@@ -20,10 +26,10 @@ namespace AR.Drone.WinApp.MyUserControl
     /// <summary>
     /// Interaction logic for LearnPanel.xaml
     /// </summary>
-    public partial class LearnPanel : UserControl,INotifyPropertyChanged
+    public partial class LearnPanel : UserControl, INotifyPropertyChanged
     {
         private int _timeValue = 1;
-        private Timer _timer=new Timer();
+        private Timer _timer = new Timer();
 
         public delegate void LearnPanelEvent();
         public event LearnPanelEvent MouseDownLeftControlButton = null;
@@ -48,6 +54,20 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private ObservableCollection<ImageComboBoxItemProperty> _itemSource = new ObservableCollection<ImageComboBoxItemProperty>();
+        public ObservableCollection<ImageComboBoxItemProperty> ComboBoxItemSource
+        {
+            set
+            {
+                _itemSource = value;
+                OnPropertyChanged("ComboBoxItemSource");
+            }
+            get
+            {
+                return _itemSource;
+            }
+        }
+
         private String _mainCircleText = "";
         public String MainCircleText
         {
@@ -62,7 +82,7 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
-        private String _mainCircleValue="";
+        private String _mainCircleValue = "";
         public String MainCircleValue
         {
             set
@@ -104,7 +124,7 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
-        private String _altitudeText="";
+        private String _altitudeText = "";
         public String AltitudeText
         {
             set
@@ -122,8 +142,28 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             InitializeComponent();
             DataContext = this;
+            _comboBox.ImageComboBoxItemSource = ComboBoxItemSource;
             _timer.Interval = 1000;
             _timer.Elapsed += ElapsedTimer;
+            LoadImageFromServer();
+        }
+
+        private void LoadImageFromServer()
+        {
+            DataSet data = Commands.GetFloorInformation();
+            int rows = data.Tables[0].Rows.Count;
+            for (int i = 0; i < rows; i++)
+            {
+                byte[] imageBytes = (byte[])data.Tables[0].Rows[i][1];
+                MemoryStream stream = new MemoryStream();
+                stream.Write(imageBytes, 0, imageBytes.Length);
+                stream.Position = 0;
+                BitmapImage img = new BitmapImage();
+                img.BeginInit();
+                img.StreamSource = stream;
+                img.EndInit();
+                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img });
+            }
         }
 
         private Color GetRelativeColor(GradientStopCollection gsc, double offset)
@@ -277,6 +317,16 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 ClickUploadButton();
             }
+
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.DefaultExt = ".png";
+            dialog.Filter = "PNG File(.png)|*.png|JPEG File(.jpeg)|*jpeg|JPG File(.jpg)|*jpg";
+            Nullable<bool> isFileReaded = dialog.ShowDialog();
+            if (isFileReaded == true)
+            {
+                //Commands.RegistFloor(dialog.FileName, "");
+                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = System.IO.Path.GetFileNameWithoutExtension(dialog.FileName), MapImage = new BitmapImage(new Uri(dialog.FileName, UriKind.Absolute)) });
+            }
         }
 
         private void OnClickBackButton()
@@ -311,6 +361,19 @@ namespace AR.Drone.WinApp.MyUserControl
             gradientBrushGroup.GradientStops.Add(end);
 
             _battery.Fill = gradientBrushGroup;
+        }
+
+        private void OnComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            if (0 <= comboBox.SelectedIndex && comboBox.SelectedIndex < ComboBoxItemSource.Count)
+            {
+                _mapImage.ImagePath = ComboBoxItemSource[comboBox.SelectedIndex].MapImage;
+            }
+            else
+            {
+                _mapImage.ImagePath = null;
+            }
         }
     }
 }

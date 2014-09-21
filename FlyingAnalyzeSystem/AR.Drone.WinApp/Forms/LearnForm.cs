@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AR.Drone.WinApp.MyUserControl.MapComboBox;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -28,11 +30,19 @@ namespace AR.Drone.WinApp.Forms
             _learnPanel.ClickSaveButton += ClickLearnPanelSaveButton;
             _learnPanel.ClickUploadButton += ClickLearnPanelUploadButton;
             _learnPanel.ClickBackButton += ClickLearnPanelBackButton;
+
+            ObservableCollection<ImageComboBoxItemProperty> list = _learnPanel.ComboBoxItemSource;
+            /*list.Add(new ImageComboBoxItemProperty() { ItemText = "456" });
+            list.Add(new ImageComboBoxItemProperty() { ItemText = "789" });
+            list.Add(new ImageComboBoxItemProperty() { ItemText = "999" });
+            list.Add(new ImageComboBoxItemProperty() { ItemText = "888" });
+            list.Add(new ImageComboBoxItemProperty() { ItemText = "999" });*/
         }
 
         void ClickLearnPanelBackButton()
         {
             Debug.WriteLine("OnClickBackButton");
+            _learnPanel.ComboBoxItemSource[0].ItemText = "aaaaa";
         }
 
         void ClickLearnPanelUploadButton()
