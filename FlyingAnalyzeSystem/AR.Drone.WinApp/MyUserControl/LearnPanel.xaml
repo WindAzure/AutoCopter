@@ -15,17 +15,14 @@
 
             <myControl:ImageThreeStateButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"
                                              NormalImagePath="../Image/LearnPage/Back.png" 
-                                             DownImagePath="../Image/LearnPage/Back.png" 
-                                             HoverImagePath="../Image/LearnPage/Back.png"/>
+                                             DownImagePath="../Image/LearnPage/BackDown.png" 
+                                             HoverImagePath="../Image/LearnPage/BackHover.png"/>
             <Grid Margin="0,45,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="55*"/>
                     <ColumnDefinition Width="45*"/>
                 </Grid.ColumnDefinitions>
-                
-                <Image Grid.Column="0" Source="../Image/LearnPage/12.png" Stretch="Fill" x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="240" Height="30"/>
-                <Image Grid.Column="0" Source="../Image/LearnPage/11.png" Stretch="Fill"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Height="20" Margin="240,15,0,0"/>
-                <!--<myComboxBox:ImageComboBox Grid.Column="0" x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="240" Height="30"/>-->
+                <myComboxBox:ImageComboBox Grid.Column="0" x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="240" Height="30"/>
 
                 <myControl:UploadButton Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="60" Margin="0,15,0,0"
                                         NormalImagePath="../Image/PlaneStatePage/Upload.png" 
@@ -77,7 +74,7 @@
                         <TextBlock Text="Secs" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="105,0,0,0" Foreground="#FFFCDA" FontSize="8"/>
 
                         <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,35"
-                                                      NormalImagePath="../Image/LearnPage/LeftControl.png">
+                                                      NormalImagePath="../Image/LearnPage/LeftControl.png" OnMouseDown="MouseDownPlaneLeftControlButton" OnMouseUp="MouseUpPlaneLeftControlButton">
                             <myControl:PlaneControlButton.MouseDownAnimation>
                                 <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
 
@@ -98,7 +95,7 @@
                         </myControl:PlaneControlButton>
 
                         <myControl:PlaneControlButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,55,35"
-                                                      NormalImagePath="../Image/LearnPage/RightControl.png">
+                                                      NormalImagePath="../Image/LearnPage/RightControl.png" OnMouseDown="MouseDownPlaneRightControlButton" OnMouseUp="MouseUpPlaneRightControlButton">
                             <myControl:PlaneControlButton.MouseDownAnimation>
                                 <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
 
@@ -119,7 +116,7 @@
                         </myControl:PlaneControlButton>
 
                         <myControl:PlaneControlButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,45"
-                                                      NormalImagePath="../Image/LearnPage/ForwardControl.png">
+                                                      NormalImagePath="../Image/LearnPage/ForwardControl.png" OnMouseDown="MouseDownPlaneForwardControlButton" OnMouseUp="MouseUpPlaneForwardControlButton">
                             <myControl:PlaneControlButton.MouseDownAnimation>
                                 <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
 

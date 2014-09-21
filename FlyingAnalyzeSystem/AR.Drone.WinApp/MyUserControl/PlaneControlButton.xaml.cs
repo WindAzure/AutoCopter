@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -61,6 +62,15 @@ namespace AR.Drone.WinApp.MyUserControl
             InitializeComponent();
             MouseDownAnimation = null;
             _board.Completed += CompletedBoard;
+            _board.Changed += OnBoardChanged;
+        }
+
+        void OnBoardChanged(object sender, EventArgs e)
+        {
+            if (OnMouseDown != null)
+            {
+                OnMouseDown();
+            }
         }
 
         void CompletedBoard(object sender, EventArgs e)
@@ -84,24 +94,20 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void MouseLeftButtonDownImage(object sender, MouseButtonEventArgs e)
         {
-            if (OnMouseDown != null)
-            {
-                OnMouseDown();
-            }
             _isDown = true;
             StartAnimation();
         }
 
         private void MouseLeftButtonUpImage(object sender, MouseButtonEventArgs e)
         {
-            if (OnMouseUp != null)
-            {
-                OnMouseUp();
-            }
             if (_isDown)
             {
                 EndAnimation();
                 _isDown = false;
+                if (OnMouseUp != null)
+                {
+                    OnMouseUp();
+                }
             }
             img.Source = _normalImage;
         }
@@ -112,6 +118,10 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 EndAnimation();
                 _isDown = false;
+                if (OnMouseUp != null)
+                {
+                    OnMouseUp();
+                }
             }
             img.Source = _normalImage;
         }

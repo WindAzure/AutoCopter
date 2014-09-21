@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              xmlns:myControl="clr-namespace:AR.Drone.WinApp.MyUserControl"
              xmlns:control="clr-namespace:AR.Drone.WinApp.MyUserControl.MapComboBox"
-             d:DesignHeight="23" d:DesignWidth="160">
+             d:DesignHeight="30" d:DesignWidth="240">
 
     <ComboBox x:Name="_imageComboBox" ItemsSource="{Binding ImageComboBoxItemSource}" SelectionChanged="SelectionChangedComboBox">
         <ComboBox.Resources>
@@ -19,7 +19,13 @@
                     <ToggleButton IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}">
                         <ToggleButton.Template>
                             <ControlTemplate TargetType="ToggleButton">
-                                <Image Name="img" Source="../../Image/PlaneStatePage/ComboBoxTextImage.png" Stretch="Fill"/>
+                                <Grid x:Name="img">
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="../../Image/LearnPage/ComboBoxBackGround.png"/>
+                                    </Grid.Background>
+                                    <Image Source="../../Image/LearnPage/ComboBoxToggleButton.png" Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="20" Margin="0,0,5,0"/>
+                                </Grid>
+                                <!--<Image Name="img" Source="../../Image/PlaneStatePage/ComboBoxTextImage.png" Stretch="Fill"/>-->
 
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">

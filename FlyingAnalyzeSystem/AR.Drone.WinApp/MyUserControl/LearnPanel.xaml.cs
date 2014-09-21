@@ -29,5 +29,36 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             Debug.WriteLine("OnClickStopButton");
         }
+
+        private void MouseDownPlaneLeftControlButton()
+        {
+            Debug.WriteLine("MouseDownPlaneLeftControlButton");
+        }
+
+        private void MouseUpPlaneLeftControlButton()
+        {
+            Debug.WriteLine("MouseUpPlaneLeftControlButton");
+        }
+
+        private void MouseDownPlaneRightControlButton()
+        {
+            Debug.WriteLine("MouseDownPlaneRightControlButton");
+        }
+
+        private void MouseUpPlaneRightControlButton()
+        {
+
+            Debug.WriteLine("MouseUpPlaneRightControlButton");
+        }
+
+        private void MouseDownPlaneForwardControlButton()
+        {
+            Debug.WriteLine("MouseDownPlaneForwardControlButton");
+        }
+
+        private void MouseUpPlaneForwardControlButton()
+        {
+            Debug.WriteLine("MouseUpPlaneForwardControlButton");
+        }
     }
 }
