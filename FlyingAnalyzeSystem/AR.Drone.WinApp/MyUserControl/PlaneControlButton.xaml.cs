@@ -54,8 +54,8 @@ namespace AR.Drone.WinApp.MyUserControl
         }
 
         public delegate void PlaneControlButtonEvent();
-        public event PlaneControlButtonEvent OnMouseDown = null;
-        public event PlaneControlButtonEvent OnMouseUp = null;
+        public event PlaneControlButtonEvent OnButtonMouseDown = null;
+        public event PlaneControlButtonEvent OnButtonMouseUp = null;
 
         public PlaneControlButton()
         {
@@ -86,9 +86,9 @@ namespace AR.Drone.WinApp.MyUserControl
         private void MouseLeftButtonDownImage(object sender, MouseButtonEventArgs e)
         {
             _isDown = true;
-            if (OnMouseDown != null)
+            if (OnButtonMouseDown != null)
             {
-                OnMouseDown();
+                OnButtonMouseDown();
             }
             StartAnimation();
         }
@@ -99,9 +99,9 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 EndAnimation();
                 _isDown = false;
-                if (OnMouseUp != null)
+                if (OnButtonMouseUp != null)
                 {
-                    OnMouseUp();
+                    OnButtonMouseUp();
                 }
             }
             img.Source = _normalImage;
@@ -113,9 +113,9 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 EndAnimation();
                 _isDown = false;
-                if (OnMouseUp != null)
+                if (OnButtonMouseUp != null)
                 {
-                    OnMouseUp();
+                    OnButtonMouseUp();
                 }
             }
             img.Source = _normalImage;

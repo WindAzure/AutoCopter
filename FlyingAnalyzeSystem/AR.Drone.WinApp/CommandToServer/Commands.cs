@@ -46,15 +46,14 @@ namespace AR.Drone.WinApp.CommandToServer
             return SqlHelper.ExecuteDataSet(CommandType.Text, "SELECT  [FloorName],[Picture] FROM [dbo].[Floor]", null);
         }
 
-        public static void RegistFloor(String imagePath, String mileage)
+        public static void RegistFloor(String imagePath)
         {
             byte[] data = File.ReadAllBytes(imagePath);
             SqlParameter floorNameParam = new SqlParameter() { ParameterName = "@FloorName", SqlDbType = SqlDbType.NVarChar, Value = "aaa" };
             SqlParameter floorStateParam = new SqlParameter() { ParameterName = "@State", SqlDbType = SqlDbType.Bit, Value = true };
             SqlParameter floorImagePathParam = new SqlParameter() { ParameterName = "@ImagePath", SqlDbType = SqlDbType.Image, Value = data };
             SqlParameter floorStateChangedDate = new SqlParameter() { ParameterName = "@CurrentDate", SqlDbType = SqlDbType.DateTime, Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") };
-            SqlParameter floorMileageRecord = new SqlParameter() { ParameterName = "@MileageRecord", SqlDbType = SqlDbType.NVarChar, Value = mileage };
-            SqlHelper.ExecuteScalar(CommandType.Text, "INSERT INTO [dbo].[Floor] ([FloorId],[Picture],[FloorName],[FloorState],[StateChangedDate],[MileageRecord]) VALUES(NEWID(),@ImagePath,@FloorName,@State,@CurrentDate,@MileageRecord)", new SqlParameter[] { floorImagePathParam, floorNameParam, floorStateParam, floorStateChangedDate, floorMileageRecord });
+            SqlHelper.ExecuteScalar(CommandType.Text, "INSERT INTO [dbo].[Floor] ([FloorId],[Picture],[FloorName],[FloorState],[StateChangedDate]) VALUES(NEWID(),@ImagePath,@FloorName,@State,@CurrentDate)", new SqlParameter[] { floorImagePathParam, floorNameParam, floorStateParam, floorStateChangedDate});
         }
     }
 }

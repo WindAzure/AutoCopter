@@ -164,7 +164,7 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 _mapImage.Initialize();
                 _mapImage.ImagePath=new BitmapImage(new Uri(dialog.FileName,UriKind.Absolute));
-                Commands.RegistFloor(dialog.FileName, "");
+                Commands.RegistFloor(dialog.FileName);
             }
         }
     }
