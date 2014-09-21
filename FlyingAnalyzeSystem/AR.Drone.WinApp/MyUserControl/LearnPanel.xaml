@@ -115,7 +115,7 @@
                             </myControl:PlaneControlButton.MouseDownAnimation>
                         </myControl:PlaneControlButton>
 
-                        <myControl:PlaneControlButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,45"
+                        <myControl:PlaneControlButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,20"
                                                       NormalImagePath="../Image/LearnPage/ForwardControl.png" OnMouseDown="MouseDownPlaneForwardControlButton" OnMouseUp="MouseUpPlaneForwardControlButton">
                             <myControl:PlaneControlButton.MouseDownAnimation>
                                 <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
@@ -136,21 +136,36 @@
                             </myControl:PlaneControlButton.MouseDownAnimation>
                         </myControl:PlaneControlButton>
 
-                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,10" 
-                                                         NormalImagePath="../Image/LearnPage/StopControl.png" 
-                                                         DownImagePath="../Image/LearnPage/StopControlDown.png" 
-                                                         HoverImagePath="../Image/LearnPage/StopControl.png"
-                                                         OnClick="OnClickStopButton"/>
+                        <myControl:PlaneControlButton HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,15,0" 
+                                                      NormalImagePath="../Image/LearnPage/UpControl.png" OnMouseDown="MouseDownPlaneUpControlButton" OnMouseUp="MouseUpPlaneUpControlButton">
+                            <myControl:PlaneControlButton.MouseDownAnimation>
+                                <ObjectAnimationUsingKeyFrames Duration="0:0:0.12">
 
-                        <myControl:ImageThreeStateButton HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,15,0" 
-                                                         NormalImagePath="../Image/LearnPage/UpControl.png" 
-                                                         DownImagePath="../Image/LearnPage/UpControlDown.png" 
-                                                         HoverImagePath="../Image/LearnPage/UpControl.png"/>
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <BitmapImage UriSource="../Image/LearnPage/UpControlDown.png"/>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
 
-                        <myControl:ImageThreeStateButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,30" 
-                                                         NormalImagePath="../Image/LearnPage/DownControl.png" 
-                                                         DownImagePath="../Image/LearnPage/DownControlDown.png" 
-                                                         HoverImagePath="../Image/LearnPage/DownControl.png"/>
+                                </ObjectAnimationUsingKeyFrames>
+                            </myControl:PlaneControlButton.MouseDownAnimation>
+                        </myControl:PlaneControlButton>
+
+                        <myControl:PlaneControlButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,30" 
+                                                      NormalImagePath="../Image/LearnPage/DownControl.png" OnMouseDown="MouseDownPlaneDownControlButton" OnMouseUp="MouseUpPlaneDownControlButton">
+                            <myControl:PlaneControlButton.MouseDownAnimation>
+                                <ObjectAnimationUsingKeyFrames Duration="0:0:2">
+
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <BitmapImage UriSource="../Image/LearnPage/DownControlDown.png"/>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+
+                                </ObjectAnimationUsingKeyFrames>
+                            </myControl:PlaneControlButton.MouseDownAnimation>
+                        </myControl:PlaneControlButton>
+                        
                     </Grid>
                 </Grid>
             </Grid>

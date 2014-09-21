@@ -40,7 +40,7 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
-        private ObjectAnimationUsingKeyFrames _mouseDownAnimation;
+        private ObjectAnimationUsingKeyFrames _mouseDownAnimation = null;
         public ObjectAnimationUsingKeyFrames MouseDownAnimation
         {
             set
@@ -62,15 +62,6 @@ namespace AR.Drone.WinApp.MyUserControl
             InitializeComponent();
             MouseDownAnimation = null;
             _board.Completed += CompletedBoard;
-            _board.Changed += OnBoardChanged;
-        }
-
-        void OnBoardChanged(object sender, EventArgs e)
-        {
-            if (OnMouseDown != null)
-            {
-                OnMouseDown();
-            }
         }
 
         void CompletedBoard(object sender, EventArgs e)
@@ -95,6 +86,10 @@ namespace AR.Drone.WinApp.MyUserControl
         private void MouseLeftButtonDownImage(object sender, MouseButtonEventArgs e)
         {
             _isDown = true;
+            if (OnMouseDown != null)
+            {
+                OnMouseDown();
+            }
             StartAnimation();
         }
 
