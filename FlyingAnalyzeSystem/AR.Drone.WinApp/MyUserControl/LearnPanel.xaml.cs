@@ -25,6 +25,20 @@ namespace AR.Drone.WinApp.MyUserControl
         private int _timeValue = 1;
         private Timer _timer=new Timer();
 
+        public delegate void LearnPanelEvent();
+        public event LearnPanelEvent MouseDownLeftControlButton = null;
+        public event LearnPanelEvent MouseUpLeftControlButton = null;
+        public event LearnPanelEvent MouseDownRightControlButton = null;
+        public event LearnPanelEvent MouseUpRightControlButton = null;
+        public event LearnPanelEvent MouseDownForwardControlButton = null;
+        public event LearnPanelEvent MouseUpForwardControlButton = null;
+        public event LearnPanelEvent MouseDownUpControlButton = null;
+        public event LearnPanelEvent MouseUpUpControlButton = null;
+        public event LearnPanelEvent MouseDownDownControlButton = null;
+        public event LearnPanelEvent MouseUpDownControlButton = null;
+        public event LearnPanelEvent ClickSaveButton = null;
+        public event LearnPanelEvent ClickUploadButton = null;
+        public event LearnPanelEvent ClickBackButton = null;
         public event PropertyChangedEventHandler PropertyChanged = null;
         public void OnPropertyChanged(String propertyName)
         {
@@ -161,84 +175,122 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void MouseDownPlaneLeftControlButton()
         {
-            Debug.WriteLine("MouseDownPlaneLeftControlButton");
             InitializeTimerAndValue("Degs");
+            if (MouseDownLeftControlButton != null)
+            {
+                MouseDownLeftControlButton();
+            }
         }
 
         private void MouseUpPlaneLeftControlButton()
         {
-            Debug.WriteLine("MouseUpPlaneLeftControlButton");
             _timer.Stop();
+            if (MouseUpLeftControlButton != null)
+            {
+                MouseUpLeftControlButton();
+            }
         }
 
         private void MouseDownPlaneRightControlButton()
         {
-            Debug.WriteLine("MouseDownPlaneRightControlButton");
             InitializeTimerAndValue("Degs");
+            if (MouseDownRightControlButton != null)
+            {
+                MouseDownRightControlButton();
+            }
         }
 
         private void MouseUpPlaneRightControlButton()
         {
-            Debug.WriteLine("MouseUpPlaneRightControlButton");
             _timer.Stop();
+            if (MouseUpRightControlButton != null)
+            {
+                MouseUpRightControlButton();
+            }
         }
 
         private void MouseDownPlaneForwardControlButton()
         {
-            Debug.WriteLine("MouseDownPlaneForwardControlButton");
             InitializeTimerAndValue("Secs");
+            if (MouseDownForwardControlButton != null)
+            {
+                MouseDownForwardControlButton();
+            }
         }
 
         private void MouseUpPlaneForwardControlButton()
         {
-            Debug.WriteLine("MouseUpPlaneForwardControlButton");
             _timer.Stop();
+            if (MouseUpForwardControlButton != null)
+            {
+                MouseUpForwardControlButton();
+            }
         }
 
         private void MouseDownPlaneUpControlButton()
         {
-            Debug.WriteLine("MouseDownPlaneUpControlButton");
             InitializeTimerAndValue("Secs");
+            if (MouseDownUpControlButton != null)
+            {
+                MouseDownUpControlButton();
+            }
         }
 
         private void MouseUpPlaneUpControlButton()
         {
-            Debug.WriteLine("MouseUpPlaneUpControlButton");
             _timer.Stop();
+            if (MouseUpUpControlButton != null)
+            {
+                MouseUpUpControlButton();
+            }
         }
 
         private void MouseDownPlaneDownControlButton()
         {
-            Debug.WriteLine("MouseDownPlaneDownControlButton");
             InitializeTimerAndValue("Secs");
+            if (MouseDownDownControlButton != null)
+            {
+                MouseDownDownControlButton();
+            }
         }
 
         private void MouseUpPlaneDownControlButton()
         {
-            Debug.WriteLine("MouseUpPlaneDownControlButton");
             _timer.Stop();
+            if (MouseUpDownControlButton != null)
+            {
+                MouseUpDownControlButton();
+            }
         }
 
         private void OnClickSaveButton()
         {
-            Debug.WriteLine("OnClickSaveButton");
+            if (ClickSaveButton != null)
+            {
+                ClickSaveButton();
+            }
         }
 
         private void OnClickUploadButton()
         {
-            Debug.WriteLine("OnClickUploadButton");
+            if (ClickUploadButton != null)
+            {
+                ClickUploadButton();
+            }
         }
 
         private void OnClickBackButton()
         {
-            Debug.WriteLine("OnClickBackButton");
+            if (ClickBackButton != null)
+            {
+                ClickBackButton();
+            }
         }
 
         public void SetBattery(double rate)
         {
             ElectricQuantityText = ((int)(rate * 100.0)).ToString();
             _battery.Width = _baterySample.Width * rate;
-            Debug.WriteLine(_battery.Width.ToString());
             Color endColor = GetRelativeColor(_batterySampleBrush.GradientStops, rate);
             Color middleColor = GetRelativeColor(_batterySampleBrush.GradientStops, rate / 2.0);
 
