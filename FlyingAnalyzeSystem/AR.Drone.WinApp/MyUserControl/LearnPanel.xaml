@@ -16,7 +16,8 @@
             <myControl:ImageThreeStateButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"
                                              NormalImagePath="../Image/LearnPage/Back.png" 
                                              DownImagePath="../Image/LearnPage/BackDown.png" 
-                                             HoverImagePath="../Image/LearnPage/BackHover.png"/>
+                                             HoverImagePath="../Image/LearnPage/BackHover.png"
+                                             OnClick="OnClickBackButton"/>
             <Grid Margin="0,45,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="55*"/>
@@ -27,7 +28,8 @@
                 <myControl:UploadButton Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="60" Margin="0,15,0,0"
                                         NormalImagePath="../Image/PlaneStatePage/Upload.png" 
                                         DownImagePath="../Image/PlaneStatePage/UploadDown.png" 
-                                        HoverImagePath="../Image/PlaneStatePage/Upload.png"/>
+                                        HoverImagePath="../Image/PlaneStatePage/Upload.png"
+                                        OnClick="OnClickUploadButton"/>
 
                 <Grid Grid.Column="0" Margin="30,50,0,40">
                     <Grid.Background>
@@ -37,7 +39,7 @@
                     <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10"
                                              NormalImagePath="../Image/LearnPage/Save.png" 
                                              DownImagePath="../Image/LearnPage/SaveDown.png" 
-                                             HoverImagePath="../Image/LearnPage/Save.png"/>
+                                             HoverImagePath="../Image/LearnPage/Save.png" OnClick="OnClickSaveButton"/>
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -50,9 +52,10 @@
                         <Grid.Background>
                             <ImageBrush ImageSource="../Image/LearnPage/Information.png"/>
                         </Grid.Background>
+                        
                         <TextBlock Text="Information" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="10" Margin="2,0,0,0"/>
-                        <TextBlock Text="Ar.Drone-001" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FAED00" Margin="25,19,0,0"/>
-                        <TextBlock Text="323" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#FAED00" Margin="0,0,41,5"/>
+                        <TextBlock Text="{Binding PlaneID}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FAED00" Margin="25,19,0,0"/>
+                        <TextBlock Text="{Binding AltitudeText}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#FAED00" Margin="170,0,0,5"/>
                         <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="11" Width="80.5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,41,0,0">
                             <Rectangle.Fill>
                                 <LinearGradientBrush x:Name="_batterySampleBrush">
@@ -63,8 +66,9 @@
                             </Rectangle.Fill>
                         </Rectangle>
                         <Rectangle x:Name="_battery" Visibility="Visible" Height="11" Width="80.5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,41,0,0"/>
-                        <TextBlock Text="0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,40,248,0"/>
+                        <TextBlock Text="{Binding ElectricQuantityText}" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,40,248,0"/>
                     </Grid>
+                    
                     <Grid Grid.Row="1" Margin="10,5,20,40">
                         <Grid.Background>
                             <ImageBrush ImageSource="../Image/LearnPage/ControlBlock.png" Stretch="Fill"/>

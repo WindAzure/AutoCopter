@@ -62,12 +62,80 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private String _planeID = "";
+        public String PlaneID
+        {
+            set
+            {
+                _planeID = value;
+                OnPropertyChanged("PlaneID");
+            }
+            get
+            {
+                return _planeID;
+            }
+        }
+
+        private String _electricQuantityText = "";
+        public String ElectricQuantityText
+        {
+            set
+            {
+                _electricQuantityText = value;
+                OnPropertyChanged("ElectricQuantityText");
+            }
+            get
+            {
+                return _electricQuantityText;
+            }
+        }
+
+        private String _altitudeText="";
+        public String AltitudeText
+        {
+            set
+            {
+                _altitudeText = value;
+                OnPropertyChanged("AltitudeText");
+            }
+            get
+            {
+                return _altitudeText;
+            }
+        }
+
         public LearnPanel()
         {
             InitializeComponent();
             DataContext = this;
             _timer.Interval = 1000;
             _timer.Elapsed += ElapsedTimer;
+        }
+
+        private Color GetRelativeColor(GradientStopCollection gsc, double offset)
+        {
+            GradientStop before = gsc.Where(w => w.Offset == gsc.Min(m => m.Offset)).First();
+            GradientStop after = gsc.Where(w => w.Offset == gsc.Max(m => m.Offset)).First();
+
+            foreach (var gs in gsc)
+            {
+                if (gs.Offset < offset && gs.Offset > before.Offset)
+                {
+                    before = gs;
+                }
+                if (gs.Offset > offset && gs.Offset < after.Offset)
+                {
+                    after = gs;
+                }
+            }
+
+            var color = new Color();
+            color.ScA = (float)((offset - before.Offset) * (after.Color.ScA - before.Color.ScA) / (after.Offset - before.Offset) + before.Color.ScA);
+            color.ScR = (float)((offset - before.Offset) * (after.Color.ScR - before.Color.ScR) / (after.Offset - before.Offset) + before.Color.ScR);
+            color.ScG = (float)((offset - before.Offset) * (after.Color.ScG - before.Color.ScG) / (after.Offset - before.Offset) + before.Color.ScG);
+            color.ScB = (float)((offset - before.Offset) * (after.Color.ScB - before.Color.ScB) / (after.Offset - before.Offset) + before.Color.ScB);
+
+            return color;
         }
 
         void ElapsedTimer(object sender, ElapsedEventArgs e)
@@ -149,6 +217,48 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             Debug.WriteLine("MouseUpPlaneDownControlButton");
             _timer.Stop();
+        }
+
+        private void OnClickSaveButton()
+        {
+            Debug.WriteLine("OnClickSaveButton");
+        }
+
+        private void OnClickUploadButton()
+        {
+            Debug.WriteLine("OnClickUploadButton");
+        }
+
+        private void OnClickBackButton()
+        {
+            Debug.WriteLine("OnClickBackButton");
+        }
+
+        public void SetBattery(double rate)
+        {
+            ElectricQuantityText = ((int)(rate * 100.0)).ToString();
+            _battery.Width = _baterySample.Width * rate;
+            Debug.WriteLine(_battery.Width.ToString());
+            Color endColor = GetRelativeColor(_batterySampleBrush.GradientStops, rate);
+            Color middleColor = GetRelativeColor(_batterySampleBrush.GradientStops, rate / 2.0);
+
+            LinearGradientBrush gradientBrushGroup = new LinearGradientBrush();
+            GradientStop start = new GradientStop();
+            start.Color = Colors.Red;
+            start.Offset = 0;
+            gradientBrushGroup.GradientStops.Add(start);
+
+            GradientStop middle = new GradientStop();
+            middle.Color = middleColor;
+            middle.Offset = 0.5;
+            gradientBrushGroup.GradientStops.Add(middle);
+
+            GradientStop end = new GradientStop();
+            end.Color = endColor;
+            end.Offset = 1;
+            gradientBrushGroup.GradientStops.Add(end);
+
+            _battery.Fill = gradientBrushGroup;
         }
     }
 }
