@@ -71,7 +71,8 @@
                         </Grid.Background>
 
                         <Image Source="../Image/LearnPage/MainCircle.png" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,10,0,0"/>
-                        <TextBlock Text="Secs" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="105,0,0,0" Foreground="#FFFCDA" FontSize="8"/>
+                        <TextBlock Text="{Binding MainCircleText}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="105,0,0,5" Foreground="#FFFCDA" FontSize="8"/>
+                        <TextBlock Text="{Binding MainCircleValue}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,43,40" Foreground="#FFFCDA" FontSize="24"/>
 
                         <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,35"
                                                       NormalImagePath="../Image/LearnPage/LeftControl.png" OnMouseDown="MouseDownPlaneLeftControlButton" OnMouseUp="MouseUpPlaneLeftControlButton">
