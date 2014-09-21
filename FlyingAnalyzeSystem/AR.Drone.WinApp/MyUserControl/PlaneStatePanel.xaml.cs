@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
@@ -25,18 +26,39 @@ namespace AR.Drone.WinApp.MyUserControl
     /// <summary>
     /// Interaction logic for PlaneStatePanel.xaml
     /// </summary>
-    public partial class PlaneStatePanel : UserControl
+    public partial class PlaneStatePanel : UserControl,INotifyPropertyChanged
     {
-        private ObservableCollection<ImageComboBoxItemProperty> _comboBoxSource = new ObservableCollection<ImageComboBoxItemProperty>();
+        public event PropertyChangedEventHandler PropertyChanged = null;
+        public void OnPropertyChanged(String propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private ObservableCollection<ImageComboBoxItemProperty> _itemSource = new ObservableCollection<ImageComboBoxItemProperty>();
+        public ObservableCollection<ImageComboBoxItemProperty> ComboBoxItemSource
+        {
+            set
+            {
+                _itemSource = value;
+                OnPropertyChanged("ComboBoxItemSource");
+            }
+            get
+            {
+                return _itemSource;
+            }
+        }
 
         public PlaneStatePanel()
         {
             InitializeComponent();
-            _comboBoxSource = _comboBox.ImageComboBoxItemSource;
-            _comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText="123"});
+            /*_comboBox.ImageComboBoxItemSource = ComboBoxItemSource;
+            ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = "123" });*/
         }
 
-        public void OnClickForwardButton()
+        /*public void OnClickForwardButton()
         {
             Debug.WriteLine("OnClickForwardButton");
         }
@@ -54,7 +76,7 @@ namespace AR.Drone.WinApp.MyUserControl
         public void OnClickLeftButton()
         {
             Debug.WriteLine("OnClickLeftButton");
-        }
+        }*/
 
         public void OnClickPlaneItemButton(object sender)
         {
@@ -76,7 +98,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 }
             }
         }
-
+        /*
         public void SetBattery(double rate)
         {
             _battery.Width = 100 * rate;
@@ -129,19 +151,15 @@ namespace AR.Drone.WinApp.MyUserControl
             return color;
         }
 
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            SetBattery(bbb.Value / 100.0);
-        }
 
         private void OnComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-        }
+        }*/
 
         private void OnClickUploadButton()
         {
-            DataSet data=Commands.GetFloorInformation();
+           /* DataSet data=Commands.GetFloorInformation();
             int rows = data.Tables[0].Rows.Count;
             for (int i = 0; i < rows; i++) 
             {
@@ -165,7 +183,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 _mapImage.Initialize();
                 _mapImage.ImagePath=new BitmapImage(new Uri(dialog.FileName,UriKind.Absolute));
                 Commands.RegistFloor(dialog.FileName);
-            }
+            }*/
         }
     }
 }

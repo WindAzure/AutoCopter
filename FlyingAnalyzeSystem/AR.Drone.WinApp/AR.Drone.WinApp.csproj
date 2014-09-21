@@ -296,14 +296,10 @@
     <Resource Include="Image\LoginPage\BigCircleIn.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\PlaneStatePage\Battery.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxItemDelete.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxTextImage.png" />
     <Resource Include="Image\PlaneStatePage\PlaneItemSelected.png" />
-    <Resource Include="Image\PlaneStatePage\MainCircle.png" />
-    <Resource Include="Image\PlaneStatePage\ForwardControlDown.png" />
-    <Resource Include="Image\PlaneStatePage\LeftControlDown.png" />
-    <Resource Include="Image\PlaneStatePage\RightControlDown.png" />
-    <Resource Include="Image\PlaneStatePage\StopControlDown.png" />
     <Resource Include="Image\PlaneStatePage\Upload.png" />
     <Resource Include="Image\PlaneStatePage\UploadDown.png" />
     <Resource Include="Image\PlaneStatePage\PlaneItemDown.png" />
@@ -311,15 +307,8 @@
     <Resource Include="Image\PlaneStatePage\PlaneItem.png" />
     <Resource Include="Image\PlaneStatePage\InformationTitle.png" />
     <Resource Include="Image\PlaneStatePage\BackGround.png" />
-    <Resource Include="Image\PlaneStatePage\Battery.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxItemDeleteHover.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxItemDeleteDown.png" />
-    <Resource Include="Image\PlaneStatePage\LeftControlA2.png" />
-    <Resource Include="Image\PlaneStatePage\LeftControlA1.png" />
-    <Resource Include="Image\PlaneStatePage\RightControlA1.png" />
-    <Resource Include="Image\PlaneStatePage\RightControlA2.png" />
-    <Resource Include="Image\PlaneStatePage\ForwardControlA1.png" />
-    <Resource Include="Image\PlaneStatePage\ForwardControlA2.png" />
     <Resource Include="Image\LearnPage\MapBackGround.png" />
     <Resource Include="Image\LearnPage\ControlBlock.png" />
     <Resource Include="Image\LearnPage\MainCircle.png" />
@@ -339,12 +328,7 @@
     <Resource Include="Image\LearnPage\StopControl.png" />
     <Resource Include="Image\LearnPage\StopControlDown.png" />
     <Resource Include="Image\LearnPage\Information.png" />
-    <Content Include="Image\LearnPage\L-13.png" />
-    <Content Include="Image\LearnPage\L-14.png" />
     <Resource Include="Image\LearnPage\BackGround.png" />
-    <Content Include="Image\LearnPage\NEW-12.png" />
-    <Content Include="Image\LearnPage\NEW-13.png" />
-    <Content Include="Image\LearnPage\NEW-14.png" />
     <Resource Include="Image\LearnPage\Back.png" />
     <Resource Include="Image\LearnPage\Save.png" />
     <Resource Include="Image\LearnPage\SaveDown.png" />
@@ -356,10 +340,6 @@
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Resource Include="Image\PlaneStatePage\AccessoryCircle.png" />
-    <Resource Include="Image\PlaneStatePage\RightControl.png" />
-    <Resource Include="Image\PlaneStatePage\LeftControl.png" />
-    <Resource Include="Image\PlaneStatePage\ForwardControl.png" />
-    <Resource Include="Image\PlaneStatePage\StopControl.png" />
     <Content Include="Image\PlaneStatePage\PC02-24.png" />
     <Content Include="Image\PlaneStatePage\PC02-25.png" />
     <Resource Include="Image\PlaneStatePage\Map.png" />

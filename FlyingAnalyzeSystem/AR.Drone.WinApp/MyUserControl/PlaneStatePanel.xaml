@@ -10,7 +10,7 @@
 
     <Viewbox Stretch="Fill">
         <Grid>
-            <Image Stretch="Fill" Source="../Image/PlaneStatePage/BackGround.png"/>
+            <Image Source="../Image/PlaneStatePage/BackGround.png"/>
 
             <Grid Margin="0,45,0,0">
                 <Grid.ColumnDefinitions>
@@ -18,13 +18,16 @@
                     <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Margin="20,0,0,0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Grid>
-                        <Image Stretch="Fill" Source="../Image/PlaneStatePage/PlaneStateTitle.png"/>
+                <StackPanel Margin="40,0,0,0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Grid Height="30">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="../Image/PlaneStatePage/PlaneStateTitle.png"/>
+                        </Grid.Background>
                         <TextBlock Text="PLANE NAME" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0"/>
                     </Grid>
 
-                    <StackPanel x:Name="_planeItemsStackPanel">
+                    <StackPanel x:Name="_planeItemsStackPanel" Orientation="Vertical">
+
                         <myControl:PlaneItemButton Margin="0,5,0,0"
                                                    NormalImagePath="../Image/PlaneStatePage/PlaneItem.png" 
                                                    DownImagePath="../Image/PlaneStatePage/PlaneItemDown.png"
@@ -70,98 +73,59 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Margin="5,0,20,0">
-                    <Grid>
-                        <Image Source="../Image/PlaneStatePage/InformationTitle.png"/>
+                    <Grid Height="30">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="../Image/PlaneStatePage/InformationTitle.png"/>
+                        </Grid.Background>
                         <TextBlock Text="INFORMATION" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Column="1" Margin="0,7,0,0">
-                        <Image Source="../Image/PlaneStatePage/InformationBlock.png"/>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="8*"/>
-                            </Grid.RowDefinitions>
+                    <Grid Height="280" Margin="0,5,0,0">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="../Image/PlaneStatePage/InformationBlock.png"/>
+                        </Grid.Background>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65*"/>
+                            <ColumnDefinition Width="35*"/>
+                        </Grid.ColumnDefinitions>
 
-                            <Grid Grid.Row="0">
-                                <TextBlock Text="Location :" Foreground="White" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Grid Grid.Column="0">
+                            <myComboxBox:ImageComboBox x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,12,0,0" Width="240" Height="30"/>
 
-                                <myComboxBox:ImageComboBox x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,11,0,0" Width="160" Height="23"
-                                                           SelectionChanged="OnComboBoxSelectionChanged"/>
-
-                                <myControl:UploadButton VerticalAlignment="Center" HorizontalAlignment="Left" Margin="250,12,0,3" Width="60"
-                                                        NormalImagePath="../Image/PlaneStatePage/Upload.png" 
-                                                        DownImagePath="../Image/PlaneStatePage/UploadDown.png" 
-                                                        HoverImagePath="../Image/PlaneStatePage/Upload.png"
-                                                        OnClick="OnClickUploadButton"/>
-                            </Grid>
-
-                            <Grid Grid.Row="1" Margin="10,0">
-                                <Grid  Margin="10,0,0,10" HorizontalAlignment="Left" x:Name="_mapGrid">
-                                    <Image Stretch="Fill" Source="../Image/PlaneStatePage/MapBackGround.png"/>
-                                    <myControl:MapImageView Width="275" Height="200" Margin="7,7,7,7" x:Name="_mapImage"/>                                    
-                                </Grid>
-
-                                <Grid Margin="305,0,10,10">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="25*"/>
-                                        <RowDefinition Height="75*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Grid Grid.Row="0">
-                                        <Image Source="../Image/PlaneStatePage/Battery.png"/>
-                                        <TextBlock Text="323" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#FAED00" Margin="91,0,57,8"/>
-                                        <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="12" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,9.5,0,0">
-                                            <Rectangle.Fill>
-                                                <LinearGradientBrush x:Name="_batterySampleBrush">
-                                                    <GradientStop Color="#FF0000" Offset="0"/>
-                                                    <GradientStop Color="#FFFF00" Offset="0.5"/>
-                                                    <GradientStop Color="#00FF00" Offset="1"/>
-                                                </LinearGradientBrush>
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-
-                                        <Rectangle x:Name="_battery" Height="12" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,9.5,0,0"/>
-                                    </Grid>
-
-                                    <Grid Grid.Row="1">
-                                        <Image Source="../Image/PlaneStatePage/MainCircle.png" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"/>
-                                        <Image Source="../Image/PlaneStatePage/AccessoryCircle.png" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="55,40,55,0"/>
-                                        <TextBlock Text="Secs" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFCDA" FontSize="8"/>
-
-                                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="6,0,116,20"
-                                                                         NormalImagePath="../Image/PlaneStatePage/LeftControl.png" 
-                                                                         DownImagePath="../Image/PlaneStatePage/LeftControlDown.png" 
-                                                                         HoverImagePath="../Image/PlaneStatePage/LeftControl.png"
-                                                                         OnClick="OnClickLeftButton"/>
-
-                                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="115,0,7,20"
-                                                                         NormalImagePath="../Image/PlaneStatePage/RightControl.png" 
-                                                                         DownImagePath="../Image/PlaneStatePage/RightControlDown.png" 
-                                                                         HoverImagePath="../Image/PlaneStatePage/RightControl.png"
-                                                                         OnClick="OnClickRightButton"/>
-
-                                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="73,0,73,8" 
-                                                                         NormalImagePath="../Image/PlaneStatePage/StopControl.png" 
-                                                                         DownImagePath="../Image/PlaneStatePage/StopControlDown.png" 
-                                                                         HoverImagePath="../Image/PlaneStatePage/StopControl.png"
-                                                                         OnClick="OnClickStopButton"/>
-
-                                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="64,0,64,37" 
-                                                                         NormalImagePath="../Image/PlaneStatePage/ForwardControl.png" 
-                                                                         DownImagePath="../Image/PlaneStatePage/ForwardControlDown.png" 
-                                                                         HoverImagePath="../Image/PlaneStatePage/ForwardControl.png"
-                                                                         OnClick="OnClickForwardButton"/>
-                                    </Grid>
-                                </Grid>
+                            <Grid x:Name="_mapGrid" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="225" Width="290" Margin="15,0,0,10">
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="../Image/PlaneStatePage/MapBackGround.png"/>
+                                </Grid.Background>
+                                <myControl:MapImageView Width="275" Height="200" x:Name="_mapImage"/>
                             </Grid>
                         </Grid>
+
+                        <Grid Grid.Column="1">
+                            <myControl:UploadButton VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" Height="22"
+                        		NormalImagePath="../Image/PlaneStatePage/Upload.png" 
+                        		DownImagePath="../Image/PlaneStatePage/UploadDown.png" 
+                        		HoverImagePath="../Image/PlaneStatePage/Upload.png"
+                        		OnClick="OnClickUploadButton" Margin="0,17,0,0"/>
+                            <Image Source="../Image/PlaneStatePage/Battery.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="65" Width="150" Margin="0,47,0,0"/>
+                            <TextBlock Text="Battery &amp; Altitude" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="10" Margin="7,48,0,0"/>
+                            <TextBlock Text="323" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FAED00" Margin="0,90,0,0"/>                       
+                            <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="12" Width="89" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,69,0,0">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush x:Name="_batterySampleBrush">
+                                        <GradientStop Color="#FF0000" Offset="0"/>
+                                        <GradientStop Color="#FFFF00" Offset="0.5"/>
+                                        <GradientStop Color="#00FF00" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <Rectangle x:Name="_battery" Visibility="Visible" Height="12" Width="89" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,69,0,0"/>
+                            <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,68,137,0"/>
+                        </Grid>
+                        
+                        
                     </Grid>
                 </StackPanel>
             </Grid>
-            <Slider x:Name="bbb" HorizontalAlignment="Left" Margin="269,352,0,0" VerticalAlignment="Top" Width="123" Minimum="0" Maximum="100" ValueChanged="Slider_ValueChanged"/>
-            <Image Margin="499,315,92,19" x:Name="sh" RenderTransformOrigin="0.407,0.471">
-            </Image>
         </Grid>
     </Viewbox>
 
