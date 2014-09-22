@@ -312,7 +312,7 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void OnClickUploadButton()
         {
-   /*         OpenFileDialog dialog = new OpenFileDialog();
+            OpenFileDialog dialog = new OpenFileDialog();
             dialog.DefaultExt = ".png";
             dialog.Filter = "PNG File(.png)|*.png|JPEG File(.jpeg)|*jpeg|JPG File(.jpg)|*jpg";
             Nullable<bool> isFileReaded = dialog.ShowDialog();
@@ -320,8 +320,7 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 Commands.RegistFloor(dialog.FileName);
                 ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = System.IO.Path.GetFileNameWithoutExtension(dialog.FileName), MapImage = new BitmapImage(new Uri(dialog.FileName, UriKind.Absolute)) });
-            }*/
-            _mapImage.ImagePath=new BitmapImage(new Uri("C:\\Users\\Azure\\Desktop\\Map\\科研大樓B2-地下演講廳.png",UriKind.Absolute));
+            }
         }
 
         private void OnClickBackButton()

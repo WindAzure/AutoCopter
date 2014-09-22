@@ -7,15 +7,18 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <Grid Background="White" x:Name="_mapImageBack"  MouseWheel="OnMouseWheelMapImageBack" ClipToBounds="True"
-          MouseDown="OnMouseDownMapImageBack" MouseMove="OnMouseMoveMapImageBack" MouseUp="OnMouseUpMapImageBack">
-        <Image  x:Name="_mapImageView" Source="{Binding ImagePath}" Stretch="Fill">
-            <Image.RenderTransform>
+          MouseLeftButtonDown="OnMouseLeftButtonDownMapImageBack" MouseMove="OnMouseMoveMapImageBack" MouseLeftButtonUp="OnMouseLeftButtonUpMapImageBack" MouseRightButtonDown="OnMouseRightButtonDownMapImageBack" MouseRightButtonUp="OnMouseRightButtonUpMapImageBack">
+        <Canvas x:Name="_mapImageView">
+            <Canvas.Background>
+                <ImageBrush ImageSource="{Binding ImagePath}"/>
+            </Canvas.Background>
+            <Canvas.RenderTransform>
                 <TransformGroup x:Name="_group">
                     <ScaleTransform x:Name="_scale"/>
                     <TranslateTransform x:Name="_trans"/>
                 </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
+            </Canvas.RenderTransform>
+        </Canvas>
     </Grid>
 
 </UserControl>
