@@ -55,6 +55,9 @@
     <StartupObject>AR.Drone.WinApp.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NumericUpDown">
+      <HintPath>..\..\..\Desktop\NumericUpDown_Binary_and_Documentation\NumericUpDown.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -67,6 +70,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\..\..\Desktop\Extended WPF Toolkit Binaries\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidGcmNotificationer.cs" />
@@ -119,6 +125,15 @@
     </Compile>
     <Compile Include="MyUserControl\PlaneItemButton.xaml.cs">
       <DependentUpon>PlaneItemButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyUserControl\PlaneStateChildPanel\PatrolingPanel.xaml.cs">
+      <DependentUpon>PatrolingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyUserControl\PlaneStateChildPanel\ReadyPanel.xaml.cs">
+      <DependentUpon>ReadyPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyUserControl\PlaneStateChildPanel\StandbyPanel.xaml.cs">
+      <DependentUpon>StandbyPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\PlaneStatePanel.xaml.cs">
       <DependentUpon>PlaneStatePanel.xaml</DependentUpon>
@@ -282,6 +297,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyUserControl\PlaneStateChildPanel\PatrolingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyUserControl\PlaneStateChildPanel\ReadyPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyUserControl\PlaneStateChildPanel\StandbyPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyUserControl\PlaneStatePanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -296,6 +323,17 @@
     <Resource Include="Image\LoginPage\BigCircleIn.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\PlaneStatePage\AM1.png" />
+    <Resource Include="Image\PlaneStatePage\PM2.png" />
+    <Resource Include="Image\PlaneStatePage\PM1.png" />
+    <Resource Include="Image\PlaneStatePage\AM2.png" />
+    <Resource Include="Image\PlaneStatePage\CancelButton.png" />
+    <Resource Include="Image\PlaneStatePage\CancelButtonDown.png" />
+    <Resource Include="Image\PlaneStatePage\OkButton.png" />
+    <Resource Include="Image\PlaneStatePage\OkButtonDown.png" />
+    <Resource Include="Image\PlaneStatePage\StandbyPanelBackGround.png" />
+    <Resource Include="Image\PlaneStatePage\ReadyPanelBackGround.png" />
+    <Content Include="Image\PlaneStatePage\時間-22.png" />
     <Resource Include="Image\PlaneStatePage\Battery.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxItemDelete.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxTextImage.png" />

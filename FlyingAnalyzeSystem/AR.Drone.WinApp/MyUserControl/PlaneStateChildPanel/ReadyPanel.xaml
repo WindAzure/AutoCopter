@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel.ReadyPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:wpfs="clr-namespace:eisiWare;assembly=NumericUpDown"
+             mc:Ignorable="d" 
+             xmlns:myControl="clr-namespace:AR.Drone.WinApp.MyUserControl"
+             d:DesignHeight="175" d:DesignWidth="427">
+
+    <Viewbox Stretch="Fill">
+        <Grid>
+            <Image Source="../../Image/PlaneStatePage/ReadyPanelBackGround.png" Stretch="Fill"/>
+            
+            <myControl:ImageThreeStateButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,20,0,0"
+                                             NormalImagePath="../../Image/PlaneStatePage/AM1.png" 
+                                             DownImagePath="../../Image/PlaneStatePage/AM2.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/AM1.png"/>
+
+            <myControl:ImageThreeStateButton HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="8,0,0,5"
+                                             NormalImagePath="../../Image/PlaneStatePage/PM1.png" 
+                                             DownImagePath="../../Image/PlaneStatePage/PM2.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/PM1.png"/>
+            
+            <wpfx:MaskedTextBox Mask="00 : 00 : 00" Text="08 : 20 : 50" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,10,0"
+                                Background="Transparent" BorderThickness="0" Foreground="White"/>
+            
+            <myControl:ImageThreeStateButton HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,15,10,0"
+                                             NormalImagePath="../../Image/PlaneStatePage/OkButton.png" 
+                                             DownImagePath="../../Image/PlaneStatePage/OkButtonDown.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/OkButton.png"/>
+        </Grid>
+    </Viewbox>
+</UserControl>

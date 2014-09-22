@@ -19,7 +19,7 @@ namespace AR.Drone.WinApp.MyUserControl
     /// <summary>
     /// Interaction logic for MapImageView.xaml
     /// </summary>
-    public partial class MapImageView : UserControl,INotifyPropertyChanged
+    public partial class MapImageView : UserControl, INotifyPropertyChanged
     {
         private Boolean _isClickDown = false;
         private Boolean _isDown = false;
@@ -53,7 +53,7 @@ namespace AR.Drone.WinApp.MyUserControl
             InitializeComponent();
             DataContext = this;
         }
-        
+
         public void Initialize()
         {
             _scale.ScaleX = 1;
@@ -97,7 +97,7 @@ namespace AR.Drone.WinApp.MyUserControl
             if (_isClickDown)
             {
                 Initialize();
-                _isClickDown = false; 
+                _isClickDown = false;
             }
             _isDown = false;
         }

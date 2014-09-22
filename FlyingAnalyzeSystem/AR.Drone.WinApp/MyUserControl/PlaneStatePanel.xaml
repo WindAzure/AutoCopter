@@ -6,7 +6,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500"
              xmlns:myControl="clr-namespace:AR.Drone.WinApp.MyUserControl"
-             xmlns:myComboxBox="clr-namespace:AR.Drone.WinApp.MyUserControl.MapComboBox">
+             xmlns:myComboxBox="clr-namespace:AR.Drone.WinApp.MyUserControl.MapComboBox"
+             xmlns:myChildControl="clr-namespace:AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel">
 
     <Viewbox Stretch="Fill">
         <Grid>
@@ -120,8 +121,11 @@
                             </Rectangle>
                             <Rectangle x:Name="_battery" Visibility="Visible" Height="12" Width="89" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,69,0,0"/>
                             <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,68,137,0"/>
+
+                            <myChildControl:StandbyPanel Height="50" Width="150" HorizontalAlignment="Left"/>
+                            <myChildControl:ReadyPanel Width="150" HorizontalAlignment="Left" Margin="0,175,0,32"/>
+
                         </Grid>
-                        
                         
                     </Grid>
                 </StackPanel>

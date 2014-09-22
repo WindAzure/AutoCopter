@@ -29,9 +29,8 @@ namespace AR.Drone.WinApp.Forms
             _learnPanel.MouseUpDownControlButton += MouseUpLearnPanelDownControlButton;
             _learnPanel.ClickSaveButton += ClickLearnPanelSaveButton;
             _learnPanel.ClickBackButton += ClickLearnPanelBackButton;
-
-            ObservableCollection<ImageComboBoxItemProperty> list = _learnPanel.ComboBoxItemSource;
-            /*list.Add(new ImageComboBoxItemProperty() { ItemText = "456" });
+            /*ObservableCollection<ImageComboBoxItemProperty> list = _learnPanel.ComboBoxItemSource;
+            list.Add(new ImageComboBoxItemProperty() { ItemText = "456" });
             list.Add(new ImageComboBoxItemProperty() { ItemText = "789" });
             list.Add(new ImageComboBoxItemProperty() { ItemText = "999" });
             list.Add(new ImageComboBoxItemProperty() { ItemText = "888" });
