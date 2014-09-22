@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" MouseLeftButtonDown="MouseLeftButtonDownImage" MouseLeftButtonUp="MouseLeftButtonUpImage" MouseLeave="MouseLeaveImage" Focusable="True">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" MouseLeftButtonDown="MouseLeftButtonDownImage" MouseLeftButtonUp="MouseLeftButtonUpImage" MouseLeave="MouseLeaveImage" Focusable="False">
         <Image x:Name="img" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"/>
     </Grid>
 </UserControl>

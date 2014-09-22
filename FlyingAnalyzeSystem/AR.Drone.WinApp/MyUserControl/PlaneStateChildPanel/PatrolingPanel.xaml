@@ -3,9 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:myControl="clr-namespace:AR.Drone.WinApp.MyUserControl"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+             d:DesignHeight="572" d:DesignWidth="444">
+
+    <Viewbox Stretch="Fill">
+        <Grid>
+            <Image Source="../../Image/PlaneStatePage/PatrolPanelBackGround.png" Stretch="Fill"/>
+            <Image Source="../../Image/PlaneStatePage/PatrolPanelBattery.png"  Stretch="Fill" VerticalAlignment="Top" Margin="4,20,4,0" Height="49"/>
+            <TextBlock Text="323" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FAED00" Margin="45,50,0,0"/>
+            <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="12" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="53,25,0,0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush x:Name="_batterySampleBrush">
+                        <GradientStop Color="#FF0000" Offset="0"/>
+                        <GradientStop Color="#FFFF00" Offset="0.5"/>
+                        <GradientStop Color="#00FF00" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="_battery" Visibility="Visible" Height="12" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="53,25,0,0"/>
+            <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,30,120,0"/>
             
-    </Grid>
+            <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,45,0,0"
+                                             NormalImagePath="../../Image/PlaneStatePage/ManualButton.png" 
+                                             DownImagePath="../../Image/PlaneStatePage/ManualButton.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/ManualButton.png"/>
+            
+            <myControl:ImageThreeStateButton HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,20"
+                                             NormalImagePath="../../Image/PlaneStatePage/StopButton.png" 
+                                             DownImagePath="../../Image/PlaneStatePage/StopButton.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/StopButton.png"/>
+
+            <myControl:ImageThreeStateButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,20"
+                                             NormalImagePath="../../Image/PlaneStatePage/ReturnButton.png" 
+                                             DownImagePath="../../Image/PlaneStatePage/ReturnButton.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/ReturnButton.png"/>
+
+        </Grid>
+    </Viewbox>
 </UserControl>

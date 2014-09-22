@@ -9,7 +9,7 @@
              xmlns:myComboxBox="clr-namespace:AR.Drone.WinApp.MyUserControl.MapComboBox"
              xmlns:myChildControl="clr-namespace:AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel">
 
-    <Viewbox Stretch="Fill">
+    <Viewbox Stretch="Fill" Focusable="False">
         <Grid>
             <Image Source="../Image/PlaneStatePage/BackGround.png"/>
 
@@ -107,24 +107,28 @@
                         		DownImagePath="../Image/PlaneStatePage/UploadDown.png" 
                         		HoverImagePath="../Image/PlaneStatePage/Upload.png"
                         		OnClick="OnClickUploadButton" Margin="0,17,0,0"/>
-                            <Image Source="../Image/PlaneStatePage/Battery.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="65" Width="150" Margin="0,47,0,0"/>
-                            <TextBlock Text="Battery &amp; Altitude" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="10" Margin="7,48,0,0"/>
-                            <TextBlock Text="323" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FAED00" Margin="0,90,0,0"/>                       
-                            <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="12" Width="89" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,69,0,0">
-                                <Rectangle.Fill>
-                                    <LinearGradientBrush x:Name="_batterySampleBrush">
-                                        <GradientStop Color="#FF0000" Offset="0"/>
-                                        <GradientStop Color="#FFFF00" Offset="0.5"/>
-                                        <GradientStop Color="#00FF00" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <Rectangle x:Name="_battery" Visibility="Visible" Height="12" Width="89" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,69,0,0"/>
-                            <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,68,137,0"/>
+                            
+                            <Grid>
+                                <!--<Image Source="../Image/PlaneStatePage/Battery.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="65" Width="150" Margin="0,47,0,0"/>
+                                <TextBlock Text="Battery &amp; Altitude" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="10" Margin="7,48,0,0"/>
+                                <TextBlock Text="323" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FAED00" Margin="0,90,0,0"/>                       
+                                <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="12" Width="89" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,69,0,0">
+                                    <Rectangle.Fill>
+                                        <LinearGradientBrush x:Name="_batterySampleBrush">
+                                            <GradientStop Color="#FF0000" Offset="0"/>
+                                            <GradientStop Color="#FFFF00" Offset="0.5"/>
+                                            <GradientStop Color="#00FF00" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                                <Rectangle x:Name="_battery" Visibility="Visible" Height="12" Width="89" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,69,0,0"/>
+                                <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,68,137,0"/>
 
-                            <myChildControl:StandbyPanel Height="50" Width="150" HorizontalAlignment="Left"/>
-                            <myChildControl:ReadyPanel Width="150" HorizontalAlignment="Left" Margin="0,175,0,32"/>
-
+                                <myChildControl:StandbyPanel Height="50" Width="150" HorizontalAlignment="Left"/>
+                                <myChildControl:ReadyPanel Width="150" HorizontalAlignment="Left" Margin="0,175,0,32"/>-->
+                                
+                                <myChildControl:PatrolingPanel Width="150" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,15,0"/>
+                            </Grid>
                         </Grid>
                         
                     </Grid>
