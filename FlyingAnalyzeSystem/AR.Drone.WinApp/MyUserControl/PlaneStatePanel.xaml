@@ -91,7 +91,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
-                            <myComboxBox:ImageComboBox x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,12,0,0" Width="240" Height="30"/>
+                            <myComboxBox:ImageComboBox x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,12,0,0" Width="240" Height="30" SelectionChanged="OnComboBoxSelectionChanged"/>
 
                             <Grid x:Name="_mapGrid" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="225" Width="290" Margin="15,0,0,10">
                                 <Grid.Background>
@@ -109,7 +109,7 @@
                         		OnClick="OnClickUploadButton" Margin="0,17,0,0"/>
                             
                             <Grid>
-                                <!--<Image Source="../Image/PlaneStatePage/Battery.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="65" Width="150" Margin="0,47,0,0"/>
+                                <Image Source="../Image/PlaneStatePage/Battery.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="65" Width="150" Margin="0,47,0,0"/>
                                 <TextBlock Text="Battery &amp; Altitude" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="10" Margin="7,48,0,0"/>
                                 <TextBlock Text="323" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FAED00" Margin="0,90,0,0"/>                       
                                 <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="12" Width="89" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,69,0,0">
@@ -125,9 +125,9 @@
                                 <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,68,137,0"/>
 
                                 <myChildControl:StandbyPanel Height="50" Width="150" HorizontalAlignment="Left"/>
-                                <myChildControl:ReadyPanel Width="150" HorizontalAlignment="Left" Margin="0,175,0,32"/>-->
+                                <myChildControl:ReadyPanel Width="150" HorizontalAlignment="Left" Margin="0,175,0,32"/>
                                 
-                                <myChildControl:PatrolingPanel Width="150" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,15,0"/>
+                                <!--<myChildControl:PatrolingPanel Width="150" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,15,0" x:Name="_patrolPanel"/>-->
                             </Grid>
                         </Grid>
                         

@@ -54,29 +54,45 @@ namespace AR.Drone.WinApp.MyUserControl
         public PlaneStatePanel()
         {
             InitializeComponent();
-            /*_comboBox.ImageComboBoxItemSource = ComboBoxItemSource;
-            ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = "123" });*/
+        /*    _patrolPanel.ClickManualButton += OnClickPatrolManualButton;
+            _patrolPanel.ClickReturnButton += OnClickPatrolReturnButton;
+            _patrolPanel.ClickStopButton += OnClickPatrolStopButton;*/
+            _comboBox.ImageComboBoxItemSource = ComboBoxItemSource;
+            LoadImageFromServer();
         }
 
-        /*public void OnClickForwardButton()
+        private void OnClickPatrolStopButton()
         {
-            Debug.WriteLine("OnClickForwardButton");
+            Debug.WriteLine("OnClickPatrolStopButton");
         }
 
-        public void OnClickStopButton()
+        private void OnClickPatrolReturnButton()
         {
-            Debug.WriteLine("OnClickStopButton");
+            Debug.WriteLine("OnClickPatrolReturnButton");
         }
 
-        public void OnClickRightButton()
+        private void OnClickPatrolManualButton()
         {
-            Debug.WriteLine("OnClickRightButton");
+            Debug.WriteLine("OnClickManualButton");
         }
 
-        public void OnClickLeftButton()
+        private void LoadImageFromServer()
         {
-            Debug.WriteLine("OnClickLeftButton");
-        }*/
+            DataSet data = Commands.GetFloorInformation();
+            int rows = data.Tables[0].Rows.Count;
+            for (int i = 0; i < rows; i++)
+            {
+                byte[] imageBytes = (byte[])data.Tables[0].Rows[i][1];
+                MemoryStream stream = new MemoryStream();
+                stream.Write(imageBytes, 0, imageBytes.Length);
+                stream.Position = 0;
+                BitmapImage img = new BitmapImage();
+                img.BeginInit();
+                img.StreamSource = stream;
+                img.EndInit();
+                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img });
+            }
+        }
 
         public void OnClickPlaneItemButton(object sender)
         {
@@ -93,7 +109,6 @@ namespace AR.Drone.WinApp.MyUserControl
                 {
                     if (T == 1)
                     {
-                        //_comboBoxSource.Add(new ImageComboBoxItemProperty() { ItemText = "共同科館3F" });
                     }
                 }
             }
@@ -149,31 +164,20 @@ namespace AR.Drone.WinApp.MyUserControl
             color.ScB = (float)((offset - before.Offset) * (after.Color.ScB - before.Color.ScB) / (after.Offset - before.Offset) + before.Color.ScB);
 
             return color;
-        }
-
-
-        private void OnComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }*/
 
         private void OnClickUploadButton()
         {
-           /* DataSet data=Commands.GetFloorInformation();
-            int rows = data.Tables[0].Rows.Count;
-            for (int i = 0; i < rows; i++) 
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.DefaultExt = ".png";
+            dialog.Filter = "PNG File(.png)|*.png|JPEG File(.jpeg)|*jpeg|JPG File(.jpg)|*jpg";
+            Nullable<bool> isFileReaded = dialog.ShowDialog();
+            if (isFileReaded == true)
             {
-                byte[] imageBytes = (byte[])data.Tables[0].Rows[i][1];
-                MemoryStream stream = new MemoryStream();
-                stream.Write(imageBytes, 0, imageBytes.Length);
-                stream.Position = 0;
-                BitmapImage img = new BitmapImage();
-                img.BeginInit();
-                img.StreamSource = stream;
-                img.EndInit();
-                _mapImage.ImagePath = img;
+                Commands.RegistFloor(dialog.FileName);
+                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = System.IO.Path.GetFileNameWithoutExtension(dialog.FileName), MapImage = new BitmapImage(new Uri(dialog.FileName, UriKind.Absolute)) });
             }
-
+            /*
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.DefaultExt = ".png";
             dialog.Filter = "PNG File(.png)|*.png|JPEG File(.jpeg)|*jpeg|JPG File(.jpg)|*jpg";
@@ -184,6 +188,19 @@ namespace AR.Drone.WinApp.MyUserControl
                 _mapImage.ImagePath=new BitmapImage(new Uri(dialog.FileName,UriKind.Absolute));
                 Commands.RegistFloor(dialog.FileName);
             }*/
+        }
+
+        private void OnComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            if (0 <= comboBox.SelectedIndex && comboBox.SelectedIndex < ComboBoxItemSource.Count)
+            {
+                _mapImage.ImagePath = ComboBoxItemSource[comboBox.SelectedIndex].MapImage;
+            }
+            else
+            {
+                _mapImage.ImagePath = null;
+            }
         }
     }
 }

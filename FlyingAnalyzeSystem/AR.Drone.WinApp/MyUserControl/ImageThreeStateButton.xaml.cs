@@ -20,10 +20,19 @@ namespace AR.Drone.WinApp.MyUserControl
     /// <summary>
     /// Interaction logic for ImageThreeStateButton.xaml
     /// </summary>
-    public partial class ImageThreeStateButton : UserControl
+    public partial class ImageThreeStateButton : UserControl, INotifyPropertyChanged
     {
         private bool _isHover = false;
         private bool _isDown = false;
+
+        public event PropertyChangedEventHandler PropertyChanged = null;
+        public void OnPropertyChanged(String propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
         private BitmapImage _normalImage;
         private String _normalImagePath;
@@ -38,6 +47,20 @@ namespace AR.Drone.WinApp.MyUserControl
             get
             {
                 return _normalImagePath;
+            }
+        }
+
+        private bool _isActive = true;
+        public bool IsActive
+        {
+            set
+            {
+                _isActive = value;
+                OnPropertyChanged("IsActive");
+            }
+            get
+            {
+                return _isActive;
             }
         }
 
@@ -77,8 +100,9 @@ namespace AR.Drone.WinApp.MyUserControl
         public ImageThreeStateButton()
         {
             InitializeComponent();
+            DataContext = this;
         }
-        
+
         private void MouseLeftButtonDownImage(object sender, MouseButtonEventArgs e)
         {
             _isDown = true;

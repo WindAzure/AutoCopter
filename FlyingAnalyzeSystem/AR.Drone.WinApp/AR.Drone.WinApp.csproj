@@ -323,6 +323,7 @@
     <Resource Include="Image\LoginPage\BigCircleIn.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Image\PlaneStatePage\時間-29.png" />
     <Resource Include="Image\PlaneStatePage\AM1.png" />
     <Resource Include="Image\PlaneStatePage\PM2.png" />
     <Resource Include="Image\PlaneStatePage\PM1.png" />
@@ -334,16 +335,16 @@
     <Resource Include="Image\PlaneStatePage\StandbyPanelBackGround.png" />
     <Resource Include="Image\PlaneStatePage\ReadyPanelBackGround.png" />
     <Resource Include="Image\PlaneStatePage\ManualButton.png" />
-    <Content Include="Image\PlaneStatePage\0921-11.png" />
-    <Content Include="Image\PlaneStatePage\0921-12.png" />
-    <Content Include="Image\PlaneStatePage\0921-13.png" />
-    <Content Include="Image\PlaneStatePage\0921-14.png" />
+    <Resource Include="Image\PlaneStatePage\ManualButtonHover.png" />
+    <Resource Include="Image\PlaneStatePage\ManualButtonDown.png" />
     <Resource Include="Image\PlaneStatePage\StopButton.png" />
     <Resource Include="Image\PlaneStatePage\ReturnButton.png" />
-    <Content Include="Image\PlaneStatePage\0921-17.png" />
-    <Content Include="Image\PlaneStatePage\0921-18.png" />
-    <Resource Include="Image\PlaneStatePage\PatrolPanelBackGround.png" />
+    <Resource Include="Image\PlaneStatePage\StopButtonHover.png" />
+    <Resource Include="Image\PlaneStatePage\ReturnButtonHover.png" />
+    <Resource Include="Image\PlaneStatePage\StopButtonDown.png" />
+    <Resource Include="Image\PlaneStatePage\ReturnButtonDown.png" />
     <Resource Include="Image\PlaneStatePage\PatrolPanelBattery.png" />
+    <Resource Include="Image\PlaneStatePage\PatrolPanelBackGround.png" />
     <Content Include="Image\PlaneStatePage\PM-35.png" />
     <Content Include="Image\PlaneStatePage\時間-22.png" />
     <Resource Include="Image\PlaneStatePage\Battery.png" />

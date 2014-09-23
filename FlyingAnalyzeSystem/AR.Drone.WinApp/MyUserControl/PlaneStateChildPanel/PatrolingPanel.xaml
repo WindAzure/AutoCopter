@@ -11,8 +11,9 @@
         <Grid>
             <Image Source="../../Image/PlaneStatePage/PatrolPanelBackGround.png" Stretch="Fill"/>
             <Image Source="../../Image/PlaneStatePage/PatrolPanelBattery.png"  Stretch="Fill" VerticalAlignment="Top" Margin="4,20,4,0" Height="49"/>
-            <TextBlock Text="323" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FAED00" Margin="45,50,0,0"/>
-            <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="12" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="53,25,0,0">
+            <TextBlock Text="Battery &amp; Altitude" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="8" Margin="15,1,0,0"/>
+            <TextBlock Text="{Binding AltitudeText}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FAED00" Margin="45,50,0,0"/>
+            <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="12" Width="94" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,28,0,0">
                 <Rectangle.Fill>
                     <LinearGradientBrush x:Name="_batterySampleBrush">
                         <GradientStop Color="#FF0000" Offset="0"/>
@@ -21,23 +22,27 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Rectangle x:Name="_battery" Visibility="Visible" Height="12" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="53,25,0,0"/>
-            <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,30,120,0"/>
+            <Rectangle x:Name="_battery" Visibility="Visible" Height="12" Width="94" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,28,0,0"/>
+            <TextBlock Text="{Binding ElectricQuantityText}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,30,120,0"/>
+            <TextBlock Text="Function Key" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="8" Margin="0,0,0,32"/>
             
-            <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,45,0,0"
+            <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,48,0,0" Width="80" Height="50"
                                              NormalImagePath="../../Image/PlaneStatePage/ManualButton.png" 
-                                             DownImagePath="../../Image/PlaneStatePage/ManualButton.png" 
-                                             HoverImagePath="../../Image/PlaneStatePage/ManualButton.png"/>
+                                             DownImagePath="../../Image/PlaneStatePage/ManualButtonDown.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/ManualButtonHover.png"
+                                             OnClick="OnClickManualButton"/>
             
             <myControl:ImageThreeStateButton HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,20"
                                              NormalImagePath="../../Image/PlaneStatePage/StopButton.png" 
-                                             DownImagePath="../../Image/PlaneStatePage/StopButton.png" 
-                                             HoverImagePath="../../Image/PlaneStatePage/StopButton.png"/>
+                                             DownImagePath="../../Image/PlaneStatePage/StopButtonDown.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/StopButtonHover.png"
+                                             OnClick="OnClickStopButton"/>
 
             <myControl:ImageThreeStateButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,20"
                                              NormalImagePath="../../Image/PlaneStatePage/ReturnButton.png" 
-                                             DownImagePath="../../Image/PlaneStatePage/ReturnButton.png" 
-                                             HoverImagePath="../../Image/PlaneStatePage/ReturnButton.png"/>
+                                             DownImagePath="../../Image/PlaneStatePage/ReturnButtonDown.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/ReturnButtonHover.png"
+                                             OnClick="OnClickReturnButton"/>
 
         </Grid>
     </Viewbox>
