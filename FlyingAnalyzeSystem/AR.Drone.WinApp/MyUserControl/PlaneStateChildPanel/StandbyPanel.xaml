@@ -19,7 +19,8 @@
             <myControl:ImageThreeStateButton HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"
                                              NormalImagePath="../../Image/PlaneStatePage/CancelButton.png" 
                                              DownImagePath="../../Image/PlaneStatePage/CancelButtonDown.png" 
-                                             HoverImagePath="../../Image/PlaneStatePage/CancelButton.png"/>
+                                             HoverImagePath="../../Image/PlaneStatePage/CancelButton.png"
+                                             OnClick="OnClickCancelButton"/>
         </Grid>
     </Viewbox>
 

@@ -10,23 +10,9 @@
     <Viewbox Stretch="Fill">
         <Grid>
             <Image Source="../../Image/PlaneStatePage/PatrolPanelBackGround.png" Stretch="Fill"/>
-            <Image Source="../../Image/PlaneStatePage/PatrolPanelBattery.png"  Stretch="Fill" VerticalAlignment="Top" Margin="4,20,4,0" Height="49"/>
-            <TextBlock Text="Battery &amp; Altitude" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="8" Margin="15,1,0,0"/>
-            <TextBlock Text="{Binding AltitudeText}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FAED00" Margin="45,50,0,0"/>
-            <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="12" Width="94" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,28,0,0">
-                <Rectangle.Fill>
-                    <LinearGradientBrush x:Name="_batterySampleBrush">
-                        <GradientStop Color="#FF0000" Offset="0"/>
-                        <GradientStop Color="#FFFF00" Offset="0.5"/>
-                        <GradientStop Color="#00FF00" Offset="1"/>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle x:Name="_battery" Visibility="Visible" Height="12" Width="94" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,28,0,0"/>
-            <TextBlock Text="{Binding ElectricQuantityText}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,30,120,0"/>
-            <TextBlock Text="Function Key" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="8" Margin="0,0,0,32"/>
+            <TextBlock Text="Function Key" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="8" Margin="0,2,0,32"/>
             
-            <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,48,0,0" Width="80" Height="50"
+            <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,20" Width="80" Height="50"
                                              NormalImagePath="../../Image/PlaneStatePage/ManualButton.png" 
                                              DownImagePath="../../Image/PlaneStatePage/ManualButtonDown.png" 
                                              HoverImagePath="../../Image/PlaneStatePage/ManualButtonHover.png"

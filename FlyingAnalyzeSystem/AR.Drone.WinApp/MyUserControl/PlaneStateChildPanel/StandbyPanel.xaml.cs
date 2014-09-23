@@ -19,9 +19,20 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
     /// </summary>
     public partial class StandbyPanel : UserControl
     {
+        public delegate void StanbyPanelEvent();
+        public StanbyPanelEvent ClickCancelButton = null;
+
         public StandbyPanel()
         {
             InitializeComponent();
+        }
+
+        private void OnClickCancelButton()
+        {
+            if (ClickCancelButton != null)
+            {
+                ClickCancelButton();
+            }
         }
     }
 }

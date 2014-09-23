@@ -26,6 +26,9 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
         private int _mm;
         private int _ss;
 
+        public delegate void ReadyPanelTimeSpanEvent(TimeSpan span);
+        public ReadyPanelTimeSpanEvent ClickOkButton = null;
+
         public event PropertyChangedEventHandler PropertyChanged = null;
         public void OnPropertyChanged(String propertyName)
         {
@@ -38,9 +41,18 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
         public ReadyPanel()
         {
             InitializeComponent();
-            _textBox.Text = DateTime.Now.ToString("HH : mm : ss");
-            _amButton.IsToggled = true;
-            _pmButton.IsToggled = false;
+            DateTime currentTime = DateTime.Now;
+            _textBox.Text = currentTime.ToString("hh : mm : ss");
+            if (currentTime.Hour < 12)
+            {
+                _amButton.IsToggled = true;
+                _pmButton.IsToggled = false;
+            }
+            else
+            {
+                _amButton.IsToggled = false;
+                _pmButton.IsToggled = true;
+            }
         }
 
         private void OnToggleAmButton()
@@ -55,16 +67,19 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
 
         private void OnClickOkButton()
         {
-            String enterTime;
+            TimeSpan span;
             if (_amButton.IsToggled)
             {
-                enterTime = _hh.ToString() + ":" + _mm.ToString() + ":" + _ss.ToString();
+                span = new TimeSpan(_hh, _mm, _ss);
             }
             else
             {
-                enterTime = (_hh + 12).ToString() + ":" + _mm.ToString() + ":" + _ss.ToString();
+                span = new TimeSpan(_hh + 12, _mm, _ss);
             }
-            Debug.WriteLine(enterTime);
+            if (ClickOkButton != null)
+            {
+                ClickOkButton(span);
+            }
         }
 
         public bool CheckTextLegal(String settingTime)
@@ -107,7 +122,6 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
                 _warningText.Visibility = Visibility.Visible;
                 return false;
             }
-            return true;
         }
 
         private void OnTextBoxTextChanged(object sender, TextChangedEventArgs e)

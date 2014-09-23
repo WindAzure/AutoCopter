@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.planeStatePanel1 = new AR.Drone.WinApp.MyUserControl.PlaneStatePanel();
+            this._elementHost = new System.Windows.Forms.Integration.ElementHost();
+            this._planeStatePanel = new AR.Drone.WinApp.MyUserControl.PlaneStatePanel();
             this.SuspendLayout();
             // 
-            // elementHost1
+            // _elementHost
             // 
-            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elementHost1.Location = new System.Drawing.Point(0, 0);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(984, 562);
-            this.elementHost1.TabIndex = 0;
-            this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this.planeStatePanel1;
+            this._elementHost.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._elementHost.Location = new System.Drawing.Point(0, 0);
+            this._elementHost.Name = "_elementHost";
+            this._elementHost.Size = new System.Drawing.Size(984, 562);
+            this._elementHost.TabIndex = 0;
+            this._elementHost.Text = "elementHost1";
+            this._elementHost.Child = this._planeStatePanel;
             // 
             // PlaneStateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 562);
-            this.Controls.Add(this.elementHost1);
+            this.Controls.Add(this._elementHost);
             this.Name = "PlaneStateForm";
             this.Text = "PlaneStateForm";
             this.ResumeLayout(false);
@@ -56,7 +56,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Integration.ElementHost elementHost1;
         private MyUserControl.PlaneStatePanel planeStatePanel1;
+        private System.Windows.Forms.Integration.ElementHost _elementHost;
+        private MyUserControl.PlaneStatePanel _planeStatePanel;
     }
 }

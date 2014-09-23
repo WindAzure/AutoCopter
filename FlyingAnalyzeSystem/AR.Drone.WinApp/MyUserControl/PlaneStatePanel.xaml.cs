@@ -51,14 +51,50 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private String _electricQuantityText = "";
+        public String ElectricQuantityText
+        {
+            set
+            {
+                _electricQuantityText = value;
+                OnPropertyChanged("ElectricQuantityText");
+            }
+            get
+            {
+                return _electricQuantityText;
+            }
+        }
+
+        private String _altitudeText = "";
+        public String AltitudeText
+        {
+            set
+            {
+                _altitudeText = value;
+                OnPropertyChanged("AltitudeText");
+            }
+            get
+            {
+                return _altitudeText;
+            }
+        }
+
         public PlaneStatePanel()
         {
             InitializeComponent();
-        /*    _patrolPanel.ClickManualButton += OnClickPatrolManualButton;
+            DataContext = this;
+            _patrolPanel.ClickManualButton += OnClickPatrolManualButton;
             _patrolPanel.ClickReturnButton += OnClickPatrolReturnButton;
-            _patrolPanel.ClickStopButton += OnClickPatrolStopButton;*/
+            _patrolPanel.ClickStopButton += OnClickPatrolStopButton;
+            _readyPanel.ClickOkButton += OnClickOkButton;
+            _standbyPanel.ClickCancelButton += OnClickCancelButton;
             _comboBox.ImageComboBoxItemSource = ComboBoxItemSource;
             LoadImageFromServer();
+        }
+
+        private void OnClickCancelButton()
+        {
+            Debug.WriteLine("OnClickCancelButton");
         }
 
         private void OnClickPatrolStopButton()
@@ -74,6 +110,11 @@ namespace AR.Drone.WinApp.MyUserControl
         private void OnClickPatrolManualButton()
         {
             Debug.WriteLine("OnClickManualButton");
+        }
+
+        private void OnClickOkButton(TimeSpan span)
+        {
+            Debug.WriteLine(span.ToString());
         }
 
         private void LoadImageFromServer()
@@ -113,10 +154,11 @@ namespace AR.Drone.WinApp.MyUserControl
                 }
             }
         }
-        /*
+        
         public void SetBattery(double rate)
         {
-            _battery.Width = 100 * rate;
+            ElectricQuantityText = ((int)(rate * 100.0)).ToString();
+            _battery.Width = _baterySample.Width * rate;
             Color endColor = GetRelativeColor(_batterySampleBrush.GradientStops, rate);
             Color middleColor = GetRelativeColor(_batterySampleBrush.GradientStops, rate / 2.0);
 
@@ -157,14 +199,13 @@ namespace AR.Drone.WinApp.MyUserControl
             }
 
             var color = new Color();
-
             color.ScA = (float)((offset - before.Offset) * (after.Color.ScA - before.Color.ScA) / (after.Offset - before.Offset) + before.Color.ScA);
             color.ScR = (float)((offset - before.Offset) * (after.Color.ScR - before.Color.ScR) / (after.Offset - before.Offset) + before.Color.ScR);
             color.ScG = (float)((offset - before.Offset) * (after.Color.ScG - before.Color.ScG) / (after.Offset - before.Offset) + before.Color.ScG);
             color.ScB = (float)((offset - before.Offset) * (after.Color.ScB - before.Color.ScB) / (after.Offset - before.Offset) + before.Color.ScB);
 
             return color;
-        }*/
+        }
 
         private void OnClickUploadButton()
         {           

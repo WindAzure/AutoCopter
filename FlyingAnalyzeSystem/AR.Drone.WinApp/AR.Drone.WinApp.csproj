@@ -330,11 +330,11 @@
     <Resource Include="Image\LoginPage\BigCircleIn.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Image\PlaneStatePage\時間-29.png" />
+    <Resource Include="Image\PlaneStatePage\PatrolPanelBackGround.png" />
     <Resource Include="Image\PlaneStatePage\AM1.png" />
-    <Resource Include="Image\PlaneStatePage\PM2.png" />
-    <Resource Include="Image\PlaneStatePage\PM1.png" />
     <Resource Include="Image\PlaneStatePage\AM2.png" />
+    <Resource Include="Image\PlaneStatePage\PM1.png" />
+    <Resource Include="Image\PlaneStatePage\PM2.png" />
     <Resource Include="Image\PlaneStatePage\CancelButton.png" />
     <Resource Include="Image\PlaneStatePage\CancelButtonDown.png" />
     <Resource Include="Image\PlaneStatePage\OkButton.png" />
@@ -351,9 +351,6 @@
     <Resource Include="Image\PlaneStatePage\StopButtonDown.png" />
     <Resource Include="Image\PlaneStatePage\ReturnButtonDown.png" />
     <Resource Include="Image\PlaneStatePage\PatrolPanelBattery.png" />
-    <Resource Include="Image\PlaneStatePage\PatrolPanelBackGround.png" />
-    <Content Include="Image\PlaneStatePage\PM-35.png" />
-    <Content Include="Image\PlaneStatePage\時間-22.png" />
     <Resource Include="Image\PlaneStatePage\Battery.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxItemDelete.png" />
     <Resource Include="Image\PlaneStatePage\ComboBoxTextImage.png" />
@@ -397,7 +394,6 @@
     <Resource Include="Image\LearnPage\BackDown.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
-    <Resource Include="Image\PlaneStatePage\AccessoryCircle.png" />
     <Content Include="Image\PlaneStatePage\PC02-24.png" />
     <Content Include="Image\PlaneStatePage\PC02-25.png" />
     <Resource Include="Image\PlaneStatePage\Map.png" />
