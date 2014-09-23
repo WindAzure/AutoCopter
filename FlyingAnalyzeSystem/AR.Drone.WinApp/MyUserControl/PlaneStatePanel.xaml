@@ -125,7 +125,7 @@
                                 <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#00B3B9" FontSize="10" Margin="0,68,137,0"/>
 
                                 <myChildControl:StandbyPanel Height="50" Width="150" HorizontalAlignment="Left"/>
-                                <myChildControl:ReadyPanel Width="150" HorizontalAlignment="Left" Margin="0,175,0,32"/>
+                                <myChildControl:ReadyPanel Width="150" HorizontalAlignment="Left" Margin="0,175,0,32" x:Name="_readyPanel"/>
                                 
                                 <!--<myChildControl:PatrolingPanel Width="150" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,15,0" x:Name="_patrolPanel"/>-->
                             </Grid>

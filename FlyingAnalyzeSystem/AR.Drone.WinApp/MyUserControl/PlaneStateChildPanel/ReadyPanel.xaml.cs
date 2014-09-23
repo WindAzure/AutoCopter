@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -19,36 +20,81 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
     /// <summary>
     /// Interaction logic for ReadyPanel.xaml
     /// </summary>
-    public partial class ReadyPanel : UserControl
+    public partial class ReadyPanel : UserControl, INotifyPropertyChanged
     {
+        private int _hh;
+        private int _mm;
+        private int _ss;
+
+        public event PropertyChangedEventHandler PropertyChanged = null;
+        public void OnPropertyChanged(String propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
         public ReadyPanel()
         {
             InitializeComponent();
             _textBox.Text = DateTime.Now.ToString("HH : mm : ss");
+            _amButton.IsToggled = true;
+            _pmButton.IsToggled = false;
         }
 
-        private void OnClickAmButton()
+        private void OnToggleAmButton()
         {
+            _pmButton.IsToggled = !_pmButton.IsToggled;
         }
 
-        private void OnClickPmButton()
+        private void OnTogglePmButton()
         {
-            Debug.WriteLine("OnClickPmButton");
+            _amButton.IsToggled = !_amButton.IsToggled;
         }
 
         private void OnClickOkButton()
         {
+            String enterTime;
+            if (_amButton.IsToggled)
+            {
+                enterTime = _hh.ToString() + ":" + _mm.ToString() + ":" + _ss.ToString();
+            }
+            else
+            {
+                enterTime = (_hh + 12).ToString() + ":" + _mm.ToString() + ":" + _ss.ToString();
+            }
+            Debug.WriteLine(enterTime);
         }
 
         public bool CheckTextLegal(String settingTime)
         {
             try
             {
-                int timeValue = Convert.ToInt32(Regex.Replace(settingTime, "[^0-9]", ""));
-                int hh = timeValue / 10000;
-                int mm = (timeValue - hh * 10000) / 100;
-                int ss = timeValue - hh * 10000 - mm * 100;
-                if (0 <= hh && hh <= 11 && 0 <= mm && mm <= 59 && 0 <= ss && ss <= 59)
+                String[] data = settingTime.Split(' ', ':');
+                int T = 0;
+                foreach (String s in data)
+                {
+                    if (!String.IsNullOrEmpty(s))
+                    {
+                        int value = Convert.ToInt32(s);
+                        if (T == 0)
+                        {
+                            _hh = value;
+                        }
+                        else if (T == 1)
+                        {
+                            _mm = value;
+                        }
+                        else if (T == 2)
+                        {
+                            _ss = value;
+                        }
+                        T++;
+                    }
+                }
+
+                if (0 <= _hh && _hh <= 11 && 0 <= _mm && _mm <= 59 && 0 <= _ss && _ss <= 59)
                 {
                     _warningText.Visibility = Visibility.Hidden;
                     return true;
@@ -58,8 +104,10 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
             }
             catch (Exception e)
             {
+                _warningText.Visibility = Visibility.Visible;
                 return false;
             }
+            return true;
         }
 
         private void OnTextBoxTextChanged(object sender, TextChangedEventArgs e)
