@@ -14,7 +14,7 @@
             <Image Source="../../Image/PlaneStatePage/StandbyPanelBackGround.png" Stretch="Fill"/>
             
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"
-                       Text="08 : 20 : 50" Foreground="White" x:Name="_timeTextBlock"/>
+                       Text="{Binding TimeText}" Foreground="White" x:Name="_timeTextBlock"/>
 
             <myControl:ImageThreeStateButton HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"
                                              NormalImagePath="../../Image/PlaneStatePage/CancelButton.png" 

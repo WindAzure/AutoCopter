@@ -331,10 +331,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\PlaneStatePage\PatrolPanelBackGround.png" />
-    <Resource Include="Image\PlaneStatePage\AM1.png" />
     <Resource Include="Image\PlaneStatePage\AM2.png" />
-    <Resource Include="Image\PlaneStatePage\PM1.png" />
+    <Resource Include="Image\PlaneStatePage\AM1.png" />
     <Resource Include="Image\PlaneStatePage\PM2.png" />
+    <Resource Include="Image\PlaneStatePage\PM1.png" />
     <Resource Include="Image\PlaneStatePage\CancelButton.png" />
     <Resource Include="Image\PlaneStatePage\CancelButtonDown.png" />
     <Resource Include="Image\PlaneStatePage\OkButton.png" />

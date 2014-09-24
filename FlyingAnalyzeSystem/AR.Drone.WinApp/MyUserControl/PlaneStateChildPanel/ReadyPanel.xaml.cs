@@ -74,7 +74,14 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
             }
             else
             {
-                span = new TimeSpan(_hh + 12, _mm, _ss);
+                if (_hh == 12)
+                {
+                    span = new TimeSpan(0, _mm, _ss);
+                }
+                else
+                {
+                    span = new TimeSpan(_hh + 12, _mm, _ss);
+                }
             }
             if (ClickOkButton != null)
             {
@@ -109,7 +116,7 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
                     }
                 }
 
-                if (0 <= _hh && _hh <= 11 && 0 <= _mm && _mm <= 59 && 0 <= _ss && _ss <= 59)
+                if (1 <= _hh && _hh <= 12 && 0 <= _mm && _mm <= 59 && 0 <= _ss && _ss <= 59)
                 {
                     _warningText.Visibility = Visibility.Hidden;
                     return true;

@@ -29,7 +29,6 @@
                                              DownImagePath="../../Image/PlaneStatePage/ReturnButtonDown.png" 
                                              HoverImagePath="../../Image/PlaneStatePage/ReturnButtonHover.png"
                                              OnClick="OnClickReturnButton"/>
-
         </Grid>
     </Viewbox>
 </UserControl>

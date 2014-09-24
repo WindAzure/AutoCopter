@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,13 +21,14 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace AR.Drone.WinApp.MyUserControl
 {
     /// <summary>
     /// Interaction logic for PlaneStatePanel.xaml
     /// </summary>
-    public partial class PlaneStatePanel : UserControl,INotifyPropertyChanged
+    public partial class PlaneStatePanel : UserControl, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
         public void OnPropertyChanged(String propertyName)
@@ -36,6 +38,10 @@ namespace AR.Drone.WinApp.MyUserControl
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        private TimeSpan _span;
+        private Timer _timer = new Timer();
+        private delegate void TimerDispatcherDelegate();
 
         private ObservableCollection<ImageComboBoxItemProperty> _itemSource = new ObservableCollection<ImageComboBoxItemProperty>();
         public ObservableCollection<ImageComboBoxItemProperty> ComboBoxItemSource
@@ -89,16 +95,40 @@ namespace AR.Drone.WinApp.MyUserControl
             _readyPanel.ClickOkButton += OnClickOkButton;
             _standbyPanel.ClickCancelButton += OnClickCancelButton;
             _comboBox.ImageComboBoxItemSource = ComboBoxItemSource;
+            _timer.Interval = 1000;
+            _timer.Elapsed += ElapsedTimer;
             LoadImageFromServer();
+        }
+
+        private void UpdatePanel()
+        {
+            _standbyPanel.Visibility = Visibility.Hidden;
+            _patrolPanel.Visibility = Visibility.Visible;
+        }
+
+        private void ElapsedTimer(object sender, ElapsedEventArgs e)
+        {
+            if (_span.TotalSeconds == 0)
+            {
+                this.Dispatcher.Invoke(DispatcherPriority.Normal, new TimerDispatcherDelegate(UpdatePanel));
+                _timer.Stop();
+                return;
+            }
+            _span = _span.Subtract(new TimeSpan(0, 0, 1));
+            _standbyPanel.TimeText = _span.ToString();
         }
 
         private void OnClickCancelButton()
         {
-            Debug.WriteLine("OnClickCancelButton");
+            _timer.Stop();
+            _standbyPanel.Visibility = Visibility.Hidden;
+            _readyPanel.Visibility = Visibility.Visible;
         }
 
         private void OnClickPatrolStopButton()
         {
+            _patrolPanel.Visibility = Visibility.Hidden;
+            _readyPanel.Visibility = Visibility.Visible;
             Debug.WriteLine("OnClickPatrolStopButton");
         }
 
@@ -114,7 +144,14 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void OnClickOkButton(TimeSpan span)
         {
-            Debug.WriteLine(span.ToString());
+            DateTime current = DateTime.Now;
+            TimeSpan currentSpan = new TimeSpan(current.Hour, current.Minute, current.Second);
+            _span = currentSpan - span;
+            _standbyPanel.TimeText = _span.ToString();
+
+            _timer.Start();
+            _readyPanel.Visibility = Visibility.Hidden;
+            _standbyPanel.Visibility = Visibility.Visible;
         }
 
         private void LoadImageFromServer()
@@ -154,7 +191,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 }
             }
         }
-        
+
         public void SetBattery(double rate)
         {
             ElectricQuantityText = ((int)(rate * 100.0)).ToString();
@@ -203,13 +240,12 @@ namespace AR.Drone.WinApp.MyUserControl
             color.ScR = (float)((offset - before.Offset) * (after.Color.ScR - before.Color.ScR) / (after.Offset - before.Offset) + before.Color.ScR);
             color.ScG = (float)((offset - before.Offset) * (after.Color.ScG - before.Color.ScG) / (after.Offset - before.Offset) + before.Color.ScG);
             color.ScB = (float)((offset - before.Offset) * (after.Color.ScB - before.Color.ScB) / (after.Offset - before.Offset) + before.Color.ScB);
-
             return color;
         }
 
         private void OnClickUploadButton()
-        {           
-             OpenFileDialog dialog = new OpenFileDialog();
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
             dialog.DefaultExt = ".png";
             dialog.Filter = "PNG File(.png)|*.png|JPEG File(.jpeg)|*jpeg|JPG File(.jpg)|*jpg";
             Nullable<bool> isFileReaded = dialog.ShowDialog();
@@ -218,16 +254,16 @@ namespace AR.Drone.WinApp.MyUserControl
                 Commands.RegistFloor(dialog.FileName);
                 ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = System.IO.Path.GetFileNameWithoutExtension(dialog.FileName), MapImage = new BitmapImage(new Uri(dialog.FileName, UriKind.Absolute)) });
             }
-        /*    OpenFileDialog dialog = new OpenFileDialog();
-            dialog.DefaultExt = ".png";
-            dialog.Filter = "PNG File(.png)|*.png|JPEG File(.jpeg)|*jpeg|JPG File(.jpg)|*jpg";
-            Nullable<bool> isFileReaded = dialog.ShowDialog();
-            if (isFileReaded==true)
-            {
-                _mapImage.Initialize();
-                _mapImage.ImagePath=new BitmapImage(new Uri(dialog.FileName,UriKind.Absolute));
-                Commands.RegistFloor(dialog.FileName);
-            }*/
+            /*    OpenFileDialog dialog = new OpenFileDialog();
+                dialog.DefaultExt = ".png";
+                dialog.Filter = "PNG File(.png)|*.png|JPEG File(.jpeg)|*jpeg|JPG File(.jpg)|*jpg";
+                Nullable<bool> isFileReaded = dialog.ShowDialog();
+                if (isFileReaded==true)
+                {
+                    _mapImage.Initialize();
+                    _mapImage.ImagePath=new BitmapImage(new Uri(dialog.FileName,UriKind.Absolute));
+                    Commands.RegistFloor(dialog.FileName);
+                }*/
         }
 
         private void OnComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
