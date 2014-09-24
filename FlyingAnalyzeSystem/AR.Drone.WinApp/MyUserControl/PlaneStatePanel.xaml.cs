@@ -85,6 +85,34 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private String _selectedMapItemMileage = null;
+        public String SelectedMapItemMileage
+        {
+            set
+            {
+                _selectedMapItemMileage = value;
+                OnPropertyChanged("SelectedMapItemMileage");
+            }
+            get
+            {
+                return _selectedMapItemMileage;
+            }
+        }
+
+        private bool _isFirstPlaneItemSelected = false;
+        public bool IsFirstPlaneItemSelected
+        {
+            set
+            {
+                _isFirstPlaneItemSelected = value;
+                OnPropertyChanged("IsFirstPlaneItemSelected");
+            }
+            get
+            {
+                return _isFirstPlaneItemSelected;
+            }
+        }
+
         public PlaneStatePanel()
         {
             InitializeComponent();
@@ -144,14 +172,31 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void OnClickOkButton(TimeSpan span)
         {
-            DateTime current = DateTime.Now;
-            TimeSpan currentSpan = new TimeSpan(current.Hour, current.Minute, current.Second);
-            _span = currentSpan - span;
-            _standbyPanel.TimeText = _span.ToString();
+            if(_mapImage.ImagePath==null)
+            {
+                MessageBox.Show("Please select map,first.", "Error");
+            }
+            else if (String.IsNullOrEmpty(SelectedMapItemMileage))
+            {
+                MessageBox.Show("The map not been learned.","Error");
+            }
+            else if (!IsFirstPlaneItemSelected)
+            {
+                MessageBox.Show("Please select plane,first.", "Error");
+            }
+            else
+            {
+                DateTime current = DateTime.Now;
+                TimeSpan currentSpan = new TimeSpan(current.Hour, current.Minute, current.Second);
+                Debug.WriteLine(currentSpan.ToString());
+                Debug.WriteLine(span.ToString());
+                _span = currentSpan - span;
+                _standbyPanel.TimeText = _span.ToString();
 
-            _timer.Start();
-            _readyPanel.Visibility = Visibility.Hidden;
-            _standbyPanel.Visibility = Visibility.Visible;
+                _timer.Start();
+                _readyPanel.Visibility = Visibility.Hidden;
+                _standbyPanel.Visibility = Visibility.Visible;
+            }
         }
 
         private void LoadImageFromServer()
@@ -168,13 +213,14 @@ namespace AR.Drone.WinApp.MyUserControl
                 img.BeginInit();
                 img.StreamSource = stream;
                 img.EndInit();
-                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img });
+                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img ,Mileage=data.Tables[0].Rows[i][2].ToString()});
             }
         }
 
         public void OnClickPlaneItemButton(object sender)
         {
             int T = 0;
+            IsFirstPlaneItemSelected = false;
             UIElementCollection group = _planeItemsStackPanel.Children;
             foreach (PlaneItemButton item in group)
             {
@@ -187,6 +233,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 {
                     if (T == 1)
                     {
+                        IsFirstPlaneItemSelected = true;
                     }
                 }
             }
@@ -251,6 +298,7 @@ namespace AR.Drone.WinApp.MyUserControl
             Nullable<bool> isFileReaded = dialog.ShowDialog();
             if (isFileReaded == true)
             {
+                _descriptionPanel.Visibility = Visibility.Hidden;
                 Commands.RegistFloor(dialog.FileName);
                 ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = System.IO.Path.GetFileNameWithoutExtension(dialog.FileName), MapImage = new BitmapImage(new Uri(dialog.FileName, UriKind.Absolute)) });
             }
@@ -271,12 +319,28 @@ namespace AR.Drone.WinApp.MyUserControl
             ComboBox comboBox = sender as ComboBox;
             if (0 <= comboBox.SelectedIndex && comboBox.SelectedIndex < ComboBoxItemSource.Count)
             {
+                _descriptionPanel.Visibility = Visibility.Hidden;
                 _mapImage.ImagePath = ComboBoxItemSource[comboBox.SelectedIndex].MapImage;
+                SelectedMapItemMileage = ComboBoxItemSource[comboBox.SelectedIndex].Mileage;
+                if (String.IsNullOrEmpty(SelectedMapItemMileage))
+                {
+                    _mapImageViewConstraint.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    _mapImageViewConstraint.Visibility = Visibility.Hidden;
+                }
             }
             else
             {
                 _mapImage.ImagePath = null;
+                SelectedMapItemMileage = null;
             }
+        }
+
+        private void OnClickLearnModeDescription()
+        {
+            _descriptionPanel.Visibility = Visibility.Hidden;
         }
     }
 }

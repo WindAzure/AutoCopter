@@ -45,5 +45,19 @@ namespace AR.Drone.WinApp.MyUserControl.MapComboBox
                 return _mapImg;
             }
         }
+
+        private String _mileage = null;
+        public String Mileage
+        {
+            set
+            {
+                _mileage = value;
+                OnPropertyChanged("Mileage");
+            }
+            get
+            {
+                return _mileage;
+            }
+        }
     }
 }

@@ -330,6 +330,9 @@
     <Resource Include="Image\LoginPage\BigCircleIn.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\PlaneStatePage\LearnModeDescription.png" />
+    <Resource Include="Image\PlaneStatePage\LearnModeImageDown.png" />
+    <Resource Include="Image\PlaneStatePage\LearnModeImage.png" />
     <Resource Include="Image\PlaneStatePage\PatrolPanelBackGround.png" />
     <Resource Include="Image\PlaneStatePage\AM2.png" />
     <Resource Include="Image\PlaneStatePage\AM1.png" />

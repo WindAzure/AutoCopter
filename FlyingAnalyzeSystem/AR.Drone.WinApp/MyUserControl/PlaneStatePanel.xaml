@@ -97,7 +97,19 @@
                                 <Grid.Background>
                                     <ImageBrush ImageSource="../Image/PlaneStatePage/MapBackGround.png"/>
                                 </Grid.Background>
+
                                 <myControl:MapImageView Width="275" Height="200" x:Name="_mapImage"/>
+
+                                <myControl:ImageThreeStateButton Visibility="Hidden" x:Name="_mapImageViewConstraint"
+                                             NormalImagePath="../../Image/PlaneStatePage/LearnModeImage.png" 
+                                             DownImagePath="../../Image/PlaneStatePage/LearnModeImageDown.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/LearnModeImage.png"/>
+                                
+                                <myControl:ImageThreeStateButton Visibility="Visible" x:Name="_descriptionPanel"
+                                             NormalImagePath="../../Image/PlaneStatePage/LearnModeDescription.png" 
+                                             DownImagePath="../../Image/PlaneStatePage/LearnModeDescription.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/LearnModeDescription.png"
+                                             OnClick="OnClickLearnModeDescription"/>
                             </Grid>
                         </Grid>
 

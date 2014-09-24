@@ -58,11 +58,13 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
         private void OnToggleAmButton()
         {
             _pmButton.IsToggled = !_pmButton.IsToggled;
+            _okButton.IsActive = CheckTextLegal(_textBox.Text);
         }
 
         private void OnTogglePmButton()
         {
             _amButton.IsToggled = !_amButton.IsToggled;
+            _okButton.IsActive = CheckTextLegal(_textBox.Text);
         }
 
         private void OnClickOkButton()
@@ -115,11 +117,14 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
                         T++;
                     }
                 }
-
-                if (1 <= _hh && _hh <= 12 && 0 <= _mm && _mm <= 59 && 0 <= _ss && _ss <= 59)
+                Debug.WriteLine(_amButton.IsToggled.ToString());
+                if (0 <= _mm && _mm <= 59 && 0 <= _ss && _ss <= 59)
                 {
-                    _warningText.Visibility = Visibility.Hidden;
-                    return true;
+                    if ((_amButton.IsToggled && 0<=_hh && _hh<=11) || (_pmButton.IsToggled && 1<=_hh && _hh<=12))
+                    {
+                        _warningText.Visibility = Visibility.Hidden;
+                        return true;
+                    }
                 }
                 _warningText.Visibility = Visibility.Visible;
                 return false;
