@@ -20,11 +20,11 @@ namespace AR.Drone.WinApp.MyUserControl.MapComboBox
     /// <summary>
     /// Interaction logic for ImageComboBox.xaml
     /// </summary>
-    public partial class ImageComboBox : UserControl,INotifyPropertyChanged
+    public partial class ImageComboBox : UserControl, INotifyPropertyChanged
     {
         public delegate void ImageComboBoxRemoveImageOnClickEvent();
         public delegate void ImageComboBoxSelectionChangedEvent(object sender, SelectionChangedEventArgs e);
-        public event ImageComboBoxRemoveImageOnClickEvent OnRemoveImageClick=null;
+        public event ImageComboBoxRemoveImageOnClickEvent OnRemoveImageClick = null;
         public event ImageComboBoxSelectionChangedEvent SelectionChanged = null;
         public event PropertyChangedEventHandler PropertyChanged = null;
 
@@ -36,7 +36,7 @@ namespace AR.Drone.WinApp.MyUserControl.MapComboBox
             }
         }
 
-        private Boolean _isRemovable = false;
+        private ComboBoxItem _highLightedItem = null;
         private ObservableCollection<ImageComboBoxItemProperty> _source = new ObservableCollection<ImageComboBoxItemProperty>();
         public ObservableCollection<ImageComboBoxItemProperty> ImageComboBoxItemSource
         {
@@ -59,30 +59,47 @@ namespace AR.Drone.WinApp.MyUserControl.MapComboBox
 
         private void ClickRemoveImageButton()
         {
+            int pos = -1;
+            foreach (var item in _imageComboBox.Items)
+            {
+                pos++;
+                if (_highLightedItem.Content.Equals(item))
+                {
+                    break;
+                }
+            }
+
+            if ((0 <= pos && pos < _source.Count))
+            {
+                if (!ImageComboBoxItemSource[pos].IsPlaneUsing)
+                {
+                    _imageComboBox.ClearValue(ItemsControl.ItemsSourceProperty);
+                    _source.RemoveAt(pos);
+                    _imageComboBox.ItemsSource = _source;
+                }
+                else
+                {
+                    MessageBox.Show("Plane is patroling.", "Error");
+                }
+            }
+
             if (OnRemoveImageClick != null)
             {
                 OnRemoveImageClick();
             }
-            _isRemovable = true;
+        }
+
+        private void OnComboBoxItemMouseMove(object sender, MouseEventArgs e)
+        {
+            _highLightedItem = sender as ComboBoxItem;
         }
 
         private void SelectionChangedComboBox(object sender, SelectionChangedEventArgs e)
         {
-            if (_isRemovable)
-            {
-                int pos = _imageComboBox.SelectedIndex;
-                _imageComboBox.ClearValue(ItemsControl.ItemsSourceProperty);
-                if (0 <= pos && pos < _source.Count)
-                {
-                    _source.RemoveAt(pos);
-                }
-                _imageComboBox.ItemsSource = _source;
-            }
             if (SelectionChanged != null)
             {
                 SelectionChanged(sender, e);
             }
-            _isRemovable = false;
         }
     }
 }

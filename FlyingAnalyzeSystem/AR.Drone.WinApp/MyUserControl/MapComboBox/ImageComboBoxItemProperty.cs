@@ -59,5 +59,19 @@ namespace AR.Drone.WinApp.MyUserControl.MapComboBox
                 return _mileage;
             }
         }
+
+        private bool _isPlaneUsing = false;
+        public bool IsPlaneUsing
+        {
+            set
+            {
+                _isPlaneUsing = value;
+                OnPropertyChanged("IsPlaneUsing");
+            }
+            get
+            {
+                return _isPlaneUsing;
+            }
+        }
     }
 }

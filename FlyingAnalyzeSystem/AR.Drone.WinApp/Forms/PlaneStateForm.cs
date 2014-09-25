@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace AR.Drone.WinApp.Forms
@@ -28,7 +29,6 @@ namespace AR.Drone.WinApp.Forms
 
         void OnClickPlaneStatePanelManualControlButton()
         {
-            Debug.WriteLine(_planeStatePanel._comboBox._imageComboBox.SelectedValue);
         }
 
         public void OnClickPlaneStatePanelReturnHomeButton()

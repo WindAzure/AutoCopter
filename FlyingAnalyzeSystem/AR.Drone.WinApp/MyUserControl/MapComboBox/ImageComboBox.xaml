@@ -77,7 +77,15 @@
 
             </ControlTemplate>
         </ComboBox.Template>
-
+        
+        <ComboBox.ItemContainerStyle>
+            
+            
+            <Style TargetType="{x:Type ComboBoxItem}">
+                <EventSetter Event="MouseMove" Handler="OnComboBoxItemMouseMove" />
+            </Style>
+        </ComboBox.ItemContainerStyle>
+        
         <ComboBox.ItemTemplateSelector>
             <control:ComboBoxTemplateSelector>
 

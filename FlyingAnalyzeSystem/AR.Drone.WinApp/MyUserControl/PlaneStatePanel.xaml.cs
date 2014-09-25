@@ -164,6 +164,7 @@ namespace AR.Drone.WinApp.MyUserControl
             _readyPanel.Visibility = Visibility.Visible;
             _isPlaneT1Flying = false;
             _comboBox.IsEnabled = true;
+            ComboBoxItemSource[_comboBox._imageComboBox.SelectedIndex].IsPlaneUsing = false;
         }
 
         private void OnClickPatrolReturnButton()
@@ -200,6 +201,7 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 _isPlaneT1Flying = true;
                 _comboBox.IsEnabled = false;
+                ComboBoxItemSource[_comboBox._imageComboBox.SelectedIndex].IsPlaneUsing = true;
                 DateTime current = DateTime.Now;
                 TimeSpan currentSpan = new TimeSpan(current.Hour, current.Minute, current.Second);
                 _span = span - currentSpan;
