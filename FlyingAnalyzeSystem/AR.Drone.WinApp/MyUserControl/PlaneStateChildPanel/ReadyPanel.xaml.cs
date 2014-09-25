@@ -131,7 +131,6 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
             }
             catch (Exception e)
             {
-                Debug.WriteLine("!!");
                 _warningText.Visibility = Visibility.Visible;
                 return false;
             }

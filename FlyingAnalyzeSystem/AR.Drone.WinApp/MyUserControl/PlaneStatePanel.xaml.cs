@@ -172,13 +172,13 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void OnClickOkButton(TimeSpan span)
         {
-            if(_mapImage.ImagePath==null)
+            if (_mapImage.ImagePath == null)
             {
                 MessageBox.Show("Please select map,first.", "Error");
             }
             else if (String.IsNullOrEmpty(SelectedMapItemMileage))
             {
-                MessageBox.Show("The map not been learned.","Error");
+                MessageBox.Show("The map not been learned.", "Error");
             }
             else if (!IsFirstPlaneItemSelected)
             {
@@ -188,9 +188,11 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 DateTime current = DateTime.Now;
                 TimeSpan currentSpan = new TimeSpan(current.Hour, current.Minute, current.Second);
-                Debug.WriteLine(currentSpan.ToString());
-                Debug.WriteLine(span.ToString());
-                _span = currentSpan - span;
+                _span = span - currentSpan;
+                if (_span < TimeSpan.Zero)
+                {
+                    _span = _span + new TimeSpan(24, 0, 0);
+                }
                 _standbyPanel.TimeText = _span.ToString();
 
                 _timer.Start();
@@ -213,7 +215,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 img.BeginInit();
                 img.StreamSource = stream;
                 img.EndInit();
-                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img ,Mileage=data.Tables[0].Rows[i][2].ToString()});
+                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img, Mileage = data.Tables[0].Rows[i][2].ToString() });
             }
         }
 
