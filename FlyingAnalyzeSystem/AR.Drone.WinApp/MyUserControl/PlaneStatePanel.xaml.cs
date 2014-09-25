@@ -39,9 +39,17 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private bool _isPlaneT1Flying = false;
         private TimeSpan _span;
         private Timer _timer = new Timer();
+
         private delegate void TimerDispatcherDelegate();
+        public delegate void PlaneStatePanelEvent();
+        public delegate void PlaneStatePanelPatrolEvent(String mileage);
+
+        public event PlaneStatePanelEvent ClickPatrolReturnHomeButton = null;
+        public event PlaneStatePanelEvent ClickPatrolManualControlButton = null;
+        public event PlaneStatePanelPatrolEvent StartAutoPatrol = null;
 
         private ObservableCollection<ImageComboBoxItemProperty> _itemSource = new ObservableCollection<ImageComboBoxItemProperty>();
         public ObservableCollection<ImageComboBoxItemProperty> ComboBoxItemSource
@@ -86,7 +94,7 @@ namespace AR.Drone.WinApp.MyUserControl
         }
 
         private String _selectedMapItemMileage = null;
-        public String SelectedMapItemMileage
+        private String SelectedMapItemMileage
         {
             set
             {
@@ -119,7 +127,6 @@ namespace AR.Drone.WinApp.MyUserControl
             DataContext = this;
             _patrolPanel.ClickManualButton += OnClickPatrolManualButton;
             _patrolPanel.ClickReturnButton += OnClickPatrolReturnButton;
-            _patrolPanel.ClickStopButton += OnClickPatrolStopButton;
             _readyPanel.ClickOkButton += OnClickOkButton;
             _standbyPanel.ClickCancelButton += OnClickCancelButton;
             _comboBox.ImageComboBoxItemSource = ComboBoxItemSource;
@@ -140,6 +147,10 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 this.Dispatcher.Invoke(DispatcherPriority.Normal, new TimerDispatcherDelegate(UpdatePanel));
                 _timer.Stop();
+                if (StartAutoPatrol!=null)
+                {
+                    StartAutoPatrol(SelectedMapItemMileage);
+                }
                 return;
             }
             _span = _span.Subtract(new TimeSpan(0, 0, 1));
@@ -151,23 +162,24 @@ namespace AR.Drone.WinApp.MyUserControl
             _timer.Stop();
             _standbyPanel.Visibility = Visibility.Hidden;
             _readyPanel.Visibility = Visibility.Visible;
-        }
-
-        private void OnClickPatrolStopButton()
-        {
-            _patrolPanel.Visibility = Visibility.Hidden;
-            _readyPanel.Visibility = Visibility.Visible;
-            Debug.WriteLine("OnClickPatrolStopButton");
+            _isPlaneT1Flying = false;
+            _comboBox.IsEnabled = true;
         }
 
         private void OnClickPatrolReturnButton()
         {
-            Debug.WriteLine("OnClickPatrolReturnButton");
+            if (ClickPatrolReturnHomeButton != null)
+            {
+                ClickPatrolReturnHomeButton();
+            }
         }
 
         private void OnClickPatrolManualButton()
         {
-            Debug.WriteLine("OnClickManualButton");
+            if (ClickPatrolManualControlButton != null)
+            {
+                ClickPatrolManualControlButton();
+            }
         }
 
         private void OnClickOkButton(TimeSpan span)
@@ -186,6 +198,8 @@ namespace AR.Drone.WinApp.MyUserControl
             }
             else
             {
+                _isPlaneT1Flying = true;
+                _comboBox.IsEnabled = false;
                 DateTime current = DateTime.Now;
                 TimeSpan currentSpan = new TimeSpan(current.Hour, current.Minute, current.Second);
                 _span = span - currentSpan;
@@ -224,6 +238,8 @@ namespace AR.Drone.WinApp.MyUserControl
             int T = 0;
             IsFirstPlaneItemSelected = false;
             UIElementCollection group = _planeItemsStackPanel.Children;
+            _planeInformationPanel.Visibility = Visibility.Hidden;
+            _comboBox.IsEnabled = true;
             foreach (PlaneItemButton item in group)
             {
                 T++;
@@ -235,6 +251,11 @@ namespace AR.Drone.WinApp.MyUserControl
                 {
                     if (T == 1)
                     {
+                        if (_isPlaneT1Flying)
+                        {
+                            _comboBox.IsEnabled = false;
+                        }
+                        _planeInformationPanel.Visibility = Visibility.Visible;
                         IsFirstPlaneItemSelected = true;
                     }
                 }
@@ -343,6 +364,11 @@ namespace AR.Drone.WinApp.MyUserControl
         private void OnClickLearnModeDescription()
         {
             _descriptionPanel.Visibility = Visibility.Hidden;
+        }
+
+        public void DrawPlaneLocation(int index, double currentTimePoint, float angle)
+        {
+            _mapImage.DrawMileageLine(index, currentTimePoint, angle);
         }
     }
 }

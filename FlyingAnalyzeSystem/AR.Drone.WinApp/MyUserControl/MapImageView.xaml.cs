@@ -56,6 +56,25 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private bool _isDrawMileageLine = false;
+        public bool IsDrawMileageLine
+        {
+            set
+            {
+                _isDrawMileageLine = value;
+                OnPropertyChanged("IsDrawMileageLine");
+            }
+            get
+            {
+                return _isDrawMileageLine;
+            }
+        }
+
+        public void DrawMileageLine(int index, double currentTimePoint, float angle)
+        {
+
+        }
+
         public MapImageView()
         {
             InitializeComponent();
@@ -124,6 +143,11 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void OnMouseRightButtonDownMapImageBack(object sender, MouseButtonEventArgs e)
         {
+            if (!IsDrawMileageLine)
+            {
+                return;
+            }
+
             _isRightButtonClickDown = true;
             if (_hasLine)
             {
@@ -139,6 +163,11 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void OnMouseRightButtonUpMapImageBack(object sender, MouseButtonEventArgs e)
         {
+            if (!IsDrawMileageLine)
+            {
+                return;
+            }
+
             if (_isRightButtonClickDown)
             {
                 _hint.X2 = e.GetPosition(_mapImageView).X;

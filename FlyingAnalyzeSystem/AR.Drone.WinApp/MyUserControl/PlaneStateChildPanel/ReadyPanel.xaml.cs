@@ -72,19 +72,27 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
             TimeSpan span;
             if (_amButton.IsToggled)
             {
-                span = new TimeSpan(_hh, _mm, _ss);
-            }
-            else
-            {
                 if (_hh == 12)
                 {
                     span = new TimeSpan(0, _mm, _ss);
                 }
                 else
                 {
+                    span = new TimeSpan(_hh, _mm, _ss);
+                }
+            }
+            else
+            {
+                if (_hh == 12)
+                {
+                    span = new TimeSpan(_hh, _mm, _ss);
+                }
+                else
+                {
                     span = new TimeSpan(_hh + 12, _mm, _ss);
                 }
             }
+
             if (ClickOkButton != null)
             {
                 ClickOkButton(span);
@@ -118,13 +126,10 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
                     }
                 }
 
-                if (0 <= _mm && _mm <= 59 && 0 <= _ss && _ss <= 59)
+                if (1 <= _hh && _hh <= 12 && 0 <= _mm && _mm <= 59 && 0 <= _ss && _ss <= 59)
                 {
-                    if ((_amButton.IsToggled && 0<=_hh && _hh<=11) || (_pmButton.IsToggled && 1<=_hh && _hh<=12))
-                    {
-                        _warningText.Visibility = Visibility.Hidden;
-                        return true;
-                    }
+                    _warningText.Visibility = Visibility.Hidden;
+                    return true;
                 }
                 _warningText.Visibility = Visibility.Visible;
                 return false;

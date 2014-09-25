@@ -17,14 +17,8 @@
                                              DownImagePath="../../Image/PlaneStatePage/ManualButtonDown.png" 
                                              HoverImagePath="../../Image/PlaneStatePage/ManualButtonHover.png"
                                              OnClick="OnClickManualButton"/>
-            
-            <myControl:ImageThreeStateButton HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,20"
-                                             NormalImagePath="../../Image/PlaneStatePage/StopButton.png" 
-                                             DownImagePath="../../Image/PlaneStatePage/StopButtonDown.png" 
-                                             HoverImagePath="../../Image/PlaneStatePage/StopButtonHover.png"
-                                             OnClick="OnClickStopButton"/>
 
-            <myControl:ImageThreeStateButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,20"
+            <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,15"
                                              NormalImagePath="../../Image/PlaneStatePage/ReturnButton.png" 
                                              DownImagePath="../../Image/PlaneStatePage/ReturnButtonDown.png" 
                                              HoverImagePath="../../Image/PlaneStatePage/ReturnButtonHover.png"

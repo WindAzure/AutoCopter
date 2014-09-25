@@ -56,7 +56,6 @@
 
         #endregion
 
-        private MyUserControl.PlaneStatePanel planeStatePanel1;
         private System.Windows.Forms.Integration.ElementHost _elementHost;
         private MyUserControl.PlaneStatePanel _planeStatePanel;
     }

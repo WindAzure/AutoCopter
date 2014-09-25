@@ -23,7 +23,6 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
     {
         public delegate void PatrolingPanelEvent();
         public PatrolingPanelEvent ClickManualButton = null;
-        public PatrolingPanelEvent ClickStopButton = null;
         public PatrolingPanelEvent ClickReturnButton = null;
         
         public PatrolingPanel()
@@ -36,14 +35,6 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
             if (ClickManualButton != null)
             {
                 ClickManualButton();
-            }
-        }
-
-        private void OnClickStopButton()
-        {
-            if (ClickStopButton != null)
-            {
-                ClickStopButton();
             }
         }
 
