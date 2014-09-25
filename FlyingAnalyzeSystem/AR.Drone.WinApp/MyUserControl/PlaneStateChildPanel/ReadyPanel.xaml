@@ -14,13 +14,13 @@
             <Image Source="../../Image/PlaneStatePage/ReadyPanelBackGround.png" Stretch="Fill"/>
             
             <myControl:ImageToggleButton x:Name="_amButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,20,0,0"
-                                         NormalImagePath="../../Image/PlaneStatePage/AM1.png" 
-                                         DownImagePath="../../Image/PlaneStatePage/AM2.png" 
+                                         NormalImagePath="../../Image/PlaneStatePage/Am.png" 
+                                         DownImagePath="../../Image/PlaneStatePage/AmToggled.png" 
                                          OnToggle="OnToggleAmButton"/>
 
             <myControl:ImageToggleButton x:Name="_pmButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="8,0,0,5"
-                                         NormalImagePath="../../Image/PlaneStatePage/PM1.png" 
-                                         DownImagePath="../../Image/PlaneStatePage/PM2.png" 
+                                         NormalImagePath="../../Image/PlaneStatePage/Pm.png" 
+                                         DownImagePath="../../Image/PlaneStatePage/PmToggled.png" 
                                          OnToggle="OnTogglePmButton"/>
             
             <wpfx:MaskedTextBox Mask="00 : 00 : 00" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,10,0"

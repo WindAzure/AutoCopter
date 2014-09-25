@@ -42,7 +42,6 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
         {
             InitializeComponent();
             DateTime currentTime = DateTime.Now;
-            _textBox.Text = currentTime.ToString("hh : mm : ss");
             if (currentTime.Hour < 12)
             {
                 _amButton.IsToggled = true;
@@ -53,6 +52,7 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
                 _amButton.IsToggled = false;
                 _pmButton.IsToggled = true;
             }
+            _textBox.Text = currentTime.ToString("hh : mm : ss");
         }
 
         private void OnToggleAmButton()
@@ -117,7 +117,7 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
                         T++;
                     }
                 }
-                Debug.WriteLine(_amButton.IsToggled.ToString());
+
                 if (0 <= _mm && _mm <= 59 && 0 <= _ss && _ss <= 59)
                 {
                     if ((_amButton.IsToggled && 0<=_hh && _hh<=11) || (_pmButton.IsToggled && 1<=_hh && _hh<=12))
@@ -131,6 +131,7 @@ namespace AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel
             }
             catch (Exception e)
             {
+                Debug.WriteLine("!!");
                 _warningText.Visibility = Visibility.Visible;
                 return false;
             }
