@@ -256,6 +256,16 @@ namespace AR.Drone.WinApp.MyUserControl
                         if (_isPlaneT1Flying)
                         {
                             _comboBox.IsEnabled = false;
+                            int N=0;
+                            foreach(var comboBoxitem in ComboBoxItemSource)
+                            {
+                                if(comboBoxitem.IsPlaneUsing)
+                                {
+                                    break;
+                                }
+                                N++;
+                            }
+                            _comboBox._imageComboBox.SelectedIndex = N;
                         }
                         _planeInformationPanel.Visibility = Visibility.Visible;
                         IsFirstPlaneItemSelected = true;

@@ -79,7 +79,7 @@ namespace AR.Drone.WinApp.MyUserControl.MapComboBox
                 }
                 else
                 {
-                    MessageBox.Show("Plane is patroling.", "Error");
+                    MessageBox.Show("Plane is patroling on this map.", "Error");
                 }
             }
 
