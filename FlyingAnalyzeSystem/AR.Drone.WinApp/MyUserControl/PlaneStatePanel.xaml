@@ -119,7 +119,13 @@
                         		DownImagePath="../Image/PlaneStatePage/UploadDown.png" 
                         		HoverImagePath="../Image/PlaneStatePage/Upload.png"
                         		OnClick="OnClickUploadButton" Margin="0,17,0,0"/>
-                            
+
+                            <myControl:ImageThreeStateButton VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" Height="22" x:Name="_learnModeButton"
+                                             NormalImagePath="../../Image/PlaneStatePage/LearnModeImage.png" 
+                                             DownImagePath="../../Image/PlaneStatePage/LearnModeImageDown.png" 
+                                             HoverImagePath="../../Image/PlaneStatePage/LearnModeImage.png"
+                                                              Margin="80,17,0,0"/>
+
                             <Grid x:Name="_planeInformationPanel" Visibility="Hidden">
                                 <Image Source="../Image/PlaneStatePage/Battery.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="65" Width="150" Margin="0,47,0,0"/>
                                 <TextBlock Text="Battery &amp; Altitude" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="10" Margin="7,48,0,0"/>
