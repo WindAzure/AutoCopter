@@ -395,6 +395,8 @@
     <Resource Include="Image\LearnPage\ComboBoxBackGround.png" />
     <Resource Include="Image\LearnPage\BackHover.png" />
     <Resource Include="Image\LearnPage\BackDown.png" />
+    <Resource Include="Image\LearnPage\TakeOfDown.png" />
+    <Resource Include="Image\LearnPage\TakeOf.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Content Include="Image\PlaneStatePage\PC02-24.png" />

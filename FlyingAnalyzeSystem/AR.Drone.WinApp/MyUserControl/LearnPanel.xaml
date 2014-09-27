@@ -79,7 +79,12 @@
                         <TextBlock Text="{Binding MainCircleText}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="105,0,0,5" Foreground="#FFFCDA" FontSize="8"/>
                         <TextBlock Text="{Binding MainCircleValue}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,43,40" Foreground="#FFFCDA" FontSize="24"/>
 
-                        <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,35"
+                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,42,35" Width="56" Height="58"
+                                                         NormalImagePath="../Image/LearnPage/TakeOf.png" x:Name="_takeOffButton"
+                                                         DownImagePath="../Image/LearnPage/TakeOfDown.png" 
+                                                         HoverImagePath="../Image/LearnPage/TakeOf.png" OnClick="OnTakeOfButtonClick"/>
+
+                        <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,35" x:Name="_leftControl" IsEnabled="False"
                                                       NormalImagePath="../Image/LearnPage/LeftControl.png" OnButtonMouseDown="MouseDownPlaneLeftControlButton" OnButtonMouseUp="MouseUpPlaneLeftControlButton">
                             <myControl:PlaneControlButton.MouseDownAnimation>
                                 <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
@@ -100,7 +105,7 @@
                             </myControl:PlaneControlButton.MouseDownAnimation>
                         </myControl:PlaneControlButton>
 
-                        <myControl:PlaneControlButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,55,35"
+                        <myControl:PlaneControlButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,55,35" x:Name="_rightControl" IsEnabled="False"
                                                       NormalImagePath="../Image/LearnPage/RightControl.png" OnButtonMouseDown="MouseDownPlaneRightControlButton" OnButtonMouseUp="MouseUpPlaneRightControlButton">
                             <myControl:PlaneControlButton.MouseDownAnimation>
                                 <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
@@ -121,7 +126,7 @@
                             </myControl:PlaneControlButton.MouseDownAnimation>
                         </myControl:PlaneControlButton>
 
-                        <myControl:PlaneControlButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,20"
+                        <myControl:PlaneControlButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,20" x:Name="_forwardControl" IsEnabled="False"
                                                       NormalImagePath="../Image/LearnPage/ForwardControl.png" OnButtonMouseDown="MouseDownPlaneForwardControlButton" OnButtonMouseUp="MouseUpPlaneForwardControlButton">
                             <myControl:PlaneControlButton.MouseDownAnimation>
                                 <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
@@ -142,7 +147,7 @@
                             </myControl:PlaneControlButton.MouseDownAnimation>
                         </myControl:PlaneControlButton>
 
-                        <myControl:PlaneControlButton HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,15,0" 
+                        <myControl:PlaneControlButton HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,15,0" x:Name="_upControl" IsEnabled="False"
                                                       NormalImagePath="../Image/LearnPage/UpControl.png" OnButtonMouseDown="MouseDownPlaneUpControlButton" OnButtonMouseUp="MouseUpPlaneUpControlButton">
                             <myControl:PlaneControlButton.MouseDownAnimation>
                                 <ObjectAnimationUsingKeyFrames Duration="0:0:0.12">
@@ -157,7 +162,7 @@
                             </myControl:PlaneControlButton.MouseDownAnimation>
                         </myControl:PlaneControlButton>
 
-                        <myControl:PlaneControlButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,30" 
+                        <myControl:PlaneControlButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,30" x:Name="_downControl" IsEnabled="False"
                                                       NormalImagePath="../Image/LearnPage/DownControl.png" OnButtonMouseDown="MouseDownPlaneDownControlButton" OnButtonMouseUp="MouseUpPlaneDownControlButton">
                             <myControl:PlaneControlButton.MouseDownAnimation>
                                 <ObjectAnimationUsingKeyFrames Duration="0:0:2">

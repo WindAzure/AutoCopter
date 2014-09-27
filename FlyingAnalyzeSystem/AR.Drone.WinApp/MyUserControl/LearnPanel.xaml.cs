@@ -44,6 +44,7 @@ namespace AR.Drone.WinApp.MyUserControl
         public event LearnPanelEvent MouseUpDownControlButton = null;
         public event LearnPanelEvent ClickSaveButton = null;
         public event LearnPanelEvent ClickBackButton = null;
+        public event LearnPanelEvent ClickTakeOffButton = null;
         public event PropertyChangedEventHandler PropertyChanged = null;
         public void OnPropertyChanged(String propertyName)
         {
@@ -367,6 +368,20 @@ namespace AR.Drone.WinApp.MyUserControl
             else
             {
                 _mapImage.ImagePath = null;
+            }
+        }
+
+        private void OnTakeOfButtonClick()
+        {
+            _takeOffButton.Visibility = Visibility.Hidden;
+            _rightControl.IsEnabled = true;
+            _leftControl.IsEnabled = true;
+            _forwardControl.IsEnabled = true;
+            _upControl.IsEnabled = true;
+            _downControl.IsEnabled = true;
+            if (ClickTakeOffButton != null)
+            {
+                ClickTakeOffButton();
             }
         }
     }
