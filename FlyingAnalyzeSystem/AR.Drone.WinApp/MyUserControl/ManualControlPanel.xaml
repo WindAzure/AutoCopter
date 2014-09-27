@@ -10,7 +10,8 @@
 
     <Viewbox Stretch="Fill" >
         <Grid Background="Transparent">
-
+            <Image Source="../Image/ManualControlPage/Title.png" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" Width="500"/>
+            
             <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_leftControl" Width="35" Height="35" Margin="10,255,445,10"
                                           NormalImagePath="../Image/ManualControlPage/LeftControl.png" OnButtonMouseDown="MouseDownPlaneLeftControlButton" OnButtonMouseUp="MouseUpPlaneLeftControlButton">
                 <myControl:PlaneControlButton.MouseDownAnimation>
@@ -131,6 +132,8 @@
                 </myControl:PlaneControlButton.MouseDownAnimation>
             </myControl:PlaneControlButton>
 
+            <Image Source="../Image/ManualControlPage/ElectricityBackGround.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0,0,0,5" Stretch="Fill"/>
+            <Image Source="../Image/ManualControlPage/Electricity.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0,0,0,5" Stretch="Fill"/>
         </Grid>
     </Viewbox>
 

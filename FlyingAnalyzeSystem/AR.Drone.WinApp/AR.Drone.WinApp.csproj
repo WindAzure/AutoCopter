@@ -435,8 +435,8 @@
     <Resource Include="Image\ManualControlPage\UpControlDown.png" />
     <Resource Include="Image\ManualControlPage\RightRotateControlDown.png" />
     <Content Include="Image\ManualControlPage\PC03AI-39.png" />
-    <Content Include="Image\ManualControlPage\PC03AI-40.png" />
-    <Content Include="Image\ManualControlPage\PC03AI-42.png" />
+    <Resource Include="Image\ManualControlPage\ElectricityBackGround.png" />
+    <Resource Include="Image\ManualControlPage\Electricity.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Content Include="Image\PlaneStatePage\PC02-24.png" />
