@@ -100,10 +100,15 @@
 
                                 <myControl:MapImageView Width="275" Height="200" x:Name="_mapImage"/>
 
-                                <myControl:ImageThreeStateButton Visibility="Hidden" x:Name="_mapImageViewConstraint"
+                                <Grid x:Name="_mapImageViewConstraint" Visibility="Visible">
+                                    <Image Source="../Image/PlaneStatePage/LearnModeImage.png" Height="200" Width="275"/>
+                                    <TextBlock Text="Incomplete floor data." Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,0,0" FontSize="18"/>
+                                    <TextBlock Text="Please learn, first." Foreground="Black"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,45,0,0" FontSize="18"/>
+                                </Grid>
+                                <!--<myControl:ImageThreeStateButton Visibility="Hidden" x:Name="_mapImageViewConstraint"
                                              NormalImagePath="../../Image/PlaneStatePage/LearnModeImage.png" 
                                              DownImagePath="../../Image/PlaneStatePage/LearnModeImageDown.png" 
-                                             HoverImagePath="../../Image/PlaneStatePage/LearnModeImage.png"/>
+                                             HoverImagePath="../../Image/PlaneStatePage/LearnModeImage.png"/>-->
                                 
                                 <myControl:ImageThreeStateButton Visibility="Visible" x:Name="_descriptionPanel"
                                              NormalImagePath="../../Image/PlaneStatePage/LearnModeDescription.png" 
@@ -145,10 +150,6 @@
                                 <myChildControl:ReadyPanel Visibility="Visible" Width="150" Height="73" HorizontalAlignment="Left" x:Name="_readyPanel" VerticalAlignment="Center" Margin="0,20,0,0"/>
                                 <myChildControl:StandbyPanel Visibility="Hidden" Height="50" Width="150" HorizontalAlignment="Left" x:Name="_standbyPanel" VerticalAlignment="Center"/>
                                 <myChildControl:PatrolingPanel Visibility="Hidden" Width="150" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,110,20,0" x:Name="_patrolPanel"/>
-                                <!--<myChildControl:ReadyPanel Visibility="Hidden" Width="150" Height="73" HorizontalAlignment="Left" x:Name="_readyPanel" VerticalAlignment="Center" Margin="0,20,0,0"/>
-                                <myChildControl:StandbyPanel Visibility="Hidden" Height="50" Width="150" HorizontalAlignment="Left" x:Name="_standbyPanel" VerticalAlignment="Center"/>
-                                <myChildControl:PatrolingPanel Visibility="Visible" Width="150" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,110,20,0" x:Name="_patrolPanel"/>-->
-                                
                             </Grid>
                         </Grid>
                         

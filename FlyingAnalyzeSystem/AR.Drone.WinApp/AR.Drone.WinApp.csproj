@@ -55,8 +55,9 @@
     <StartupObject>AR.Drone.WinApp.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NumericUpDown">
-      <HintPath>..\..\..\Desktop\NumericUpDown_Binary_and_Documentation\NumericUpDown.dll</HintPath>
+    <Reference Include="NumericUpDown, Version=0.1.6.1, Culture=neutral, PublicKeyToken=74df933eb4e7b0ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NumericUpDown.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -70,8 +71,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
-    <Reference Include="Xceed.Wpf.Toolkit">
-      <HintPath>..\..\..\Desktop\Extended WPF Toolkit Binaries\Xceed.Wpf.Toolkit.dll</HintPath>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +92,12 @@
     <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ManualForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ManualForm.Designer.cs">
+      <DependentUpon>ManualForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PlaneStateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +112,9 @@
     </Compile>
     <Compile Include="MyUserControl\LearnPanel.xaml.cs">
       <DependentUpon>LearnPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyUserControl\ManualControlPanel.xaml.cs">
+      <DependentUpon>ManualControlPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\MapComboBox\ComboBoxTemplateSelector.cs" />
     <Compile Include="MyUserControl\MapComboBox\DependencyObjectExtensions.cs" />
@@ -173,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ManualForm.resx">
+      <DependentUpon>ManualForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PlaneStateForm.resx">
       <DependentUpon>PlaneStateForm.cs</DependentUpon>
@@ -284,6 +298,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyUserControl\ManualControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyUserControl\MapComboBox\ImageComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -332,7 +350,6 @@
   <ItemGroup>
     <Resource Include="Image\PlaneStatePage\LearnModeDescription.png" />
     <Resource Include="Image\PlaneStatePage\LearnModeImageDown.png" />
-    <Resource Include="Image\PlaneStatePage\LearnModeImage.png" />
     <Resource Include="Image\PlaneStatePage\PatrolPanelBackGround.png" />
     <Resource Include="Image\PlaneStatePage\Am.png" />
     <Resource Include="Image\PlaneStatePage\AmToggled.png" />
@@ -397,6 +414,29 @@
     <Resource Include="Image\LearnPage\BackDown.png" />
     <Resource Include="Image\LearnPage\TakeOfDown.png" />
     <Resource Include="Image\LearnPage\TakeOf.png" />
+    <Resource Include="Image\PlaneStatePage\LearnModeImage.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-20.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-21-21.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-22.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-23.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-24.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-25.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-26.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-27.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-28.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-29.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-30.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-31.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-32.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-33.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-34.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-35.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-36.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-37.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-38.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-39.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-40.png" />
+    <Content Include="Image\ManualControlPage\PC03AI-42.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Content Include="Image\PlaneStatePage\PC02-24.png" />

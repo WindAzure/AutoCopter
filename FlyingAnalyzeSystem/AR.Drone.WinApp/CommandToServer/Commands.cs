@@ -53,19 +53,19 @@ namespace AR.Drone.WinApp.CommandToServer
             SqlParameter floorStateParam = new SqlParameter() { ParameterName = "@State", SqlDbType = SqlDbType.Bit, Value = true };
             SqlParameter floorImagePathParam = new SqlParameter() { ParameterName = "@ImagePath", SqlDbType = SqlDbType.Image, Value = data };
             SqlParameter floorStateChangedDate = new SqlParameter() { ParameterName = "@CurrentDate", SqlDbType = SqlDbType.DateTime, Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") };
-            SqlHelper.ExecuteScalar(CommandType.Text, "INSERT INTO [dbo].[Floor] ([FloorId],[Picture],[FloorName],[FloorState],[StateChangedDate]) VALUES(NEWID(),@ImagePath,@FloorName,@State,@CurrentDate)", new SqlParameter[] { floorImagePathParam, floorNameParam, floorStateParam, floorStateChangedDate});
+            SqlHelper.ExecuteScalar(CommandType.Text, "INSERT INTO [dbo].[Floor] ([FloorId],[Picture],[FloorName],[FloorState],[StateChangedDate]) VALUES(NEWID(),@ImagePath,@FloorName,@State,@CurrentDate)", new SqlParameter[] { floorImagePathParam, floorNameParam, floorStateParam, floorStateChangedDate });
         }
 
-        public static bool IsAdmin(String account,String password)
+        public static bool IsAdmin(String account, String password)
         {
-            if (String.IsNullOrEmpty(account) || String.IsNullOrEmpty(password))
+            if (String.IsNullOrEmpty(account) || String.IsNullOrEmpty(password) || account.Length > 10 || password.Length > 10)
             {
                 return false;
             }
 
-            SqlParameter accountParam = new SqlParameter() {ParameterName="@Account",SqlDbType=SqlDbType.NVarChar,Value=account };
-            SqlParameter passwordParam = new SqlParameter() {ParameterName="@Password",SqlDbType=SqlDbType.NVarChar,Value=password };
-            int count=Convert.ToInt32(SqlHelper.ExecuteScalar(CommandType.Text, "SELECT count(*) FROM [dbo].[Member] WHERE [Account]=@Account and [Password]=@Password and [IsAdmin]='true'", new SqlParameter[] { accountParam, passwordParam }));
+            SqlParameter accountParam = new SqlParameter() { ParameterName = "@Account", SqlDbType = SqlDbType.NVarChar, Value = account };
+            SqlParameter passwordParam = new SqlParameter() { ParameterName = "@Password", SqlDbType = SqlDbType.NVarChar, Value = password };
+            int count = Convert.ToInt32(SqlHelper.ExecuteScalar(CommandType.Text, "SELECT count(*) FROM [dbo].[Member] WHERE [Account]=@Account and [Password]=@Password and [IsAdmin]='true'", new SqlParameter[] { accountParam, passwordParam }));
             return count == 1;
         }
     }

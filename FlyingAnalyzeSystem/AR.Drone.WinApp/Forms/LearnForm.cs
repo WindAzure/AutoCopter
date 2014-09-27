@@ -34,12 +34,6 @@ namespace AR.Drone.WinApp.Forms
             _learnPanel.ClickSaveButton += ClickLearnPanelSaveButton;
             _learnPanel.ClickBackButton += ClickLearnPanelBackButton;
             _learnPanel.ClickTakeOffButton += ClickLearnPanelTakeOffButton;
-            /*ObservableCollection<ImageComboBoxItemProperty> list = _learnPanel.ComboBoxItemSource;
-            list.Add(new ImageComboBoxItemProperty() { ItemText = "456" });
-            list.Add(new ImageComboBoxItemProperty() { ItemText = "789" });
-            list.Add(new ImageComboBoxItemProperty() { ItemText = "999" });
-            list.Add(new ImageComboBoxItemProperty() { ItemText = "888" });
-            list.Add(new ImageComboBoxItemProperty() { ItemText = "999" });*/
         }
 
         public void ClickLearnPanelTakeOffButton()
@@ -114,6 +108,10 @@ namespace AR.Drone.WinApp.Forms
             {
                 if (_isBack)
                 {
+                    _lastForm.Location = this.Location;
+                    _lastForm.WindowState = this.WindowState;
+                    _lastForm.Width = this.Width;
+                    _lastForm.Height = this.Height;
                     _lastForm.Show();
                 }
                 else
