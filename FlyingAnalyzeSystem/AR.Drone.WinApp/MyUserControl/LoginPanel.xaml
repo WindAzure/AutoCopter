@@ -6,7 +6,7 @@
              xmlns:myControl="clr-namespace:AR.Drone.WinApp.MyUserControl"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
-    
+
     <Viewbox Stretch="Fill">
         <Grid Width="500" Height="300" Background="Transparent">
             <Image Source="../Image/LoginPage/BackGround.png" />
@@ -47,5 +47,5 @@
             <myControl:PasswordTexBox x:Name="_passwordTextBox" Margin="68,147,257,128"/>
         </Grid>
     </Viewbox>
-    
+
 </UserControl>

@@ -14,9 +14,13 @@ namespace AR.Drone.WinApp.Forms
 {
     public partial class LearnForm : Form
     {
-        public LearnForm()
+        private bool _isBack = false;
+        private PlaneStateForm _lastForm=null;
+
+        public LearnForm(PlaneStateForm form)
         {
             InitializeComponent();
+            _lastForm = form;
             _learnPanel.MouseDownLeftControlButton += MouseDownLearnPanelLeftControlButton;
             _learnPanel.MouseUpLeftControlButton += MouseUpLearnPanelLeftControlButton;
             _learnPanel.MouseDownRightControlButton += MouseDownLearnPanelRightControlButton;
@@ -38,70 +42,85 @@ namespace AR.Drone.WinApp.Forms
             list.Add(new ImageComboBoxItemProperty() { ItemText = "999" });*/
         }
 
-        void ClickLearnPanelTakeOffButton()
+        public void ClickLearnPanelTakeOffButton()
         {
             Debug.WriteLine("ClickLearnPanelTakeOffButton");
         }
 
-        void ClickLearnPanelBackButton()
+        public void ClickLearnPanelBackButton()
         {
-            Debug.WriteLine("OnClickBackButton");
-            _learnPanel.ComboBoxItemSource[0].ItemText = "aaaaa";
+            _isBack = true;
+            this.Close();
         }
 
-        void ClickLearnPanelSaveButton()
+        public void ClickLearnPanelSaveButton()
         {
             Debug.WriteLine("OnClickSaveButton");
         }
 
-        void MouseUpLearnPanelDownControlButton()
+        public void MouseUpLearnPanelDownControlButton()
         {
             Debug.WriteLine("MouseUpPlaneDownControlButton");
         }
 
-        void MouseLearnPanelDownDownControlButton()
+        public void MouseLearnPanelDownDownControlButton()
         {
             Debug.WriteLine("MouseDownPlaneDownControlButton");
         }
 
-        void MouseUpLearnPanelUpControlButton()
+        public void MouseUpLearnPanelUpControlButton()
         {
             Debug.WriteLine("MouseUpPlaneUpControlButton");
         }
 
-        void MouseDownLearnPanelUpControlButton()
+        public void MouseDownLearnPanelUpControlButton()
         {
             Debug.WriteLine("MouseDownPlaneUpControlButton");
         }
 
-        void MouseUpLearnPanelForwardControlButton()
+        public void MouseUpLearnPanelForwardControlButton()
         {
             Debug.WriteLine("MouseUpPlaneForwardControlButton");
         }
 
-        void MouseDownLearnPanelForwardControlButton()
+        public void MouseDownLearnPanelForwardControlButton()
         {
             Debug.WriteLine("MouseDownPlaneForwardControlButton");
         }
 
-        void MouseUpLearnPanelRightControlButton()
+        public void MouseUpLearnPanelRightControlButton()
         {
             Debug.WriteLine("MouseUpPlaneRightControlButton");
         }
 
-        void MouseDownLearnPanelRightControlButton()
+        public void MouseDownLearnPanelRightControlButton()
         {
             Debug.WriteLine("MouseDownPlaneRightControlButton");
         }
 
-        void MouseUpLearnPanelLeftControlButton()
+        public void MouseUpLearnPanelLeftControlButton()
         {
             Debug.WriteLine("MouseUpPlaneLeftControlButton");
         }
 
-        void MouseDownLearnPanelLeftControlButton()
+        public void MouseDownLearnPanelLeftControlButton()
         {
             Debug.WriteLine("MouseDownPlaneLeftControlButton");
+        }
+
+        private void LearnForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(e.CloseReason==CloseReason.UserClosing)
+            {
+                if (_isBack)
+                {
+                    _lastForm.Show();
+                }
+                else
+                {
+                    _lastForm.Close();
+                }
+            }
         }
     }
 }

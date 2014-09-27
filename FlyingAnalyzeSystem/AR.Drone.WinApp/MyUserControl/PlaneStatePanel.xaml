@@ -124,7 +124,7 @@
                                              NormalImagePath="../../Image/PlaneStatePage/LearnModeImage.png" 
                                              DownImagePath="../../Image/PlaneStatePage/LearnModeImageDown.png" 
                                              HoverImagePath="../../Image/PlaneStatePage/LearnModeImage.png"
-                                                              Margin="80,17,0,0"/>
+                                             OnClick="OnLearnModeButtonClick" Margin="80,17,0,0"/>
 
                             <Grid x:Name="_planeInformationPanel" Visibility="Hidden">
                                 <Image Source="../Image/PlaneStatePage/Battery.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="65" Width="150" Margin="0,47,0,0"/>

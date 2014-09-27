@@ -50,6 +50,7 @@
             this.Controls.Add(this._elementHost);
             this.Name = "LearnForm";
             this.Text = "LearnForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LearnForm_FormClosing);
             this.ResumeLayout(false);
 
         }

@@ -16,7 +16,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Image Grid.Column="0"  Margin="5,0,0,0" x:Name="_icon" Source="../Image/LoginPage/AccountIcon.png"/>
-                <TextBox Grid.Column="1" VerticalContentAlignment="Center" BorderThickness="0" Foreground="Yellow">
+                <TextBox Grid.Column="1" VerticalContentAlignment="Center" BorderThickness="0" Foreground="Yellow" Text="{Binding AccountText}">
                     <TextBox.Style>
                         <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                             <Style.Resources>

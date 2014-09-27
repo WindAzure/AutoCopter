@@ -49,6 +49,7 @@ namespace AR.Drone.WinApp.MyUserControl
 
         public event PlaneStatePanelEvent ClickPatrolReturnHomeButton = null;
         public event PlaneStatePanelEvent ClickPatrolManualControlButton = null;
+        public event PlaneStatePanelEvent ClickStartLearnButton = null;
         public event PlaneStatePanelPatrolEvent StartAutoPatrol = null;
 
         private ObservableCollection<ImageComboBoxItemProperty> _itemSource = new ObservableCollection<ImageComboBoxItemProperty>();
@@ -381,6 +382,14 @@ namespace AR.Drone.WinApp.MyUserControl
         public void DrawPlaneLocation(int index, double currentTimePoint, float angle)
         {
             _mapImage.DrawMileageLine(index, currentTimePoint, angle);
+        }
+
+        private void OnLearnModeButtonClick()
+        {
+            if (ClickStartLearnButton != null)
+            {
+                ClickStartLearnButton();
+            }
         }
     }
 }

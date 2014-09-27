@@ -1,5 +1,8 @@
-﻿using System;
+﻿using AR.Drone.WinApp.CommandToServer;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -20,12 +23,16 @@ namespace AR.Drone.WinApp.MyUserControl
     /// </summary>
     public partial class LoginPanel : UserControl
     {
-        Storyboard _bigCircleIn = new Storyboard();
-        Storyboard _bigCircleOut = new Storyboard();
-        Storyboard _middleCircle = new Storyboard();
-        Storyboard _signInUpCircle = new Storyboard();
-        Storyboard _signInDownCircle = new Storyboard();
-        Storyboard _bigCircleDownCircle = new Storyboard();
+        private bool _isDown = false;
+        private Storyboard _bigCircleIn = new Storyboard();
+        private Storyboard _bigCircleOut = new Storyboard();
+        private Storyboard _middleCircle = new Storyboard();
+        private Storyboard _signInUpCircle = new Storyboard();
+        private Storyboard _signInDownCircle = new Storyboard();
+        private Storyboard _bigCircleDownCircle = new Storyboard();
+
+        public delegate void LoginPanelEvent();
+        public event LoginPanelEvent SignInSuccess = null;
 
         public void Rotate(Storyboard board, DependencyObject obj, int from, int to, int milliSecond)
         {
@@ -94,6 +101,7 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void MouseDownSignInImage(object sender, MouseButtonEventArgs e)
         {
+            _isDown = true;
             _signInImage.Focus();
             _signInImage.Opacity = 0.5;
         }
@@ -105,12 +113,28 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void MouseLeaveSignInImage(object sender, MouseEventArgs e)
         {
+            _isDown = false;
             _signInImage.Opacity = 1;
         }
 
         private void MouseUpSignInImage(object sender, MouseButtonEventArgs e)
         {
             _signInImage.Opacity = 1;
+            if (_isDown)
+            {
+                if (Commands.IsAdmin(_accountTextBox.AccountText, _passwordTextBox.PasswordText) == false)
+                {
+                    MessageBox.Show("Invalid ID or password", "Error");
+                }
+                else
+                {
+                    if (SignInSuccess != null)
+                    {
+                        SignInSuccess();
+                    }
+                }
+            }
+            _isDown = false;
         }
     }
 }
