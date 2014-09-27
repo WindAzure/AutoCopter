@@ -26,10 +26,16 @@ namespace AR.Drone.WinApp.MyUserControl
         public event ManualControlPanelEvent MouseUpRightControlButton = null;
         public event ManualControlPanelEvent MouseDownForwardControlButton = null;
         public event ManualControlPanelEvent MouseUpForwardControlButton = null;
+        public event ManualControlPanelEvent MouseDownBackControlButton = null;
+        public event ManualControlPanelEvent MouseUpBackControlButton = null;
         public event ManualControlPanelEvent MouseDownUpControlButton = null;
         public event ManualControlPanelEvent MouseUpUpControlButton = null;
         public event ManualControlPanelEvent MouseDownDownControlButton = null;
         public event ManualControlPanelEvent MouseUpDownControlButton = null;
+        public event ManualControlPanelEvent MouseDownLeftRotateControlButton = null;
+        public event ManualControlPanelEvent MouseUpLeftRotateControlButton = null;
+        public event ManualControlPanelEvent MouseDownRightRotateControlButton = null;
+        public event ManualControlPanelEvent MouseUpRightRotateControlButton = null;
 
         public ManualControlPanel()
         {
@@ -49,6 +55,118 @@ namespace AR.Drone.WinApp.MyUserControl
             if (MouseUpLeftControlButton != null)
             {
                 MouseUpLeftControlButton();
+            }
+        }
+
+        private void MouseUpPlaneRightControlButton()
+        {
+            if (MouseUpRightControlButton != null)
+            {
+                MouseUpRightControlButton();
+            }
+        }
+
+        private void MouseDownPlaneRightControlButton()
+        {
+            if (MouseDownRightControlButton != null)
+            {
+                MouseDownRightControlButton();
+            }
+        }
+
+        private void MouseDownPlaneBackControlButton()
+        {
+            if (MouseDownBackControlButton != null)
+            {
+                MouseDownBackControlButton();
+            }
+        }
+
+        private void MouseUpPlaneBackControlButton()
+        {
+            if (MouseUpBackControlButton != null)
+            {
+                MouseUpBackControlButton();
+            }
+        }
+
+        private void MouseDownPlaneForwardControlButton()
+        {
+            if (MouseDownForwardControlButton != null)
+            {
+                MouseDownForwardControlButton();
+            }
+        }
+
+        private void MouseUpPlaneForwardControlButton()
+        {
+            if (MouseUpForwardControlButton != null)
+            {
+                MouseUpForwardControlButton();
+            }
+        }
+
+        private void MouseDownPlaneLeftRotateControlButton()
+        {
+            if (MouseDownLeftRotateControlButton != null)
+            {
+                MouseDownLeftRotateControlButton();
+            }
+        }
+
+        private void MouseUpPlaneLeftRotateControlButton()
+        {
+            if (MouseUpLeftRotateControlButton != null)
+            {
+                MouseUpLeftRotateControlButton();
+            }
+        }
+
+        private void MouseDownPlaneRightRotateControlButton()
+        {
+            if (MouseDownRightRotateControlButton != null)
+            {
+                MouseDownRightRotateControlButton();
+            }
+        }
+
+        private void MouseUpPlaneRightRotateControlButton()
+        {
+            if (MouseUpRightRotateControlButton != null)
+            {
+                MouseUpRightRotateControlButton();
+            }
+        }
+
+        private void MouseDownPlaneDownControlButton()
+        {
+            if (MouseDownDownControlButton != null)
+            {
+                MouseDownDownControlButton();
+            }
+        }
+
+        private void MouseUpPlaneDownControlButton()
+        {
+            if (MouseUpDownControlButton != null)
+            {
+                MouseUpDownControlButton();
+            }
+        }
+
+        private void MouseDownPlaneUpControlButton()
+        {
+            if (MouseDownUpControlButton != null)
+            {
+                MouseDownUpControlButton();
+            }
+        }
+
+        private void MouseUpPlaneUpControlButton()
+        {
+            if (MouseUpUpControlButton != null)
+            {
+                MouseUpUpControlButton();
             }
         }
     }

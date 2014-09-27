@@ -28,11 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this._pictureBox = new System.Windows.Forms.PictureBox();
             this._elementHost = new System.Windows.Forms.Integration.ElementHost();
             this._manualControlPanel = new AR.Drone.WinApp.MyUserControl.ManualControlPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).BeginInit();
             this.SuspendLayout();
+            // 
+            // _pictureBox
+            // 
+            this._pictureBox.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this._pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._pictureBox.Location = new System.Drawing.Point(0, 0);
+            this._pictureBox.Name = "_pictureBox";
+            this._pictureBox.Size = new System.Drawing.Size(984, 562);
+            this._pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this._pictureBox.TabIndex = 1;
+            this._pictureBox.TabStop = false;
             // 
             // _elementHost
             // 
@@ -40,18 +51,9 @@
             this._elementHost.Location = new System.Drawing.Point(0, 0);
             this._elementHost.Name = "_elementHost";
             this._elementHost.Size = new System.Drawing.Size(984, 562);
-            this._elementHost.TabIndex = 0;
+            this._elementHost.TabIndex = 2;
             this._elementHost.Text = "elementHost1";
             this._elementHost.Child = this._manualControlPanel;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(984, 562);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
             // 
             // ManualForm
             // 
@@ -59,18 +61,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 562);
             this.Controls.Add(this._elementHost);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this._pictureBox);
             this.Name = "ManualForm";
             this.Text = "ManualForm";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.PictureBox _pictureBox;
         private System.Windows.Forms.Integration.ElementHost _elementHost;
         private MyUserControl.ManualControlPanel _manualControlPanel;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
