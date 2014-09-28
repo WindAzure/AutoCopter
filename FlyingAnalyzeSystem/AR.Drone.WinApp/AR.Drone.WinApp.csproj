@@ -110,6 +110,9 @@
     <Compile Include="MyUserControl\ImageToggleButton.xaml.cs">
       <DependentUpon>ImageToggleButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyUserControl\LearnButton.xaml.cs">
+      <DependentUpon>LearnButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyUserControl\LearnPanel.xaml.cs">
       <DependentUpon>LearnPanel.xaml</DependentUpon>
     </Compile>
@@ -290,6 +293,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyUserControl\LearnButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyUserControl\LearnPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -349,7 +356,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\PlaneStatePage\LearnModeDescription.png" />
-    <Resource Include="Image\PlaneStatePage\LearnModeImageDown.png" />
     <Resource Include="Image\PlaneStatePage\PatrolPanelBackGround.png" />
     <Resource Include="Image\PlaneStatePage\Am.png" />
     <Resource Include="Image\PlaneStatePage\AmToggled.png" />
@@ -414,7 +420,6 @@
     <Resource Include="Image\LearnPage\BackDown.png" />
     <Resource Include="Image\LearnPage\TakeOfDown.png" />
     <Resource Include="Image\LearnPage\TakeOf.png" />
-    <Resource Include="Image\PlaneStatePage\LearnModeImage.png" />
     <Resource Include="Image\ManualControlPage\Title.png" />
     <Content Include="Image\ManualControlPage\PC03AI-21-21.png" />
     <Content Include="Image\ManualControlPage\PC03AI-22.png" />
@@ -437,6 +442,8 @@
     <Content Include="Image\ManualControlPage\PC03AI-39.png" />
     <Resource Include="Image\ManualControlPage\ElectricityBackGround.png" />
     <Resource Include="Image\ManualControlPage\Electricity.png" />
+    <Resource Include="Image\PlaneStatePage\LearnModeImage.png" />
+    <Resource Include="Image\PlaneStatePage\LearnModeImageDown.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Content Include="Image\PlaneStatePage\PC02-24.png" />
