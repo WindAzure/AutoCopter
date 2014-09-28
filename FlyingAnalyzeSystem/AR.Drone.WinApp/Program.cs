@@ -30,7 +30,7 @@ namespace AR.Drone.WinApp
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PlaneStateForm());
+            Application.Run(new ManualForm());
         }
     }
 }

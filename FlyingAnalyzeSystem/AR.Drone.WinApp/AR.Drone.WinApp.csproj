@@ -116,6 +116,9 @@
     <Compile Include="MyUserControl\LearnPanel.xaml.cs">
       <DependentUpon>LearnPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyUserControl\ManualButton.xaml.cs">
+      <DependentUpon>ManualButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyUserControl\ManualControlPanel.xaml.cs">
       <DependentUpon>ManualControlPanel.xaml</DependentUpon>
     </Compile>
@@ -302,6 +305,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyUserControl\LoginPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyUserControl\ManualButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

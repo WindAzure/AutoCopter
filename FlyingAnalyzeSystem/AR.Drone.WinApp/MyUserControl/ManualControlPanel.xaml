@@ -7,130 +7,50 @@
              d:DesignHeight="300" d:DesignWidth="500"
              xmlns:myControl="clr-namespace:AR.Drone.WinApp.MyUserControl"
              xmlns:myComboxBox="clr-namespace:AR.Drone.WinApp.MyUserControl.MapComboBox">
-
-    <Viewbox Stretch="Fill" >
+        
+    <Viewbox Stretch="Fill" Focusable="True" x:Name="_view" KeyDown="KeyDownManualControlPanel" KeyUp="KeyUpManualControlPanel">
         <Grid Background="Transparent">
             <Image Source="../Image/ManualControlPage/Title.png" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" Width="500"/>
-            
-            <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_leftControl" Width="35" Height="35" Margin="10,255,445,10"
-                                          NormalImagePath="../Image/ManualControlPage/LeftControl.png" OnButtonMouseDown="MouseDownPlaneLeftControlButton" OnButtonMouseUp="MouseUpPlaneLeftControlButton">
-                <myControl:PlaneControlButton.MouseDownAnimation>
-                    <ObjectAnimationUsingKeyFrames Duration="0:0:0.12">
 
-                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                            <DiscreteObjectKeyFrame.Value>
-                                <BitmapImage UriSource="../Image/ManualControlPage/LeftControlDown.png"/>
-                            </DiscreteObjectKeyFrame.Value>
-                        </DiscreteObjectKeyFrame>
-                        
-                    </ObjectAnimationUsingKeyFrames>
-                </myControl:PlaneControlButton.MouseDownAnimation>
-            </myControl:PlaneControlButton>
+            <myControl:ManualButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_leftControl" Width="35" Height="35" Margin="10,255,445,10"
+                                    NormalImagePath="../Image/ManualControlPage/LeftControl.png" DownImagePath="../Image/ManualControlPage/LeftControlDown.png"
+                                    OnButtonMouseDown="MouseDownPlaneLeftControlButton" OnButtonMouseUp="MouseUpPlaneLeftControlButton">
+            </myControl:ManualButton>
 
-            <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_rightControl" Width="35" Height="35" Margin="100,0,0,10"
-                                          NormalImagePath="../Image/ManualControlPage/RightControl.png" OnButtonMouseDown="MouseDownPlaneRightControlButton" OnButtonMouseUp="MouseUpPlaneRightControlButton">
-                <myControl:PlaneControlButton.MouseDownAnimation>
-                    <ObjectAnimationUsingKeyFrames Duration="0:0:0.12">
+            <myControl:ManualButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_rightControl" Width="35" Height="35" Margin="100,0,0,10"
+                                    NormalImagePath="../Image/ManualControlPage/RightControl.png" DownImagePath="../Image/ManualControlPage/RightControlDown.png"
+                                    OnButtonMouseDown="MouseDownPlaneRightControlButton" OnButtonMouseUp="MouseUpPlaneRightControlButton">
+            </myControl:ManualButton>
 
-                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                            <DiscreteObjectKeyFrame.Value>
-                                <BitmapImage UriSource="../Image/ManualControlPage/RightControlDown.png"/>
-                            </DiscreteObjectKeyFrame.Value>
-                        </DiscreteObjectKeyFrame>
+            <myControl:ManualButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_backControl" Width="35" Height="35" Margin="55,0,0,10"
+                                    NormalImagePath="../Image/ManualControlPage/BackControl.png" DownImagePath="../Image/ManualControlPage/BackControlDown.png"
+                                    OnButtonMouseDown="MouseDownPlaneBackControlButton" OnButtonMouseUp="MouseUpPlaneBackControlButton">
+            </myControl:ManualButton>
 
-                    </ObjectAnimationUsingKeyFrames>
-                </myControl:PlaneControlButton.MouseDownAnimation>
-            </myControl:PlaneControlButton>
+            <myControl:ManualButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_forwardControl" Width="35" Height="35" Margin="55,0,0,55"
+                                    NormalImagePath="../Image/ManualControlPage/ForwardControl.png" DownImagePath="../Image/ManualControlPage/ForwardControlDown.png"
+                                    OnButtonMouseDown="MouseDownPlaneForwardControlButton" OnButtonMouseUp="MouseUpPlaneForwardControlButton">
+            </myControl:ManualButton>
 
-            <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_backControl" Width="35" Height="35" Margin="55,0,0,10"
-                                          NormalImagePath="../Image/ManualControlPage/BackControl.png" OnButtonMouseDown="MouseDownPlaneBackControlButton" OnButtonMouseUp="MouseUpPlaneBackControlButton">
-                <myControl:PlaneControlButton.MouseDownAnimation>
-                    <ObjectAnimationUsingKeyFrames Duration="0:0:0.12">
+            <myControl:ManualButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_leftRotateControl" Width="35" Height="35" Margin="355,0,0,10"
+                                    NormalImagePath="../Image/ManualControlPage/LeftRotateControl.png" DownImagePath="../Image/ManualControlPage/LeftRotateControlDown.png"
+                                    OnButtonMouseDown="MouseDownPlaneLeftRotateControlButton" OnButtonMouseUp="MouseUpPlaneLeftRotateControlButton">
+            </myControl:ManualButton>
 
-                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                            <DiscreteObjectKeyFrame.Value>
-                                <BitmapImage UriSource="../Image/ManualControlPage/BackControlDown.png"/>
-                            </DiscreteObjectKeyFrame.Value>
-                        </DiscreteObjectKeyFrame>
+            <myControl:ManualButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_rightRotateControl" Width="35" Height="35" Margin="445,0,0,10"
+                                    NormalImagePath="../Image/ManualControlPage/RightRotateControl.png" DownImagePath="../Image/ManualControlPage/RightRotateControlDown.png"
+                                    OnButtonMouseDown="MouseDownPlaneRightRotateControlButton" OnButtonMouseUp="MouseUpPlaneRightRotateControlButton">
+            </myControl:ManualButton>
 
-                    </ObjectAnimationUsingKeyFrames>
-                </myControl:PlaneControlButton.MouseDownAnimation>
-            </myControl:PlaneControlButton>
+            <myControl:ManualButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_downControl" Width="35" Height="35" Margin="400,0,0,10"
+                                    NormalImagePath="../Image/ManualControlPage/DownControl.png" DownImagePath="../Image/ManualControlPage/DownControlDown.png"
+                                    OnButtonMouseDown="MouseDownPlaneDownControlButton" OnButtonMouseUp="MouseUpPlaneDownControlButton">
+            </myControl:ManualButton>
 
-            <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_forwardControl" Width="35" Height="35" Margin="55,0,0,55"
-                                          NormalImagePath="../Image/ManualControlPage/ForwardControl.png" OnButtonMouseDown="MouseDownPlaneForwardControlButton" OnButtonMouseUp="MouseUpPlaneForwardControlButton">
-                <myControl:PlaneControlButton.MouseDownAnimation>
-                    <ObjectAnimationUsingKeyFrames Duration="0:0:0.12">
-
-                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                            <DiscreteObjectKeyFrame.Value>
-                                <BitmapImage UriSource="../Image/ManualControlPage/ForwardControlDown.png"/>
-                            </DiscreteObjectKeyFrame.Value>
-                        </DiscreteObjectKeyFrame>
-
-                    </ObjectAnimationUsingKeyFrames>
-                </myControl:PlaneControlButton.MouseDownAnimation>
-            </myControl:PlaneControlButton>
-
-            <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_leftRotateControl" Width="35" Height="35" Margin="355,0,0,10"
-                                          NormalImagePath="../Image/ManualControlPage/LeftRotateControl.png" OnButtonMouseDown="MouseDownPlaneLeftRotateControlButton" OnButtonMouseUp="MouseUpPlaneLeftRotateControlButton">
-                <myControl:PlaneControlButton.MouseDownAnimation>
-                    <ObjectAnimationUsingKeyFrames Duration="0:0:0.12">
-
-                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                            <DiscreteObjectKeyFrame.Value>
-                                <BitmapImage UriSource="../Image/ManualControlPage/LeftRotateControlDown.png"/>
-                            </DiscreteObjectKeyFrame.Value>
-                        </DiscreteObjectKeyFrame>
-
-                    </ObjectAnimationUsingKeyFrames>
-                </myControl:PlaneControlButton.MouseDownAnimation>
-            </myControl:PlaneControlButton>
-
-            <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_rightRotateControl" Width="35" Height="35" Margin="445,0,0,10"
-                                          NormalImagePath="../Image/ManualControlPage/RightRotateControl.png" OnButtonMouseDown="MouseDownPlaneRightRotateControlButton" OnButtonMouseUp="MouseUpPlaneRightRotateControlButton">
-                <myControl:PlaneControlButton.MouseDownAnimation>
-                    <ObjectAnimationUsingKeyFrames Duration="0:0:0.12">
-
-                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                            <DiscreteObjectKeyFrame.Value>
-                                <BitmapImage UriSource="../Image/ManualControlPage/RightRotateControlDown.png"/>
-                            </DiscreteObjectKeyFrame.Value>
-                        </DiscreteObjectKeyFrame>
-
-                    </ObjectAnimationUsingKeyFrames>
-                </myControl:PlaneControlButton.MouseDownAnimation>
-            </myControl:PlaneControlButton>
-
-            <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_downControl" Width="35" Height="35" Margin="400,0,0,10"
-                                          NormalImagePath="../Image/ManualControlPage/DownControl.png" OnButtonMouseDown="MouseDownPlaneDownControlButton" OnButtonMouseUp="MouseUpPlaneDownControlButton">
-                <myControl:PlaneControlButton.MouseDownAnimation>
-                    <ObjectAnimationUsingKeyFrames Duration="0:0:0.12">
-
-                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                            <DiscreteObjectKeyFrame.Value>
-                                <BitmapImage UriSource="../Image/ManualControlPage/DownControlDown.png"/>
-                            </DiscreteObjectKeyFrame.Value>
-                        </DiscreteObjectKeyFrame>
-
-                    </ObjectAnimationUsingKeyFrames>
-                </myControl:PlaneControlButton.MouseDownAnimation>
-            </myControl:PlaneControlButton>
-
-            <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_upControl" Width="35" Height="35" Margin="400,0,0,55"
-                                          NormalImagePath="../Image/ManualControlPage/UpControl.png" OnButtonMouseDown="MouseDownPlaneUpControlButton" OnButtonMouseUp="MouseUpPlaneUpControlButton">
-                <myControl:PlaneControlButton.MouseDownAnimation>
-                    <ObjectAnimationUsingKeyFrames Duration="0:0:0.12">
-
-                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                            <DiscreteObjectKeyFrame.Value>
-                                <BitmapImage UriSource="../Image/ManualControlPage/UpControlDown.png"/>
-                            </DiscreteObjectKeyFrame.Value>
-                        </DiscreteObjectKeyFrame>
-
-                    </ObjectAnimationUsingKeyFrames>
-                </myControl:PlaneControlButton.MouseDownAnimation>
-            </myControl:PlaneControlButton>
+            <myControl:ManualButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_upControl" Width="35" Height="35" Margin="400,0,0,55"
+                                    NormalImagePath="../Image/ManualControlPage/UpControl.png" DownImagePath="../Image/ManualControlPage/UpControlDown.png"
+                                    OnButtonMouseDown="MouseDownPlaneUpControlButton" OnButtonMouseUp="MouseUpPlaneUpControlButton">
+            </myControl:ManualButton>
 
             <Image Source="../Image/ManualControlPage/ElectricityBackGround.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0,0,0,5" Stretch="Fill"/>
             <Image Source="../Image/ManualControlPage/Electricity.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0,0,0,5" Stretch="Fill"/>
