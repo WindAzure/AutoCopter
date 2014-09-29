@@ -64,6 +64,7 @@
             this.Controls.Add(this._pictureBox);
             this.Name = "ManualForm";
             this.Text = "ManualForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ManualForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).EndInit();
             this.ResumeLayout(false);
 

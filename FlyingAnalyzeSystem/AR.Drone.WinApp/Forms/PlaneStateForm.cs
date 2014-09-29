@@ -23,9 +23,8 @@ namespace AR.Drone.WinApp.Forms
             _planeStatePanel.StartAutoPatrol += OnPlaneStatePanelStartAutoPatrol;
         }
 
-        public void OnClickPlaneStatePanelStartLearnButton()
+        private void SwitchForm(Form form)
         {
-            LearnForm form = new LearnForm(this);
             form.StartPosition = FormStartPosition.Manual;
             form.Location = this.Location;
             form.WindowState = this.WindowState;
@@ -35,6 +34,11 @@ namespace AR.Drone.WinApp.Forms
             this.Hide();
         }
 
+        public void OnClickPlaneStatePanelStartLearnButton()
+        {
+            SwitchForm(new LearnForm(this));
+        }
+
         public void OnPlaneStatePanelStartAutoPatrol(string mileage)
         {
             Debug.WriteLine(mileage);
@@ -42,7 +46,7 @@ namespace AR.Drone.WinApp.Forms
 
         public void OnClickPlaneStatePanelManualControlButton()
         {
-            Debug.WriteLine("OnClickPlaneStatePanelManualControlButton");
+            SwitchForm(new ManualForm(this));
         }
 
         public void OnClickPlaneStatePanelReturnHomeButton()

@@ -12,9 +12,13 @@ namespace AR.Drone.WinApp.Forms
 {
     public partial class ManualForm : Form
     {
-        public ManualForm()
+        private bool _isBack = false;
+        private PlaneStateForm _lastForm;
+
+        public ManualForm(PlaneStateForm form)
         {
             InitializeComponent();
+            _lastForm = form;
             _elementHost.Parent = _pictureBox;
             _manualControlPanel.MouseDownLeftControlButton += OnMouseDownManualControlPanelLeftControlButton;
             _manualControlPanel.MouseUpLeftControlButton += OnMouseUpManualControlPanelLeftControlButton;
@@ -37,14 +41,8 @@ namespace AR.Drone.WinApp.Forms
 
         public void ClickManualControlPanelBackButton()
         {
-            Debug.WriteLine("ClickManualControlPanelBackButton");
-            _manualControlPanel.UltraForwardText = "9";
-            _manualControlPanel.UltraBackText = "8";
-            _manualControlPanel.UltraLeftText = "7";
-            _manualControlPanel.UltraRightText = "6";
-            _manualControlPanel.UltraUpText = "5";
-            _manualControlPanel.UltraDownText = "4";
-            _manualControlPanel.SetBattery(0.13);
+            _isBack = true;
+            this.Close();
         }
 
         public void OnMouseUpManualControlPanelUpControlButton()
@@ -125,6 +123,25 @@ namespace AR.Drone.WinApp.Forms
         public void OnMouseUpManualControlPanelRightControlButton()
         {
             Debug.WriteLine("OnMouseUpManualControlPanelRightControlButton");
+        }
+
+        private void ManualForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                if (_isBack)
+                {
+                    _lastForm.Location = this.Location;
+                    _lastForm.WindowState = this.WindowState;
+                    _lastForm.Width = this.Width;
+                    _lastForm.Height = this.Height;
+                    _lastForm.Show();
+                }
+                else
+                {
+                    _lastForm.Close();
+                }
+            }
         }
     }
 }
