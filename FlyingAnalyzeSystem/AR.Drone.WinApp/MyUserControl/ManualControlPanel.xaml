@@ -12,6 +12,11 @@
         <Grid Background="Transparent">
             <Image Source="../Image/ManualControlPage/Title.png" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" Width="500"/>
 
+            <myControl:ImageThreeStateButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,3,0,0" Width="20" Height="20"
+                                             NormalImagePath="../Image/LearnPage/Back.png" 
+                                             DownImagePath="../Image/LearnPage/BackDown.png" 
+                                             HoverImagePath="../Image/LearnPage/BackHover.png" OnClick="OnClickBackButton"/>
+
             <myControl:ManualButton HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="_leftControl" Width="35" Height="35" Margin="10,255,445,10"
                                     NormalImagePath="../Image/ManualControlPage/LeftControl.png" DownImagePath="../Image/ManualControlPage/LeftControlDown.png"
                                     OnButtonMouseDown="MouseDownPlaneLeftControlButton" OnButtonMouseUp="MouseUpPlaneLeftControlButton">
@@ -56,12 +61,20 @@
                 <Ellipse.Clip>
                     <GeometryGroup>
                         <RectangleGeometry Rect="0,0,100,40"/>
-                        <RectangleGeometry Rect="0,0,100,0" x:Name="_electircityShape"/>
+                        <RectangleGeometry Rect="0,0,100,40" x:Name="_electircityShape"/>
                     </GeometryGroup>
                 </Ellipse.Clip>
             </Ellipse>
             <TextBlock Text="{Binding EletricityText}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="Yellow" Margin="0,0,0,20"/>
             <Image Source="../Image/ManualControlPage/ElectricityBackGround.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0,0,0,5" Stretch="Fill"/>
+            <Image Source="../Image/ManualControlPage/UltraDistance.png" HorizontalAlignment="Right" VerticalAlignment="Center" Width="160" Margin="0,0,10,0"/>
+            <TextBlock Text="{Binding UltraRightText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,0,20,25" FontSize="8"/>
+            <TextBlock Text="{Binding UltraBackText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,45,10,0" FontSize="8"/>
+            <TextBlock Text="{Binding UltraUpText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Yellow" Margin="310,0,0,100" FontSize="8"/>
+            <TextBlock Text="{Binding UltraForwardText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,0,145,25" FontSize="8"/>
+            <TextBlock Text="{Binding UltraLeftText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,45,150,0" FontSize="8"/>
+            <TextBlock Text="{Binding UltraDownText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Yellow" Margin="310,0,0,-90" FontSize="8"/>
+            <Image Source="../Image/ManualControlPage/Targeting.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Viewbox>
 

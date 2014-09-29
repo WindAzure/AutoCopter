@@ -32,6 +32,19 @@ namespace AR.Drone.WinApp.Forms
             _manualControlPanel.MouseUpDownControlButton += OnMouseUpManualControlPanelDownControlButton;
             _manualControlPanel.MouseDownUpControlButton += OnMouseDownManualControlPanelUpControlButton;
             _manualControlPanel.MouseUpUpControlButton += OnMouseUpManualControlPanelUpControlButton;
+            _manualControlPanel.ClickBackButton += ClickManualControlPanelBackButton;
+        }
+
+        public void ClickManualControlPanelBackButton()
+        {
+            Debug.WriteLine("ClickManualControlPanelBackButton");
+            _manualControlPanel.UltraForwardText = "9";
+            _manualControlPanel.UltraBackText = "8";
+            _manualControlPanel.UltraLeftText = "7";
+            _manualControlPanel.UltraRightText = "6";
+            _manualControlPanel.UltraUpText = "5";
+            _manualControlPanel.UltraDownText = "4";
+            _manualControlPanel.SetBattery(0.13);
         }
 
         public void OnMouseUpManualControlPanelUpControlButton()

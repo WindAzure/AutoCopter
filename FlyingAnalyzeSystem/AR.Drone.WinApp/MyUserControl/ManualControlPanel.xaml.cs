@@ -38,6 +38,7 @@ namespace AR.Drone.WinApp.MyUserControl
         public event ManualControlPanelEvent MouseUpLeftRotateControlButton = null;
         public event ManualControlPanelEvent MouseDownRightRotateControlButton = null;
         public event ManualControlPanelEvent MouseUpRightRotateControlButton = null;
+        public event ManualControlPanelEvent ClickBackButton = null;
         public event PropertyChangedEventHandler PropertyChanged = null;
         public void OnPropertyChanged(String propertyName)
         {
@@ -56,7 +57,7 @@ namespace AR.Drone.WinApp.MyUserControl
         private bool _isPressedLeft = false;
         private bool _isPressedRight = false;
 
-        private String _electricityText="100%";
+        private String _electricityText;
         public String EletricityText
         {
             set
@@ -67,6 +68,96 @@ namespace AR.Drone.WinApp.MyUserControl
             get
             {
                 return _electricityText;
+            }
+        }
+
+        private String _ultraUpText;
+        public String UltraUpText
+        {
+            set
+            {
+                String temp = value;
+                _ultraUpText = temp+" cm";
+                OnPropertyChanged("UltraUpText");
+            }
+            get
+            {
+                return _ultraUpText;
+            }
+        }
+
+        private String _ultraDownText;
+        public String UltraDownText
+        {
+            set
+            {
+                String temp = value;
+                _ultraDownText = temp + " cm";
+                OnPropertyChanged("UltraDownText");
+            }
+            get
+            {
+                return _ultraDownText;
+            }
+        }
+
+        private String _ultraLeftText;
+        public String UltraLeftText
+        {
+            set
+            {
+                String temp = value;
+                _ultraLeftText = temp + " cm";
+                OnPropertyChanged("UltraLeftText");
+            }
+            get
+            {
+                return _ultraLeftText;
+            }
+        }
+
+        private String _ultraRightText;
+        public String UltraRightText
+        {
+            set
+            {
+                String temp = value;
+                _ultraRightText = temp + " cm";
+                OnPropertyChanged("UltraRightText");
+            }
+            get
+            {
+                return _ultraRightText;
+            }
+        }
+
+        private String _ultraForwardText;
+        public String UltraForwardText
+        {
+            set
+            {
+                String temp = value;
+                _ultraForwardText = temp + " cm";
+                OnPropertyChanged("UltraForwardText");
+            }
+            get
+            {
+                return _ultraForwardText;
+            }
+        }
+
+        private String _ultraBackText;
+        public String UltraBackText
+        {
+            set
+            {
+                String temp = value;
+                _ultraBackText = temp + " cm";
+                OnPropertyChanged("UltraBackText");
+            }
+            get
+            {
+                return _ultraBackText;
             }
         }
 
@@ -345,6 +436,14 @@ namespace AR.Drone.WinApp.MyUserControl
             if (MouseUpUpControlButton != null)
             {
                 MouseUpUpControlButton();
+            }
+        }
+
+        private void OnClickBackButton()
+        {
+            if (ClickBackButton != null)
+            {
+                ClickBackButton();
             }
         }
     }

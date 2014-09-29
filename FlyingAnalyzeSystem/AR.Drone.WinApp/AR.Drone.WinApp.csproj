@@ -428,8 +428,6 @@
     <Resource Include="Image\LearnPage\TakeOfDown.png" />
     <Resource Include="Image\LearnPage\TakeOf.png" />
     <Resource Include="Image\ManualControlPage\Title.png" />
-    <Content Include="Image\ManualControlPage\PC03AI-21-21.png" />
-    <Content Include="Image\ManualControlPage\PC03AI-22.png" />
     <Resource Include="Image\ManualControlPage\RightControl.png" />
     <Resource Include="Image\ManualControlPage\BackControl.png" />
     <Resource Include="Image\ManualControlPage\LeftControl.png" />
@@ -446,11 +444,12 @@
     <Resource Include="Image\ManualControlPage\LeftRotateControlDown.png" />
     <Resource Include="Image\ManualControlPage\UpControlDown.png" />
     <Resource Include="Image\ManualControlPage\RightRotateControlDown.png" />
-    <Content Include="Image\ManualControlPage\PC03AI-39.png" />
+    <Resource Include="Image\ManualControlPage\UltraDistance.png" />
     <Resource Include="Image\ManualControlPage\ElectricityBackGround.png" />
     <Resource Include="Image\ManualControlPage\Electricity.png" />
     <Resource Include="Image\PlaneStatePage\LearnModeImage.png" />
     <Resource Include="Image\PlaneStatePage\LearnModeImageDown.png" />
+    <Resource Include="Image\ManualControlPage\Targeting.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Content Include="Image\PlaneStatePage\PC02-24.png" />
