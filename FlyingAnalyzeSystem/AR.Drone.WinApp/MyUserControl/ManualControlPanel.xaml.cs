@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace AR.Drone.WinApp.MyUserControl
     /// <summary>
     /// Interaction logic for ManualControlPanel.xaml
     /// </summary>
-    public partial class ManualControlPanel : UserControl
+    public partial class ManualControlPanel : UserControl, INotifyPropertyChanged
     {
         public delegate void ManualControlPanelEvent();
         public event ManualControlPanelEvent MouseDownLeftControlButton = null;
@@ -37,6 +38,14 @@ namespace AR.Drone.WinApp.MyUserControl
         public event ManualControlPanelEvent MouseUpLeftRotateControlButton = null;
         public event ManualControlPanelEvent MouseDownRightRotateControlButton = null;
         public event ManualControlPanelEvent MouseUpRightRotateControlButton = null;
+        public event PropertyChangedEventHandler PropertyChanged = null;
+        public void OnPropertyChanged(String propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
         private bool _isPressedA = false;
         private bool _isPressedS = false;
@@ -47,10 +56,32 @@ namespace AR.Drone.WinApp.MyUserControl
         private bool _isPressedLeft = false;
         private bool _isPressedRight = false;
 
+        private String _electricityText="100%";
+        public String EletricityText
+        {
+            set
+            {
+                _electricityText = value;
+                OnPropertyChanged("EletricityText");
+            }
+            get
+            {
+                return _electricityText;
+            }
+        }
+
         public ManualControlPanel()
         {
             InitializeComponent();
+            DataContext = this;
             _view.Focus();
+        }
+
+        public void SetBattery(double rate)
+        {
+            int value = (int)(rate * 100.0);
+            EletricityText = value.ToString() + "%";
+            _electircityShape.Rect = new System.Windows.Rect(0, 0, 100, 40 - 40 * rate);
         }
 
         private void KeyDownManualControlPanel(object sender, KeyEventArgs e)

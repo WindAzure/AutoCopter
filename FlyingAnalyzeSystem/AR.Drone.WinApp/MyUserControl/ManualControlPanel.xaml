@@ -52,8 +52,16 @@
                                     OnButtonMouseDown="MouseDownPlaneUpControlButton" OnButtonMouseUp="MouseUpPlaneUpControlButton">
             </myControl:ManualButton>
 
+            <Ellipse HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="100" Height="100" Margin="0,0,0,-40" Stretch="Fill" Stroke="Yellow" StrokeThickness="20" Fill="Transparent">
+                <Ellipse.Clip>
+                    <GeometryGroup>
+                        <RectangleGeometry Rect="0,0,100,40"/>
+                        <RectangleGeometry Rect="0,0,100,0" x:Name="_electircityShape"/>
+                    </GeometryGroup>
+                </Ellipse.Clip>
+            </Ellipse>
+            <TextBlock Text="{Binding EletricityText}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="Yellow" Margin="0,0,0,20"/>
             <Image Source="../Image/ManualControlPage/ElectricityBackGround.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0,0,0,5" Stretch="Fill"/>
-            <Image Source="../Image/ManualControlPage/Electricity.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0,0,0,5" Stretch="Fill"/>
         </Grid>
     </Viewbox>
 
