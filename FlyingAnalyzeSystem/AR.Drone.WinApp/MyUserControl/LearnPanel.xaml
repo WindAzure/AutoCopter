@@ -27,7 +27,7 @@
                                            SelectionChanged="OnComboBoxSelectionChanged"/>
 
                 <myControl:UploadButton Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="60" Margin="0,15,0,0"
-                                        NormalImagePath="../Image/PlaneStatePage/Upload.png" 
+                                        NormalImagePath="../Image/PlaneStatePage/Upload.png" x:Name="_uploadButton"
                                         DownImagePath="../Image/PlaneStatePage/UploadDown.png" 
                                         HoverImagePath="../Image/PlaneStatePage/Upload.png"
                                         OnClick="OnClickUploadButton"/>
@@ -38,7 +38,7 @@
                     </Grid.Background>
                     <myControl:MapImageView Margin="0,10,0,0" Width="320" Height="220" VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="_mapImage"/>
                     <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10"
-                                             NormalImagePath="../Image/LearnPage/Save.png" 
+                                             NormalImagePath="../Image/LearnPage/Save.png" IsEnabled="False" x:Name="_saveButton"
                                              DownImagePath="../Image/LearnPage/SaveDown.png" 
                                              HoverImagePath="../Image/LearnPage/Save.png" OnClick="OnClickSaveButton"/>
                 </Grid>
@@ -81,9 +81,9 @@
 
                         <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,42,35" Width="56" Height="58"
                                                          NormalImagePath="../Image/LearnPage/TakeOf.png" x:Name="_takeOffButton"
-                                                         DownImagePath="../Image/LearnPage/TakeOfDown.png" 
+                                                         DownImagePath="../Image/LearnPage/TakeOfDown.png" IsEnabled="True"
                                                          HoverImagePath="../Image/LearnPage/TakeOf.png" OnClick="OnTakeOfButtonClick"/>
-
+                            
                         <myControl:PlaneControlButton HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,35" x:Name="_leftControl" IsEnabled="False"
                                                       NormalImagePath="../Image/LearnPage/LeftControl.png" OnButtonMouseDown="MouseDownPlaneLeftControlButton" OnButtonMouseUp="MouseUpPlaneLeftControlButton">
                             <myControl:PlaneControlButton.MouseDownAnimation>
@@ -126,7 +126,7 @@
                             </myControl:PlaneControlButton.MouseDownAnimation>
                         </myControl:PlaneControlButton>
 
-                        <myControl:PlaneControlButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,20" x:Name="_forwardControl" IsEnabled="False"
+                        <myControl:PlaneControlButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,45" x:Name="_forwardControl" IsEnabled="False"
                                                       NormalImagePath="../Image/LearnPage/ForwardControl.png" OnButtonMouseDown="MouseDownPlaneForwardControlButton" OnButtonMouseUp="MouseUpPlaneForwardControlButton">
                             <myControl:PlaneControlButton.MouseDownAnimation>
                                 <ObjectAnimationUsingKeyFrames Duration="0:0:0.24">
@@ -146,6 +146,11 @@
                                 </ObjectAnimationUsingKeyFrames>
                             </myControl:PlaneControlButton.MouseDownAnimation>
                         </myControl:PlaneControlButton>
+
+                        <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,10"
+                                                         NormalImagePath="../Image/LearnPage/LandControl.png" x:Name="_landButton"
+                                                         DownImagePath="../Image/LearnPage/LandControlDown.png" Visibility="Hidden"
+                                                         HoverImagePath="../Image/LearnPage/LandControl.png" OnClick="OnClickLandButton"/>
 
                         <myControl:PlaneControlButton HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,15,0" x:Name="_upControl" IsEnabled="False"
                                                       NormalImagePath="../Image/LearnPage/UpControl.png" OnButtonMouseDown="MouseDownPlaneUpControlButton" OnButtonMouseUp="MouseUpPlaneUpControlButton">

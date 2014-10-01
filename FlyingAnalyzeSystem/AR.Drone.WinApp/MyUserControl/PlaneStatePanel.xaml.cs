@@ -384,7 +384,7 @@ namespace AR.Drone.WinApp.MyUserControl
             _mapImage.DrawMileageLine(index, currentTimePoint, angle);
         }
 
-        private void OnLearnModeButtonClick()
+        private void OnClickStartLearingButton()
         {
             if (ClickStartLearnButton != null)
             {

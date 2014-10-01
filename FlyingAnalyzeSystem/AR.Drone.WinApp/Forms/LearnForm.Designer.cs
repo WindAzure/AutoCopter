@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this._elementHost = new System.Windows.Forms.Integration.ElementHost();
             this._learnPanel = new AR.Drone.WinApp.MyUserControl.LearnPanel();
             this.SuspendLayout();
@@ -57,6 +59,7 @@
 
         #endregion
 
+        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Integration.ElementHost _elementHost;
         private MyUserControl.LearnPanel _learnPanel;
     }

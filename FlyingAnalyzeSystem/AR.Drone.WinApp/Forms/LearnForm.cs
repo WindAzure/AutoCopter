@@ -34,6 +34,12 @@ namespace AR.Drone.WinApp.Forms
             _learnPanel.ClickSaveButton += ClickLearnPanelSaveButton;
             _learnPanel.ClickBackButton += ClickLearnPanelBackButton;
             _learnPanel.ClickTakeOffButton += ClickLearnPanelTakeOffButton;
+            _learnPanel.ClickLandButton += ClickLearnPanelLandButton;
+        }
+
+        public void ClickLearnPanelLandButton()
+        {
+            Debug.WriteLine("ClickLearnPanelLandButton");
         }
 
         public void ClickLearnPanelTakeOffButton()

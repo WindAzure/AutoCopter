@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 namespace AR.Drone.WinApp.MyUserControl
 {
     /// <summary>
-    /// Interaction logic for LearnButton.xaml
+    /// Interaction logic for StartLearingButton.xaml
     /// </summary>
-    public partial class LearnButton : UserControl
+    public partial class StartLearingButton : UserControl
     {
         private bool _isDown = false;
 
@@ -70,7 +70,7 @@ namespace AR.Drone.WinApp.MyUserControl
         public delegate void ImageThreeStateButtonEvent();
         public event ImageThreeStateButtonEvent OnClick = null;
 
-        public LearnButton()
+        public StartLearingButton()
         {
             InitializeComponent();
         }

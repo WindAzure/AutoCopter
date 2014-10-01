@@ -45,6 +45,7 @@ namespace AR.Drone.WinApp.MyUserControl
         public event LearnPanelEvent ClickSaveButton = null;
         public event LearnPanelEvent ClickBackButton = null;
         public event LearnPanelEvent ClickTakeOffButton = null;
+        public event LearnPanelEvent ClickLandButton = null;
         public event PropertyChangedEventHandler PropertyChanged = null;
         public void OnPropertyChanged(String propertyName)
         {
@@ -309,6 +310,10 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 ClickSaveButton();
             }
+            MessageBox.Show("Learning is completed.", "Success");
+            _comboBox.IsEnabled = true;
+            _uploadButton.IsEnabled = true;
+            _saveButton.IsEnabled = false;
         }
 
         private void OnClickUploadButton()
@@ -373,7 +378,15 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void OnTakeOfButtonClick()
         {
+            if (_mapImage.ImagePath == null)
+            {
+                MessageBox.Show("Please select map,first.", "Error");
+                return;
+            }
             _takeOffButton.Visibility = Visibility.Hidden;
+            _landButton.Visibility = Visibility.Visible;
+            _comboBox.IsEnabled = false;
+            _uploadButton.IsEnabled = false;
             _rightControl.IsEnabled = true;
             _leftControl.IsEnabled = true;
             _forwardControl.IsEnabled = true;
@@ -383,6 +396,24 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 ClickTakeOffButton();
             }
+        }
+
+        private void OnClickLandButton()
+        {
+            if (ClickLandButton != null)
+            {
+                ClickLandButton();
+            }
+            _landButton.Visibility = Visibility.Hidden;
+            _takeOffButton.Visibility = Visibility.Visible;
+            _rightControl.IsEnabled = false;
+            _leftControl.IsEnabled = false;
+            _forwardControl.IsEnabled = false;
+            _upControl.IsEnabled = false;
+            _downControl.IsEnabled = false;
+            _saveButton.IsEnabled = true;
+            MainCircleText = "";
+            MainCircleValue = "";
         }
     }
 }

@@ -110,9 +110,6 @@
     <Compile Include="MyUserControl\ImageToggleButton.xaml.cs">
       <DependentUpon>ImageToggleButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyUserControl\LearnButton.xaml.cs">
-      <DependentUpon>LearnButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MyUserControl\LearnPanel.xaml.cs">
       <DependentUpon>LearnPanel.xaml</DependentUpon>
     </Compile>
@@ -157,6 +154,9 @@
     </Compile>
     <Compile Include="MyUserControl\PlaneStatePanel.xaml.cs">
       <DependentUpon>PlaneStatePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyUserControl\StartLearingButton.xaml.cs">
+      <DependentUpon>StartLearingButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\UploadButton.xaml.cs">
       <DependentUpon>UploadButton.xaml</DependentUpon>
@@ -296,10 +296,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MyUserControl\LearnButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MyUserControl\LearnPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -352,6 +348,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyUserControl\StartLearingButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyUserControl\UploadButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -362,6 +362,9 @@
     <Resource Include="Image\LoginPage\BigCircleIn.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\PlaneStatePage\LearnButtonImage.png" />
+    <Resource Include="Image\PlaneStatePage\LearnButtonImageDown.png" />
+    <Resource Include="Image\PlaneStatePage\LearnModeImage.png" />
     <Resource Include="Image\PlaneStatePage\LearnModeDescription.png" />
     <Resource Include="Image\PlaneStatePage\PatrolPanelBackGround.png" />
     <Resource Include="Image\PlaneStatePage\Am.png" />
@@ -377,11 +380,8 @@
     <Resource Include="Image\PlaneStatePage\ManualButton.png" />
     <Resource Include="Image\PlaneStatePage\ManualButtonHover.png" />
     <Resource Include="Image\PlaneStatePage\ManualButtonDown.png" />
-    <Resource Include="Image\PlaneStatePage\StopButton.png" />
     <Resource Include="Image\PlaneStatePage\ReturnButton.png" />
-    <Resource Include="Image\PlaneStatePage\StopButtonHover.png" />
     <Resource Include="Image\PlaneStatePage\ReturnButtonHover.png" />
-    <Resource Include="Image\PlaneStatePage\StopButtonDown.png" />
     <Resource Include="Image\PlaneStatePage\ReturnButtonDown.png" />
     <Resource Include="Image\PlaneStatePage\PatrolPanelBattery.png" />
     <Resource Include="Image\PlaneStatePage\Battery.png" />
@@ -447,9 +447,9 @@
     <Resource Include="Image\ManualControlPage\UltraDistance.png" />
     <Resource Include="Image\ManualControlPage\ElectricityBackGround.png" />
     <Resource Include="Image\ManualControlPage\Electricity.png" />
-    <Resource Include="Image\PlaneStatePage\LearnModeImage.png" />
-    <Resource Include="Image\PlaneStatePage\LearnModeImageDown.png" />
     <Resource Include="Image\ManualControlPage\Targeting.png" />
+    <Resource Include="Image\LearnPage\LandControlDown.png" />
+    <Resource Include="Image\LearnPage\LandControl.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Content Include="Image\PlaneStatePage\PC02-24.png" />

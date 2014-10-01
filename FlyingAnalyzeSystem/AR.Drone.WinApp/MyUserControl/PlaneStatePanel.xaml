@@ -81,9 +81,9 @@
                         <TextBlock Text="INFORMATION" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Height="280" Margin="0,5,0,0">
+                    <Grid Height="290" Margin="0,5,0,0">
                         <Grid.Background>
-                            <ImageBrush ImageSource="../Image/PlaneStatePage/InformationBlock.png"/>
+                            <ImageBrush ImageSource="../Image/PlaneStatePage/InformationBlock.png" Opacity="0.7"/>
                         </Grid.Background>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="65*"/>
@@ -93,22 +93,18 @@
                         <Grid Grid.Column="0">
                             <myComboxBox:ImageComboBox x:Name="_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,12,0,0" Width="240" Height="30" SelectionChanged="OnComboBoxSelectionChanged"/>
 
-                            <Grid x:Name="_mapGrid" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="225" Width="290" Margin="15,0,0,10">
+                            <Grid x:Name="_mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="205" Width="290" Margin="15,50,0,0">
                                 <Grid.Background>
                                     <ImageBrush ImageSource="../Image/PlaneStatePage/MapBackGround.png"/>
                                 </Grid.Background>
 
-                                <myControl:MapImageView Width="275" Height="200" x:Name="_mapImage"/>
+                                <myControl:MapImageView Width="275" Height="180" x:Name="_mapImage"/>
 
                                 <Grid x:Name="_mapImageViewConstraint" Visibility="Hidden">
-                                    <Image Source="../Image/PlaneStatePage/LearnModeImage.png" Height="200" Width="275"/>
-                                    <TextBlock Text="Incomplete floor data." Foreground="#4A4E6B" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5,0,0" FontSize="18"/>
-                                    <TextBlock Text="Please learn, first." Foreground="#4A4E6B"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,45,0,0" FontSize="18"/>
+                                    <Image Source="../Image/PlaneStatePage/LearnModeImage.png" Height="180" Width="275"/>
+                                    <TextBlock Text="Incomplete floor data." Foreground="#4A4E6B" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5,0,0" FontSize="16"/>
+                                    <TextBlock Text="Please learn, first." Foreground="#4A4E6B"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,35,0,0" FontSize="16"/>
                                 </Grid>
-                                <!--<myControl:ImageThreeStateButton Visibility="Hidden" x:Name="_mapImageViewConstraint"
-                                             NormalImagePath="../../Image/PlaneStatePage/LearnModeImage.png" 
-                                             DownImagePath="../../Image/PlaneStatePage/LearnModeImageDown.png" 
-                                             HoverImagePath="../../Image/PlaneStatePage/LearnModeImage.png"/>-->
                                 
                                 <myControl:ImageThreeStateButton Visibility="Visible" x:Name="_descriptionPanel"
                                              NormalImagePath="../../Image/PlaneStatePage/LearnModeDescription.png" 
@@ -116,6 +112,11 @@
                                              HoverImagePath="../../Image/PlaneStatePage/LearnModeDescription.png"
                                              OnClick="OnClickLearnModeDescription"/>
                             </Grid>
+
+                            <myControl:StartLearingButton VerticalAlignment="Top" HorizontalAlignment="Center" Width="90" Height="22"  Margin="0,260,0,0"
+                        		NormalImagePath="../Image/PlaneStatePage/LearnButtonImage.png" 
+                        		DownImagePath="../Image/PlaneStatePage/LearnButtonImageDown.png" 
+                        		HoverImagePath="../Image/PlaneStatePage/LearnButtonImage.png" OnClick="OnClickStartLearingButton"/>
                         </Grid>
 
                         <Grid Grid.Column="1">
@@ -124,12 +125,6 @@
                         		DownImagePath="../Image/PlaneStatePage/UploadDown.png" 
                         		HoverImagePath="../Image/PlaneStatePage/Upload.png"
                         		OnClick="OnClickUploadButton" Margin="0,17,0,0"/>
-                            
-                            <myControl:LearnButton VerticalAlignment="Top" HorizontalAlignment="Center" Width="90" Height="22"
-                        		NormalImagePath="../Image/PlaneStatePage/LearnModeImage.png" 
-                        		DownImagePath="../Image/PlaneStatePage/LearnModeImageDown.png" 
-                        		HoverImagePath="../Image/PlaneStatePage/LearnModeImage.png"
-                        		OnClick="OnLearnModeButtonClick" Margin="55,17,0,0"/>
                             
                             <Grid x:Name="_planeInformationPanel" Visibility="Hidden">
                                 <Image Source="../Image/PlaneStatePage/Battery.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="65" Width="150" Margin="0,47,0,0"/>
@@ -152,7 +147,6 @@
                                 <myChildControl:PatrolingPanel Visibility="Hidden" Width="150" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,110,20,0" x:Name="_patrolPanel"/>
                             </Grid>
                         </Grid>
-                        
                     </Grid>
                 </StackPanel>
             </Grid>
