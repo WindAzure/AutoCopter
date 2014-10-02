@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this._planeStateTimer = new System.Windows.Forms.Timer(this.components);
             this._elementHost = new System.Windows.Forms.Integration.ElementHost();
             this._planeStatePanel = new AR.Drone.WinApp.MyUserControl.PlaneStatePanel();
             this.SuspendLayout();
+            // 
+            // _planeStateTimer
+            // 
+            this._planeStateTimer.Enabled = true;
+            this._planeStateTimer.Interval = 500;
+            this._planeStateTimer.Tick += new System.EventHandler(this._planeStateTimer_Tick);
             // 
             // _elementHost
             // 
@@ -58,5 +66,6 @@
 
         private System.Windows.Forms.Integration.ElementHost _elementHost;
         private MyUserControl.PlaneStatePanel _planeStatePanel;
+        private System.Windows.Forms.Timer _planeStateTimer;
     }
 }

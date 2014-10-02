@@ -53,5 +53,10 @@ namespace AR.Drone.WinApp.Forms
         {
             Debug.WriteLine("OnClickPlaneStatePanelReturnHomeButton");
         }
+
+        private void _planeStateTimer_Tick(object sender, EventArgs e)
+        {
+            Debug.WriteLine(DroneSingleton._navigationData.Battery);
+        }
     }
 }
