@@ -24,7 +24,6 @@ namespace AR.Drone.WinApp
         public void OnSignInSuccess()
         {
             PlaneStateForm form = new PlaneStateForm();
-            DroneSingleton.InitializeDrone();
             form.StartPosition = FormStartPosition.Manual;
             form.Location = this.Location;
             form.WindowState = this.WindowState;
@@ -33,14 +32,6 @@ namespace AR.Drone.WinApp
             form.FormClosing += delegate { Close(); };
             form.Show();
             this.Hide();
-        }
-
-        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (DroneSingleton._droneClient != null)
-            {
-                DroneSingleton._droneClient.Dispose();
-            }
         }
     }
 }

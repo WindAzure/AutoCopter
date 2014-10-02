@@ -36,7 +36,6 @@
             // 
             // _planeStateTimer
             // 
-            this._planeStateTimer.Enabled = true;
             this._planeStateTimer.Interval = 500;
             this._planeStateTimer.Tick += new System.EventHandler(this._planeStateTimer_Tick);
             // 

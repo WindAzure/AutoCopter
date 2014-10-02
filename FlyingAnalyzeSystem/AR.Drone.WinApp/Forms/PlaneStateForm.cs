@@ -16,12 +16,21 @@ namespace AR.Drone.WinApp.Forms
         public PlaneStateForm()
         {
             InitializeComponent();
-            
+
             _planeStatePanel.ClickPatrolReturnHomeButton += OnClickPlaneStatePanelReturnHomeButton;
             _planeStatePanel.ClickPatrolManualControlButton += OnClickPlaneStatePanelManualControlButton;
             _planeStatePanel.ClickStartLearnButton += OnClickPlaneStatePanelStartLearnButton;
             _planeStatePanel.StartAutoPatrol += OnPlaneStatePanelStartAutoPatrol;
+            DroneSingleton.InitializeDrone();
+            _planeStateTimer.Enabled = true;
+            
         }
+        protected override void OnClosed(EventArgs e)
+        {
+            DroneSingleton._droneClient.Dispose();
+            base.OnClosed(e);
+        }
+
 
         private void SwitchForm(Form form)
         {
@@ -56,7 +65,8 @@ namespace AR.Drone.WinApp.Forms
 
         private void _planeStateTimer_Tick(object sender, EventArgs e)
         {
-            Debug.WriteLine(DroneSingleton._navigationData.Battery);
+            _planeStatePanel.SetBattery(DroneSingleton._navigationData.Battery.Percentage/100.0);
+            _planeStatePanel.AltitudeText = DroneSingleton._navigationData.Altitude.ToString();
         }
     }
 }

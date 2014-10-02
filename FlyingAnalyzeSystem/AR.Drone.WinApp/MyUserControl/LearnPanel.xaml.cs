@@ -378,11 +378,11 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void OnTakeOfButtonClick()
         {
-            if (_mapImage.ImagePath == null)
+           /* if (_mapImage.ImagePath == null)
             {
                 MessageBox.Show("Please select map,first.", "Error");
                 return;
-            }
+            }*/
             _takeOffButton.Visibility = Visibility.Hidden;
             _landButton.Visibility = Visibility.Visible;
             _comboBox.IsEnabled = false;

@@ -20,6 +20,9 @@ namespace AR.Drone.WinApp
             DroneSingleton._droneClient = new DroneClient("192.168.1.1");
             DroneSingleton._droneClient.NavigationPacketAcquired += OnNavigationPacketAcquired;
             DroneSingleton._droneClient.NavigationDataAcquired += data => _navigationData = data;
+            DroneSingleton._droneClient.Start();
+            DroneSingleton._droneClient.ResetEmergency();
+            DroneSingleton._droneClient.FlatTrim();
         }
 
         private static void OnNavigationPacketAcquired(NavigationPacket packet)
