@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="AndroidGcmNotificationer.cs" />
     <Compile Include="CommandToServer\Commands.cs" />
+    <Compile Include="DroneSingleton.cs" />
     <Compile Include="FilePlayer.cs" />
     <Compile Include="Forms\LearnForm.cs">
       <SubType>Form</SubType>
