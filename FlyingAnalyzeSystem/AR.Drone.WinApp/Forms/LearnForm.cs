@@ -24,10 +24,7 @@ namespace AR.Drone.WinApp.Forms
 
         private const string ARDroneTrackFileExt = ".ardrone";
         private const string ARDroneTrackFilesFilter = "AR.Drone track files (*.ardrone)|*.ardrone";
-
-        private NavigationData _navigationData;
-        private NavigationPacket _navigationPacket;
-
+        
         private float _heading;
 
         private DateTime _commandStartTime;
@@ -58,10 +55,7 @@ namespace AR.Drone.WinApp.Forms
             _learnPanel.ClickTakeOffButton += ClickLearnPanelTakeOffButton;
             _learnPanel.ClickLandButton += ClickLearnPanelLandButton;
 
-            DroneSingleton._droneClient = new DroneClient("192.168.1.1");
-            DroneSingleton._droneClient.NavigationPacketAcquired += OnNavigationPacketAcquired;
-            DroneSingleton._droneClient.NavigationDataAcquired += data => _navigationData = data;
-
+            DroneSingleton.InitializeDrone();
             DroneSingleton._droneClient.Start();
             DroneSingleton._droneClient.ResetEmergency();
             DroneSingleton._droneClient.FlatTrim();
@@ -78,11 +72,6 @@ namespace AR.Drone.WinApp.Forms
             DroneSingleton._droneClient.Dispose();
 
             base.OnClosed(e);
-        }
-
-        private void OnNavigationPacketAcquired(NavigationPacket packet)
-        {
-            _navigationPacket = packet;
         }
 
         public void ClickLearnPanelLandButton()
@@ -188,7 +177,7 @@ namespace AR.Drone.WinApp.Forms
             Debug.WriteLine("MouseDownPlaneRightControlButton");
             Record();
             NavdataBag navdataBag;
-            if (_navigationPacket.Data != null && NavdataBagParser.TryParse(ref _navigationPacket, out navdataBag))
+            if (DroneSingleton._navigationPacket.Data != null && NavdataBagParser.TryParse(ref DroneSingleton._navigationPacket, out navdataBag))
             {
                 _heading = navdataBag.magneto.heading_fusion_unwrapped;
             }
@@ -212,7 +201,7 @@ namespace AR.Drone.WinApp.Forms
             Debug.WriteLine("MouseDownPlaneLeftControlButton");
             Record();
             NavdataBag navdataBag;
-            if (_navigationPacket.Data != null && NavdataBagParser.TryParse(ref _navigationPacket, out navdataBag))
+            if (DroneSingleton._navigationPacket.Data != null && NavdataBagParser.TryParse(ref DroneSingleton._navigationPacket, out navdataBag))
             {
                 _heading = navdataBag.magneto.heading_fusion_unwrapped;
             }
@@ -246,7 +235,7 @@ namespace AR.Drone.WinApp.Forms
             {
                 float nowHeading;
                 NavdataBag navdataBag;
-                if (_navigationPacket.Data != null && NavdataBagParser.TryParse(ref _navigationPacket, out navdataBag))
+                if (DroneSingleton._navigationPacket.Data != null && NavdataBagParser.TryParse(ref DroneSingleton._navigationPacket, out navdataBag))
                 {
                     nowHeading = navdataBag.magneto.heading_fusion_unwrapped;
                     _timeList.Add(new TimeSpan(0, 0, 0, 0));
