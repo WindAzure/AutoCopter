@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 
 namespace AR.Drone.WinApp.Forms
 {
@@ -19,7 +20,6 @@ namespace AR.Drone.WinApp.Forms
         {
             InitializeComponent();
             _lastForm = form;
-            _elementHost.Parent = _pictureBox;
             _manualControlPanel.MouseDownLeftControlButton += OnMouseDownManualControlPanelLeftControlButton;
             _manualControlPanel.MouseUpLeftControlButton += OnMouseUpManualControlPanelLeftControlButton;
             _manualControlPanel.MouseDownRightControlButton += OnMouseDownManualControlPanelRightControlButton;
@@ -37,6 +37,8 @@ namespace AR.Drone.WinApp.Forms
             _manualControlPanel.MouseDownUpControlButton += OnMouseDownManualControlPanelUpControlButton;
             _manualControlPanel.MouseUpUpControlButton += OnMouseUpManualControlPanelUpControlButton;
             _manualControlPanel.ClickBackButton += ClickManualControlPanelBackButton;
+
+            _videoUpdateTimer.Enabled = true;
         }
 
         public void ClickManualControlPanelBackButton()
@@ -142,6 +144,20 @@ namespace AR.Drone.WinApp.Forms
                     _lastForm.Close();
                 }
             }
+        }
+
+        private void _videoUpdateTimer_Tick(object sender, EventArgs e)
+        {
+            if (DroneSingleton._frame == null || DroneSingleton._frameNumber == DroneSingleton._frame.Number)
+                return;
+            DroneSingleton._frameNumber = DroneSingleton._frame.Number;
+
+            if (DroneSingleton._frameBitmap == null)
+                DroneSingleton._frameBitmap = VideoHelper.CreateBitmap(ref DroneSingleton._frame);
+            else
+                VideoHelper.UpdateBitmap(ref DroneSingleton._frameBitmap, ref DroneSingleton._frame);
+
+            _manualControlPanel.RefreshMainImageBackground();
         }
     }
 }

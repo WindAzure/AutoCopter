@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this._pictureBox = new System.Windows.Forms.PictureBox();
+            this.components = new System.ComponentModel.Container();
+            this._stateUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this._videoUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this._elementHost = new System.Windows.Forms.Integration.ElementHost();
             this._manualControlPanel = new AR.Drone.WinApp.MyUserControl.ManualControlPanel();
-            ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // _pictureBox
+            // _stateUpdateTimer
             // 
-            this._pictureBox.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this._pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._pictureBox.Location = new System.Drawing.Point(0, 0);
-            this._pictureBox.Name = "_pictureBox";
-            this._pictureBox.Size = new System.Drawing.Size(984, 562);
-            this._pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this._pictureBox.TabIndex = 1;
-            this._pictureBox.TabStop = false;
+            this._stateUpdateTimer.Interval = 500;
+            // 
+            // _videoUpdateTimer
+            // 
+            this._videoUpdateTimer.Interval = 20;
+            this._videoUpdateTimer.Tick += new System.EventHandler(this._videoUpdateTimer_Tick);
             // 
             // _elementHost
             // 
+            this._elementHost.BackColor = System.Drawing.Color.Transparent;
             this._elementHost.Dock = System.Windows.Forms.DockStyle.Fill;
             this._elementHost.Location = new System.Drawing.Point(0, 0);
             this._elementHost.Name = "_elementHost";
@@ -61,19 +61,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 562);
             this.Controls.Add(this._elementHost);
-            this.Controls.Add(this._pictureBox);
             this.Name = "ManualForm";
             this.Text = "ManualForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ManualForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox _pictureBox;
         private System.Windows.Forms.Integration.ElementHost _elementHost;
         private MyUserControl.ManualControlPanel _manualControlPanel;
+        private System.Windows.Forms.Timer _stateUpdateTimer;
+        private System.Windows.Forms.Timer _videoUpdateTimer;
     }
 }

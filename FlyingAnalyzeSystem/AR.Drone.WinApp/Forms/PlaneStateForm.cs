@@ -30,6 +30,7 @@ namespace AR.Drone.WinApp.Forms
         protected override void OnClosed(EventArgs e)
         {
             DroneSingleton._droneClient.Dispose();
+            DroneSingleton._videoPacketDecoderWorker.Dispose();
             base.OnClosed(e);
         }
 
