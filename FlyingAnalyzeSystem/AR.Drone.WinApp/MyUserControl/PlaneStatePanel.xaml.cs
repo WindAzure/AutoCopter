@@ -301,6 +301,11 @@ namespace AR.Drone.WinApp.MyUserControl
             _battery.Fill = gradientBrushGroup;
         }
 
+        public void SetPlaneText(String text)
+        {
+            _firstPlaneItem.ItemText = text;
+        }
+
         private Color GetRelativeColor(GradientStopCollection gsc, double offset)
         {
             GradientStop before = gsc.Where(w => w.Offset == gsc.Min(m => m.Offset)).First();

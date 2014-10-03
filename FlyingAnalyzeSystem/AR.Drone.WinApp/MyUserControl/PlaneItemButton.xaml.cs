@@ -1,5 +1,7 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -18,7 +20,7 @@ namespace AR.Drone.WinApp.MyUserControl
     /// <summary>
     /// Interaction logic for PlaneItemButton.xaml
     /// </summary>
-    public partial class PlaneItemButton : UserControl
+    public partial class PlaneItemButton : UserControl, INotifyPropertyChanged
     {
         private bool _isSelected = false;
         private bool _isDown = false;
@@ -38,7 +40,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 return _normalImagePath;
             }
         }
-        
+
         private BitmapImage _downImage;
         private String _downImagePath;
         public String DownImagePath
@@ -69,12 +71,35 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private String _itemText;
+        public String ItemText
+        {
+            set
+            {
+                _itemText = value;
+                OnPropertyChanged("ItemText");
+            }
+            get
+            {
+                return _itemText;
+            }
+        }
+
         public delegate void ImageThreeStateButtonEvent(object sender);
         public event ImageThreeStateButtonEvent OnClick = null;
+        public event PropertyChangedEventHandler PropertyChanged = null;
+        public void OnPropertyChanged(String propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
         public PlaneItemButton()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
         public void InitializeToNormalImage()

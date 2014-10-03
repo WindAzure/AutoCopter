@@ -13,6 +13,8 @@ namespace AR.Drone.WinApp.Forms
 {
     public partial class PlaneStateForm : Form
     {
+        private int _retryConnectionTimes = 0;
+
         public PlaneStateForm()
         {
             InitializeComponent();
@@ -22,22 +24,14 @@ namespace AR.Drone.WinApp.Forms
             _planeStatePanel.ClickStartLearnButton += OnClickPlaneStatePanelStartLearnButton;
             _planeStatePanel.StartAutoPatrol += OnPlaneStatePanelStartAutoPatrol;
             DroneSingleton.InitializeDrone();
-            if (DroneSingleton._navigationData != null)
-            {
-                _planeStateTimer.Enabled = true;
-            }
-            else
-            {
-                MessageBox.Show("Please check connection of drone.", "error");
-            }
-
+            _planeStateTimer.Enabled = true;
         }
+
         protected override void OnClosed(EventArgs e)
         {
             DroneSingleton._droneClient.Dispose();
             base.OnClosed(e);
         }
-
 
         private void SwitchForm(Form form)
         {
@@ -72,8 +66,23 @@ namespace AR.Drone.WinApp.Forms
 
         private void _planeStateTimer_Tick(object sender, EventArgs e)
         {
-            _planeStatePanel.SetBattery(DroneSingleton._navigationData.Battery.Percentage / 100.0);
-            _planeStatePanel.AltitudeText = DroneSingleton._navigationData.Altitude.ToString();
+            if (DroneSingleton._navigationData != null)
+            {
+                _planeStatePanel.SetBattery(DroneSingleton._navigationData.Battery.Percentage / 100.0);
+                _planeStatePanel.AltitudeText = DroneSingleton._navigationData.Altitude.ToString();
+                _planeStatePanel.SetPlaneText("Drone-001");
+            }
+            else
+            {
+                _retryConnectionTimes++;
+                if (_retryConnectionTimes == 3)
+                {
+                    _retryConnectionTimes = 0;
+                    _planeStateTimer.Enabled = false;
+                    MessageBox.Show("Please check connection of drone.", "error"); 
+                }
+            }
+
         }
     }
 }

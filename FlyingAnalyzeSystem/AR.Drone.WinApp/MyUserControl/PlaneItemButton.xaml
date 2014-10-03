@@ -7,5 +7,6 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" MouseLeftButtonDown="MouseLeftButtonDownImage" MouseLeftButtonUp="MouseLeftButtonUpImage" MouseLeave="MouseLeaveImage" Focusable="False">
         <Image x:Name="img" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"/>
+        <TextBlock Text="{Binding ItemText}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,0,0,0"/>
     </Grid>
 </UserControl>
