@@ -22,8 +22,15 @@ namespace AR.Drone.WinApp.Forms
             _planeStatePanel.ClickStartLearnButton += OnClickPlaneStatePanelStartLearnButton;
             _planeStatePanel.StartAutoPatrol += OnPlaneStatePanelStartAutoPatrol;
             DroneSingleton.InitializeDrone();
-            _planeStateTimer.Enabled = true;
-            
+            if (DroneSingleton._navigationData != null)
+            {
+                _planeStateTimer.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Please check connection of drone.", "error");
+            }
+
         }
         protected override void OnClosed(EventArgs e)
         {
@@ -65,7 +72,7 @@ namespace AR.Drone.WinApp.Forms
 
         private void _planeStateTimer_Tick(object sender, EventArgs e)
         {
-            _planeStatePanel.SetBattery(DroneSingleton._navigationData.Battery.Percentage/100.0);
+            _planeStatePanel.SetBattery(DroneSingleton._navigationData.Battery.Percentage / 100.0);
             _planeStatePanel.AltitudeText = DroneSingleton._navigationData.Altitude.ToString();
         }
     }
