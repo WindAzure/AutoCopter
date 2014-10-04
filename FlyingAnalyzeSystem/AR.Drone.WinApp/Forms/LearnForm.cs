@@ -90,6 +90,11 @@ namespace AR.Drone.WinApp.Forms
             Commands.UpdateMileage(id, "QQQ");
         }
 
+        public void SetComboBoxSource(ObservableCollection<ImageComboBoxItemProperty> source)
+        {
+            _learnPanel.SetComboBoxSource(source);
+        }
+
         public void MouseUpLearnPanelDownControlButton()
         {
             Debug.WriteLine("MouseUpPlaneDownControlButton");

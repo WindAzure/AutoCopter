@@ -65,6 +65,20 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private bool _notShowChildPanel = false;
+        public bool NotShowChildPanel
+        {
+            set
+            {
+                _notShowChildPanel = value;
+                OnPropertyChanged("NotShowChildPanel");
+            }
+            get
+            {
+                return _notShowChildPanel;
+            }
+        }
+
         private String _electricQuantityText = "";
         public String ElectricQuantityText
         {
@@ -260,7 +274,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 {
                     if (T == 1)
                     {
-                        if (_isPlaneT1Flying)
+                        if (_isPlaneT1Flying && (!NotShowChildPanel))
                         {
                             _comboBox.IsEnabled = false;
                             int N = 0;

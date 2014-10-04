@@ -161,7 +161,15 @@ namespace AR.Drone.WinApp.MyUserControl
             _comboBox.ImageComboBoxItemSource = ComboBoxItemSource;
             _timer.Interval = 1000;
             _timer.Elapsed += ElapsedTimer;
-            LoadImageFromServer();
+            //LoadImageFromServer();
+        }
+
+        public void SetComboBoxSource(ObservableCollection<ImageComboBoxItemProperty> source)
+        {
+            foreach(ImageComboBoxItemProperty item in source)
+            {
+                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = item.ItemText, MapImage = item.MapImage, Id = item.Id });
+            }
         }
 
         private void LoadImageFromServer()

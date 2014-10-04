@@ -52,7 +52,9 @@ namespace AR.Drone.WinApp.Forms
 
         public void OnClickPlaneStatePanelStartLearnButton()
         {
-            SwitchForm(new LearnForm(this));
+            LearnForm form = new LearnForm(this);
+            form.SetComboBoxSource(_planeStatePanel.ComboBoxItemSource);
+            SwitchForm(form);
         }
 
         public void OnPlaneStatePanelStartAutoPatrol()
@@ -94,6 +96,7 @@ namespace AR.Drone.WinApp.Forms
                 {
                     _retryConnectionTimes = 0;
                     _planeStateTimer.Enabled = false;
+                    _planeStatePanel.NotShowChildPanel = true;
                     MessageBox.Show("Please check connection of drone.", "error"); 
                 }
             }
