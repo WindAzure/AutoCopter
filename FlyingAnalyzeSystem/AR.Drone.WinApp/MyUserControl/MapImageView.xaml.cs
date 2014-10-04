@@ -32,6 +32,14 @@ namespace AR.Drone.WinApp.MyUserControl
         private int _index = 0;
         private Ellipse _nowPosition = new Ellipse();
         private Boolean _searching = false;
+        private List<State> _commandList = new List<State>();
+        private List<TimeSpan> _timeList2 = new List<TimeSpan>();
+        private List<float> _angleList = new List<float>();
+
+        private enum State
+        {
+            TakeOff, Hover, Up, Down, Forward, Right, Left, TurnRight, TurnLeft, Land, Wait
+        };
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(String name)
@@ -215,6 +223,56 @@ namespace AR.Drone.WinApp.MyUserControl
             double y = (line.Y2 - line.Y1) / totalTime * time + line.Y1;
             Canvas.SetLeft(_nowPosition, x - 5);
             Canvas.SetTop(_nowPosition, y - 5);
+        }
+
+        private void DrawPlane(double x, double y,double angle)
+        {
+            //Canvas.SetLeft(_nowPosition, line.X1 - 5);
+            //Canvas.SetTop(_nowPosition, line.Y1 - 5);
+        }
+
+
+        public void GetPosition(int index, double time, float angle)
+        {
+            int lineIndex = -1;
+            for (int i = 0; i <= index; i++)
+            {
+                if (_commandList[i] == State.Forward)
+                {
+                    lineIndex++;
+                }
+            }
+
+            if (_commandList[index] == State.Forward)
+            {
+                Line line = _lineList[lineIndex];
+                double costTime = _timeList2[index].Seconds + (double)_timeList2[index].Milliseconds / 1000;
+
+                double x = (line.X2 - line.X1) / costTime * time + line.X1;
+                double y = (line.Y2 - line.Y1) / costTime * time + line.Y1;
+                DrawPlane(x, y,0);
+            }
+            else if (_commandList[index] == State.TurnLeft || _commandList[index] == State.TurnRight)
+            {
+                Line line = _lineList[lineIndex + 1];
+                float originalAngle = _angleList[index - 1];
+
+                Canvas.SetLeft(_nowPosition, line.X1 - 5);
+                Canvas.SetTop(_nowPosition, line.Y1 - 5);
+
+                float turnAngle = Math.Abs(angle - originalAngle);
+                if (_commandList[index] == State.TurnLeft)
+                    turnAngle = -turnAngle;
+                Debug.WriteLine(_angleList[index - 1]);
+                Debug.WriteLine(turnAngle);
+            }
+            else
+            {
+                Line line = _lineList[lineIndex + 1];
+
+                Canvas.SetLeft(_nowPosition, line.X1 - 5);
+                Canvas.SetTop(_nowPosition, line.Y1 - 5);
+            }
         }
     }
 }
