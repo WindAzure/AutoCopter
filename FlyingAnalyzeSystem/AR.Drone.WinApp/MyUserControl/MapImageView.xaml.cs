@@ -35,6 +35,7 @@ namespace AR.Drone.WinApp.MyUserControl
         private List<State> _commandList = new List<State>();
         private List<TimeSpan> _timeList2 = new List<TimeSpan>();
         private List<float> _angleList = new List<float>();
+        private bool _isDrawPlane = false;
 
         private enum State
         {
@@ -225,15 +226,24 @@ namespace AR.Drone.WinApp.MyUserControl
             Canvas.SetTop(_nowPosition, y - 5);
         }
 
+        public void SetIsDrawPlane(bool state)
+        {
+            _isDrawPlane = state;
+        }
+
         private void DrawPlane(double x, double y,double angle)
         {
             //Canvas.SetLeft(_nowPosition, line.X1 - 5);
             //Canvas.SetTop(_nowPosition, line.Y1 - 5);
         }
 
-
         public void GetPosition(int index, double time, float angle)
         {
+            if (_isDrawPlane == false)
+            {
+                return;
+            }
+
             int lineIndex = -1;
             for (int i = 0; i <= index; i++)
             {
@@ -272,6 +282,45 @@ namespace AR.Drone.WinApp.MyUserControl
 
                 Canvas.SetLeft(_nowPosition, line.X1 - 5);
                 Canvas.SetTop(_nowPosition, line.Y1 - 5);
+            }
+        }
+
+        public void Decode(String data)
+        {
+        /*   for (int index = 0; index < data.Count; index++)
+            {
+                char split = ' ';
+                string[] dataString = data[index].Split(split);
+                _commandList.Add(Convert(dataString[0]));
+                _timeList.Add(TimeSpan.Parse(dataString[1]));
+                _angleList.Add(float.Parse(dataString[2]));
+            }*/
+        }
+
+        private State Convert(string conmandString)
+        {
+            switch (conmandString)
+            {
+                case "TakeOff":
+                    return State.TakeOff;
+                case "Hover":
+                    return State.Hover;
+                case "Up":
+                    return State.Up;
+                case "Down":
+                    return State.Down;
+                case "Forward":
+                    return State.Forward;
+                case "Left":
+                    return State.Left;
+                case "Right":
+                    return State.Right;
+                case "TurnLeft":
+                    return State.TurnLeft;
+                case "TurnRight":
+                    return State.TurnRight;
+                default:
+                    return State.Land;
             }
         }
     }

@@ -73,5 +73,19 @@ namespace AR.Drone.WinApp.MyUserControl.MapComboBox
                 return _isPlaneUsing;
             }
         }
+
+        private String _id;
+        public String Id
+        {
+            set
+            {
+                _id = value;
+                OnPropertyChanged("Id");
+            }
+            get
+            {
+                return _id;
+            }
+        }
     }
 }

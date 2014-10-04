@@ -3,6 +3,7 @@ using AR.Drone.Client.Command;
 using AR.Drone.Data;
 using AR.Drone.Data.Navigation;
 using AR.Drone.Data.Navigation.Native;
+using AR.Drone.WinApp.CommandToServer;
 using AR.Drone.WinApp.MyUserControl.MapComboBox;
 using System;
 using System.Collections.Generic;
@@ -84,10 +85,9 @@ namespace AR.Drone.WinApp.Forms
             this.Close();
         }
 
-        public void ClickLearnPanelSaveButton()
+        public void ClickLearnPanelSaveButton(String id)
         {
-            Debug.WriteLine("OnClickSaveButton");
-            Debug.WriteLine(DroneSingleton._navigationData.Battery.Percentage);
+            Commands.UpdateMileage(id, "QQQ");
         }
 
         public void MouseUpLearnPanelDownControlButton()

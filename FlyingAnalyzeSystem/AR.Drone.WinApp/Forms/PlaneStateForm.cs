@@ -55,9 +55,9 @@ namespace AR.Drone.WinApp.Forms
             SwitchForm(new LearnForm(this));
         }
 
-        public void OnPlaneStatePanelStartAutoPatrol(string mileage)
+        public void OnPlaneStatePanelStartAutoPatrol()
         {
-            Debug.WriteLine(mileage);
+            Debug.WriteLine("!!");
         }
 
         public void OnClickPlaneStatePanelManualControlButton()

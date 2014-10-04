@@ -45,12 +45,11 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private delegate void TimerDispatcherDelegate();
         public delegate void PlaneStatePanelEvent();
-        public delegate void PlaneStatePanelPatrolEvent(String mileage);
 
         public event PlaneStatePanelEvent ClickPatrolReturnHomeButton = null;
         public event PlaneStatePanelEvent ClickPatrolManualControlButton = null;
         public event PlaneStatePanelEvent ClickStartLearnButton = null;
-        public event PlaneStatePanelPatrolEvent StartAutoPatrol = null;
+        public event PlaneStatePanelEvent StartAutoPatrol = null;
 
         private ObservableCollection<ImageComboBoxItemProperty> _itemSource = new ObservableCollection<ImageComboBoxItemProperty>();
         public ObservableCollection<ImageComboBoxItemProperty> ComboBoxItemSource
@@ -154,9 +153,9 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 this.Dispatcher.Invoke(DispatcherPriority.Normal, new TimerDispatcherDelegate(UpdatePanel));
                 _timer.Stop();
-                if (StartAutoPatrol!=null)
+                if (StartAutoPatrol != null)
                 {
-                    StartAutoPatrol(SelectedMapItemMileage);
+                    StartAutoPatrol();
                 }
                 return;
             }
@@ -238,7 +237,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 img.BeginInit();
                 img.StreamSource = stream;
                 img.EndInit();
-                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img, Mileage = data.Tables[0].Rows[i][2].ToString() });
+                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img, Mileage = data.Tables[0].Rows[i][2].ToString(), Id = data.Tables[0].Rows[i][3].ToString() });
             }
         }
 
@@ -246,6 +245,7 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             int T = 0;
             IsFirstPlaneItemSelected = false;
+            _mapImage.SetIsDrawPlane(false);
             UIElementCollection group = _planeItemsStackPanel.Children;
             _planeInformationPanel.Visibility = Visibility.Hidden;
             _comboBox.IsEnabled = true;
@@ -263,16 +263,17 @@ namespace AR.Drone.WinApp.MyUserControl
                         if (_isPlaneT1Flying)
                         {
                             _comboBox.IsEnabled = false;
-                            int N=0;
-                            foreach(var comboBoxitem in ComboBoxItemSource)
+                            int N = 0;
+                            foreach (var comboBoxitem in ComboBoxItemSource)
                             {
-                                if(comboBoxitem.IsPlaneUsing)
+                                if (comboBoxitem.IsPlaneUsing)
                                 {
                                     break;
                                 }
                                 N++;
                             }
                             _comboBox._imageComboBox.SelectedIndex = N;
+                            _mapImage.SetIsDrawPlane(true);
                         }
                         _planeInformationPanel.Visibility = Visibility.Visible;
                         IsFirstPlaneItemSelected = true;
@@ -376,6 +377,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 else
                 {
                     _mapImageViewConstraint.Visibility = Visibility.Hidden;
+                    _mapImage.Decode(SelectedMapItemMileage);
                 }
             }
             else

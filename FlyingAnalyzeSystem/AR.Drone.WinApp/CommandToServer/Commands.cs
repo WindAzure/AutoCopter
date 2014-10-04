@@ -43,7 +43,14 @@ namespace AR.Drone.WinApp.CommandToServer
 
         public static DataSet GetFloorInformation()
         {
-            return SqlHelper.ExecuteDataSet(CommandType.Text, "SELECT  [FloorName],[Picture],[MileageRecord] FROM [dbo].[Floor]", null);
+            return SqlHelper.ExecuteDataSet(CommandType.Text, "SELECT  [FloorName],[Picture],[MileageRecord],[FloorId] FROM [dbo].[Floor]", null);
+        }
+
+        public static void UpdateMileage(String floorId, String mileage)
+        {
+            SqlParameter floorIdParam = new SqlParameter() { ParameterName = "@FloorId", SqlDbType = SqlDbType.NVarChar, Value = floorId };
+            SqlParameter mileageParam = new SqlParameter() { ParameterName = "@Mileage", SqlDbType = SqlDbType.NVarChar, Value = mileage };
+            SqlHelper.ExecuteScalar(CommandType.Text, "UPDATE [dbo].[Floor] SET [MileageRecord] = @Mileage WHERE [FloorId] =@FloorId", new SqlParameter[] { floorIdParam, mileageParam });
         }
 
         public static void RegistFloor(String imagePath)

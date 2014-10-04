@@ -32,6 +32,7 @@ namespace AR.Drone.WinApp.MyUserControl
         private Timer _timer = new Timer();
 
         public delegate void LearnPanelEvent();
+        public delegate void LearnPanelSaveEvent(String id);
         public event LearnPanelEvent MouseDownLeftControlButton = null;
         public event LearnPanelEvent MouseUpLeftControlButton = null;
         public event LearnPanelEvent MouseDownRightControlButton = null;
@@ -42,10 +43,10 @@ namespace AR.Drone.WinApp.MyUserControl
         public event LearnPanelEvent MouseUpUpControlButton = null;
         public event LearnPanelEvent MouseDownDownControlButton = null;
         public event LearnPanelEvent MouseUpDownControlButton = null;
-        public event LearnPanelEvent ClickSaveButton = null;
         public event LearnPanelEvent ClickBackButton = null;
         public event LearnPanelEvent ClickTakeOffButton = null;
         public event LearnPanelEvent ClickLandButton = null;
+        public event LearnPanelSaveEvent ClickSaveButton = null;
         public event PropertyChangedEventHandler PropertyChanged = null;
         public void OnPropertyChanged(String propertyName)
         {
@@ -139,6 +140,20 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private String _selectedMapItemId = "";
+        public String SelectedMapItemId
+        {
+            set
+            {
+                _selectedMapItemId = value;
+                OnPropertyChanged("SelectedMapItemId");
+            }
+            get
+            {
+                return _selectedMapItemId;
+            }
+        }
+
         public LearnPanel()
         {
             InitializeComponent();
@@ -163,7 +178,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 img.BeginInit();
                 img.StreamSource = stream;
                 img.EndInit();
-                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img });
+                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img, Id = data.Tables[0].Rows[i][3].ToString() });
             }
         }
 
@@ -308,7 +323,7 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (ClickSaveButton != null)
             {
-                ClickSaveButton();
+                ClickSaveButton(SelectedMapItemId);
             }
             MessageBox.Show("Learning is completed.", "Success");
             _comboBox.IsEnabled = true;
@@ -369,6 +384,7 @@ namespace AR.Drone.WinApp.MyUserControl
             if (0 <= comboBox.SelectedIndex && comboBox.SelectedIndex < ComboBoxItemSource.Count)
             {
                 _mapImage.ImagePath = ComboBoxItemSource[comboBox.SelectedIndex].MapImage;
+                SelectedMapItemId = ComboBoxItemSource[comboBox.SelectedIndex].Id;
             }
             else
             {
@@ -378,11 +394,11 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void OnTakeOfButtonClick()
         {
-           /* if (_mapImage.ImagePath == null)
-            {
-                MessageBox.Show("Please select map,first.", "Error");
-                return;
-            }*/
+            /* if (_mapImage.ImagePath == null)
+             {
+                 MessageBox.Show("Please select map,first.", "Error");
+                 return;
+             }*/
             _takeOffButton.Visibility = Visibility.Hidden;
             _landButton.Visibility = Visibility.Visible;
             _comboBox.IsEnabled = false;
