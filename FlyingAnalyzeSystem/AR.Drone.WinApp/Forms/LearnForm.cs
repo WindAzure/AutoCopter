@@ -70,6 +70,11 @@ namespace AR.Drone.WinApp.Forms
             Debug.WriteLine("ClickLearnPanelTakeOffButton");
             DroneSingleton._droneClient.Takeoff();
             _commandStartTime = DateTime.Now;
+            NavdataBag navdataBag;
+            if (DroneSingleton._navigationPacket.Data != null && NavdataBagParser.TryParse(ref DroneSingleton._navigationPacket, out navdataBag))
+            {
+                _heading = navdataBag.magneto.heading_fusion_unwrapped;
+            }
             _commandList.Add(State.TakeOff);
         }
 
@@ -223,6 +228,7 @@ namespace AR.Drone.WinApp.Forms
                     nowHeading = navdataBag.magneto.heading_fusion_unwrapped;
                     _timeList.Add(new TimeSpan(0, 0, 0, 0));
                     _angleList.Add(nowHeading);
+                    _heading = nowHeading;
                 }
             }
             else
@@ -230,7 +236,7 @@ namespace AR.Drone.WinApp.Forms
                 _commandEndTime = DateTime.Now;
                 TimeSpan costTime = _commandEndTime.Subtract(_commandStartTime);
                 _timeList.Add(costTime);
-                _angleList.Add(0);
+                _angleList.Add(_heading);
             }
         }
     }
