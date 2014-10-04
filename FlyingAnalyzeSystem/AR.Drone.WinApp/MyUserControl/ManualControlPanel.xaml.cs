@@ -179,36 +179,36 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void KeyDownManualControlPanel(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.A && (!_isPressedA))
+            if (e.Key == Key.A && (!_isPressedA) && (!_isPressedD))
             {
                 if (_leftControl.SwitchCurrentImageByKey(false))
                 {
-                    MouseDownPlaneLeftControlButton();
                     _isPressedA = true;
+                    MouseDownPlaneLeftControlButton();
                 }
             }
-            if (e.Key == Key.S && (!_isPressedS))
+            if (e.Key == Key.S && (!_isPressedS) && (!_isPressedW))
             {
                 if (_backControl.SwitchCurrentImageByKey(false))
                 {
-                    MouseDownPlaneBackControlButton();
                     _isPressedS = true;
+                    MouseDownPlaneBackControlButton();
                 }
             }
-            if (e.Key == Key.D && (!_isPressedD))
+            if (e.Key == Key.D && (!_isPressedD) && (!_isPressedA))
             {
                 if (_rightControl.SwitchCurrentImageByKey(false))
                 {
-                    MouseDownPlaneRightControlButton();
                     _isPressedD = true;
+                    MouseDownPlaneRightControlButton();
                 }
             }
-            if (e.Key == Key.W && (!_isPressedW))
+            if (e.Key == Key.W && (!_isPressedW) && (!_isPressedS))
             {
                 if (_forwardControl.SwitchCurrentImageByKey(false))
                 {
-                    MouseDownPlaneForwardControlButton();
                     _isPressedW = true;
+                    MouseDownPlaneForwardControlButton();
                 }
             }
             if (e.Key == Key.Up && (!_isPressedUp))
@@ -317,6 +317,7 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseDownLeftControlButton != null)
             {
+                DisableRightPartButtonState();
                 MouseDownLeftControlButton();
             }
         }
@@ -325,6 +326,10 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseUpLeftControlButton != null)
             {
+                if ((!_isPressedW) && (!_isPressedS))
+                {
+                    InitializeControlButtonState();
+                }
                 MouseUpLeftControlButton();
             }
         }
@@ -333,6 +338,10 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseUpRightControlButton != null)
             {
+                if ((!_isPressedW) && (!_isPressedS))
+                {
+                    InitializeControlButtonState();
+                }
                 MouseUpRightControlButton();
             }
         }
@@ -341,6 +350,7 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseDownRightControlButton != null)
             {
+                DisableRightPartButtonState();
                 MouseDownRightControlButton();
             }
         }
@@ -349,6 +359,7 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseDownBackControlButton != null)
             {
+                DisableRightPartButtonState();
                 MouseDownBackControlButton();
             }
         }
@@ -357,6 +368,10 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseUpBackControlButton != null)
             {
+                if ((!_isPressedA) && (!_isPressedD))
+                {
+                    InitializeControlButtonState();
+                }
                 MouseUpBackControlButton();
             }
         }
@@ -365,6 +380,7 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseDownForwardControlButton != null)
             {
+                DisableRightPartButtonState();
                 MouseDownForwardControlButton();
             }
         }
@@ -373,6 +389,10 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseUpForwardControlButton != null)
             {
+                if ((!_isPressedA) && (!_isPressedD))
+                {
+                    InitializeControlButtonState();
+                }
                 MouseUpForwardControlButton();
             }
         }
@@ -381,6 +401,8 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseDownLeftRotateControlButton != null)
             {
+                DisableControlButtonState();
+                _leftRotateControl.IsEnabled = true;
                 MouseDownLeftRotateControlButton();
             }
         }
@@ -389,6 +411,7 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseUpLeftRotateControlButton != null)
             {
+                InitializeControlButtonState();
                 MouseUpLeftRotateControlButton();
             }
         }
@@ -397,6 +420,8 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseDownRightRotateControlButton != null)
             {
+                DisableControlButtonState();
+                _rightRotateControl.IsEnabled = true;
                 MouseDownRightRotateControlButton();
             }
         }
@@ -405,6 +430,7 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseUpRightRotateControlButton != null)
             {
+                InitializeControlButtonState();
                 MouseUpRightRotateControlButton();
             }
         }
@@ -413,6 +439,8 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseDownDownControlButton != null)
             {
+                DisableControlButtonState();
+                _downControl.IsEnabled = true;
                 MouseDownDownControlButton();
             }
         }
@@ -421,6 +449,7 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseUpDownControlButton != null)
             {
+                InitializeControlButtonState();
                 MouseUpDownControlButton();
             }
         }
@@ -429,6 +458,8 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseDownUpControlButton != null)
             {
+                DisableControlButtonState();
+                _upControl.IsEnabled = true;
                 MouseDownUpControlButton();
             }
         }
@@ -437,6 +468,7 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             if (MouseUpUpControlButton != null)
             {
+                InitializeControlButtonState();
                 MouseUpUpControlButton();
             }
         }
@@ -471,7 +503,37 @@ namespace AR.Drone.WinApp.MyUserControl
 
         public void RefreshMainImageBackground()
         {
-            _mainImage.Source = loadBitmap(DroneSingleton._frameBitmap);
+            _mainImage.ImageSource = loadBitmap(DroneSingleton._frameBitmap);
+        }
+
+        private void InitializeControlButtonState()
+        {
+            _forwardControl.IsEnabled = true;
+            _backControl.IsEnabled = true;
+            _leftControl.IsEnabled = true;
+            _rightControl.IsEnabled = true;
+            _upControl.IsEnabled = true;
+            _downControl.IsEnabled = true;
+            _leftRotateControl.IsEnabled = true;
+            _rightRotateControl.IsEnabled = true;
+        }
+        private void DisableControlButtonState()
+        {
+            _forwardControl.IsEnabled = false;
+            _backControl.IsEnabled = false;
+            _leftControl.IsEnabled = false;
+            _rightControl.IsEnabled = false;
+            _upControl.IsEnabled = false;
+            _downControl.IsEnabled = false;
+            _leftRotateControl.IsEnabled = false;
+            _rightRotateControl.IsEnabled = false;
+        }
+        private void DisableRightPartButtonState()
+        {
+            _upControl.IsEnabled = false;
+            _downControl.IsEnabled = false;
+            _leftRotateControl.IsEnabled = false;
+            _rightRotateControl.IsEnabled = false;
         }
     }
 }

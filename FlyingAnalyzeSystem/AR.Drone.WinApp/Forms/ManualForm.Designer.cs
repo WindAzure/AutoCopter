@@ -38,6 +38,7 @@
             // _stateUpdateTimer
             // 
             this._stateUpdateTimer.Interval = 500;
+            this._stateUpdateTimer.Tick += new System.EventHandler(this._stateUpdateTimer_Tick);
             // 
             // _videoUpdateTimer
             // 

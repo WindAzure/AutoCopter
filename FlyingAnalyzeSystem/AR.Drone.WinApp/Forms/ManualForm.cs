@@ -13,6 +13,10 @@ namespace AR.Drone.WinApp.Forms
 {
     public partial class ManualForm : Form
     {
+        private bool _isLeft = false;
+        private bool _isRight = false;
+        private bool _isForward = false;
+        private bool _isBackward = false;
         private bool _isBack = false;
         private PlaneStateForm _lastForm;
 
@@ -39,6 +43,7 @@ namespace AR.Drone.WinApp.Forms
             _manualControlPanel.ClickBackButton += ClickManualControlPanelBackButton;
 
             _videoUpdateTimer.Enabled = true;
+            _stateUpdateTimer.Enabled = true;
         }
 
         public void ClickManualControlPanelBackButton()
@@ -89,42 +94,158 @@ namespace AR.Drone.WinApp.Forms
 
         public void OnMouseUpManualControlPanelForwardControlButton()
         {
-            Debug.WriteLine("OnMouseUpManualControlPanelForwardControlButton");
+            _isForward = false;
+            if (_isLeft)
+            {
+                OnMouseDownManualControlPanelLeftControlButton();
+            }
+            else if (_isRight)
+            {
+                OnMouseDownManualControlPanelRightControlButton();
+            }
+            else
+            {
+                Debug.WriteLine("OnMouseUpManualControlPanelForwardControlButton");
+            }
         }
 
         public void OnMouseDownManualControlPanelForwardControlButton()
         {
-            Debug.WriteLine("OnMouseDownManualControlPanelForwardControlButton");
+            _isForward = true;
+            if (_isLeft)
+            {
+                OnLeftForward();
+            }
+            else if (_isRight)
+            {
+                OnRightForward();
+            }
+            else
+            {
+                Debug.WriteLine("OnMouseDownManualControlPanelForwardControlButton");
+            }
         }
 
         public void OnMouseUpManualControlPanelBackControlButton()
         {
-            Debug.WriteLine("OnMouseUpManualControlPanelBackControlButton");
+            _isBackward = false;
+            if (_isLeft)
+            {
+                OnMouseDownManualControlPanelLeftControlButton();
+            }
+            else if (_isRight)
+            {
+                OnMouseDownManualControlPanelRightControlButton();
+            }
+            else
+            {
+                Debug.WriteLine("OnMouseUpManualControlPanelBackControlButton");
+            }
         }
 
         public void OnMouseDownManualControlPanelBackControlButton()
         {
-            Debug.WriteLine("OnMouseDownManualControlPanelBackControlButton");
+            _isBackward = true;
+            if (_isLeft)
+            {
+                OnLeftBackward();
+            }
+            else if (_isRight)
+            {
+                OnRightBackward();
+            }
+            else
+            {
+                Debug.WriteLine("OnMouseDownManualControlPanelBackControlButton");
+            }
         }
 
         public void OnMouseDownManualControlPanelLeftControlButton()
         {
-            Debug.WriteLine("OnMouseDownManualControlPanelLeftControlButton");
+            _isLeft = true;
+            if (_isBackward)
+            {
+                OnLeftBackward();
+            }
+            else if (_isForward)
+            {
+                OnLeftForward();
+            }
+            else
+            {
+                Debug.WriteLine("OnMouseDownManualControlPanelLeftControlButton");
+            }
         }
 
         public void OnMouseUpManualControlPanelLeftControlButton()
         {
-            Debug.WriteLine("OnMouseUpManualControlPanelLeftControlButton");
+            _isLeft = false;
+            if (_isForward)
+            {
+                OnMouseDownManualControlPanelForwardControlButton();
+            }
+            else if (_isBackward)
+            {
+                OnMouseDownManualControlPanelBackControlButton();
+            }
+            else
+            {
+                Debug.WriteLine("OnMouseUpManualControlPanelLeftControlButton");
+            }
         }
 
         public void OnMouseDownManualControlPanelRightControlButton()
         {
-            Debug.WriteLine("OnMouseDownManualControlPanelRightControlButton");
+            _isRight = true;
+            if (_isBackward)
+            {
+                OnRightBackward();
+            }
+            else if (_isForward)
+            {
+                OnRightForward();
+            }
+            else
+            {
+                Debug.WriteLine("OnMouseDownManualControlPanelRightControlButton");
+            }
         }
 
         public void OnMouseUpManualControlPanelRightControlButton()
         {
-            Debug.WriteLine("OnMouseUpManualControlPanelRightControlButton");
+            _isRight = false;
+            if (_isForward)
+            {
+                OnMouseDownManualControlPanelForwardControlButton();
+            }
+            else if (_isBackward)
+            {
+                OnMouseDownManualControlPanelBackControlButton();
+            }
+            else
+            {
+                Debug.WriteLine("OnMouseUpManualControlPanelRightControlButton");
+            }
+        }
+
+        public void OnLeftForward()
+        {
+            Debug.WriteLine("OnLeftForward");
+        }
+
+        public void OnRightForward()
+        {
+            Debug.WriteLine("OnRightForward");
+        }
+
+        public void OnLeftBackward()
+        {
+            Debug.WriteLine("OnLeftBackward");
+        }
+
+        public void OnRightBackward()
+        {
+            Debug.WriteLine("OnRightBackward");
         }
 
         private void ManualForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -158,6 +279,11 @@ namespace AR.Drone.WinApp.Forms
                 VideoHelper.UpdateBitmap(ref DroneSingleton._frameBitmap, ref DroneSingleton._frame);
 
             _manualControlPanel.RefreshMainImageBackground();
+        }
+
+        private void _stateUpdateTimer_Tick(object sender, EventArgs e)
+        {
+            _manualControlPanel.SetBattery(DroneSingleton._navigationData.Battery.Percentage / 100.0);
         }
     }
 }
