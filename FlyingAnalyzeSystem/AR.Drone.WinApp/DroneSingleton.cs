@@ -21,6 +21,7 @@ namespace AR.Drone.WinApp
         public static Bitmap _frameBitmap;
         public static uint _frameNumber;
         public static VideoPacketDecoderWorker _videoPacketDecoderWorker;
+        public static ReceiveUdpModel _droneUnity;
 
         public static void InitializeDrone()
         {
@@ -37,6 +38,8 @@ namespace AR.Drone.WinApp
             _droneClient.Start();
             _droneClient.ResetEmergency();
             _droneClient.FlatTrim();
+
+            _droneUnity = new ReceiveUdpModel();
         }
 
         private static void OnVideoPacketDecoded(VideoFrame frame)

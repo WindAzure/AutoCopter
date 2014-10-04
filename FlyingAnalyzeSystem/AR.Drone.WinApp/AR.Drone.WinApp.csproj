@@ -174,8 +174,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="CommandToServer\SqlHelper.cs" />
-    <Compile Include="TcpSender.cs" />
-    <Compile Include="UdpSender.cs" />
+    <Compile Include="ReceiveUdpModel.cs" />
     <Compile Include="VideoHelper.cs" />
     <Compile Include="TreeViewHelper.cs" />
     <Compile Include="MainForm.cs">

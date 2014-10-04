@@ -77,6 +77,15 @@ namespace AR.Drone.WinApp.Forms
                 _planeStatePanel.SetBattery(DroneSingleton._navigationData.Battery.Percentage / 100.0);
                 _planeStatePanel.AltitudeText = DroneSingleton._navigationData.Altitude.ToString();
                 _planeStatePanel.SetPlaneText("Drone-001");
+                Debug.WriteLine(DroneSingleton._droneUnity.PirState);
+                List<String> data = DroneSingleton._droneUnity.BeaconMac;
+                foreach (var item in data)
+                {
+                    Debug.WriteLine(item);
+                }
+                int[] dis = DroneSingleton._droneUnity.UltraSonicDistance;
+                for (int i = 0; i < 5; i++)
+                    Debug.WriteLine(dis[i]);
             }
             else
             {
