@@ -45,6 +45,11 @@ namespace AR.Drone.WinApp.Forms
             this.Hide();
         }
 
+        public void InitializeChildPanel()
+        {
+            _planeStatePanel.InitializeChildPanel();
+        }
+
         public void OnClickPlaneStatePanelStartLearnButton()
         {
             SwitchForm(new LearnForm(this));

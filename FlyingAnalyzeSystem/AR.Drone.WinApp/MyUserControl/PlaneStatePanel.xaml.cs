@@ -142,6 +142,12 @@ namespace AR.Drone.WinApp.MyUserControl
             _patrolPanel.Visibility = Visibility.Visible;
         }
 
+        public void InitializeChildPanel()
+        {
+            _patrolPanel.Visibility = Visibility.Hidden;
+            _readyPanel.Visibility = Visibility.Visible;
+        }
+
         private void ElapsedTimer(object sender, ElapsedEventArgs e)
         {
             if (_span.TotalSeconds == 0)

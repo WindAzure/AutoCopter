@@ -258,6 +258,7 @@ namespace AR.Drone.WinApp.Forms
                     _lastForm.WindowState = this.WindowState;
                     _lastForm.Width = this.Width;
                     _lastForm.Height = this.Height;
+                    _lastForm.InitializeChildPanel();
                     _lastForm.Show();
                 }
                 else
