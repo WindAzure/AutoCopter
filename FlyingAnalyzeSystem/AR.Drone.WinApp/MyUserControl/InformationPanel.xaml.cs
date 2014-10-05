@@ -23,5 +23,15 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             InitializeComponent();
         }
+
+        private void OnClickYesButton()
+        {
+
+        }
+
+        private void OnClickNoButton()
+        {
+
+        }
     }
 }

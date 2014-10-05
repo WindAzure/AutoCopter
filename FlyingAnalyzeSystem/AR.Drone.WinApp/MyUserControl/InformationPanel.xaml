@@ -11,7 +11,9 @@
             <Grid.Background>
                 <ImageBrush ImageSource="../Image/InformationPage/InfoBackGround.png"/>
             </Grid.Background>
+            
             <Image Source="../Image/InformationPage/PlaneIdTitle.png" Margin="30,4,203,228"/>
+            <TextBlock Text="Drone-001" Foreground="White" Margin="60,18,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Image Source="../Image/InformationPage/ResultTitle.png" Margin="226,11,14,239"/>
             <Image Source="../Image/InformationPage/Green.png" Margin="260,15,14,239" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" x:Name="_okState"/>
             <Image Source="../Image/InformationPage/Red.png" Margin="260,15,14,239" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" x:Name="_noState"/>
@@ -19,12 +21,12 @@
             <Image Source="../Image/InformationPage/OptionTitle.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="28,0,16,6"/>
             <myControl:ImageThreeStateButton NormalImagePath="../Image/InformationPage/YesButton.png" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                                              HoverImagePath="../Image/InformationPage/YesButton.png"
-                                             DownImagePath="../Image/InformationPage/YesButtonDown.png" Margin="200,0,0,15"/>
+                                             DownImagePath="../Image/InformationPage/YesButtonDown.png" Margin="200,0,0,15" OnClick="OnClickYesButton"/>
             <myControl:ImageThreeStateButton NormalImagePath="../Image/InformationPage/NoButton.png" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                                              HoverImagePath="../Image/InformationPage/NoButton.png"
-                                             DownImagePath="../Image/InformationPage/NoButtonDown.png" Margin="290,0,0,15"/>
+                                             DownImagePath="../Image/InformationPage/NoButtonDown.png" Margin="290,0,0,15" OnClick="OnClickNoButton"/>
             
-            <Viewbox Width="10" Height="10"  Margin="260,15,14,239" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Viewbox Width="10" Height="10"  Margin="260,15,14,239" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="_progressBar">
                 <myControl:CircularProgressBar/>
             </Viewbox>
         </Grid>

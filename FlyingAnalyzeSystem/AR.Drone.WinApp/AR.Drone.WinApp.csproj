@@ -466,8 +466,8 @@
     <Resource Include="Image\LearnPage\LandControl.png" />
     <Resource Include="Image\InformationPage\PlaneIdTitle.png" />
     <Resource Include="Image\InformationPage\ResultTitle.png" />
-    <Resource Include="Image\InformationPage\InfoBackGround2.png" />
     <Resource Include="Image\InformationPage\Green.png" />
+    <Resource Include="Image\InformationPage\InfoBackGround2.png" />
     <Content Include="Image\InformationPage\0919-19.png" />
     <Resource Include="Image\InformationPage\Red.png" />
     <Content Include="Image\InformationPage\0919-21.png" />
