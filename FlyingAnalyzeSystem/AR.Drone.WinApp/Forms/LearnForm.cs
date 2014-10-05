@@ -97,7 +97,6 @@ namespace AR.Drone.WinApp.Forms
 
         public void MouseUpLearnPanelDownControlButton()
         {
-            Debug.WriteLine("MouseUpPlaneDownControlButton");
             Record();
             _nowState = State.Hover;
             DroneSingleton._droneClient.Hover();
@@ -107,7 +106,6 @@ namespace AR.Drone.WinApp.Forms
 
         public void MouseLearnPanelDownDownControlButton()
         {
-            Debug.WriteLine("MouseDownPlaneDownControlButton");
             Record();
             _nowState = State.Down;
             DroneSingleton._droneClient.Progress(FlightMode.Progressive, gaz: -0.25f);
@@ -117,7 +115,6 @@ namespace AR.Drone.WinApp.Forms
 
         public void MouseUpLearnPanelUpControlButton()
         {
-            Debug.WriteLine("MouseUpPlaneUpControlButton");
             Record();
             _nowState = State.Hover;
             DroneSingleton._droneClient.Hover();
@@ -127,7 +124,6 @@ namespace AR.Drone.WinApp.Forms
 
         public void MouseDownLearnPanelUpControlButton()
         {
-            Debug.WriteLine("MouseDownPlaneUpControlButton");
             Record();
             _nowState = State.Up;
             DroneSingleton._droneClient.Progress(FlightMode.Progressive, gaz: 0.25f);
@@ -137,7 +133,6 @@ namespace AR.Drone.WinApp.Forms
 
         public void MouseUpLearnPanelForwardControlButton()
         {
-            Debug.WriteLine("MouseUpPlaneForwardControlButton");
             Record();
             _nowState = State.Hover;
             DroneSingleton._droneClient.Hover();
@@ -147,7 +142,6 @@ namespace AR.Drone.WinApp.Forms
 
         public void MouseDownLearnPanelForwardControlButton()
         {
-            Debug.WriteLine("MouseDownPlaneForwardControlButton");
             Record();
             _nowState = State.Forward;
             DroneSingleton._droneClient.Progress(FlightMode.Progressive, pitch: -0.05f);
@@ -157,7 +151,6 @@ namespace AR.Drone.WinApp.Forms
 
         public void MouseUpLearnPanelRightControlButton()
         {
-            Debug.WriteLine("MouseUpPlaneRightControlButton");
             Record();
             _nowState = State.Hover;
             DroneSingleton._droneClient.Hover();
@@ -167,7 +160,6 @@ namespace AR.Drone.WinApp.Forms
 
         public void MouseDownLearnPanelRightControlButton()
         {
-            Debug.WriteLine("MouseDownPlaneRightControlButton");
             Record();
             NavdataBag navdataBag;
             if (DroneSingleton._navigationPacket.Data != null && NavdataBagParser.TryParse(ref DroneSingleton._navigationPacket, out navdataBag))
@@ -181,7 +173,6 @@ namespace AR.Drone.WinApp.Forms
 
         public void MouseUpLearnPanelLeftControlButton()
         {
-            Debug.WriteLine("MouseUpPlaneLeftControlButton");
             Record();
             _nowState = State.Hover;
             DroneSingleton._droneClient.Hover();
@@ -191,7 +182,6 @@ namespace AR.Drone.WinApp.Forms
 
         public void MouseDownLearnPanelLeftControlButton()
         {
-            Debug.WriteLine("MouseDownPlaneLeftControlButton");
             Record();
             NavdataBag navdataBag;
             if (DroneSingleton._navigationPacket.Data != null && NavdataBagParser.TryParse(ref DroneSingleton._navigationPacket, out navdataBag))

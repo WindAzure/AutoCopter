@@ -105,7 +105,7 @@
                                     <TextBlock Text="Incomplete floor data." Foreground="#4A4E6B" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5,0,0" FontSize="16"/>
                                     <TextBlock Text="Please learn, first." Foreground="#4A4E6B"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,35,0,0" FontSize="16"/>
                                 </Grid>
-                                
+
                                 <myControl:ImageThreeStateButton Visibility="Visible" x:Name="_descriptionPanel"
                                              NormalImagePath="../../Image/PlaneStatePage/LearnModeDescription.png" 
                                              DownImagePath="../../Image/PlaneStatePage/LearnModeDescription.png" 
@@ -125,11 +125,11 @@
                         		DownImagePath="../Image/PlaneStatePage/UploadDown.png" 
                         		HoverImagePath="../Image/PlaneStatePage/Upload.png"
                         		OnClick="OnClickUploadButton" Margin="0,17,0,0"/>
-                            
+
                             <Grid x:Name="_planeInformationPanel" Visibility="Hidden">
                                 <Image Source="../Image/PlaneStatePage/Battery.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="65" Width="150" Margin="0,47,0,0"/>
                                 <TextBlock Text="Battery &amp; Altitude" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="10" Margin="7,48,0,0"/>
-                                <TextBlock Text="{Binding AltitudeText}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FAED00" Margin="0,90,0,0"/>                       
+                                <TextBlock Text="{Binding AltitudeText}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FAED00" Margin="0,90,0,0"/>
                                 <Rectangle x:Name="_baterySample" Visibility="Hidden" Height="12" Width="89" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,69,0,0">
                                     <Rectangle.Fill>
                                         <LinearGradientBrush x:Name="_batterySampleBrush">
@@ -150,6 +150,8 @@
                     </Grid>
                 </StackPanel>
             </Grid>
+
+            <myControl:InformationPanel HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Viewbox>
 

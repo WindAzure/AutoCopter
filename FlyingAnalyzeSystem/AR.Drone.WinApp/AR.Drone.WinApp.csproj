@@ -108,8 +108,14 @@
     <Compile Include="MyUserControl\AccountTextBox.xaml.cs">
       <DependentUpon>AccountTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyUserControl\CircularProgressBar.xaml.cs">
+      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyUserControl\ImageToggleButton.xaml.cs">
       <DependentUpon>ImageToggleButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyUserControl\InformationPanel.xaml.cs">
+      <DependentUpon>InformationPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\LearnPanel.xaml.cs">
       <DependentUpon>LearnPanel.xaml</DependentUpon>
@@ -288,11 +294,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyUserControl\CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyUserControl\ImageThreeStateButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyUserControl\ImageToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyUserControl\InformationPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -450,6 +464,25 @@
     <Resource Include="Image\ManualControlPage\Targeting.png" />
     <Resource Include="Image\LearnPage\LandControlDown.png" />
     <Resource Include="Image\LearnPage\LandControl.png" />
+    <Resource Include="Image\InformationPage\PlaneIdTitle.png" />
+    <Resource Include="Image\InformationPage\ResultTitle.png" />
+    <Resource Include="Image\InformationPage\InfoBackGround2.png" />
+    <Resource Include="Image\InformationPage\Green.png" />
+    <Content Include="Image\InformationPage\0919-19.png" />
+    <Resource Include="Image\InformationPage\Red.png" />
+    <Content Include="Image\InformationPage\0919-21.png" />
+    <Resource Include="Image\InformationPage\YesButton.png" />
+    <Resource Include="Image\InformationPage\YesButtonDown.png" />
+    <Resource Include="Image\InformationPage\NoButton.png" />
+    <Resource Include="Image\InformationPage\NoButtonDown.png" />
+    <Resource Include="Image\InformationPage\InfoBackGround.png" />
+    <Resource Include="Image\InformationPage\OptionTitle.png" />
+    <Content Include="Image\InformationPage\WARNING-04.png" />
+    <Content Include="Image\InformationPage\WARNING-05.png" />
+    <Content Include="Image\InformationPage\WARNING-06.png" />
+    <Content Include="Image\InformationPage\WARNING-07.png" />
+    <Content Include="Image\InformationPage\WARNING-08.png" />
+    <Content Include="Image\InformationPage\WARNING-09.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
     <Content Include="Image\PlaneStatePage\PC02-24.png" />

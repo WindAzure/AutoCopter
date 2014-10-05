@@ -418,5 +418,9 @@ namespace AR.Drone.WinApp.MyUserControl
                 ClickStartLearnButton();
             }
         }
+
+        public void ShowInfoPanel()
+        {
+        }
     }
 }
