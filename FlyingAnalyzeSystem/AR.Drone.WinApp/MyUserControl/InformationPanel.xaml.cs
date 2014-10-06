@@ -30,6 +30,26 @@ namespace AR.Drone.WinApp.MyUserControl
             InitializeComponent();
         }
 
+        public void Initialize()
+        {
+            _progressBar.Visibility = Visibility.Visible;
+            _okState.Visibility = Visibility.Hidden;
+            _noState.Visibility = Visibility.Hidden;
+        }
+
+        public void SetCheckResultState(bool state)
+        {
+            _progressBar.Visibility = Visibility.Hidden;
+            if (state)
+            {
+                _okState.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                _noState.Visibility = Visibility.Visible;
+            }
+        }
+
         private void OnClickYesButton()
         {
             if (ClickYesButton != null)

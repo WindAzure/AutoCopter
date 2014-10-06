@@ -82,5 +82,12 @@ namespace AR.Drone.WinApp.CommandToServer
             int count = Convert.ToInt32(SqlHelper.ExecuteScalar(CommandType.Text, "SELECT count(*) FROM [dbo].[Member] WHERE [Account]=@Account and [Password]=@Password and [IsAdmin]='true'", new SqlParameter[] { accountParam, passwordParam }));
             return count == 1;
         }
+
+        public static bool IsInBeaconTable(String mac)
+        {
+            SqlParameter macParam = new SqlParameter() { ParameterName = "@Mac", SqlDbType = SqlDbType.NVarChar, Value = mac };
+            int count = Convert.ToInt32(SqlHelper.ExecuteScalar(CommandType.Text, "SELECT count(*) FROM [dbo].[Beacon] WHERE [Mac]=@Mac", new SqlParameter[] { macParam }));
+            return count == 1;
+        }
     }
 }

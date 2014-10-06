@@ -17,9 +17,9 @@
             <Image Source="../Image/InformationPage/ResultTitle.png" Margin="250,3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill" Width="210" Height="30"/>
             <TextBlock Text="Checking Result" Foreground="White" Margin="275,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"/>
 
-            <Image Source="../Image/InformationPage/Green.png" Margin="355,0,0,285" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" x:Name="_okState"/>
+            <Image Source="../Image/InformationPage/Green.png" Margin="355,0,0,285" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" x:Name="_okState"/>
             <Image Source="../Image/InformationPage/Red.png"  Margin="355,0,0,285" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" x:Name="_noState"/>
-            <Viewbox Width="10" Height="10"  Margin="355,0,0,285" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="_progressBar" Visibility="Hidden">
+            <Viewbox Width="10" Height="10"  Margin="355,0,0,285" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="_progressBar" Visibility="Visible">
                 <myControl:CircularProgressBar/>
             </Viewbox>
 

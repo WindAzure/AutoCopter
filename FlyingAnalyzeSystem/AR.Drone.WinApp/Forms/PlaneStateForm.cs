@@ -14,9 +14,12 @@ namespace AR.Drone.WinApp.Forms
 {
     public partial class PlaneStateForm : Form
     {
+        private bool _isShowedWarning = false;
+        private bool _isCheckingBle = false;
         private bool _isSendedGCM = false;
         private int _pirTrueTime = 0;
         private int _retryConnectionTimes = 0;
+        private List<String> _bleMac;
 
         public PlaneStateForm()
         {
@@ -54,6 +57,7 @@ namespace AR.Drone.WinApp.Forms
                 Commands.SendGCM("Ar.drone-001", true);
             }
             _isSendedGCM = false;
+            _isShowedWarning = false;
         }
 
         protected override void OnClosed(EventArgs e)
@@ -101,6 +105,57 @@ namespace AR.Drone.WinApp.Forms
             Debug.WriteLine("OnClickPlaneStatePanelReturnHomeButton");
         }
 
+        private void StoreBleMac()
+        {
+            _bleMac.Clear();
+            foreach (var item in DroneSingleton._droneUnity.BeaconMac)
+            {
+                _bleMac.Add(item);
+            }
+        }
+
+        private bool CheckBleMacUpdate()
+        {
+            bool ans = true;
+            if (_bleMac.Count == DroneSingleton._droneUnity.BeaconMac.Count)
+            {
+                for (int i = 0; i < _bleMac.Count; i++)
+                {
+                    if (!_bleMac[i].Equals(DroneSingleton._droneUnity.BeaconMac[i]))
+                    {
+                        ans = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                ans = false;
+            }
+            return ans;
+        }
+
+        private bool CheckCertification()
+        {
+            bool ans = true;
+            if (_bleMac.Count != 0)
+            {
+                for (int i = 0; i < _bleMac.Count; i++)
+                {
+                    if (!Commands.IsInBeaconTable(_bleMac[i]))
+                    {
+                        ans = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                ans = false;
+            }
+            return ans;
+        }
+
         private void _planeStateTimer_Tick(object sender, EventArgs e)
         {
             if (DroneSingleton._navigationData != null)
@@ -112,14 +167,23 @@ namespace AR.Drone.WinApp.Forms
                 if (DroneSingleton._droneUnity.PirState && _pirTrueTime < 5)
                 {
                     _pirTrueTime++;
-                    if (_pirTrueTime == 5)
+                    if (_pirTrueTime == 5 && (!_isShowedWarning))
                     {
+                        _isShowedWarning = true;
+                        StoreBleMac();
+                        _isCheckingBle = true;
                         _planeStatePanel.ShowInfoPanel();
                     }
                 }
                 else if (!DroneSingleton._droneUnity.PirState)
                 {
                     _pirTrueTime = 0;
+                }
+
+                if (_isShowedWarning && _isCheckingBle && CheckBleMacUpdate())
+                {
+                    _planeStatePanel.SetInfoState(CheckCertification());
+                    _isCheckingBle = false;
                 }
             }
             else

@@ -162,9 +162,8 @@ namespace AR.Drone.WinApp.MyUserControl
             _comboBox.ImageComboBoxItemSource = ComboBoxItemSource;
             _timer.Interval = 1000;
             _timer.Elapsed += ElapsedTimer;
-            LoadImageFromServer();
+        //    LoadImageFromServer();
             SetWarningAnimation();
-            ShowInfoPanel();
         }
 
         private void UpdatePanel()
@@ -442,7 +441,6 @@ namespace AR.Drone.WinApp.MyUserControl
         private void SetWarningAnimation()
         {
             _board.Completed += board_Completed;
-            _warningImg.Visibility = Visibility.Visible;
             DoubleAnimation animation = new DoubleAnimation();
             animation.AutoReverse = true;
             animation.Duration = TimeSpan.FromMilliseconds(750);
@@ -455,6 +453,7 @@ namespace AR.Drone.WinApp.MyUserControl
 
         public void ShowInfoPanel()
         {
+            _infoControl.Initialize();
             _warningImg.Visibility = Visibility.Visible;
             _board.Begin();
         }
@@ -479,6 +478,11 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             _infoControl.Visibility = Visibility.Hidden;
             _backGroundDark.Visibility = Visibility.Hidden;
+        }
+
+        public void SetInfoState(bool state)
+        {
+            _infoControl.SetCheckResultState(state);
         }
     }
 }
