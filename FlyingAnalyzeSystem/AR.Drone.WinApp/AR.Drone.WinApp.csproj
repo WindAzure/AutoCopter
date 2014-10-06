@@ -481,7 +481,7 @@
     <Content Include="Image\InformationPage\WARNING-06.png" />
     <Content Include="Image\InformationPage\WARNING-07.png" />
     <Content Include="Image\InformationPage\WARNING-08.png" />
-    <Content Include="Image\InformationPage\Warning.png" />
+    <Resource Include="Image\PlaneStatePage\Warning.png" />
     <Resource Include="Image\InformationPage\ResultTitle.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />

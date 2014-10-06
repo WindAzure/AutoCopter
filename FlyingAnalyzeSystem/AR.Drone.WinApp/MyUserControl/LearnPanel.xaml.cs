@@ -161,33 +161,13 @@ namespace AR.Drone.WinApp.MyUserControl
             _comboBox.ImageComboBoxItemSource = ComboBoxItemSource;
             _timer.Interval = 1000;
             _timer.Elapsed += ElapsedTimer;
-            //LoadImageFromServer();
         }
 
         public void SetComboBoxSource(ObservableCollection<ImageComboBoxItemProperty> source)
         {
-            foreach(ImageComboBoxItemProperty item in source)
-            {
-                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = item.ItemText, MapImage = item.MapImage, Id = item.Id });
-            }
-        }
-
-        private void LoadImageFromServer()
-        {
-            DataSet data = Commands.GetFloorInformation();
-            int rows = data.Tables[0].Rows.Count;
-            for (int i = 0; i < rows; i++)
-            {
-                byte[] imageBytes = (byte[])data.Tables[0].Rows[i][1];
-                MemoryStream stream = new MemoryStream();
-                stream.Write(imageBytes, 0, imageBytes.Length);
-                stream.Position = 0;
-                BitmapImage img = new BitmapImage();
-                img.BeginInit();
-                img.StreamSource = stream;
-                img.EndInit();
-                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img, Id = data.Tables[0].Rows[i][3].ToString() });
-            }
+            _comboBox.ImageComboBoxItemSource = source;
+            ComboBoxItemSource = source;
+            ComboBoxItemSource[0].MileageLine = "AA";
         }
 
         private Color GetRelativeColor(GradientStopCollection gsc, double offset)

@@ -42,6 +42,8 @@ namespace AR.Drone.WinApp.MyUserControl
         private bool _isPlaneT1Flying = false;
         private TimeSpan _span;
         private Timer _timer = new Timer();
+        private int warningAnimationTime = 0;
+        private Storyboard _board = new Storyboard();
 
         private delegate void TimerDispatcherDelegate();
         public delegate void PlaneStatePanelEvent();
@@ -121,6 +123,20 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private String _selectedMapItemMileageLine = null;
+        private String SelectedMapItemMileageLine
+        {
+            set
+            {
+                _selectedMapItemMileageLine = value;
+                OnPropertyChanged("SelectedMapItemMileageLine");
+            }
+            get
+            {
+                return _selectedMapItemMileageLine;
+            }
+        }
+
         private bool _isFirstPlaneItemSelected = false;
         public bool IsFirstPlaneItemSelected
         {
@@ -147,6 +163,8 @@ namespace AR.Drone.WinApp.MyUserControl
             _timer.Interval = 1000;
             _timer.Elapsed += ElapsedTimer;
             LoadImageFromServer();
+            SetWarningAnimation();
+            ShowInfoPanel();
         }
 
         private void UpdatePanel()
@@ -251,7 +269,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 img.BeginInit();
                 img.StreamSource = stream;
                 img.EndInit();
-                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img, Mileage = data.Tables[0].Rows[i][2].ToString(), Id = data.Tables[0].Rows[i][3].ToString() });
+                ComboBoxItemSource.Add(new ImageComboBoxItemProperty() { ItemText = data.Tables[0].Rows[i][0].ToString(), MapImage = img, Mileage = data.Tables[0].Rows[i][2].ToString(), Id = data.Tables[0].Rows[i][3].ToString(), MileageLine = data.Tables[0].Rows[i][4].ToString() });
             }
         }
 
@@ -384,6 +402,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 _descriptionPanel.Visibility = Visibility.Hidden;
                 _mapImage.ImagePath = ComboBoxItemSource[comboBox.SelectedIndex].MapImage;
                 SelectedMapItemMileage = ComboBoxItemSource[comboBox.SelectedIndex].Mileage;
+                SelectedMapItemMileageLine=ComboBoxItemSource[comboBox.SelectedIndex].MileageLine;
                 if (String.IsNullOrEmpty(SelectedMapItemMileage))
                 {
                     _mapImageViewConstraint.Visibility = Visibility.Visible;
@@ -392,6 +411,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 {
                     _mapImageViewConstraint.Visibility = Visibility.Hidden;
                     _mapImage.Decode(SelectedMapItemMileage);
+                    _mapImage.SetLineString(SelectedMapItemMileageLine);
                 }
             }
             else
@@ -419,10 +439,40 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private void SetWarningAnimation()
+        {
+            _board.Completed += board_Completed;
+            _warningImg.Visibility = Visibility.Visible;
+            DoubleAnimation animation = new DoubleAnimation();
+            animation.AutoReverse = true;
+            animation.Duration = TimeSpan.FromMilliseconds(750);
+            animation.From = 0.0;
+            animation.To = 1.0;
+            _board.Children.Add(animation);
+            Storyboard.SetTargetProperty(animation, new PropertyPath("Opacity"));
+            Storyboard.SetTarget(animation, _warningImg);
+        }
+
         public void ShowInfoPanel()
         {
-            _infoControl.Visibility = Visibility.Visible;
-            _backGroundDark.Visibility = Visibility.Visible;
+            _warningImg.Visibility = Visibility.Visible;
+            _board.Begin();
+        }
+
+        void board_Completed(object sender, EventArgs e)
+        {
+            warningAnimationTime++;
+            if (warningAnimationTime < 3)
+            {
+                _board.Begin();
+            }
+            else
+            {
+                warningAnimationTime = 0;
+                _warningImg.Visibility = Visibility.Hidden;
+                _infoControl.Visibility = Visibility.Visible;
+                _backGroundDark.Visibility = Visibility.Visible;
+            }
         }
 
         public void HideInfoPanel()

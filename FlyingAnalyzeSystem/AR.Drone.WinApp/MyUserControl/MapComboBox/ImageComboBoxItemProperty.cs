@@ -60,6 +60,20 @@ namespace AR.Drone.WinApp.MyUserControl.MapComboBox
             }
         }
 
+        private String _mileageLine = null;
+        public String MileageLine
+        {
+            set
+            {
+                _mileageLine = value;
+                OnPropertyChanged("MileageLine");
+            }
+            get
+            {
+                return _mileageLine;
+            }
+        }
+
         private bool _isPlaneUsing = false;
         public bool IsPlaneUsing
         {
