@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AR.Drone.Client.Command;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -54,42 +55,42 @@ namespace AR.Drone.WinApp.Forms
 
         public void OnMouseUpManualControlPanelUpControlButton()
         {
-            Debug.WriteLine("OnMouseUpManualControlPanelUpControlButton");
+            DroneSingleton._droneClient.Hover();
         }
 
         public void OnMouseDownManualControlPanelUpControlButton()
         {
-            Debug.WriteLine("OnMouseDownManualControlPanelUpControlButton");
+            DroneSingleton._droneClient.Progress(FlightMode.Progressive, gaz: 0.25f);
         }
 
         public void OnMouseUpManualControlPanelDownControlButton()
         {
-            Debug.WriteLine("OnMouseUpManualControlPanelDownControlButton");
+            DroneSingleton._droneClient.Hover();
         }
 
         public void OnMouseDownManualControlPanelDownControlButton()
         {
-            Debug.WriteLine("OnMouseDownManualControlPanelDownControlButton");
+            DroneSingleton._droneClient.Progress(FlightMode.Progressive, gaz: -0.25f);
         }
 
         public void OnMouseUpManualControlPanelRightRotateControlButton()
         {
-            Debug.WriteLine("OnMouseUpManualControlPanelRightRotateControlButton");
+            DroneSingleton._droneClient.Hover();
         }
 
         public void OnMouseDownManualControlPanelRightRotateControlButton()
         {
-            Debug.WriteLine("OnMouseDownManualControlPanelRightRotateControlButton");
+            DroneSingleton._droneClient.Progress(FlightMode.Progressive, yaw: 0.25f);
         }
 
         public void OnMouseUpManualControlPanelLeftRotateControlButton()
         {
-            Debug.WriteLine("OnMouseUpManualControlPanelLeftRotateControlButton");
+            DroneSingleton._droneClient.Hover();
         }
 
         public void OnMouseDownManualControlPanelLeftRotateControlButton()
         {
-            Debug.WriteLine("OnMouseDownManualControlPanelLeftRotateControlButton");
+            DroneSingleton._droneClient.Progress(FlightMode.Progressive, yaw: -0.25f);
         }
 
         public void OnMouseUpManualControlPanelForwardControlButton()
@@ -105,7 +106,7 @@ namespace AR.Drone.WinApp.Forms
             }
             else
             {
-                Debug.WriteLine("OnMouseUpManualControlPanelForwardControlButton");
+                DroneSingleton._droneClient.Hover();
             }
         }
 
@@ -122,7 +123,7 @@ namespace AR.Drone.WinApp.Forms
             }
             else
             {
-                Debug.WriteLine("OnMouseDownManualControlPanelForwardControlButton");
+                DroneSingleton._droneClient.Progress(FlightMode.Progressive, pitch: -0.05f);
             }
         }
 
@@ -139,7 +140,7 @@ namespace AR.Drone.WinApp.Forms
             }
             else
             {
-                Debug.WriteLine("OnMouseUpManualControlPanelBackControlButton");
+                DroneSingleton._droneClient.Hover();
             }
         }
 
@@ -156,7 +157,7 @@ namespace AR.Drone.WinApp.Forms
             }
             else
             {
-                Debug.WriteLine("OnMouseDownManualControlPanelBackControlButton");
+                DroneSingleton._droneClient.Progress(FlightMode.Progressive, pitch: 0.05f);
             }
         }
 
@@ -173,7 +174,7 @@ namespace AR.Drone.WinApp.Forms
             }
             else
             {
-                Debug.WriteLine("OnMouseDownManualControlPanelLeftControlButton");
+                DroneSingleton._droneClient.Progress(FlightMode.Progressive, roll: -0.05f);
             }
         }
 
@@ -190,7 +191,7 @@ namespace AR.Drone.WinApp.Forms
             }
             else
             {
-                Debug.WriteLine("OnMouseUpManualControlPanelLeftControlButton");
+                DroneSingleton._droneClient.Hover();
             }
         }
 
@@ -207,7 +208,7 @@ namespace AR.Drone.WinApp.Forms
             }
             else
             {
-                Debug.WriteLine("OnMouseDownManualControlPanelRightControlButton");
+                DroneSingleton._droneClient.Progress(FlightMode.Progressive, roll: 0.05f);
             }
         }
 
@@ -224,28 +225,28 @@ namespace AR.Drone.WinApp.Forms
             }
             else
             {
-                Debug.WriteLine("OnMouseUpManualControlPanelRightControlButton");
+                DroneSingleton._droneClient.Hover();
             }
         }
 
         public void OnLeftForward()
         {
-            Debug.WriteLine("OnLeftForward");
+            DroneSingleton._droneClient.Progress(FlightMode.Progressive, pitch: -0.05f, roll: -0.05f);
         }
 
         public void OnRightForward()
         {
-            Debug.WriteLine("OnRightForward");
+            DroneSingleton._droneClient.Progress(FlightMode.Progressive, pitch: -0.05f, roll: 0.05f);
         }
 
         public void OnLeftBackward()
         {
-            Debug.WriteLine("OnLeftBackward");
+            DroneSingleton._droneClient.Progress(FlightMode.Progressive, pitch: 0.05f, roll: -0.05f);
         }
 
         public void OnRightBackward()
         {
-            Debug.WriteLine("OnRightBackward");
+            DroneSingleton._droneClient.Progress(FlightMode.Progressive, pitch: 0.05f, roll: 0.05f);
         }
 
         private void ManualForm_FormClosing(object sender, FormClosingEventArgs e)

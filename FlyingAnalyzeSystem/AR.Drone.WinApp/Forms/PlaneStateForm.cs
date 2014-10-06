@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AR.Drone.WinApp.CommandToServer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace AR.Drone.WinApp.Forms
 {
     public partial class PlaneStateForm : Form
     {
+        private bool _isSendedGCM = false;
         private int _pirTrueTime = 0;
         private int _retryConnectionTimes = 0;
 
@@ -26,22 +28,32 @@ namespace AR.Drone.WinApp.Forms
             _planeStatePanel.StartAutoPatrol += OnPlaneStatePanelStartAutoPatrol;
             _planeStatePanel._infoControl.ClickNoButton += ClickInfoControlNoButton;
             _planeStatePanel._infoControl.ClickYesButton += ClickInfoControlYesButton;
+            _planeStatePanel._infoControl.ClickSendButton += ClickInfoControlSendButton;
             DroneSingleton.InitializeDrone();
             _planeStateTimer.Enabled = true;
             _videoUpdateTimer.Enabled = true;
         }
 
+        private void ClickInfoControlSendButton()
+        {
+            Commands.SendGCM("Ar.drone-001", false);
+            _isSendedGCM = true;
+        }
+
         private void ClickInfoControlYesButton()
         {
             SwitchForm(new ManualForm(this));
-            _planeStatePanel.HideInfoPanel();
-            _pirTrueTime = 0;
         }
 
         private void ClickInfoControlNoButton()
         {
             _planeStatePanel.HideInfoPanel();
             _pirTrueTime = 0;
+            if (_isSendedGCM)
+            {
+                Commands.SendGCM("Ar.drone-001", true);
+            }
+            _isSendedGCM = false;
         }
 
         protected override void OnClosed(EventArgs e)

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AR.Drone.WinApp.Forms;
 
 namespace AR.Drone.WinApp.MyUserControl
 {
@@ -25,22 +26,20 @@ namespace AR.Drone.WinApp.MyUserControl
         private Boolean _isLeftButtonDown = false;
         private Boolean _isRightButtonClickDown = false;
         private Point _DownPoint = new Point();
+        //private BitmapImage _imagePath = new BitmapImage();
         private Line _hint = new Line();
         private Boolean _hasLine = false;
         private List<Line> _lineList = new List<Line>();
-        private List<double> _timeList = new List<double>();
-        private int _index = 0;
-        private Ellipse _nowPosition = new Ellipse();
-        private Boolean _searching = false;
-        private List<State> _commandList = new List<State>();
-        private List<TimeSpan> _timeList2 = new List<TimeSpan>();
-        private List<float> _angleList = new List<float>();
+        private Image _nowPosition = new Image();
+        private RotateTransform _rotate = new RotateTransform();
+        private float _initAngle = 0;
         private bool _isDrawPlane = false;
 
-        private enum State
-        {
-            TakeOff, Hover, Up, Down, Forward, Right, Left, TurnRight, TurnLeft, Land, Wait
-        };
+        private List<LearnForm.State> _commandList = new List<LearnForm.State>();
+        private List<TimeSpan> _timeList = new List<TimeSpan>();
+        private List<float> _angleList = new List<float>();
+
+        private string _lineString;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(String name)
@@ -79,22 +78,18 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
-        public void DrawMileageLine(int index, double currentTimePoint, float angle)
-        {
-
-        }
-
         public MapImageView()
         {
             InitializeComponent();
             DataContext = this;
 
-            _nowPosition.Stroke = System.Windows.Media.Brushes.Blue;
-            _nowPosition.Fill = System.Windows.Media.Brushes.Blue;
             _hint.Stroke = System.Windows.Media.Brushes.Red;
             _mapImageView.Children.Add(_hint);
-            _nowPosition.Height = 10;
-            _nowPosition.Width = 10;
+            _nowPosition.Source = new BitmapImage(new Uri("../Image/PlaneState/PlanePosition.png", UriKind.Relative));
+            _nowPosition.RenderTransformOrigin = new Point(0.5, 0.5);
+
+            _rotate.Angle = 0;
+            _nowPosition.RenderTransform = _rotate;
         }
 
         public void Initialize()
@@ -197,130 +192,193 @@ namespace AR.Drone.WinApp.MyUserControl
             _isRightButtonClickDown = false;
         }
 
-        public void AddTime(double time)
-        {
-            _timeList.Add(time);
-        }
-
-        public double GetLimit(int index)
-        {
-            _index = index;
-            if (!_searching)
-            {
-                _mapImageView.Children.Add(_nowPosition);
-                _searching = true;
-            }
-            Line line = _lineList[_index];
-            Canvas.SetLeft(_nowPosition, line.X1 - 5);
-            Canvas.SetTop(_nowPosition, line.Y1 - 5);
-            return _timeList[index];
-        }
-
-        public void SearchNowPosition(double time)
-        {
-            Line line = _lineList[_index];
-            double totalTime = _timeList[_index];
-            double x = (line.X2 - line.X1) / totalTime * time + line.X1;
-            double y = (line.Y2 - line.Y1) / totalTime * time + line.Y1;
-            Canvas.SetLeft(_nowPosition, x - 5);
-            Canvas.SetTop(_nowPosition, y - 5);
-        }
-
         public void SetIsDrawPlane(bool state)
         {
             _isDrawPlane = state;
-        }
-
-        private void DrawPlane(double x, double y,double angle)
-        {
-            //Canvas.SetLeft(_nowPosition, line.X1 - 5);
-            //Canvas.SetTop(_nowPosition, line.Y1 - 5);
+            if (_isDrawPlane)
+                _mapImageView.Children.Add(_nowPosition);
+            else
+                _mapImageView.Children.Remove(_nowPosition);
         }
 
         public void GetPosition(int index, double time, float angle)
         {
-            if (_isDrawPlane == false)
-            {
-                return;
-            }
-
+            Point point;
             int lineIndex = -1;
             for (int i = 0; i <= index; i++)
             {
-                if (_commandList[i] == State.Forward)
+                if (_commandList[i] == LearnForm.State.Forward)
                 {
                     lineIndex++;
                 }
             }
 
-            if (_commandList[index] == State.Forward)
+            if (_commandList[index] == LearnForm.State.Forward)
             {
                 Line line = _lineList[lineIndex];
-                double costTime = _timeList2[index].Seconds + (double)_timeList2[index].Milliseconds / 1000;
+                double costTime = _timeList[index].Seconds + (double)_timeList[index].Milliseconds / 1000;
 
                 double x = (line.X2 - line.X1) / costTime * time + line.X1;
                 double y = (line.Y2 - line.Y1) / costTime * time + line.Y1;
-                DrawPlane(x, y,0);
+                point = new Point(x, y);
+
+                Canvas.SetLeft(_nowPosition, x - 5);
+                Canvas.SetTop(_nowPosition, y - 4);
             }
-            else if (_commandList[index] == State.TurnLeft || _commandList[index] == State.TurnRight)
+            else if (_commandList[index] == LearnForm.State.TurnLeft || _commandList[index] == LearnForm.State.TurnRight)
             {
                 Line line = _lineList[lineIndex + 1];
-                float originalAngle = _angleList[index - 1];
+                float originalAngle = _angleList[0];
 
                 Canvas.SetLeft(_nowPosition, line.X1 - 5);
-                Canvas.SetTop(_nowPosition, line.Y1 - 5);
+                Canvas.SetTop(_nowPosition, line.Y1 - 4);
 
-                float turnAngle = Math.Abs(angle - originalAngle);
-                if (_commandList[index] == State.TurnLeft)
+                float turnAngle = angle - originalAngle;
+                if (_commandList[index] == LearnForm.State.TurnLeft)
                     turnAngle = -turnAngle;
-                Debug.WriteLine(_angleList[index - 1]);
-                Debug.WriteLine(turnAngle);
+                _rotate.Angle = _initAngle + turnAngle;
+                _nowPosition.RenderTransform = _rotate;
             }
             else
             {
                 Line line = _lineList[lineIndex + 1];
 
                 Canvas.SetLeft(_nowPosition, line.X1 - 5);
-                Canvas.SetTop(_nowPosition, line.Y1 - 5);
+                Canvas.SetTop(_nowPosition, line.Y1 - 4);
             }
         }
 
         public void Decode(String data)
         {
-        /*   for (int index = 0; index < data.Count; index++)
+            _commandList.Clear();
+            _timeList.Clear();
+            _angleList.Clear();
+            char split = ' ';
+            string[] dataString = data.Split(split);
+            for (int i = 0; i < dataString.Length; i += 3)
             {
-                char split = ' ';
-                string[] dataString = data[index].Split(split);
-                _commandList.Add(Convert(dataString[0]));
-                _timeList.Add(TimeSpan.Parse(dataString[1]));
-                _angleList.Add(float.Parse(dataString[2]));
-            }*/
+                _commandList.Add(Convert(dataString[i]));
+                _timeList.Add(TimeSpan.Parse(dataString[i + 1]));
+                _angleList.Add(float.Parse(dataString[i + 2]));
+            }
         }
 
-        private State Convert(string conmandString)
+        private LearnForm.State Convert(string conmandString)
         {
             switch (conmandString)
             {
                 case "TakeOff":
-                    return State.TakeOff;
+                    return LearnForm.State.TakeOff;
                 case "Hover":
-                    return State.Hover;
+                    return LearnForm.State.Hover;
                 case "Up":
-                    return State.Up;
+                    return LearnForm.State.Up;
                 case "Down":
-                    return State.Down;
+                    return LearnForm.State.Down;
                 case "Forward":
-                    return State.Forward;
+                    return LearnForm.State.Forward;
                 case "Left":
-                    return State.Left;
+                    return LearnForm.State.Left;
                 case "Right":
-                    return State.Right;
+                    return LearnForm.State.Right;
                 case "TurnLeft":
-                    return State.TurnLeft;
+                    return LearnForm.State.TurnLeft;
                 case "TurnRight":
-                    return State.TurnRight;
+                    return LearnForm.State.TurnRight;
                 default:
-                    return State.Land;
+                    return LearnForm.State.Land;
+            }
+        }
+
+        private void InitAngle()
+        {
+            Line line = _lineList[0];
+            double m = (line.Y2 - line.Y1) / (line.X2 - line.X1);
+            float angle = (float)(Math.Atan(m) * 180 / Math.PI);
+            if (m == 0)
+            {
+                if (line.X2 > line.X1)
+                    _initAngle = 0;
+                else
+                    _initAngle = 180;
+            }
+            else if (line.X2 > line.X1)
+            {
+                _initAngle = angle;
+            }
+            else if (line.X2 == line.X1)
+            {
+                if (line.Y2 > line.Y1)
+                    _initAngle = -90;
+                else
+                    _initAngle = 90;
+            }
+            else if (line.X2 < line.X1)
+            {
+                _initAngle = -180 + angle;
+            }
+            _rotate.Angle = _initAngle;
+            _nowPosition.RenderTransform = _rotate;
+        }
+
+        public string LineString
+        {
+            get
+            {
+                _lineString = "";
+                for (int index = 0; index < _lineList.Count; index++)
+                {
+                    _lineString = _lineString + _lineList[index].X1 + " " + _lineList[index].Y1 + " " + _lineList[index].X2 + " " + _lineList[index].Y2;
+                    if (index != _commandList.Count - 1)
+                        _lineString = _lineString + " ";
+                }
+                return _lineString;
+            }
+        }
+
+        public void SetLineString(string lineString)
+        {
+            _lineString = lineString;
+            DecodeLineString();
+        }
+
+        private void DecodeLineString()
+        {
+            _lineList.Clear();
+            char split = ' ';
+            string[] dataString = _lineString.Split(split);
+            for (int index = 0; index < dataString.Length; index += 4)
+            {
+                Line line = new Line();
+                line.X1 = double.Parse(dataString[index]);
+                line.Y1 = double.Parse(dataString[index + 1]);
+                line.X2 = double.Parse(dataString[index + 2]);
+                line.Y2 = double.Parse(dataString[index + 3]);
+                _lineList.Add(line);
+            }
+        }
+
+        public List<LearnForm.State> CommandList
+        {
+            get
+            {
+                return _commandList;
+            }
+        }
+
+        public List<TimeSpan> TimeList
+        {
+            get
+            {
+                return _timeList;
+            }
+        }
+
+        public List<float> AngleList
+        {
+            get
+            {
+                return _angleList;
             }
         }
     }

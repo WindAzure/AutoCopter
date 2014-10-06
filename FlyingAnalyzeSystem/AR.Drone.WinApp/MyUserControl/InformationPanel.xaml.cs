@@ -23,6 +23,7 @@ namespace AR.Drone.WinApp.MyUserControl
         public delegate void InformationPanelEvent();
         public event InformationPanelEvent ClickNoButton = null;
         public event InformationPanelEvent ClickYesButton = null;
+        public event InformationPanelEvent ClickSendButton = null;
 
         public InformationPanel()
         {
@@ -68,6 +69,14 @@ namespace AR.Drone.WinApp.MyUserControl
         public void RefreshMainImageBackground()
         {
             _mainImage.Source = loadBitmap(DroneSingleton._frameBitmap);
+        }
+
+        private void OnClickSendButton()
+        {
+            if (ClickSendButton != null)
+            {
+                ClickSendButton();
+            }
         }
     }
 }

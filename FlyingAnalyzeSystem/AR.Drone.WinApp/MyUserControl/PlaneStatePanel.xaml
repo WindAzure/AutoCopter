@@ -151,7 +151,8 @@
                 </StackPanel>
             </Grid>
 
-            <myControl:InformationPanel HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="_infoControl" Width="425" Height="278"/>
+            <Rectangle Fill="Black" Opacity="0.5" x:Name="_backGroundDark" Visibility="Hidden"/>
+            <myControl:InformationPanel HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="_infoControl" Width="425" Height="278" Visibility="Hidden"/>
         </Grid>
     </Viewbox>
 

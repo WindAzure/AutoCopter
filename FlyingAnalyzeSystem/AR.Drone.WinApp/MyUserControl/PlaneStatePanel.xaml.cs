@@ -408,7 +408,7 @@ namespace AR.Drone.WinApp.MyUserControl
 
         public void DrawPlaneLocation(int index, double currentTimePoint, float angle)
         {
-            _mapImage.DrawMileageLine(index, currentTimePoint, angle);
+            _mapImage.GetPosition(index, currentTimePoint, angle);
         }
 
         private void OnClickStartLearingButton()
@@ -422,10 +422,13 @@ namespace AR.Drone.WinApp.MyUserControl
         public void ShowInfoPanel()
         {
             _infoControl.Visibility = Visibility.Visible;
+            _backGroundDark.Visibility = Visibility.Visible;
         }
+
         public void HideInfoPanel()
         {
             _infoControl.Visibility = Visibility.Hidden;
+            _backGroundDark.Visibility = Visibility.Hidden;
         }
     }
 }

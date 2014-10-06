@@ -25,12 +25,13 @@ namespace AR.Drone.WinApp.Forms
 
         private const string ARDroneTrackFileExt = ".ardrone";
         private const string ARDroneTrackFilesFilter = "AR.Drone track files (*.ardrone)|*.ardrone";
-        
+
         private float _heading;
 
         private DateTime _commandStartTime;
         private DateTime _commandEndTime;
-        private enum State { TakeOff, Hover, Up, Down, Forward, Right, Left, TurnRight, TurnLeft, Land, Wait };
+
+        public enum State { TakeOff, Hover, Up, Down, Forward, Right, Left, TurnRight, TurnLeft, Land, Wait };
         private State _nowState = State.Land;
 
         private List<State> _commandList = new List<State>();
@@ -59,7 +60,6 @@ namespace AR.Drone.WinApp.Forms
 
         public void ClickLearnPanelLandButton()
         {
-            Debug.WriteLine("ClickLearnPanelLandButton");
             Record();
             _nowState = State.Land;
             DroneSingleton._droneClient.Land();
@@ -68,13 +68,13 @@ namespace AR.Drone.WinApp.Forms
 
         public void ClickLearnPanelTakeOffButton()
         {
-            Debug.WriteLine("ClickLearnPanelTakeOffButton");
             DroneSingleton._droneClient.Takeoff();
             _commandStartTime = DateTime.Now;
             NavdataBag navdataBag;
             if (DroneSingleton._navigationPacket.Data != null && NavdataBagParser.TryParse(ref DroneSingleton._navigationPacket, out navdataBag))
             {
                 _heading = navdataBag.magneto.heading_fusion_unwrapped;
+                _heading = CheckAngle(_heading);
             }
             _commandList.Add(State.TakeOff);
         }
@@ -87,7 +87,15 @@ namespace AR.Drone.WinApp.Forms
 
         public void ClickLearnPanelSaveButton(String id)
         {
-            Commands.UpdateMileage(id, "QQQ");
+            string data = "";
+            for (int index = 0; index < _commandList.Count; index++)
+            {
+                data = data + _commandList[index].ToString() + " " + _timeList[index].ToString() + " " + _angleList[index].ToString();
+                if (index != _commandList.Count - 1)
+                    data = data + " ";
+            }
+            Commands.UpdateMileage(id, data);
+            string lineData = _learnPanel._mapImage.LineString;
         }
 
         public void SetComboBoxSource(ObservableCollection<ImageComboBoxItemProperty> source)
@@ -165,6 +173,7 @@ namespace AR.Drone.WinApp.Forms
             if (DroneSingleton._navigationPacket.Data != null && NavdataBagParser.TryParse(ref DroneSingleton._navigationPacket, out navdataBag))
             {
                 _heading = navdataBag.magneto.heading_fusion_unwrapped;
+                _heading = CheckAngle(_heading);
             }
             _nowState = State.TurnRight;
             DroneSingleton._droneClient.Progress(FlightMode.Progressive, yaw: 0.25f);
@@ -187,6 +196,7 @@ namespace AR.Drone.WinApp.Forms
             if (DroneSingleton._navigationPacket.Data != null && NavdataBagParser.TryParse(ref DroneSingleton._navigationPacket, out navdataBag))
             {
                 _heading = navdataBag.magneto.heading_fusion_unwrapped;
+                _heading = CheckAngle(_heading);
             }
             _nowState = State.TurnLeft;
             DroneSingleton._droneClient.Progress(FlightMode.Progressive, yaw: -0.25f);
@@ -221,6 +231,7 @@ namespace AR.Drone.WinApp.Forms
                 if (DroneSingleton._navigationPacket.Data != null && NavdataBagParser.TryParse(ref DroneSingleton._navigationPacket, out navdataBag))
                 {
                     nowHeading = navdataBag.magneto.heading_fusion_unwrapped;
+                    nowHeading = CheckAngle(nowHeading);
                     _timeList.Add(new TimeSpan(0, 0, 0, 0));
                     _angleList.Add(nowHeading);
                     _heading = nowHeading;
@@ -233,6 +244,15 @@ namespace AR.Drone.WinApp.Forms
                 _timeList.Add(costTime);
                 _angleList.Add(_heading);
             }
+        }
+
+        private float CheckAngle(float angle)
+        {
+            if (angle >= 360)
+                angle -= 360;
+            else if (angle < 0)
+                angle += 360;
+            return angle;
         }
     }
 }

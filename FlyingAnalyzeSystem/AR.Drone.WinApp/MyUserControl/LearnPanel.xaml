@@ -36,7 +36,7 @@
                     <Grid.Background>
                         <ImageBrush ImageSource="../Image/LearnPage/MapBackGround.png"/>
                     </Grid.Background>
-                    <myControl:MapImageView Margin="0,10,0,0" Width="320" Height="220" VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="_mapImage"/>
+                    <myControl:MapImageView Margin="0,10,0,0" Width="320" Height="220" VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="_mapImage" IsDrawMileageLine="True"/>
                     <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10"
                                              NormalImagePath="../Image/LearnPage/Save.png" IsEnabled="False" x:Name="_saveButton"
                                              DownImagePath="../Image/LearnPage/SaveDown.png" 
