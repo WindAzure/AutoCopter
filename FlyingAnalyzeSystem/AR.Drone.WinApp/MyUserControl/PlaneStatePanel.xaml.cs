@@ -176,7 +176,7 @@ namespace AR.Drone.WinApp.MyUserControl
             _comboBox.ImageComboBoxItemSource = ComboBoxItemSource;
             _timer.Interval = 1000;
             _timer.Elapsed += ElapsedTimer;
-        //    LoadImageFromServer();
+            LoadImageFromServer();
             SetWarningAnimation();
         }
 

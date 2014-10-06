@@ -476,11 +476,6 @@
     <Resource Include="Image\InformationPage\InfoBackGround.png" />
     <Resource Include="Image\InformationPage\OptionTitle2.png" />
     <Resource Include="Image\InformationPage\OptionTitle.png" />
-    <Content Include="Image\InformationPage\WARNING-04.png" />
-    <Content Include="Image\InformationPage\WARNING-05.png" />
-    <Content Include="Image\InformationPage\WARNING-06.png" />
-    <Content Include="Image\InformationPage\WARNING-07.png" />
-    <Content Include="Image\InformationPage\WARNING-08.png" />
     <Resource Include="Image\PlaneStatePage\Warning.png" />
     <Resource Include="Image\InformationPage\ResultTitle.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />

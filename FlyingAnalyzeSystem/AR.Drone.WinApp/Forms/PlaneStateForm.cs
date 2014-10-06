@@ -14,12 +14,13 @@ namespace AR.Drone.WinApp.Forms
 {
     public partial class PlaneStateForm : Form
     {
+        private bool _isPatroling = false;
         private bool _isShowedWarning = false;
         private bool _isCheckingBle = false;
         private bool _isSendedGCM = false;
         private int _pirTrueTime = 0;
         private int _retryConnectionTimes = 0;
-        private List<String> _bleMac;
+        private List<String> _bleMac=new List<string>();
 
         public PlaneStateForm()
         {
@@ -92,7 +93,7 @@ namespace AR.Drone.WinApp.Forms
 
         public void OnPlaneStatePanelStartAutoPatrol()
         {
-            Debug.WriteLine("!!");
+            _isPatroling = true;
         }
 
         public void OnClickPlaneStatePanelManualControlButton()
@@ -114,7 +115,7 @@ namespace AR.Drone.WinApp.Forms
             }
         }
 
-        private bool CheckBleMacUpdate()
+        private bool CheckBleMacNotUpdate()
         {
             bool ans = true;
             if (_bleMac.Count == DroneSingleton._droneUnity.BeaconMac.Count)
@@ -137,13 +138,16 @@ namespace AR.Drone.WinApp.Forms
 
         private bool CheckCertification()
         {
+            List<String> data = DroneSingleton._droneUnity.BeaconMac;
+
             bool ans = true;
-            if (_bleMac.Count != 0)
+            if (data.Count != 0)
             {
-                for (int i = 0; i < _bleMac.Count; i++)
+                for (int i = 0; i < data.Count; i++)
                 {
-                    if (!Commands.IsInBeaconTable(_bleMac[i]))
+                    if (!Commands.IsInBeaconTable(data[i]))
                     {
+                        Debug.WriteLine(data[i]);
                         ans = false;
                         break;
                     }
@@ -165,26 +169,30 @@ namespace AR.Drone.WinApp.Forms
                 _planeStatePanel.SetPlaneText("Drone-001");
                 _planeStatePanel.IsLearningButtonEnable = true;
 
-                if (DroneSingleton._droneUnity.PirState && _pirTrueTime < 5)
+                if (!_isPatroling)
                 {
-                    _pirTrueTime++;
-                    if (_pirTrueTime == 5 && (!_isShowedWarning))
+                    Debug.WriteLine(DroneSingleton._droneUnity.PirState);
+                    if (DroneSingleton._droneUnity.PirState && _pirTrueTime < 5)
                     {
-                        _isShowedWarning = true;
-                        StoreBleMac();
-                        _isCheckingBle = true;
-                        _planeStatePanel.ShowInfoPanel();
+                        _pirTrueTime++;
+                        if (_pirTrueTime == 5 && (!_isShowedWarning))
+                        {
+                            _isShowedWarning = true;
+                            StoreBleMac();
+                            _isCheckingBle = true;
+                            _planeStatePanel.ShowInfoPanel();
+                        }
                     }
-                }
-                else if (!DroneSingleton._droneUnity.PirState)
-                {
-                    _pirTrueTime = 0;
-                }
+                    else if (!DroneSingleton._droneUnity.PirState)
+                    {
+                        _pirTrueTime = 0;
+                    }
 
-                if (_isShowedWarning && _isCheckingBle && CheckBleMacUpdate())
-                {
-                    _planeStatePanel.SetInfoState(CheckCertification());
-                    _isCheckingBle = false;
+                    if (_isShowedWarning && _isCheckingBle && (!CheckBleMacNotUpdate()))
+                    {
+                        _planeStatePanel.SetInfoState(CheckCertification());
+                        _isCheckingBle = false;
+                    }
                 }
             }
             else
