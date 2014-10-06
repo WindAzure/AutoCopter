@@ -6,18 +6,16 @@
              xmlns:myControl="clr-namespace:AR.Drone.WinApp.MyUserControl"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
+    
     <Viewbox Stretch="Fill">
         <Grid>
-            <Grid.Background>
-                <ImageBrush ImageSource="../Image/InformationPage/InfoBackGround.png"/>
-            </Grid.Background>
-            
-            <Image Source="../Image/InformationPage/PlaneIdTitle.png" Margin="30,4,203,228"/>
-            <TextBlock Text="Drone-001" Foreground="White" Margin="60,18,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Image Source="../Image/InformationPage/ResultTitle.png" Margin="226,11,14,239"/>
-            <Image Source="../Image/InformationPage/Green.png" Margin="260,15,14,239" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" x:Name="_okState"/>
-            <Image Source="../Image/InformationPage/Red.png" Margin="260,15,14,239" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" x:Name="_noState"/>
-            <Image Source="../Image/InformationPage/InfoBackGround2.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image x:Name="_mainImage"  Stretch="Fill" Width="465" Height="220"  Margin="25,40,15,40"/>
+            <Image Source="../Image/InformationPage/InfoBackGround.png" Stretch="Fill"/>
+            <Image Source="../Image/InformationPage/PlaneIdTitle.png" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill" Margin="35,5,0,0" Width="230"/>
+            <TextBlock Text="Drone-001" Foreground="White" Margin="70,13,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"/>
+            <Image Source="../Image/InformationPage/ResultTitle.png" Margin="270,6,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" Stretch="Fill"/>
+            <Image Source="../Image/InformationPage/Green.png" Margin="320,0,14,250" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" x:Name="_okState"/>
+            <Image Source="../Image/InformationPage/Red.png"  Margin="320,0,14,250" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" x:Name="_noState"/>
             <Image Source="../Image/InformationPage/OptionTitle.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="28,0,16,6"/>
             <myControl:ImageThreeStateButton NormalImagePath="../Image/InformationPage/YesButton.png" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                                              HoverImagePath="../Image/InformationPage/YesButton.png"
@@ -25,10 +23,11 @@
             <myControl:ImageThreeStateButton NormalImagePath="../Image/InformationPage/NoButton.png" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                                              HoverImagePath="../Image/InformationPage/NoButton.png"
                                              DownImagePath="../Image/InformationPage/NoButtonDown.png" Margin="290,0,0,15" OnClick="OnClickNoButton"/>
-            
-            <Viewbox Width="10" Height="10"  Margin="260,15,14,239" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="_progressBar">
+
+            <Viewbox Width="10" Height="10"  Margin="315,0,14,250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="_progressBar">
                 <myControl:CircularProgressBar/>
             </Viewbox>
         </Grid>
     </Viewbox>
+    
 </UserControl>

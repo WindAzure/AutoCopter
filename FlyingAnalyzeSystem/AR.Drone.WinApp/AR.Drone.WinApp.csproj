@@ -467,7 +467,6 @@
     <Resource Include="Image\InformationPage\PlaneIdTitle.png" />
     <Resource Include="Image\InformationPage\ResultTitle.png" />
     <Resource Include="Image\InformationPage\Green.png" />
-    <Resource Include="Image\InformationPage\InfoBackGround2.png" />
     <Content Include="Image\InformationPage\0919-19.png" />
     <Resource Include="Image\InformationPage\Red.png" />
     <Content Include="Image\InformationPage\0919-21.png" />
@@ -475,8 +474,8 @@
     <Resource Include="Image\InformationPage\YesButtonDown.png" />
     <Resource Include="Image\InformationPage\NoButton.png" />
     <Resource Include="Image\InformationPage\NoButtonDown.png" />
-    <Resource Include="Image\InformationPage\InfoBackGround.png" />
     <Resource Include="Image\InformationPage\OptionTitle.png" />
+    <Resource Include="Image\InformationPage\InfoBackGround.png" />
     <Content Include="Image\InformationPage\WARNING-04.png" />
     <Content Include="Image\InformationPage\WARNING-05.png" />
     <Content Include="Image\InformationPage\WARNING-06.png" />

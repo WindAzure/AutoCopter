@@ -151,7 +151,7 @@
                 </StackPanel>
             </Grid>
 
-            <myControl:InformationPanel HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <myControl:InformationPanel HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="_infoControl" Width="425" Height="278"/>
         </Grid>
     </Viewbox>
 

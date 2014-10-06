@@ -32,6 +32,7 @@
             this._planeStateTimer = new System.Windows.Forms.Timer(this.components);
             this._elementHost = new System.Windows.Forms.Integration.ElementHost();
             this._planeStatePanel = new AR.Drone.WinApp.MyUserControl.PlaneStatePanel();
+            this._videoUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // _planeStateTimer
@@ -48,6 +49,11 @@
             this._elementHost.TabIndex = 0;
             this._elementHost.Text = "elementHost1";
             this._elementHost.Child = this._planeStatePanel;
+            // 
+            // _videoUpdateTimer
+            // 
+            this._videoUpdateTimer.Interval = 20;
+            this._videoUpdateTimer.Tick += new System.EventHandler(this._videoUpdateTimer_Tick);
             // 
             // PlaneStateForm
             // 
@@ -66,5 +72,6 @@
         private System.Windows.Forms.Integration.ElementHost _elementHost;
         private MyUserControl.PlaneStatePanel _planeStatePanel;
         private System.Windows.Forms.Timer _planeStateTimer;
+        private System.Windows.Forms.Timer _videoUpdateTimer;
     }
 }

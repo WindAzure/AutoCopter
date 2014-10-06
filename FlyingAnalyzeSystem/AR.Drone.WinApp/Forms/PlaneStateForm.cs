@@ -25,6 +25,7 @@ namespace AR.Drone.WinApp.Forms
             _planeStatePanel.StartAutoPatrol += OnPlaneStatePanelStartAutoPatrol;
             DroneSingleton.InitializeDrone();
             _planeStateTimer.Enabled = true;
+            _videoUpdateTimer.Enabled = true;
         }
 
         protected override void OnClosed(EventArgs e)
@@ -97,10 +98,23 @@ namespace AR.Drone.WinApp.Forms
                     _retryConnectionTimes = 0;
                     _planeStateTimer.Enabled = false;
                     _planeStatePanel.NotShowChildPanel = true;
-                    MessageBox.Show("Please check connection of drone.", "error"); 
+                    MessageBox.Show("Please check connection of drone.", "error");
                 }
             }
 
+        }
+
+        private void _videoUpdateTimer_Tick(object sender, EventArgs e)
+        {
+            if (DroneSingleton._frame == null || DroneSingleton._frameNumber == DroneSingleton._frame.Number)
+                return;
+            DroneSingleton._frameNumber = DroneSingleton._frame.Number;
+
+            if (DroneSingleton._frameBitmap == null)
+                DroneSingleton._frameBitmap = VideoHelper.CreateBitmap(ref DroneSingleton._frame);
+            else
+                VideoHelper.UpdateBitmap(ref DroneSingleton._frameBitmap, ref DroneSingleton._frame);
+            _planeStatePanel._infoControl.RefreshMainImageBackground();
         }
     }
 }
