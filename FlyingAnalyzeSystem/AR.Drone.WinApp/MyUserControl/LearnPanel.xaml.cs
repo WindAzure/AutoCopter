@@ -167,7 +167,6 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             _comboBox.ImageComboBoxItemSource = source;
             ComboBoxItemSource = source;
-            ComboBoxItemSource[0].MileageLine = "AA";
         }
 
         private Color GetRelativeColor(GradientStopCollection gsc, double offset)

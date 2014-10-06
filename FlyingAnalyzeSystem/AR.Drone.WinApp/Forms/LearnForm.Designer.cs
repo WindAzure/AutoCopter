@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this._elementHost = new System.Windows.Forms.Integration.ElementHost();
             this._learnPanel = new AR.Drone.WinApp.MyUserControl.LearnPanel();
+            this._planeStateTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // _elementHost
@@ -41,6 +43,11 @@
             this._elementHost.TabIndex = 0;
             this._elementHost.Text = "elementHost1";
             this._elementHost.Child = this._learnPanel;
+            // 
+            // _planeStateTimer
+            // 
+            this._planeStateTimer.Interval = 500;
+            this._planeStateTimer.Tick += new System.EventHandler(this._planeStateTimer_Tick);
             // 
             // LearnForm
             // 
@@ -59,5 +66,6 @@
 
         private System.Windows.Forms.Integration.ElementHost _elementHost;
         private MyUserControl.LearnPanel _learnPanel;
+        private System.Windows.Forms.Timer _planeStateTimer;
     }
 }

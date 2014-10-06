@@ -56,6 +56,9 @@ namespace AR.Drone.WinApp.Forms
             _learnPanel.ClickBackButton += ClickLearnPanelBackButton;
             _learnPanel.ClickTakeOffButton += ClickLearnPanelTakeOffButton;
             _learnPanel.ClickLandButton += ClickLearnPanelLandButton;
+
+            _learnPanel.PlaneID = "Drone-001";
+            _planeStateTimer.Enabled = true;
         }
 
         public void ClickLearnPanelLandButton()
@@ -253,6 +256,12 @@ namespace AR.Drone.WinApp.Forms
             else if (angle < 0)
                 angle += 360;
             return angle;
+        }
+
+        private void _planeStateTimer_Tick(object sender, EventArgs e)
+        {
+            _learnPanel.SetBattery(DroneSingleton._navigationData.Battery.Percentage / 100.0);
+            _learnPanel.AltitudeText = DroneSingleton._navigationData.Altitude.ToString();
         }
     }
 }

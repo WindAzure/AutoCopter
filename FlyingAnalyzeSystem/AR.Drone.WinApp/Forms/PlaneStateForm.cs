@@ -163,6 +163,7 @@ namespace AR.Drone.WinApp.Forms
                 _planeStatePanel.SetBattery(DroneSingleton._navigationData.Battery.Percentage / 100.0);
                 _planeStatePanel.AltitudeText = DroneSingleton._navigationData.Altitude.ToString();
                 _planeStatePanel.SetPlaneText("Drone-001");
+                _planeStatePanel.IsLearningButtonEnable = true;
 
                 if (DroneSingleton._droneUnity.PirState && _pirTrueTime < 5)
                 {

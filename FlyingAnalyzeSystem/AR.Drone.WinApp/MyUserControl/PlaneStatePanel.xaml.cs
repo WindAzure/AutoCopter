@@ -81,6 +81,20 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private bool _isLearningButtonEnable = false;
+        public bool IsLearningButtonEnable
+        {
+            set
+            {
+                _isLearningButtonEnable = value;
+                OnPropertyChanged("IsLearningButtonEnable");
+            }
+            get
+            {
+                return _isLearningButtonEnable;
+            }
+        }
+
         private String _electricQuantityText = "";
         public String ElectricQuantityText
         {

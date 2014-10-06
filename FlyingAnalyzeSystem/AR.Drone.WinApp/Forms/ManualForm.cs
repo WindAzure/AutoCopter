@@ -286,6 +286,12 @@ namespace AR.Drone.WinApp.Forms
         private void _stateUpdateTimer_Tick(object sender, EventArgs e)
         {
             _manualControlPanel.SetBattery(DroneSingleton._navigationData.Battery.Percentage / 100.0);
+            _manualControlPanel.UltraForwardText=DroneSingleton._droneUnity.UltraSonicDistance[0].ToString();
+            _manualControlPanel.UltraBackText=DroneSingleton._droneUnity.UltraSonicDistance[1].ToString();
+            _manualControlPanel.UltraLeftText=DroneSingleton._droneUnity.UltraSonicDistance[2].ToString();
+            _manualControlPanel.UltraRightText=DroneSingleton._droneUnity.UltraSonicDistance[3].ToString();
+            _manualControlPanel.UltraUpText=DroneSingleton._droneUnity.UltraSonicDistance[4].ToString();
+            _manualControlPanel.UltraDownText = DroneSingleton._navigationData.Altitude.ToString();
         }
     }
 }
