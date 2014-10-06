@@ -20,6 +20,10 @@ namespace AR.Drone.WinApp.MyUserControl
     /// </summary>
     public partial class InformationPanel : UserControl
     {
+        public delegate void InformationPanelEvent();
+        public event InformationPanelEvent ClickNoButton = null;
+        public event InformationPanelEvent ClickYesButton = null;
+
         public InformationPanel()
         {
             InitializeComponent();
@@ -27,14 +31,19 @@ namespace AR.Drone.WinApp.MyUserControl
 
         private void OnClickYesButton()
         {
-
+            if (ClickYesButton != null)
+            {
+                ClickYesButton();
+            }
         }
 
         private void OnClickNoButton()
         {
-
+            if (ClickNoButton != null)
+            {
+                ClickNoButton();
+            }
         }
-
 
         [DllImport("gdi32")]
         static extern int DeleteObject(IntPtr o);

@@ -13,6 +13,7 @@ namespace AR.Drone.WinApp.Forms
 {
     public partial class PlaneStateForm : Form
     {
+        private int _pirTrueTime = 0;
         private int _retryConnectionTimes = 0;
 
         public PlaneStateForm()
@@ -23,9 +24,24 @@ namespace AR.Drone.WinApp.Forms
             _planeStatePanel.ClickPatrolManualControlButton += OnClickPlaneStatePanelManualControlButton;
             _planeStatePanel.ClickStartLearnButton += OnClickPlaneStatePanelStartLearnButton;
             _planeStatePanel.StartAutoPatrol += OnPlaneStatePanelStartAutoPatrol;
+            _planeStatePanel._infoControl.ClickNoButton += ClickInfoControlNoButton;
+            _planeStatePanel._infoControl.ClickYesButton += ClickInfoControlYesButton;
             DroneSingleton.InitializeDrone();
             _planeStateTimer.Enabled = true;
             _videoUpdateTimer.Enabled = true;
+        }
+
+        private void ClickInfoControlYesButton()
+        {
+            SwitchForm(new ManualForm(this));
+            _planeStatePanel.HideInfoPanel();
+            _pirTrueTime = 0;
+        }
+
+        private void ClickInfoControlNoButton()
+        {
+            _planeStatePanel.HideInfoPanel();
+            _pirTrueTime = 0;
         }
 
         protected override void OnClosed(EventArgs e)
@@ -80,15 +96,19 @@ namespace AR.Drone.WinApp.Forms
                 _planeStatePanel.SetBattery(DroneSingleton._navigationData.Battery.Percentage / 100.0);
                 _planeStatePanel.AltitudeText = DroneSingleton._navigationData.Altitude.ToString();
                 _planeStatePanel.SetPlaneText("Drone-001");
-                Debug.WriteLine(DroneSingleton._droneUnity.PirState);
-                List<String> data = DroneSingleton._droneUnity.BeaconMac;
-                foreach (var item in data)
+
+                if (DroneSingleton._droneUnity.PirState && _pirTrueTime < 5)
                 {
-                    Debug.WriteLine(item);
+                    _pirTrueTime++;
+                    if (_pirTrueTime == 5)
+                    {
+                        _planeStatePanel.ShowInfoPanel();
+                    }
                 }
-                int[] dis = DroneSingleton._droneUnity.UltraSonicDistance;
-                for (int i = 0; i < 5; i++)
-                    Debug.WriteLine(dis[i]);
+                else if (!DroneSingleton._droneUnity.PirState)
+                {
+                    _pirTrueTime = 0;
+                }
             }
             else
             {
