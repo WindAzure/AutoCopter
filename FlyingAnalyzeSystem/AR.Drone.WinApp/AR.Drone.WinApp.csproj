@@ -480,8 +480,7 @@
     <Resource Include="Image\InformationPage\ResultTitle.png" />
     <Content Include="Image\PlaneStatePage\PC02-03.png" />
     <Resource Include="Image\PlaneStatePage\InformationBlock.png" />
-    <Content Include="Image\PlaneStatePage\PC02-24.png" />
-    <Content Include="Image\PlaneStatePage\PC02-25.png" />
+    <Resource Include="Image\PlaneStatePage\PlanePosition.png" />
     <Resource Include="Image\PlaneStatePage\Map.png" />
     <Resource Include="Image\PlaneStatePage\MapBackGround.png" />
   </ItemGroup>

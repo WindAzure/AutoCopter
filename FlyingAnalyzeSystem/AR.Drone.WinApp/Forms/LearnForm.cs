@@ -99,6 +99,7 @@ namespace AR.Drone.WinApp.Forms
             }
             Commands.UpdateMileage(id, data);
             string lineData = _learnPanel._mapImage.LineString;
+            Commands.UpdateMileageLine(id, lineData);
         }
 
         public void SetComboBoxSource(ObservableCollection<ImageComboBoxItemProperty> source)
