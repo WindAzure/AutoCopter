@@ -243,6 +243,7 @@ namespace AR.Drone.WinApp.Forms
 
                     if (_isShowedWarning && _isCheckingBle && (!CheckBleMacNotUpdate()))
                     {
+                        _planeStatePanel.DetectedPerson();
                         _planeStatePanel.SetInfoState(CheckCertification());
                         _isCheckingBle = false;
                     }

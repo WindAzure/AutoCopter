@@ -1,4 +1,4 @@
-package com.example.flowicon;
+package com.example.http.to.server;
 
 public interface MainPanelEventRegister 
 {

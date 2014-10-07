@@ -1,8 +1,13 @@
 package com.example.stable;
 
+import com.example.flowicon.FlowIconSingleton;
+
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -22,6 +27,7 @@ public class MapImageView extends ImageView
 	private float _width;
 	private float _height;
 	private boolean _isClickActive=false;
+	private Canvas _canvas;
 	
 	public View.OnTouchListener mapImageViewTouchListener=new View.OnTouchListener()
 	{
@@ -81,7 +87,6 @@ public class MapImageView extends ImageView
 			return false;
 		}
 	};
-	
 	
 	public View.OnClickListener mapImageViewClickListener=new View.OnClickListener() 
 	{	
@@ -145,5 +150,19 @@ public class MapImageView extends ImageView
 		super(context, attrs);
 		this.setOnTouchListener(mapImageViewTouchListener);
 		this.setOnClickListener(mapImageViewClickListener);
+	}
+	
+	@Override
+	protected void onDraw(Canvas canvas) 
+	{
+		super.onDraw(canvas);
+		/*if(_isDrawPoint)
+		{
+			Paint paint = new Paint();
+			paint.setColor(Color.RED);
+			String point=FlowIconSingleton._locationPoint;
+			String []data=point.split(" ");
+			canvas.drawCircle(Float.parseFloat(data[0]),Float.parseFloat(data[1]), 5, paint);
+		}*/
 	}
 }

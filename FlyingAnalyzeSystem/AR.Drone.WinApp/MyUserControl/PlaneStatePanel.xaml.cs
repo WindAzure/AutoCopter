@@ -515,5 +515,10 @@ namespace AR.Drone.WinApp.MyUserControl
         {
             _infoControl.SetCheckResultState(state);
         }
+
+        public void DetectedPerson()
+        { 
+            
+        }
     }
 }

@@ -1,13 +1,19 @@
 package com.example.flowicon;
 
 import com.example.autocopter.R;
+import com.example.http.to.server.MainPanelEventRegister;
 import com.example.stable.ConstValue;
 import com.example.stable.MapImageView;
 import com.example.stable.UsualMethod;
 
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
@@ -41,6 +47,7 @@ public class UnNormalService extends Service
 	private ImageView _callImageView;
 	private MapImageView _mapImageView;
 	private TextView _locationTextView;
+	private Bitmap _source ;
 	
 	private SingleIconEventRegister _translateRegister=new SingleIconEventRegister()
 	{
@@ -227,6 +234,22 @@ public class UnNormalService extends Service
 		}
 	};
 	
+	public void DrawPlaneLocation()
+	{
+		_source= FlowIconSingleton._locationBitmap.copy(Bitmap.Config.ARGB_8888, true);
+		Canvas canvas = new Canvas(_source);
+		Paint paintRed = new Paint();
+		paintRed.setColor(Color.RED);
+		Paint paintPink = new Paint();
+		paintPink.setColor(Color.argb(255, 255, 174, 201));
+		paintPink.setAlpha(128);
+		
+		String point=FlowIconSingleton._locationPoint;
+		String []data=point.split(" ");
+		canvas.drawCircle(Float.parseFloat(data[0]),Float.parseFloat(data[1]), 180, paintPink);
+		canvas.drawCircle(Float.parseFloat(data[0]),Float.parseFloat(data[1]), 30, paintRed);
+	}
+	
 	@Override
 	public void onCreate()
 	{
@@ -249,7 +272,8 @@ public class UnNormalService extends Service
 		_callImageView.setOnClickListener(TwoStateImageViewClickListener);
 		
 		_mapImageView=(MapImageView)FlowIconSingleton._fullLayout.findViewById(R.id.mapImageView);
-		_mapImageView.setImageBitmap(FlowIconSingleton._locationBitmap);
+		DrawPlaneLocation();
+		_mapImageView.setImageBitmap(_source);
 		
 		_locationTextView=(TextView)FlowIconSingleton._fullLayout.findViewById(R.id.locationTextView);
 		_locationTextView.setText(FlowIconSingleton._locationText);
@@ -272,7 +296,7 @@ public class UnNormalService extends Service
 			{
 				_closeIconTranslateAnimation.InitializePosition();
 				_closeIconTranslateAnimation.TranslateToOrderPosition();
-				_mapImageView.Initialize(FlowIconSingleton._locationBitmap);
+				_mapImageView.Initialize(_source);
 			}
 		});
 	}
