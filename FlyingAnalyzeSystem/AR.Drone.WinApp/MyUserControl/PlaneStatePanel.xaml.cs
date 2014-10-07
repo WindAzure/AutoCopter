@@ -123,6 +123,20 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
+        private String _selectedMapId = null;
+        private String SelectedMapId
+        {
+            set
+            {
+                _selectedMapId = value;
+                OnPropertyChanged("SelectedMapId");
+            }
+            get
+            {
+                return _selectedMapId;
+            }
+        }
+
         private String _selectedMapItemMileage = null;
         private String SelectedMapItemMileage
         {
@@ -250,6 +264,8 @@ namespace AR.Drone.WinApp.MyUserControl
             }
             else
             {
+                Commands.UpdatePatrolFloor("Ar.drone-001", SelectedMapId);
+
                 _isPlaneT1Flying = true;
                 _comboBox.IsEnabled = false;
                 ComboBoxItemSource[_comboBox._imageComboBox.SelectedIndex].IsPlaneUsing = true;
@@ -416,6 +432,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 _mapImage.ImagePath = ComboBoxItemSource[comboBox.SelectedIndex].MapImage;
                 SelectedMapItemMileage = ComboBoxItemSource[comboBox.SelectedIndex].Mileage;
                 SelectedMapItemMileageLine=ComboBoxItemSource[comboBox.SelectedIndex].MileageLine;
+                SelectedMapId = ComboBoxItemSource[comboBox.SelectedIndex].Id;
                 if (String.IsNullOrEmpty(SelectedMapItemMileage))
                 {
                     _mapImageViewConstraint.Visibility = Visibility.Visible;
