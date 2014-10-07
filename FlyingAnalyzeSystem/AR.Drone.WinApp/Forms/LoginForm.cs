@@ -29,7 +29,7 @@ namespace AR.Drone.WinApp
             form.WindowState = this.WindowState;
             form.Width = this.Width;
             form.Height = this.Height;
-            form.FormClosing += delegate { Close(); };
+            form.FormClosing += delegate { DroneSingleton._droneClient.Land(); Close(); };
             form.Show();
             this.Hide();
         }

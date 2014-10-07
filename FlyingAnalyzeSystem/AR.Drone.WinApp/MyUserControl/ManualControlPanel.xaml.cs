@@ -243,6 +243,10 @@ namespace AR.Drone.WinApp.MyUserControl
                     _isPressedRight = true;
                 }
             }
+            if (e.Key == Key.Escape)
+            {
+                DroneSingleton._droneClient.Emergency();
+            }
         }
 
         private void KeyUpManualControlPanel(object sender, KeyEventArgs e)

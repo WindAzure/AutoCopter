@@ -9,7 +9,7 @@
              xmlns:myComboxBox="clr-namespace:AR.Drone.WinApp.MyUserControl.MapComboBox"
              xmlns:myChildControl="clr-namespace:AR.Drone.WinApp.MyUserControl.PlaneStateChildPanel">
 
-    <Viewbox Stretch="Fill" Focusable="False">
+    <Viewbox Stretch="Fill" Focusable="True" x:Name="_view" KeyDown="_view_KeyDown">
         <Grid>
             <Image Source="../Image/PlaneStatePage/BackGround.png"/>
 

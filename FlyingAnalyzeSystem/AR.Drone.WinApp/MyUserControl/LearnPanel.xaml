@@ -9,7 +9,7 @@
              xmlns:myComboxBox="clr-namespace:AR.Drone.WinApp.MyUserControl.MapComboBox">
 
 
-    <Viewbox Stretch="Fill">
+    <Viewbox Stretch="Fill" Focusable="True" x:Name="_view" KeyDown="_view_KeyDown">
         <Grid>
             <Image Stretch="Fill" Source="../Image/LearnPage/BackGround.png"/>
 

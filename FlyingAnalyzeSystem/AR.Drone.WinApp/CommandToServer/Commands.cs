@@ -63,7 +63,15 @@ namespace AR.Drone.WinApp.CommandToServer
         {
             SqlParameter floorIdParam = new SqlParameter() { ParameterName = "@FloorId", SqlDbType = SqlDbType.NVarChar, Value = floorId };
             SqlParameter mileageLineParam = new SqlParameter() { ParameterName = "@MileageLine", SqlDbType = SqlDbType.NVarChar, Value = mileageLine };
-            SqlHelper.ExecuteScalar(CommandType.Text, "UPDATE [dbo].[Floor] SET [MileageLine] = @Mileage WHERE [FloorId] =@FloorId", new SqlParameter[] { floorIdParam, mileageLineParam });
+            SqlHelper.ExecuteScalar(CommandType.Text, "UPDATE [dbo].[Floor] SET [MileageLine] = @MileageLine WHERE [FloorId] =@FloorId", new SqlParameter[] { floorIdParam, mileageLineParam });
+        }
+
+        public static void UpdateLocationPoint(String floorId, float X,float Y)
+        {
+            SqlParameter floorIdParam = new SqlParameter() { ParameterName = "@FloorId", SqlDbType = SqlDbType.NVarChar, Value = floorId };
+            SqlParameter LocationPointXParam = new SqlParameter() { ParameterName = "@LocationPointX", SqlDbType = SqlDbType.Float, Value = X };
+            SqlParameter LocationPointYParam = new SqlParameter() { ParameterName = "@LocationPointY", SqlDbType = SqlDbType.Float, Value = Y };
+            SqlHelper.ExecuteScalar(CommandType.Text, "UPDATE [dbo].[Floor] SET [LocationX] = @LocationPointX,[LocationY] = @LocationPointY WHERE [FloorId] =@FloorId", new SqlParameter[] { floorIdParam, LocationPointXParam, LocationPointYParam });
         }
 
         public static void RegistFloor(String imagePath)

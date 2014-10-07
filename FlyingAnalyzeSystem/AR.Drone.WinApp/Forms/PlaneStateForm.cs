@@ -128,11 +128,20 @@ namespace AR.Drone.WinApp.Forms
             SwitchForm(form);
         }
 
+        public void UpdateFromServer()
+        {
+            _planeStatePanel.LoadImageFromServer();
+        }
+
         public void OnPlaneStatePanelStartAutoPatrol()
         {
             _isPatroling = true;
 
             //FLY START
+            _commandList = _planeStatePanel._mapImage.CommandList;
+            _timeList = _planeStatePanel._mapImage.TimeList;
+            _angleList = _planeStatePanel._mapImage.AngleList;
+
             _nowState = LearnForm.State.Land;
             _controling = true;
             _haveLastLine = false;
@@ -145,6 +154,8 @@ namespace AR.Drone.WinApp.Forms
 
         public void OnClickPlaneStatePanelManualControlButton()
         {
+            _controling = false;
+            DroneSingleton._droneClient.Hover();
             SwitchForm(new ManualForm(this));
         }
 
@@ -338,6 +349,8 @@ namespace AR.Drone.WinApp.Forms
                     _haveLastLine = false;
                     _nowState = LearnForm.State.Land;
                     _isForwarding = false;
+                    InitializeChildPanel();
+                    _planeStatePanel._comboBox.IsEnabled = true;
                 }
                 else
                 {
@@ -358,6 +371,8 @@ namespace AR.Drone.WinApp.Forms
                 _haveLastLine = false;
                 _nowState = LearnForm.State.Land;
                 _isForwarding = false;
+                InitializeChildPanel();
+                _planeStatePanel._comboBox.IsEnabled = true;
             }
             else if (_nowCommand == LearnForm.State.Hover)
             {

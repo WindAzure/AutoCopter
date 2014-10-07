@@ -67,6 +67,8 @@ namespace AR.Drone.WinApp.Forms
             _nowState = State.Land;
             DroneSingleton._droneClient.Land();
             _commandList.Add(State.Land);
+            _timeList.Add(new TimeSpan(0, 0, 0, 0, 0));
+            _angleList.Add(_heading);
         }
 
         public void ClickLearnPanelTakeOffButton()
@@ -217,6 +219,7 @@ namespace AR.Drone.WinApp.Forms
                     _lastForm.WindowState = this.WindowState;
                     _lastForm.Width = this.Width;
                     _lastForm.Height = this.Height;
+                    _lastForm.UpdateFromServer();
                     _lastForm.Show();
                 }
                 else

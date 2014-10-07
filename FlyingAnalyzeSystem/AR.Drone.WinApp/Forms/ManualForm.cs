@@ -50,6 +50,8 @@ namespace AR.Drone.WinApp.Forms
         public void ClickManualControlPanelBackButton()
         {
             _isBack = true;
+            DroneSingleton._droneClient.Land();
+            _lastForm.InitializeChildPanel();
             this.Close();
         }
 

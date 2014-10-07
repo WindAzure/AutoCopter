@@ -71,13 +71,13 @@
             </Ellipse>
             <TextBlock Text="{Binding EletricityText}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,20"/>
             <Image Source="../Image/ManualControlPage/ElectricityBackGround.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="180" Margin="0,0,0,5" Stretch="Fill"/>
-            <Image Source="../Image/ManualControlPage/UltraDistance.png" HorizontalAlignment="Right" VerticalAlignment="Center" Width="160" Margin="0,0,10,0"/>
-            <TextBlock Text="{Binding UltraRightText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,0,20,25" FontSize="8"/>
-            <TextBlock Text="{Binding UltraBackText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,45,10,0" FontSize="8"/>
-            <TextBlock Text="{Binding UltraUpText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Yellow" Margin="310,0,0,100" FontSize="8"/>
-            <TextBlock Text="{Binding UltraForwardText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,0,145,25" FontSize="8"/>
-            <TextBlock Text="{Binding UltraLeftText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,45,150,0" FontSize="8"/>
-            <TextBlock Text="{Binding UltraDownText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Yellow" Margin="310,0,0,-90" FontSize="8"/>
+            <Image Source="../Image/ManualControlPage/UltraDistance.png" HorizontalAlignment="Right" VerticalAlignment="Center" Width="160" Margin="0,0,10,0" Visibility="Hidden"/>
+            <TextBlock Text="{Binding UltraRightText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,0,20,25" FontSize="8" Visibility="Hidden"/>
+            <TextBlock Text="{Binding UltraBackText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,45,10,0" FontSize="8" Visibility="Hidden"/>
+            <TextBlock Text="{Binding UltraUpText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Yellow" Margin="310,0,0,100" FontSize="8" Visibility="Hidden"/>
+            <TextBlock Text="{Binding UltraForwardText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,0,145,25" FontSize="8" Visibility="Hidden"/>
+            <TextBlock Text="{Binding UltraLeftText}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Yellow" Margin="0,45,150,0" FontSize="8" Visibility="Hidden"/>
+            <TextBlock Text="{Binding UltraDownText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Yellow" Margin="310,0,0,-90" FontSize="8" Visibility="Hidden"/>
             <Image Source="../Image/ManualControlPage/Targeting.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Viewbox>

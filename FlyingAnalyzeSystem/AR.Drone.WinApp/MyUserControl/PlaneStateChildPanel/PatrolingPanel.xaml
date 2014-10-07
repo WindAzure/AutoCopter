@@ -19,7 +19,7 @@
                                              OnClick="OnClickManualButton"/>
 
             <myControl:ImageThreeStateButton HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,15"
-                                             NormalImagePath="../../Image/PlaneStatePage/ReturnButton.png" 
+                                             NormalImagePath="../../Image/PlaneStatePage/ReturnButton.png" Visibility="Hidden"
                                              DownImagePath="../../Image/PlaneStatePage/ReturnButtonDown.png" 
                                              HoverImagePath="../../Image/PlaneStatePage/ReturnButtonHover.png"
                                              OnClick="OnClickReturnButton"/>

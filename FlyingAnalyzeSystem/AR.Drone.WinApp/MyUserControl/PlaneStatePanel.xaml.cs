@@ -284,8 +284,9 @@ namespace AR.Drone.WinApp.MyUserControl
             }
         }
 
-        private void LoadImageFromServer()
+        public void LoadImageFromServer()
         {
+            ComboBoxItemSource.Clear();
             DataSet data = Commands.GetFloorInformation();
             int rows = data.Tables[0].Rows.Count;
             for (int i = 0; i < rows; i++)
@@ -517,8 +518,16 @@ namespace AR.Drone.WinApp.MyUserControl
         }
 
         public void DetectedPerson()
-        { 
-            
+        {
+            Commands.UpdateLocationPoint(SelectedMapId, (float)_mapImage.X, (float)_mapImage.Y);
+        }
+
+        private void _view_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                DroneSingleton._droneClient.Emergency();
+            }
         }
     }
 }

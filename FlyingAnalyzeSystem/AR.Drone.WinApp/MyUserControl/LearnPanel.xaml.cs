@@ -418,5 +418,13 @@ namespace AR.Drone.WinApp.MyUserControl
             MainCircleText = "";
             MainCircleValue = "";
         }
+
+        private void _view_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                DroneSingleton._droneClient.Emergency();
+            }
+        }
     }
 }

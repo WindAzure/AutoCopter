@@ -39,6 +39,8 @@ namespace AR.Drone.WinApp.MyUserControl
         private List<TimeSpan> _timeList = new List<TimeSpan>();
         private List<float> _angleList = new List<float>();
 
+        private Point _nowPoint = new Point();
+
         private string _lineString;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -220,7 +222,8 @@ namespace AR.Drone.WinApp.MyUserControl
 
                 double x = (line.X2 - line.X1) / costTime * time + line.X1;
                 double y = (line.Y2 - line.Y1) / costTime * time + line.Y1;
-                point = new Point(x, y);
+                _nowPoint.X = x;
+                _nowPoint.Y = y;
 
                 Canvas.SetLeft(_nowPosition, x - 5);
                 Canvas.SetTop(_nowPosition, y - 4);
@@ -229,6 +232,9 @@ namespace AR.Drone.WinApp.MyUserControl
             {
                 Line line = _lineList[lineIndex + 1];
                 float originalAngle = _angleList[0];
+
+                _nowPoint.X = line.X1;
+                _nowPoint.Y = line.Y1;
 
                 Canvas.SetLeft(_nowPosition, line.X1 - 5);
                 Canvas.SetTop(_nowPosition, line.Y1 - 4);
@@ -242,6 +248,9 @@ namespace AR.Drone.WinApp.MyUserControl
             else
             {
                 Line line = _lineList[lineIndex + 1];
+
+                _nowPoint.X = line.X1;
+                _nowPoint.Y = line.Y1;
 
                 Canvas.SetLeft(_nowPosition, line.X1 - 5);
                 Canvas.SetTop(_nowPosition, line.Y1 - 4);
@@ -329,7 +338,7 @@ namespace AR.Drone.WinApp.MyUserControl
                 for (int index = 0; index < _lineList.Count; index++)
                 {
                     _lineString = _lineString + _lineList[index].X1 + " " + _lineList[index].Y1 + " " + _lineList[index].X2 + " " + _lineList[index].Y2;
-                    if (index != _commandList.Count - 1)
+                    if (index != _lineList.Count - 1)
                         _lineString = _lineString + " ";
                 }
                 return _lineString;
@@ -379,6 +388,22 @@ namespace AR.Drone.WinApp.MyUserControl
             get
             {
                 return _angleList;
+            }
+        }
+
+        public double X
+        {
+            get
+            {
+                return _nowPoint.X;
+            }
+        }
+
+        public double Y
+        {
+            get
+            {
+                return _nowPoint.Y;
             }
         }
     }
