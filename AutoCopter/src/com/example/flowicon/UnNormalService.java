@@ -230,6 +230,8 @@ public class UnNormalService extends Service
 		@Override
 		public void onClick(View v) 
 		{
+			FlowIconSingleton._locationBitmap.recycle();
+			System.gc();
 			stopSelf();
 		}
 	};
@@ -251,8 +253,6 @@ public class UnNormalService extends Service
 			canvas.drawCircle(Float.parseFloat(data[0]),Float.parseFloat(data[1]), 180, paintPink);
 			canvas.drawCircle(Float.parseFloat(data[0]),Float.parseFloat(data[1]), 30, paintRed);
 		}
-		FlowIconSingleton._locationBitmap.recycle();
-		System.gc();
 	}
 	
 	@Override

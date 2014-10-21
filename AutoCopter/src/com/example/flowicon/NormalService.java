@@ -238,6 +238,7 @@ public class NormalService extends Service
 		@Override
 		public void onClick(View v) 
 		{
+			System.gc();
 			stopSelf();
 		}
 	};

@@ -108,7 +108,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_weight="8"
-                android:text="Large Text"
+                android:text="Azure"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <com.example.stable.TwoStateScaleAlphaImageView
