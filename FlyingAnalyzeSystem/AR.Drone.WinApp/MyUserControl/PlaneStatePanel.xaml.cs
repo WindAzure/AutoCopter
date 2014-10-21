@@ -520,7 +520,7 @@ namespace AR.Drone.WinApp.MyUserControl
         public void DetectedPerson()
         {
             Commands.UpdateLocationPoint(SelectedMapId, (float)_mapImage.X, (float)_mapImage.Y);
-        }
+        }8      
 
         private void _view_KeyDown(object sender, KeyEventArgs e)
         {
